@@ -338,16 +338,7 @@ function onLogOut(event) {
  *
  * @returns {object} The user data, or the default state if no data is found.
  */
-function getDataFromSessionStorage() {
-  const INITIAL_STATE = {
-    users: [],// PASO 1
-    botellas: [],
-    isLoading: false,// Podría usarse para controlar cuando estamos realizando un fetch
-    error: false,// Podría usarse para controlar cuando sucede un error
-  }
-  const defaultValue = JSON.stringify(INITIAL_STATE)
-  return JSON.parse(sessionStorage.getItem('user') || defaultValue)
-}
+
 
   /**
  * Get data from API
@@ -366,14 +357,7 @@ export async function getAPIData(apiURL, method = 'GET', data) {
     headers.append('Access-Control-Allow-Origin', '*')
     if (data) {
       headers.append('Content-Length', String(JSON.stringify(data).length))
-    }
-    // Añadimos la cabecera Authorization si el usuario esta logueado
-    if (isUserLoggedIn()) {
-      const userData = getDataFromSessionStorage()
-      headers.append('Authorization', `Bearer ${userData?.user?.token}`)
-      console.log(headers)
-
-    }
+    }  
     apiData = await simpleFetch(apiURL, {
       // Si la petición tarda demasiado, la abortamos
       signal: AbortSignal.timeout(TIMEOUT),
@@ -397,16 +381,6 @@ export async function getAPIData(apiURL, method = 'GET', data) {
   }
 
   return apiData
-}
-/**
- * Checks if there is a user logged in by verifying the presence of a token
- * in the local storage.
- *
- * @returns {boolean} True if the user is logged in, false otherwise.
- */
-function isUserLoggedIn() {
-  const userData = getDataFromSessionStorage()
-  return userData?.user?._id
 }
 
 async function displayProductos() {
