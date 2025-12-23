@@ -472,8 +472,7 @@ a{
 }
 
   #listaProductos,
-  #carrito,
-  #listCocktails{
+  #carrito{
             display: flex;
             flex-direction: row ;
             flex-wrap: wrap;
