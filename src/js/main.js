@@ -1,53 +1,13 @@
  //@ts-no-check
- 
 import { simpleFetch } from './lib/simpleFetch.js'
 import { HttpError } from './clases/HttpError.js'
-
-
 export const API_PORT = location.port ? `:${1337}` : ''
 const TIMEOUT = 10000
 
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
-
-/**
- * Function triggered when the DOM is fully loaded.
- * It is responsible for initializing the event listeners for the following elements:
- *   - logOutButton
- *   - signOutButton
- *   - openPopUpLink
- *   - closePopUpButton
- *   - formBusqueda
- *   - botonBuscar
- *   - overlay
- *   - hamMenu
- *   - xButton
- *   - underlay
- *   - deleteButton
- *   - signInFormLit
- *   - LogInFormLit
- *
- * It also triggers the loading of the products and calculators when the corresponding
- * body elements are found.
- *
- * @listens logOutButton - click
- * @listens signOutButton - click
- * @listens openPopUpLink - click
- * @listens closePopUpButton - click
- * @listens formBusqueda - submit
- * @listens formBusqueda - keyup
- * @listens botonBuscar - click
- * @listens overlay - click
- * @listens hamMenu - click
- * @listens xButton - click
- * @listens underlay - click
- * @listens deleteButton - click
- * @listens signInFormLit - signin-form-submit
- * @listens LogInFormLit - login-form-submit
- */
 function DomContentLoaded() {
   
-   
   let formLogOut = document.getElementById('logOutButton')
   let formSignout = document.getElementById('signOutButton')
   let openPopUpLink = document.querySelectorAll('[data-modal-target]')
@@ -162,26 +122,12 @@ function checkLoggedIn() {
   }
 }
 
-/**
- * Handles the log out form submission, prevents the default form behavior,
- * removes the user session data from session storage, and redirects to the home page.
- *
- * @param {Event} event - The event object associated with the form submission.
- */
 function onLogOut(event) {
     event.preventDefault()
     // Eliminar la sesión del usuario
     sessionStorage.removeItem('user')
     location.href = './index.html'
   }
-
-/**
- * Handles the sign out form submission, prevents the default form behavior,
- * removes the user data from USER_DB, removes the user session data from session storage,
- * and redirects to the home page.
- *
- * @return {void}
- */
 
   function onSignOut() {
    console.log('borrar usuario')
@@ -197,11 +143,7 @@ function onLogOut(event) {
     }
 
   }
-/**
- * Abre el menu  lateral
- *
- * @return {void}
- */
+
   function openSideBar(){
   console.log('lets open the menu')
   let underlay = document.getElementById('underlay')
@@ -209,12 +151,6 @@ function onLogOut(event) {
   let sideBar = document.querySelector('.sidebar')
   sideBar?.classList.add('active')
   }
-
-/**
- * Cierra el menu lateral
- *
- * @return {void}
- */
   function closeSideBar(){
     console.log('lets close the menu')
     let underlay = document.getElementById('underlay')
@@ -222,15 +158,7 @@ function onLogOut(event) {
     let sideBar = document.querySelector('.sidebar')
     sideBar?.classList.remove('active')
   }
-/**
- * Abre el popup de la receta correspondiente al enlace clickado, cambia el texto
- * del popup seg n el nombre de la receta y lo muestra
- *
- * @param {HTMLElement} popUp - El elemento HTML del popup
- * @param {HTMLElement} link - El enlace clickado
- *
- * @return {void}
- */
+
   function openPopup(popUp, link) {
     let overlay = document.getElementById('overlay')
     if (popUp == null) return
@@ -279,10 +207,6 @@ function onLogOut(event) {
    
       }
 
-/**
- * Store the selected cocktail in session storage and redirect the user to
- * calculadores.html
- */
      function redirectToCalculadores() {
       let titlePop = document.getElementById('pop-up-name');
       let valueToStore = titlePop.textContent || titlePop.value;
@@ -294,12 +218,6 @@ function onLogOut(event) {
 
      }
 
-/**
- * Retrieves the previously selected cocktail from session storage and sets it as the
- * `choice` property of the `calculador-component` web component.
- *
- * @returns {void}
- */
      function autoSelectOption() {
       const chosenOption = sessionStorage.getItem('choice');
       if (!chosenOption) return;
@@ -311,11 +229,7 @@ function onLogOut(event) {
         component.choice = chosenOption;  
       }
     }
-/**
- * Cierra el popup y su overlay
- * @param {HTMLElement} popUp - El popup a cerrar
- * @returns {void}
- */
+
   function closePopup(popUp) {
      console.log(`the popup ${popUp} should close`)
      let overlay = document.getElementById('overlay')
@@ -326,30 +240,8 @@ function onLogOut(event) {
   }
 
 
-/**
- * Retrieves the user data from session storage and returns it as an object.
- *
- * If no data is found, returns the default state, which is an object with the following
- * properties:
- * @property {User[]} users - An array of User objects.
- * @property {Botella[]} botellas - An array of Botella objects.
- * @property {boolean} isLoading - A boolean indicating if a fetch is being performed.
- * @property {boolean} error - A boolean indicating if an error occurred.
- *
- * @returns {object} The user data, or the default state if no data is found.
- */
-
-
-  /**
- * Get data from API
- * @param {string} apiURL
- * @param {string} method
- * @param {any} [data]
- * @returns {Promise<Array<User | Botellas>>}
- */
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
-
 
   try {
     let headers = new Headers()
@@ -422,13 +314,6 @@ async function displayProductos() {
   } 
 }
 
-/**
- * Busca un producto en la API y los muestra en la página.
- *
- * @param {Event} event - El evento submit del formulario de búsqueda.
- *
- * @throws {Error} - Si la petición a la API falla.
- */
 async function buscarProducto(event) {
   event.preventDefault();
 
@@ -484,13 +369,6 @@ async function buscarProducto(event) {
 }
 
 
-/**
- * Gestisce l'evento keyup del campo di ricerca.
- * Se il campo di ricerca  vuoto, cancella tutti i prodotti
- * e li ricrea con la funzione displayProductos.
- *
- * @param {KeyboardEvent} event - L'evento keyup.
- */
 function onInputKeyUp(event) {// Keyup: mirar teclas pulsadas
   console.log(event.key)
    const listaProductos = document.getElementById('listaProductos');
@@ -503,14 +381,6 @@ function onInputKeyUp(event) {// Keyup: mirar teclas pulsadas
     displayProductos()
   }
 }
-
-/**
- * Adds a specified bottle to the user's cart by sending a POST request to the API.
- *
- * @param {string} id - The ID of the bottle to be added to the cart.
- *
- * @throws {Error} - If an error occurs during the API request.
- */
 
 async function addToCart(id){
 try{
@@ -535,12 +405,6 @@ catch (error) {
 }
 
 }
-/**
- * Recupera le informazioni delle bottiglie presenti nel carrello dell'utente,
- * chiamando l'API con il metodo POST.
- *
- * @throws {Error} - Se si verifica un errore durante la richiesta API.
- */
 
  async function loadCartData() {
 
@@ -564,13 +428,6 @@ catch (error) {
 }
 
 
-/**
- * Recupera le informazioni delle bottiglie presenti nel carrello dell'utente.
- *
- * @param {string[]} idsInCart - Array di ID delle bottiglie presenti nel carrello.
- *
- * @returns {Promise<void>}
- */
   async function getbottlesFromShop(idsInCart) {
   console.log('up next getting this bottles from shop',idsInCart);
 
@@ -624,13 +481,6 @@ apiDataCart.forEach((botella) => {
      }
 }
  
-/**
- * Deletes a specified bottle from the user's cart by sending a DELETE request to the API.
- *
- * @param {string} idBotellaNum - The ID of the bottle to be deleted from the cart.
- *
- * @throws {Error} - If an error occurs during the API request.
- */
 function deleteItemFromCart(idBotellaNum){
   console.log('delete from crt event lauched')
 let userId = JSON.parse(sessionStorage.getItem('user'))._id
@@ -648,11 +498,6 @@ console.log(userId, idBotellaNum)
 location.reload();
 
 }
-/**
- * Deletes all the items from the user's cart by sending a DELETE request to the API.
- *
- * @throws {Error} - If an error occurs during the API request.
- */
 
 function clearCart(){
   console.log('clear cart event lauched')
@@ -668,11 +513,7 @@ function clearCart(){
   alert('Cart cleared!')
   location.reload(); 
 }
-/**
- * Prints a welcome message to the user, displaying their email address.
- *
- * @returns {void}
- */
+
 function welcoming(){
   let pWelcome = document.getElementById('welcome')
   let userEmail = JSON.parse(sessionStorage.getItem('user')).email
@@ -680,11 +521,7 @@ function welcoming(){
   pWelcome.textContent= `Welcome,
   ${userEmail}`
 }
-/**
- * Retrieves the value from the specified input element.
- * @param {HTMLElement | null} inputElement - The input element from which to get the value.
- * @returns {string} The value of the input element, or an empty string if the element is null.
- */
+
 export function getInputValue(inputElement) {
   if (inputElement) {
     return /** @type {HTMLInputElement} */(inputElement).value
