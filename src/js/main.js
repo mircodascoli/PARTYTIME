@@ -271,7 +271,7 @@ export async function getAPIData(apiURL, method = 'GET', data) {
       }
     }
   }
-
+  console.log(apiData, typeof apiData, 'data from getApiData' )
   return apiData
 }
 
@@ -418,7 +418,7 @@ catch (error) {
    console.log(apiData);
     let idsInCart = apiData.cart;
     console.log(idsInCart);
- getbottlesFromShop(idsInCart)
+   getbottlesFromShop(idsInCart)
 
     
   } catch (error) {

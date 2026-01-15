@@ -22,6 +22,9 @@ export const db = {
         findByIds: findBotellasByIds,
        findByNames: findBotellasByNames
     }
+    ,cocktails: {
+        get: getCocktails
+    }
 }
 
   async function getBotellas(filter, projection){
@@ -56,6 +59,15 @@ async function AddIdBotellaToCart(idBotella, idUser){
   const PartytimetDB = client.db('Partytime');
   const usersCollection = PartytimetDB.collection('users');
   return await usersCollection.find(filter).project(projection).toArray();
+
+  }
+  async function getCocktails(){
+  const client = new MongoClient(URI);
+  const PartytimetDB = client.db('Partytime');
+  const cocktailsCollection = PartytimetDB.collection('Cocktails');
+  const cocktails = await cocktailsCollection.find({}).toArray();
+  console.log(cocktails , 'cocktails from MONGOdb')
+  return cocktails;
 
   }
 

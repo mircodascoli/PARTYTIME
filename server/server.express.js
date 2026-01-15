@@ -4,10 +4,9 @@ import bodyParser from 'body-parser';
 import { ObjectId } from 'mongodb';
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;;
 
-// Static server
-app.use(express.static('src'));
+
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
@@ -51,6 +50,19 @@ app.get('/api/read/users', async (req, res) =>  {
       console.log('server read botellas')
       res.json(await db.botellas.get())
     });
+console.log('db.cocktails:', db.cocktails);
+app.get('/api/read/cocktails', async (req, res) => {
+  console.log('server read cocktails');
+
+  try {
+    const cocktails = await db.cocktails.get();
+    console.log('cocktails from db:', cocktails);
+    res.json(cocktails);
+  } catch (err) {
+    console.error('❌ ERROR IN db.cocktails.get:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
 
 
  // UPDATE     
@@ -148,6 +160,9 @@ app.post('/api/busqueda/party', async (req, res) => {
     res.json(user)
     
   })
+
+  // Static server
+app.use(express.static('src'));
 
   app.listen(port, async () => {
     console.log(` listening on port ${port}`);
