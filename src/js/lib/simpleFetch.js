@@ -10,7 +10,10 @@ import { HttpError } from '../clases/HttpError.js'
  * @throws {HttpError} If the response status is not 2xx.
  */
 export async function simpleFetch (url, options) {
+  console.log('Fetching:', url);
   const result = await fetch(url, options);
+   console.log('Fetch status:', result.status);
+  console.log('Content-Type:', result.headers.get('Content-Type'));
   if (!result.ok) {
     throw new HttpError(result);
   }
@@ -19,5 +22,7 @@ export async function simpleFetch (url, options) {
   if (isJsonResponse) {
     return (await result.json());
   }
+    console.log('Fetch status:', result.status);
+  console.log('Content-Type:', result.headers.get('Content-Type'));
   return (await result.text());
 }
