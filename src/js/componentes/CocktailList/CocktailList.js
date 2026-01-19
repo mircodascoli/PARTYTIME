@@ -1,8 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CocktailListCSS from '../CocktailList/CocktailListCSS.css' with { type: 'css' };
-
-import { Cocktail } from '../../clases/Cocktails.js';
+import '../../componentes/CocktailDetails/CocktailDetails.js';
 import { getAPIData, API_PORT } from '../../main.js';
 
 export class CocktailList extends LitElement {
@@ -29,7 +28,7 @@ export class CocktailList extends LitElement {
         'GET'
       );
 
-      this.cocktails = data.map(cocktail => new Cocktail(cocktail));
+      this.cocktails = data;
 
       console.log(this.cocktails, 'cocktails mapped to model');
     } catch (error) {
@@ -37,21 +36,18 @@ export class CocktailList extends LitElement {
     }
   }
 
-  render() {
-    return html`
-      <ul id="listCocktails">
-        ${this.cocktails.map(
-          cocktail => html`
-            <cocktail-details
-              .cocktail=${cocktail}
-            ></cocktail-details>
-          `
-        )}
-      </ul>
-    `;
-  }
+ render() {
+  return html`
+    <ul id="listCocktails">
+      ${this.cocktails.map(
+        cocktail => html`
+          <cocktail-details .cocktail=${cocktail}></cocktail-details>
+        `
+      )}
+    </ul>
+  `;
+ }
 }
 
 customElements.define('cocktail-list', CocktailList);
 
-export default CocktailList;
