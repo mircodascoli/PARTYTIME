@@ -9,11 +9,16 @@ export class CocktailDetails extends LitElement {
 
   render() {
     return html`
-      <li class="cocktail-item">
+      <li class="cocktail-item" @click=${this._onClick}>
         <h2>${this.cocktail.name}</h2>
         <img src="../../img/imgCocktails/${this.cocktail.name}.jpeg" alt="${this.cocktail.name}" class="img-list-cocktails" />
       </li>
     `;
+  }
+
+  _onClick() {
+    console.log(`Cocktail selected: ${this.cocktail.name, this.cocktail.description}`);
+
   }
 }
 
