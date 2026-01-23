@@ -10,8 +10,6 @@ function DomContentLoaded() {
   
   let formLogOut = document.getElementById('logOutButton')
   let formSignout = document.getElementById('signOutButton')
-  let openPopUpLink = document.querySelectorAll('[data-modal-target]')
-  let closePopUpButton = document.querySelectorAll('[data-close-button]')
   let bodyCalculator = document.getElementById('body-calculadores')
   let bodyProductos = document.getElementById('bodyProductos')
   let bodyUser = document.getElementById('bodyUser')
@@ -26,7 +24,7 @@ function DomContentLoaded() {
   let xButton = document.getElementById('xButton')
   let underlay = document.getElementById('underlay')
   let deleteButton = document.querySelector('.delete-button')
-
+ 
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
   botonBuscar?.addEventListener('click', buscarProducto)
@@ -36,19 +34,6 @@ function DomContentLoaded() {
   hamMenu?.addEventListener('click',openSideBar)
   xButton ?.addEventListener('click',closeSideBar)   
   deleteButton?.addEventListener('click', deleteItemFromCart) 
-  openPopUpLink.forEach((link) => {
-    link.addEventListener('click', () => {
-      let popUp = document.querySelector(`${link.dataset.modalTarget}`);
-      openPopup(popUp, link);
-      console.log('pop up')
-    });
-  });
-  closePopUpButton.forEach((button) => {
-    button.addEventListener('click', () => {
-      let popUp =button.closest('.description');
-      closePopup(popUp);
-    });
-  });
     
     if (bodyProductos != null){
       console.log('body encontrado, display productos') 
@@ -158,55 +143,6 @@ function onLogOut(event) {
     let sideBar = document.querySelector('.sidebar')
     sideBar?.classList.remove('active')
   }
-
-  function openPopup(popUp, link) {
-    let overlay = document.getElementById('overlay')
-    if (popUp == null) return
-    popUp.classList.add('active')
-    overlay?.classList.add('active')
- 
-    let titlePop = document.getElementById('pop-up-name');
-    let bodyText = document.getElementById('pop-up-text');
-    let heading = link.querySelector('h3');
-   
-    titlePop.innerText = heading.innerText;
-    // apri il popup
-    overlay?.classList.add('active');
-    popUp.classList.add('active');
-    // cambiar ficha de la receta en el pop up a partir de el nombre
-    switch (titlePop.innerText.toLowerCase()) {
-      case 'negroni':
-         bodyText.innerText = 'Born in 1919 Florence, the Negroni blends gin, Campari, and sweet vermouth for a bold, bittersweet taste with herbal, citrus, and spiced notes—an Italian aperitivo classic. '
-        break;
-      case 'manhattan':
-        bodyText.innerText = 'Created in 19th-century New York, the Manhattan mixes rye whiskey, sweet vermouth, and bitters—rich, smooth, and slightly spicy with cherry and herbal notes. A timeless, elegant classic.'
-        break;
-      case 'old fashioned':
-        bodyText.innerText = 'Dating to the early 1800s, it combines bourbon or rye, sugar, bitters, and orange zest. Bold, smooth, and subtly sweet with a citrusy, aromatic twist. The original cocktail.'
-        break;
-      case 'dry martini':
-        bodyText.innerText = 'Born in the early 20th century, it mixes gin and dry vermouth, garnished with olive or lemon. Crisp, clean, and botanical—a symbol of sophistication and minimalist elegance. '
-        break;
-      case 'tom collins':
-        bodyText.innerText = 'A 19th-century gin cocktail of lemon juice, sugar, and soda water. Light, fizzy, and citrusy—like sparkling lemonade with a botanical twist. A refreshing, sunny-day drink. '
-        break;
-      case 'paloma':
-        bodyText.innerText = 'A refreshing Mexican favorite of tequila and grapefruit soda (or juice + soda), often with lime and salt. Bright, tangy, and slightly bitter-sweet with a zesty, citrusy kick.'
-        break;
-      case 'dark & stormy':
-        bodyText.innerText = 'Originating in Bermuda, this cocktail layers dark rum over ginger beer and lime. Spicy, rich, and invigorating with warming ginger heat and deep molasses notes. A sailor&rsquo;s delight. '
-        break;
-      case 'berry hiball':
-        bodyText.innerText = 'Our latest creation! surprise your friends with a unique cocktail. Fruity, easy drinking, and refreshing with a hint of sweetness. '
-        break;
-      default:
-        bodyText.innerText = '';
-        break;
-      }
-       
-   
-      }
-
      function redirectToCalculadores() {
       let titlePop = document.getElementById('pop-up-name');
       let valueToStore = titlePop.textContent || titlePop.value;

@@ -41,13 +41,23 @@ export class CocktailList extends LitElement {
     <ul id="listCocktails">
       ${this.cocktails.map(
         cocktail => html`
-          <cocktail-details .cocktail=${cocktail}></cocktail-details>
+          <cocktail-details  @click=${() => this._clickToChoose(cocktail)} .cocktail=${cocktail}></cocktail-details>
         `
       )}
     </ul>
   `;
  }
-}
+ _clickToChoose(recipeSelected) {
+    // 1️⃣ log dell'elemento cliccato
+    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.description}`);
 
+    // 2️⃣ evento con i dati dell'item
+    this.dispatchEvent(new CustomEvent('item-selected', {
+      details: recipeSelected,
+      bubbles: true,
+      composed: true
+    }));
+ }
+}
 customElements.define('cocktail-list', CocktailList);
 
