@@ -24,7 +24,9 @@ function DomContentLoaded() {
   let xButton = document.getElementById('xButton')
   let underlay = document.getElementById('underlay')
   let deleteButton = document.querySelector('.delete-button')
- 
+  let CocktailListComp = document.querySelector('cocktail-list')
+
+
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
   botonBuscar?.addEventListener('click', buscarProducto)
@@ -34,7 +36,9 @@ function DomContentLoaded() {
   hamMenu?.addEventListener('click',openSideBar)
   xButton ?.addEventListener('click',closeSideBar)   
   deleteButton?.addEventListener('click', deleteItemFromCart) 
-    
+  CocktailListComp?.addEventListener('item-selected', (e) => {
+    openPopUp(e.detail);
+});
     if (bodyProductos != null){
       console.log('body encontrado, display productos') 
       displayProductos()
@@ -143,6 +147,14 @@ function onLogOut(event) {
     let sideBar = document.querySelector('.sidebar')
     sideBar?.classList.remove('active')
   }
+
+ function openPopUp(data) {
+    console.log(`lets open the popup for ${data.name}
+      and description: ${data.description}`);
+    let popUp = document.createElement('description-pop-up')
+    popUp.cocktail = data;
+    document.body.appendChild(popUp)
+     }
      function redirectToCalculadores() {
       let titlePop = document.getElementById('pop-up-name');
       let valueToStore = titlePop.textContent || titlePop.value;

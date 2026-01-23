@@ -2,18 +2,33 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import DescriptionPopUpCSS from '../DescriptionPopUp/DescriptionPopUpCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 export class DescriptionPopUp extends LitElement {
-    static styles = [ResetCSS, DescriptionPopUpCSS];
-  static properties = {
-    cocktail: { type: Object }
-  };
+ static styles = [ResetCSS, DescriptionPopUpCSS];
+ static properties = { cocktail: { type: Object }};
+  constructor() {
+    super();
+    this.cocktail = null;
+  }
 
   render() {
-    return html`
-      <div class="description-popup">
-        <h2>${this.cocktail.name}</h2>
-        <img src="../../img/imgCocktails/${this.cocktail.name}.jpeg" alt="${this.cocktail.name}" class="img-list-cocktails" />
-        <p>${this.cocktail.description}</p>
-      </div>
+    if (!this.cocktail) {
+      return html`
+        <div class="description-pop-up open">
+          <h2>Loading...</h2>
+        </div>
+      `;
+    }
+   return html`
+  
+          <div class="popup-window">
+            <div class="popup-header"><h2>${this.cocktail.name}</h2>
+            <button class="popup-close-button" @click="${() => this.remove()}">X</button>
+            </div>
+            <div class="popup-body">
+            <p class="popup-description">${this.cocktail.description}</p>
+            <button class="popup-select-button">SELECT</button>
+            </div>
+          </div>
+
     `;
   }
 }

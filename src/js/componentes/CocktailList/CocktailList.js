@@ -53,7 +53,7 @@ export class CocktailList extends LitElement {
 
     // 2️⃣ evento con i dati dell'item
     this.dispatchEvent(new CustomEvent('item-selected', {
-      details: recipeSelected,
+      detail: recipeSelected,
       bubbles: true,
       composed: true
     }));
