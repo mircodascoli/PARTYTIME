@@ -27,7 +27,7 @@ export class DescriptionPopUp extends LitElement {
             </div>
             <div class="popup-body">
             <p class="popup-description">${this.cocktail.description}</p>
-            <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail)}">SELECT</button>
+            <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }" @click="${() => this.remove() }">SELECT</button>
             </div>
           </div>
 
