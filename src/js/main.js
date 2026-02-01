@@ -15,7 +15,6 @@ function DomContentLoaded() {
   let bodyUser = document.getElementById('bodyUser')
   let formBusqueda =  document.getElementById('formBusqueda')
   let botonBuscar = document.getElementById('botonBuscar')
-  let overlay = document.getElementById('overlay') 
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
   let bodyCarrito = document.getElementById('bodyCarrito')
@@ -66,11 +65,6 @@ function DomContentLoaded() {
 });
 
     }
-
-    overlay?.addEventListener('click', () => {
-      const activePopUps = document.querySelectorAll('.description.active');
-      activePopUps.forEach((popUp) => closePopup(popUp));
-    })
 
   underlay?.addEventListener('click', closeSideBar)
   signInFormLit?.addEventListener('signin-form-submit', (event) => {
@@ -164,8 +158,7 @@ function onLogOut(event) {
     let popUp = document.createElement('description-pop-up')
     popUp.cocktail = data;
     document.body.appendChild(popUp)
-     }
-
+  }
 
   function SetCocktailToSS(cocktail){
     console.log('setting cocktail to session storage', cocktail)
