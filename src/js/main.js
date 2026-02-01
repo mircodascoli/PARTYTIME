@@ -16,7 +16,6 @@ function DomContentLoaded() {
   let formBusqueda =  document.getElementById('formBusqueda')
   let botonBuscar = document.getElementById('botonBuscar')
   let overlay = document.getElementById('overlay') 
-  let craftButton = document.getElementById('craft-button');
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
   let bodyCarrito = document.getElementById('bodyCarrito') 
@@ -26,11 +25,9 @@ function DomContentLoaded() {
   let deleteButton = document.querySelector('.delete-button')
   let CocktailListComp = document.querySelector('cocktail-list')
 
-
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
   botonBuscar?.addEventListener('click', buscarProducto)
-  craftButton?.addEventListener('click', redirectToCalculadores); 
   formBusqueda?.addEventListener('submit', buscarProducto)
   formBusqueda?.addEventListener('keyup', onInputKeyUp)
   hamMenu?.addEventListener('click',openSideBar)
@@ -39,15 +36,20 @@ function DomContentLoaded() {
   CocktailListComp?.addEventListener('item-selected', (e) => {
     openPopUp(e.detail);
 });
+document.addEventListener('craft-selected', (event) => {
+  console.log('Evento ricevuto dal popup:', event.detail);
+
+  // Prima reindirizzi
+  redirecToCalculator();
+
+  // Poi apri la calcolatrice con i dati del cocktail
+  openCalculator(event.detail);
+});
     if (bodyProductos != null){
       console.log('body encontrado, display productos') 
       displayProductos()
     }
    
-    if (bodyCalculator != null){
-      console.log('body encontrado, display calculadores') 
-      autoSelectOption()
-    }
     if (bodyUser != null){
       console.log('body userencontrado, weloming user') 
       welcoming()
@@ -155,39 +157,19 @@ function onLogOut(event) {
     popUp.cocktail = data;
     document.body.appendChild(popUp)
      }
-     function redirectToCalculadores() {
-      let titlePop = document.getElementById('pop-up-name');
-      let valueToStore = titlePop.textContent || titlePop.value;
-      sessionStorage.setItem('choice', valueToStore);
-        // reindirizza l'utente alla pagina calculadores.html
-        console.log(valueToStore,'selected redirecting you to calculadores.html');
-      
-        window.location.href = './calculadores.html';
 
-     }
-
-     function autoSelectOption() {
-      const chosenOption = sessionStorage.getItem('choice');
-      if (!chosenOption) return;
-    
-      console.log(chosenOption, "✅ Retrieved and ready to pass to the web component.");
-    
-      const component = document.querySelector('calculador-component');
-      if (component) {
-        component.choice = chosenOption;  
-      }
-    }
-
-  function closePopup(popUp) {
-     console.log(`the popup ${popUp} should close`)
-     let overlay = document.getElementById('overlay')
-    if (popUp == null) return
-    console.log(popUp.classList)
-    popUp.classList.remove('active')
-    overlay?.classList.remove('active')
+  function redirecToCalculator() {
+    console.log('redirecting to calculator page')
+    location.href = './calculadores.html'
   }
-
-
+  function openCalculator(data) {
+    console.log(`lets open the calculator for ${data.name}
+      and ingredient: ${data.ingredient}`);
+    let calculator = document.createElement('calculator-pop-up')
+    calculator.cocktail = data;
+    document.body.appendChild(calculator)
+     }
+    
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
 
