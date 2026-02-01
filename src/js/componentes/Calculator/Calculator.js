@@ -16,4 +16,4 @@ export class Calculator extends LitElement {
   }
 }
 
-customElements.define('calculator', Calculator);
+customElements.define('calculator-component', Calculator);
