@@ -57,13 +57,14 @@ function DomContentLoaded() {
       console.log('body chooseencontrado, display choosepoison')
       document.addEventListener('craft-selected', (event) => {
   console.log('Evento ricevuto dal popup:', event.detail);
-
+  SetCocktailToSS(event.detail);
   // Prima reindirizzi
-  redirecToCalculator();
+ redirectToCalculator();
 
   // Poi apri la calcolatrice con i dati del cocktail
-  SetCocktailToSS(event.detail);
-}); 
+
+});
+
     }
 
     overlay?.addEventListener('click', () => {
@@ -165,15 +166,16 @@ function onLogOut(event) {
     document.body.appendChild(popUp)
      }
 
-  function redirecToCalculator() {
+
+  function SetCocktailToSS(cocktail){
+    console.log('setting cocktail to session storage', cocktail)
+    sessionStorage.setItem('selectedCraft', JSON.stringify(cocktail))
+  }
+    
+  function redirectToCalculator(){
     console.log('redirecting to calculator page')
     location.href = './calculadores.html'
   }
-  function SetCocktailToSS(cocktail){
-    console.log('setting cocktail to session storage', cocktail)
-    sessionStorage.setItem('selectedCocktail', JSON.stringify(cocktail))
-  }
-    
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
 
