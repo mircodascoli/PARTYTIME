@@ -9,6 +9,8 @@ export class DescriptionPopUp extends LitElement {
     this.cocktail = null;
   }
 
+ 
+
   render() {
     if (!this.cocktail) {
       return html`
@@ -25,11 +27,21 @@ export class DescriptionPopUp extends LitElement {
             </div>
             <div class="popup-body">
             <p class="popup-description">${this.cocktail.description}</p>
-            <button class="popup-select-button">SELECT</button>
+            <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail)}">SELECT</button>
             </div>
           </div>
 
     `;
+  }
+   SelectRecipeToCalc(recipeSelected) {
+       // 1️⃣ log dell'elemento cliccato
+    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.ingredient}`);
+
+      this.dispatchEvent(new CustomEvent('craft-selected', {
+      detail: recipeSelected,
+      bubbles: true,
+      composed: true
+    }));
   }
 }
 
