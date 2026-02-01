@@ -18,7 +18,8 @@ function DomContentLoaded() {
   let overlay = document.getElementById('overlay') 
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
-  let bodyCarrito = document.getElementById('bodyCarrito') 
+  let bodyCarrito = document.getElementById('bodyCarrito')
+  let bodyChoose = document.getElementById('bodyChoose') 
   let hamMenu= document.getElementById('hamMenu')
   let xButton = document.getElementById('xButton')
   let underlay = document.getElementById('underlay')
@@ -36,20 +37,14 @@ function DomContentLoaded() {
   CocktailListComp?.addEventListener('item-selected', (e) => {
     openPopUp(e.detail);
 });
-document.addEventListener('craft-selected', (event) => {
-  console.log('Evento ricevuto dal popup:', event.detail);
 
-  // Prima reindirizzi
-  redirecToCalculator();
-
-  // Poi apri la calcolatrice con i dati del cocktail
-  openCalculator(event.detail);
-});
     if (bodyProductos != null){
       console.log('body encontrado, display productos') 
       displayProductos()
     }
-   
+   if (bodyCalculator != null){
+      console.log('body calculadoraencontrado, display calculadora') 
+    }
     if (bodyUser != null){
       console.log('body userencontrado, weloming user') 
       welcoming()
@@ -57,6 +52,18 @@ document.addEventListener('craft-selected', (event) => {
     if (bodyCarrito != null){
       console.log('body carritoencontrado, display carrito') 
      loadCartData()
+    }
+    if (bodyChoose != null){
+      console.log('body chooseencontrado, display choosepoison')
+      document.addEventListener('craft-selected', (event) => {
+  console.log('Evento ricevuto dal popup:', event.detail);
+
+  // Prima reindirizzi
+  redirecToCalculator();
+
+  // Poi apri la calcolatrice con i dati del cocktail
+  SetCocktailToSS(event.detail);
+}); 
     }
 
     overlay?.addEventListener('click', () => {
@@ -162,13 +169,10 @@ function onLogOut(event) {
     console.log('redirecting to calculator page')
     location.href = './calculadores.html'
   }
-  function openCalculator(data) {
-    console.log(`lets open the calculator for ${data.name}
-      and ingredient: ${data.ingredient}`);
-    let calculator = document.createElement('calculator-pop-up')
-    calculator.cocktail = data;
-    document.body.appendChild(calculator)
-     }
+  function SetCocktailToSS(cocktail){
+    console.log('setting cocktail to session storage', cocktail)
+    sessionStorage.setItem('selectedCocktail', JSON.stringify(cocktail))
+  }
     
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
