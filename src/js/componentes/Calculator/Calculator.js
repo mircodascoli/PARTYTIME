@@ -17,6 +17,8 @@ export class Calculator extends LitElement {
     if (storedRecipe) {
       this.recipe = JSON.parse(storedRecipe);
       console.log('Ricetta caricata nel calculator:', this.recipe);
+      // Optionally, clear the session storage if you don't need it anymore
+      // sessionStorage.removeItem('selectedCraft');
     }
   }
   constructor() {
@@ -55,7 +57,12 @@ export class Calculator extends LitElement {
               <th>quantity:</th>
             </thead>
             <tbody>
-             
+               ${this.recipe.ingredients.map(i => html`
+                <tr>
+                  <td>${i.name}</td>
+                  <td>${i.ml} ml</td>
+                </tr>
+              `)}
             </tbody>
           </table>
           ${this.selected
