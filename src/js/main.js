@@ -43,9 +43,12 @@ function DomContentLoaded() {
     }
    if (bodyCalculator != null){
       console.log('body calculadoraencontrado, display calculadora') 
+      document.addEventListener('receta-guardada', () => {
+        location.href = './user.html';
+      });
     }
     if (bodyUser != null){
-      console.log('body userencontrado, weloming user') 
+      console.log('body userencontrado, weloming user')
       welcoming()
     }
     if (bodyCarrito != null){
@@ -55,14 +58,12 @@ function DomContentLoaded() {
     if (bodyChoose != null){
       console.log('body chooseencontrado, display choosepoison')
       document.addEventListener('craft-selected', (event) => {
-  console.log('Evento ricevuto dal popup:', event.detail);
-  SetCocktailToSS(event.detail);
-  // Prima reindirizzi
- redirectToCalculator();
+ 
+     SetCocktailToSS(event.detail);
 
-  // Poi apri la calcolatrice con i dati del cocktail
+     redirectToCalculator();
 
-});
+    });
 
     }
 

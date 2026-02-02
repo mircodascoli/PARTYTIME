@@ -4,15 +4,15 @@ import ResetCSS from '../../../css/reset.css' with {type: 'css'};
 import SignInFormLitCSS from '../SignInFormLit/SignInFormLit.css'with {type: 'css'};
 export class SignInFormLit extends LitElement {
     static styles = [ResetCSS, SignInFormLitCSS];
-      static properties = {
-    // Propiedad reactiva y pública por medio de un atributo HTML
-    info: { type: String },
+    static properties = {
+    name: { type: String },
     email: { type: String },
     password: { type: String },
   }
 
  constructor() {
     super();
+    this.name = '';
     this.email = '';
     this.password = '';
   }
@@ -22,6 +22,7 @@ export class SignInFormLit extends LitElement {
             <form id="formLog" @submit="${this._onFormSubmit}">
                 <slot></slot>
                 <p id="infoMessage">Register your account</p>
+                <input type="name" id="nameSign" placeholder="Name" required>
                 <input type="email" id="emailSign" placeholder="Email" required>
                 <input type="password" id="passwordSign" placeholder="Password" required>
                 <button type="submit" class="btn">Sign In</button>
@@ -34,19 +35,20 @@ export class SignInFormLit extends LitElement {
         async _onFormSubmit(e) {
           console.log('onFormSubmit activation')
             e.preventDefault();
-           
+            const name = this.renderRoot.getElementById('nameSign');
             const email = this.renderRoot.getElementById('emailSign');
             const password = this.renderRoot.getElementById('passwordSign')
             
 
             const signInData  = {
+              name: getInputValue(name),
               email: getInputValue(email),
               password: getInputValue(password)
             }
 
            let onFormSubmitEvent
           
-             console.log(`DESDE DENTRO DEL COMPONENTE Name: ${signInData.email}, Email: ${signInData.password}`);
+             console.log(`DESDE DENTRO DEL COMPONENTE Name: ${signInData.name}, Email: ${signInData.email}, Email: ${signInData.password}`);
 
              if (signInData.email !== '' && signInData.password !== '') {
 
