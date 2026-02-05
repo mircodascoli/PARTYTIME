@@ -446,10 +446,10 @@ function clearCart(){
 
 function welcoming(){
   let pWelcome = document.getElementById('welcome')
-  let userEmail = JSON.parse(sessionStorage.getItem('user')).email
+  let userName = JSON.parse(sessionStorage.getItem('user')).name
   pWelcome?.classList.add('p-welcome')
   pWelcome.textContent= `Welcome,
-  ${userEmail}`
+  ${userName}`
 }
 
 export function getInputValue(inputElement) {
