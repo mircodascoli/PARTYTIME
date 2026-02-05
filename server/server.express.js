@@ -141,9 +141,14 @@ app.post('/api/busqueda/party', async (req, res) => {
 });
    
          app.post('/api/push/to/cart', async (req, res) => {
-      console.log('estamos para push to cart', req.body)
+      console.log('req.body push to cart EXPRESS', req.body)
     
          res.json(await db.users.carting( req.body.idBotella, req.body.idUser))
+      })
+
+      app.post('/api/push/to/recipes', async (req, res) => {
+      console.log('req.body push to recipes in express', req.body)
+         res.json(await db.users.addToRecipes( req.body.recipe, req.body.idUser))
       })
 
       app.post('/api/buscar/usuario', async (req, res) => {

@@ -75,7 +75,7 @@ export class Calculator extends LitElement {
   }
 
   async handleClick() {
-  const receta = {
+  const recipe = {
     name: this.recipe.name,
     ingredientes: this.recipe.ingredients.map(i => ({
       name: i.name,
@@ -85,7 +85,7 @@ export class Calculator extends LitElement {
   };
 
   try {
-    const result = await this.guardarReceta(receta);
+    const result = await this.guardarReceta(recipe);
 
     this.dispatchEvent(new CustomEvent('receta-guardada', {
       detail: result,
@@ -99,17 +99,15 @@ export class Calculator extends LitElement {
   }
 }
 
- async guardarReceta(receta) {
-  const user = JSON.parse(sessionStorage.getItem('user'));
-  if (!user?._id) throw new Error('User not found');
-
-  const PAYLOAD = JSON.stringify({ receta });
-
-  const apiData = await getAPIData(
-    `${location.protocol}//${location.hostname}${API_PORT}/api/update/users/${user._id}`,
-    'PUT',
-    PAYLOAD
-  );
+ async guardarReceta(recipe) {
+  const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
+  const body = {
+    recipe,
+    idUser: idUserNum
+  };
+  console.log(body, 'body in guardar receta');
+  const PAYLOAD = JSON.stringify(body);
+  const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/push/to/recipes`, 'POST', PAYLOAD);
 
   return apiData;
 }
