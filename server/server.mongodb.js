@@ -10,6 +10,7 @@ export const db = {
         update: updateUsers,
         search: searchUsers,
         carting: AddIdBotellaToCart,
+        addToRecipes: addToRecipes,
         delete: deleteUsers,
         DeleteFromCart: DeleteFromCart,
         clearCart: clearCart,
@@ -51,6 +52,13 @@ async function AddIdBotellaToCart(idBotella, idUser){
     const PartytimetDB = client.db('Partytime');
     const usersCollection = PartytimetDB.collection('users');
     return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { cart: idBotella } });
+  }
+  async function addToRecipes(recipe, idUser){
+    console.log('hey from add to recipies in MONGO' , recipe, idUser)
+    const client = new MongoClient(URI);
+    const PartytimetDB = client.db('Partytime');
+    const usersCollection = PartytimetDB.collection('users');
+    return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { recipes: recipe } });
   }
 
   async function  getUsers(filter, projection){
