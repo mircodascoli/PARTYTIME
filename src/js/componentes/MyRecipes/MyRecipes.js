@@ -42,12 +42,33 @@ export class MyRecipes extends LitElement {
   
     render() {
       return html`
+       <button class="clear-button">Clear List</button>
       <div class="my-recipes-container">
-        <h2 class="my-recipes-title">Mis recetas</h2>
-        <div class="my-recipes-list">
-           <p>Cocktail:${this.apiData.receta.name} </p>
+       <ul class="recipes-list">
+        ${this.apiData.recipes.map(item => html`
+         
+        <div class="recipe-card">
+          <button class="delete-recipe">X</button>
+
+          <div class="recipe-title">
+            ${item.recipe.name}
+          </div>
+          <div class="recipe-data">
+          
+               <ul class="recipe-ingredients-list">
+               ${item.recipe.ingredientes.map(ing => html`<li> ${ing.name}${ing.mls}ml</li>`)}
+            </ul>
+            <ul class="recipe-products-list">
+            ${item.recipe.ingredientes.map(ing => html`<li> ${ing.dbname}</li><button>BUY</button>`)}
+            </ul>
+
+            <button>BUY SET</button>
+
+          </div>
 
         </div>
+      `)}
+    </ul>
       </div>
       `
     }
