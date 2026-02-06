@@ -58,7 +58,7 @@ async function AddIdBotellaToCart(idBotella, idUser){
     const client = new MongoClient(URI);
     const PartytimetDB = client.db('Partytime');
     const usersCollection = PartytimetDB.collection('users');
-    return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { recipes: recipe } });
+    return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { recipes: {$each: [{recipe}],$slice: -3} } });
   }
 
   async function  getUsers(filter, projection){
