@@ -51,12 +51,12 @@ export class MyRecipes extends LitElement {
           <button class="delete-recipe">X</button>
 
           <div class="recipe-title">
-            ${item.recipe.name}
+            <p>${item.recipe.name} X${item.recipe.amount}</p>
           </div>
           <div class="recipe-data">
           
                <ul class="recipe-ingredients-list">
-               ${item.recipe.ingredientes.map(ing => html`<li> ${ing.name}${ing.mls}ml</li>`)}
+               ${item.recipe.ingredientes.map(ing => html`<li> ${ing.name} ${ing.mls}ml</li>`)}
             </ul>
             <ul class="recipe-products-list">
             ${item.recipe.ingredientes.map(ing => html`<li> ${ing.dbname}</li><button>BUY</button>`)}

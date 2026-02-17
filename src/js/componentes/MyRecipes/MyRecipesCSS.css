@@ -20,16 +20,28 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      border: 1px solid #000;
+
+      .recipe-title{
+        border: 1px solid #000;
+        }
 
       .recipe-data{
         display: flex;
         flex-direction: row;
         align-items: center;
-
-        
+        border: 1px solid #000;
         }
+
+        .recipe-ingredients-list{
+          border: 1px solid #000;
+      }
+      
+      .recipe-products-list{
+        border: 1px solid #000;
       }
 
 
     }
   }
+}
