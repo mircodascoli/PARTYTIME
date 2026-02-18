@@ -38,11 +38,25 @@ export class MyRecipes extends LitElement {
     this.apiData = apiData;
     this.requestUpdate();
   }
+  clearList(){
+    console.log('clear recipe event lauched')
+  let userId = JSON.parse(sessionStorage.getItem('user'))._id
+  console.log(userId)
+  const body = {
+    userId
+  }
+  const payload = JSON.stringify(body);
+   console.log(payload)
+  const apiData = getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/clear/recipes`, 'DELETE', payload);
+  console.log(apiData)
+  alert('Recipe cleared!')
+ location.reload();   
+}
   
   
     render() {
       return html`
-       <button class="clear-button">Clear List</button>
+       <button class="clear-button" @click="${this.clearList}">Clear List</button>
       <div class="my-recipes-container">
        <ul class="recipes-list">
         ${this.apiData.recipes.map(item => html`

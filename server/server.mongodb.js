@@ -14,7 +14,7 @@ export const db = {
         delete: deleteUsers,
         DeleteFromCart: DeleteFromCart,
         clearCart: clearCart,
-        clearRecipe: clearRecipe
+        clearRecipes: clearRecipes
     },
     botellas: {
         get: getBotellas,
@@ -204,8 +204,8 @@ const result = await users.updateOne(
     await client.close();
   }
 }
-  async function clearRecipe(userId) {
-  console.log('Clearing recipe...');
+  async function clearRecipes(userId) {
+  console.log('Clearing recipes...');
   const client = new MongoClient(URI);
 
   try {
@@ -215,9 +215,9 @@ const users = db.collection('users');
 
 const result = await users.updateOne(
   { _id: new ObjectId(userId) },
-   { $unset: { receta: ""} }
-);          
-
+  { $set: { recipes: [] } }
+);
+      
     console.log('Clear result:', result);
     return result;
   } catch (error) {
