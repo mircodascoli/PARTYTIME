@@ -93,10 +93,10 @@ app.get('/api/read/cocktails', async (req, res) => {
     res.json(await db.users.clearCart( req.body.userId))
       })  
 
-  app.delete('/api/delete/recipe', async (req, res) => {
-    console.log('server delete recipe')
+  app.delete('/api/clear/recipes', async (req, res) => {
+    console.log('server clear recipes')
 
-    res.json(await db.users.clearRecipe( req.body.userId))
+    res.json(await db.users.clearRecipes( req.body.userId))
       })  
 
 
