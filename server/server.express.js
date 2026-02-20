@@ -99,6 +99,12 @@ app.get('/api/read/cocktails', async (req, res) => {
     res.json(await db.users.clearRecipes( req.body.userId))
       })  
 
+  app.delete('/api/delete/recipe', async (req, res) => {
+    console.log('server delete recipe', req.body)
+    const { userId, recipeName } = req.body;
+    res.json(await db.users.deleteRecipe(userId, recipeName));
+  });
+
 
     // FILTER
 

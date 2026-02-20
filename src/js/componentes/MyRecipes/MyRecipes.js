@@ -29,7 +29,6 @@ export class MyRecipes extends LitElement {
     this.loadApiData();
 
     }
-
   async loadApiData() {
     console.log('Loading the data');
     const payload = JSON.stringify({ id: this._idSession });
@@ -40,7 +39,7 @@ export class MyRecipes extends LitElement {
   }
   clearList(){
     console.log('clear recipe event lauched')
-  let userId = JSON.parse(sessionStorage.getItem('user'))._id
+  let userId = this._idSession
   console.log(userId)
   const body = {
     userId
@@ -51,8 +50,21 @@ export class MyRecipes extends LitElement {
   console.log(apiData)
   alert('Recipe cleared!')
  location.reload();   
-}
-  
+  }
+  deleteRecipe(recipeName){ 
+    console.log('delete recipe event lauched for', recipeName)
+      let userId = this._idSession
+  console.log(userId)
+  const body = {
+    userId, 
+    recipeName
+  }
+  const payload = JSON.stringify(body);
+   console.log(payload)
+  const apiData = getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/delete/recipe`, 'DELETE', payload);
+  console.log(apiData)
+  alert(recipeName,'Recipe deleted!')
+  }
   
     render() {
       return html`
@@ -62,8 +74,7 @@ export class MyRecipes extends LitElement {
         ${this.apiData.recipes.map(item => html`
          
         <div class="recipe-card">
-          <button class="delete-recipe">X</button>
-
+          <button class="delete-recipe" @click=${() => this.deleteRecipe(item.recipe.name)}>X</button>
           <div class="recipe-title">
             <p>${item.recipe.name} X${item.recipe.amount}</p>
           </div>
