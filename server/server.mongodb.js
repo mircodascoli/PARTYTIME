@@ -14,7 +14,8 @@ export const db = {
         delete: deleteUsers,
         DeleteFromCart: DeleteFromCart,
         clearCart: clearCart,
-        clearRecipes: clearRecipes
+        clearRecipes: clearRecipes,
+        deleteRecipe: deleteRecipe
     },
     botellas: {
         get: getBotellas,
@@ -53,13 +54,51 @@ async function AddIdBotellaToCart(idBotella, idUser){
     const usersCollection = PartytimetDB.collection('users');
     return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { cart: idBotella } });
   }
-  async function addToRecipes(recipe, idUser){
-    console.log('hey from add to recipies in MONGO' , recipe, idUser)
-    const client = new MongoClient(URI);
-    const PartytimetDB = client.db('Partytime');
-    const usersCollection = PartytimetDB.collection('users');
-    return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { recipes: {$each: [{recipe}],$slice: -3} } });
+async function addToRecipes(recipe, idUser) {
+  const client = new MongoClient(URI);
+
+  try {
+    await client.connect();
+    const db = client.db("Partytime");
+    const users = db.collection("users");
+
+    // 1️⃣ Provo a sostituire se esiste già stesso name
+    const result = await users.updateOne(
+      {
+        _id: new ObjectId(idUser),
+        "recipes.name": recipe.name
+      },
+      {
+        $set: {
+          "recipes.$": {
+            _id: new ObjectId(),
+            ...recipe
+          }
+        }
+      }
+    );
+
+    // 2️⃣ Se non esiste → lo aggiungo
+    if (result.matchedCount === 0) {
+      await users.updateOne(
+        { _id: new ObjectId(idUser) },
+        {
+          $push: {
+            recipes: {
+              _id: new ObjectId(),
+              ...recipe
+            }
+          }
+        }
+      );
+    }
+  } catch (err) {
+    console.error(err);
+ 
+  } finally {
+    await client.close();
   }
+}
 
   async function  getUsers(filter, projection){
     console.log('hey from get users')
@@ -226,6 +265,28 @@ const result = await users.updateOne(
   } finally {
     await client.close();
   }
+}
+async function deleteRecipe(userId, recipeName) {
+  console.log('Deleting recipe in MONGOdb...', recipeName, 'for user', userId);
+  const client = new MongoClient(URI);
+  try {
+   await client.connect();
+const db = client.db('Partytime');
+const users = db.collection('users');
+
+const result = await users.updateOne(
+  { _id: new ObjectId(userId) },
+  { $pull: { recipes: recipeName } }
+);
+      
+    console.log('Delete result:', result);
+    return result;
+  } catch (error) {
+    console.error('Error deleting recipe:', error);
+    throw error;
+  } finally {
+    await client.close();
+  } 
 }
 async function findBotellasByNames(filter, projection){
   console.log('hey from display party in mongo DB')
