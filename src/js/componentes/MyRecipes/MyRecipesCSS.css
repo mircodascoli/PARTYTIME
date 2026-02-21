@@ -1,47 +1,81 @@
+:host {
+  display: block;
+}
+
 .my-recipes-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+}
 
-  .recipes-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    width: 100%;
+.recipes-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .recipe-card {
-      background-color: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      padding: 15px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      border: 1px solid #000;
+.recipe-card {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+  width: 300px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #000;
+  position: relative;
+}
 
-      .recipe-title{
-        border: 1px solid #000;
-        }
+.delete-recipe {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
 
-      .recipe-data{
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        border: 1px solid #000;
-        }
+.delete-recipe:hover {
+  opacity: 0.85;
+}
 
-        .recipe-ingredients-list{
-          border: 1px solid #000;
-      }
-      
-      .recipe-products-list{
-        border: 1px solid #000;
-      }
+.recipe-title {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  padding-bottom: 6px;
+}
 
+.recipe-data {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
 
-    }
-  }
+.recipe-ingredients-list,
+.recipe-products-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+}
+
+.recipe-ingredients-list li,
+.recipe-products-list li {
+  margin-bottom: 4px;
+}
+
+button {
+  cursor: pointer;
 }

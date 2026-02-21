@@ -101,8 +101,8 @@ app.get('/api/read/cocktails', async (req, res) => {
 
   app.delete('/api/delete/recipe', async (req, res) => {
     console.log('server delete recipe', req.body)
-    const { userId, recipeName } = req.body;
-    res.json(await db.users.deleteRecipe(userId, recipeName));
+    const { userId, recipeId } = req.body;
+    res.json(await db.users.deleteRecipe(userId, recipeId));
   });
 
 

@@ -266,19 +266,24 @@ const result = await users.updateOne(
     await client.close();
   }
 }
-async function deleteRecipe(userId, recipeName) {
-  console.log('Deleting recipe in MONGOdb...', recipeName, 'for user', userId);
+async function deleteRecipe(userId, recipeId) {
+  console.log('Deleting recipe in MONGOdb...', recipeId, 'for user', userId);
   const client = new MongoClient(URI);
   try {
    await client.connect();
 const db = client.db('Partytime');
 const users = db.collection('users');
 
-const result = await users.updateOne(
+const result =await users.updateOne(
   { _id: new ObjectId(userId) },
-  { $pull: { recipes: recipeName } }
+  {
+    $pull: {
+      recipes: { _id: new ObjectId(recipeId) }
+    }
+  }
+
+  // RECIPE ID ARRIVA UNDEFINED 
 );
-      
     console.log('Delete result:', result);
     return result;
   } catch (error) {
