@@ -70,7 +70,6 @@ export class MyRecipes extends LitElement {
     }
   }
 
-
   async deleteRecipe(recipeId) {
     if (!this._idSession) return;
 
@@ -97,6 +96,9 @@ export class MyRecipes extends LitElement {
     }
   } 
 
+  async buyIngredient(ingDbname) {
+    console.log('buy ingredient', ingDbname);
+  }
   render() {
 
     if (!this.apiData) {
@@ -117,12 +119,8 @@ export class MyRecipes extends LitElement {
 
             <div class="recipe-card">
 
-              <button
-                class="delete-recipe"
-                @click=${() => this.deleteRecipe(item._id)}
-              >
-                X
-              </button>
+              <button class="delete-recipe"
+                @click=${() => this.deleteRecipe(item._id)}>X</button>
 
               <div class="recipe-title">
                 <p>${item.name} × ${item.amount}</p>
@@ -139,7 +137,7 @@ export class MyRecipes extends LitElement {
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
                     <li>${ing.dbname}</li>
-                    <button>BUY</button>
+                    <button  @click=${() => this.buyIngredient(ing.dbname)}>BUY</button>
                   `)}
                 </ul>
 
