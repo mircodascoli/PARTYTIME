@@ -6,13 +6,10 @@ import { ObjectId } from 'mongodb';
 const app = express();
 const port = process.env.PORT || 3000;;
 
-
 // for parsing application/json
 app.use(bodyParser.json());
 // for parsing application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true }))
-
-
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // CREATE
 
@@ -37,20 +34,19 @@ app.use(bodyParser.urlencoded({ extended: true }))
     }
   })
 
-
 // READ
+
 app.get('/api/read/users', async (req, res) =>  {
       console.log('server read users')
       res.json(await db.users.get())
     });
-
 
   app.get('/api/read/botellas', async (req, res) => {
    
       console.log('server read botellas')
       res.json(await db.botellas.get())
     });
-console.log('db.cocktails:', db.cocktails);
+
 app.get('/api/read/cocktails', async (req, res) => {
   console.log('server read cocktails');
 
@@ -63,7 +59,6 @@ app.get('/api/read/cocktails', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
  // UPDATE     
  app.put('/api/update/users/:_id', async (req, res) => {
@@ -79,7 +74,6 @@ app.get('/api/read/cocktails', async (req, res) => {
     res.json(await db.users.delete(req.body._id))
       })  
 
- 
   app.delete('/api/delete/from/cart', async (req, res) => {
     console.log('server delete from cart')
     
@@ -104,7 +98,6 @@ app.get('/api/read/cocktails', async (req, res) => {
     const { userId, recipeId } = req.body;
     res.json(await db.users.deleteRecipe(userId, recipeId));
   });
-
 
     // FILTER
 
@@ -146,32 +139,36 @@ app.post('/api/busqueda/party', async (req, res) => {
   }
 });
    
-         app.post('/api/push/to/cart', async (req, res) => {
-      console.log('req.body push to cart EXPRESS', req.body)
+   app.post('/api/push/to/cart', async (req, res) => {
+console.log('req.body push to cart EXPRESS', req.body)
     
          res.json(await db.users.carting( req.body.idBotella, req.body.idUser))
       })
 
-      app.post('/api/push/to/recipes', async (req, res) => {
-      console.log('req.body push to recipes in express', req.body)
-         res.json(await db.users.addToRecipes( req.body.recipe, req.body.idUser))
-      })
+  app.post('/api/push/to/recipes', async (req, res) => {
+   console.log('req.body push to recipes in express', req.body)
+    res.json(await db.users.addToRecipes( req.body.recipe, req.body.idUser))
+  })
 
-      app.post('/api/buscar/usuario', async (req, res) => {
-        console.log('estamos en busqueda', req.body)
-        //recuerda añadir la projeccion para filtrar los ampos que devolvemos
-           res.json(await db.users.search(req.body))
-           console.log(res.json)
-        })
+ app.post('/api/buscar/usuario', async (req, res) => {
+    console.log('estamos en busqueda', req.body)
+  //recuerda añadir la projeccion para filtrar los ampos que devolvemos
+   res.json(await db.users.search(req.body))
+    console.log(res.json)
+  })
 
 
    app.post('/api/login', async (req, res) => {
     console.log('estamos en login', req.body)
     const user = await db.users.login({ email:req.body.email, password:req.body.password})
     res.json(user)
-    
   })
 
+  app.post('/api/buy/ingredient', async (req, res) => {
+    console.log('server buy ingredient', req.body)
+    const { userId, ingDbname } = req.body;
+    res.json(await db.users.buyIngredient(userId, ingDbname));
+  });
   // Static server
 app.use(express.static('src'));
 

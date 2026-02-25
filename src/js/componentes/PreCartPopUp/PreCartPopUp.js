@@ -1,0 +1,46 @@
+import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import PreCartPopUpCSS from '../PreCartPopUp/PreCartPopUpCSS.css' with { type: 'css' };
+import ResetCSS from '../../../css/reset.css' with { type: 'css' };
+export class PreCartPopUp extends LitElement {
+ static styles = [ResetCSS, PreCartPopUpCSS];
+ static properties = { cocktail: { type: Object }};
+  constructor() {
+    super();
+    this.cocktail = null;
+  }
+
+  render() {
+    if (!this.cocktail) {
+      return html`
+        <div class="description-pop-up open">
+          <h2>Loading...</h2>
+        </div>
+      `;
+    }
+   return html`
+  
+          <div class="popup-window">
+            <div class="popup-header"><h2>${this.cocktail.name}</h2>
+            <button class="popup-close-button" @click="${() => this.remove()}">X</button>
+            </div>
+            <div class="popup-body">
+            <p class="popup-description">${this.cocktail.description}</p>
+            <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }" @click="${() => this.remove() }">SELECT</button>
+            </div>
+          </div>
+
+    `;
+  }
+   SelectRecipeToCalc(recipeSelected) {
+       // 1️⃣ log dell'elemento cliccato
+    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.ingredient}`);
+
+      this.dispatchEvent(new CustomEvent('craft-selected', {
+      detail: recipeSelected,
+      bubbles: true,
+      composed: true
+    }));
+  }
+}
+
+customElements.define('pre-cart-popup', PreCartPopUp);

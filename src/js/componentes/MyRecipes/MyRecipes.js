@@ -96,9 +96,16 @@ export class MyRecipes extends LitElement {
     }
   } 
 
-  async buyIngredient(ingDbname) {
-    console.log('buy ingredient', ingDbname);
-  }
+  _launchpreCartPoPup(ing) {
+    console.log('buy ingredient function activated by the click', ing.dbname);
+
+    this.dispatchEvent(new CustomEvent('ingredient-selected', {
+      detail: ing,
+      bubbles: true,
+      composed: true
+    }));
+  
+  } 
   render() {
 
     if (!this.apiData) {
@@ -137,7 +144,7 @@ export class MyRecipes extends LitElement {
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
                     <li>${ing.dbname}</li>
-                    <button  @click=${() => this.buyIngredient(ing.dbname)}>BUY</button>
+                    <button class="buy-button" @click=${() => this._launchpreCartPoPup(ing)}>BUY</button>
                   `)}
                 </ul>
 
