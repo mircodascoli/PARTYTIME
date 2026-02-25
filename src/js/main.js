@@ -24,6 +24,8 @@ function DomContentLoaded() {
   let underlay = document.getElementById('underlay')
   let deleteButton = document.querySelector('.delete-button')
   let CocktailListComp = document.querySelector('cocktail-list')
+  let MyRecipesComp = document.querySelector('my-recipes')
+ 
 
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
@@ -35,7 +37,10 @@ function DomContentLoaded() {
   deleteButton?.addEventListener('click', deleteItemFromCart) 
   CocktailListComp?.addEventListener('item-selected', (e) => {
     openPopUp(e.detail);
-});
+   });
+   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {
+    openPopUp(e.detail);
+   });
 
     if (bodyProductos != null){
       console.log('body encontrado, display productos') 

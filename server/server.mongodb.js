@@ -9,13 +9,13 @@ export const db = {
         create: createUsers,
         update: updateUsers,
         search: searchUsers,
-        carting: AddIdBotellaToCart,
         addToRecipes: addToRecipes,
         delete: deleteUsers,
         DeleteFromCart: DeleteFromCart,
         clearCart: clearCart,
         clearRecipes: clearRecipes,
-        deleteRecipe: deleteRecipe
+        deleteRecipe: deleteRecipe,
+        buyIngredient: buyIngredient
     },
     botellas: {
         get: getBotellas,
@@ -47,8 +47,8 @@ export const db = {
     return await usersCollection.findOne({  });
   }
 
-async function AddIdBotellaToCart(idBotella, idUser){
-    console.log('hey from add to cart')
+async function buyIngredient(idBotella, idUser){
+    console.log('hey from add to cart', idBotella, idUser)
     const client = new MongoClient(URI);
     const PartytimetDB = client.db('Partytime');
     const usersCollection = PartytimetDB.collection('users');
@@ -127,14 +127,6 @@ async function addToRecipes(recipe, idUser) {
 
   }
 
-/**
- * Searches for a user in the 'users' collection in the 'Partytime' database
- * using the provided filter.
- *
- * @param {string} filter - The filter to locate the user, typically a user ID.
- * @returns {Promise<object|null>} A promise that resolves to the user object if found, or null otherwise.
- */
-
   async function searchUsers(filter){
     console.log('hey from search users')
     const client = new MongoClient(URI);
@@ -156,7 +148,6 @@ async function addToRecipes(recipe, idUser) {
 
   return await botellasCollection.find(filter).toArray();
 }
-  
 
   async function login({email, password}){
     console.log('hey from login')
@@ -195,7 +186,6 @@ async function deleteUsers(id){
     console.log(returnValue)
     return returnValue
   }
-
 
 async function DeleteFromCart(idBotella, idUser) {
   console.log('Deleting from cart...');
@@ -300,3 +290,5 @@ async function findBotellasByNames(filter, projection){
   const botellasCollection = PartytimetDB.collection('Botellas');
   return await botellasCollection.find(filter).project(projection).toArray();
 }
+
+
