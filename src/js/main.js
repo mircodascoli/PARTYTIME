@@ -39,7 +39,7 @@ function DomContentLoaded() {
     openPopUp(e.detail);
    });
    MyRecipesComp?.addEventListener('ingredient-selected', (e) => {
-    openPopUp(e.detail);
+    openPreCart(e.detail);
    });
 
     if (bodyProductos != null){
@@ -164,6 +164,13 @@ function onLogOut(event) {
     let popUp = document.createElement('description-pop-up')
     popUp.cocktail = data;
     document.body.appendChild(popUp)
+  }
+
+  function openPreCart(data) {
+    console.log(`lets open the popup for ${data.name}`);
+    let preCart = document.createElement('pre-cart-popup')
+    preCart.product = data;
+    document.body.appendChild(preCart)
   }
 
   function SetCocktailToSS(cocktail){
