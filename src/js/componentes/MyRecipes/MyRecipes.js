@@ -144,6 +144,7 @@ export class MyRecipes extends LitElement {
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
                     <li>${ing.dbname}</li>
+                     <img src="../../img/imgProductos/${ing.dbname}.png" alt="${ing.dbname}" class="suggested-product-image" />
                     <button class="buy-button" @click=${() => this._launchpreCartPoPup(ing)}>BUY</button>
                   `)}
                 </ul>
