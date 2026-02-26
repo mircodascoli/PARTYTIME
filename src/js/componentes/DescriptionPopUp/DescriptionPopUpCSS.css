@@ -65,4 +65,11 @@
   }
 }
 
+.img-popup-cocktails {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px; 
+
+}
 }
