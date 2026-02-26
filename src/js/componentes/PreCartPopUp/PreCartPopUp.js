@@ -45,10 +45,11 @@ export class PreCartPopUp extends LitElement {
    return html`
   
           <div class="popup-window">
-            <div class="popup-header"><h2>${this.dbitem.dbname}</h2>
+            <div class="popup-header"><h2>${this.dbitem.name}</h2>
             <button class="popup-close-button" @click="${() => this.remove()}">X</button>
             </div>
             <div class="popup-body">
+              <img src="../../img/imgProductos/${this.dbitem.name}.png" alt="${this.dbitem.name}" class="preview-image" />
             <p class="popup-description">${this.dbitem.price}</p>
               <select id="quantity" @change=${this._handleQuantityChange}>
       ${Array.from({ length: 10 }, (_, i) => i + 1).map(num => html`
