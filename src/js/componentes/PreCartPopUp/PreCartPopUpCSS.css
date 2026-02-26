@@ -8,61 +8,70 @@
   background-color: rgba(128, 128, 128, 0.166);
   width: 100vw;
   height: 100vh;
-
-  .popup-window {
-    display:flex;
-    flex-direction: column;
-    justify-content: space-around;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
-    height: 70%;
-    width: 70%;
-
-    .popup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      background-color: skyblue;
-
-
-      p{
-        text-align: center;
-        font-weight: bold;
-        background-color: coral;
-
-      }
-
-      .popup-close-button {
-        background-color: red;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-      }
-
-      .popup-body {
-        background-color: mediumorchid;
-
-        p {
-         background-color: aquamarine;
-         margin-bottom: 20px;
-        }
-
-        .popup-select-button {
-          padding: 10px 20px;
-          background-color: #007BFF;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-    }
-  }
 }
 
+/* POPUP WINDOW */
+:host .popup-window {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  height: 70%;
+  width: 70%;
+}
+
+/* HEADER */
+:host .popup-window .popup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background-color: skyblue;
+}
+
+:host .popup-window .popup-header p {
+  text-align: center;
+  font-weight: bold;
+  background-color: coral;
+}
+
+/* CLOSE BUTTON */
+:host .popup-window .popup-header .popup-close-button {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+/* BODY */
+:host .popup-window .popup-body {
+  background-color: mediumorchid;
+}
+
+:host .popup-window .popup-body p {
+  background-color: aquamarine;
+  margin-bottom: 20px;
+}
+
+/* SELECT BUTTON */
+:host .popup-window .popup-body .popup-select-button {
+  padding: 10px 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* IMAGE */
+:host .preview-image {
+  max-width: 100px;
+  height: auto;
+  margin-bottom: 20px;
 }
