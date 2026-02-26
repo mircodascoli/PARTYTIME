@@ -22,7 +22,8 @@ export const db = {
         getInCart: getBotellaInCart,
         search: searchBotellas,
         findByIds: findBotellasByIds,
-       findByNames: findBotellasByNames
+        productPreview: productPreview 
+
     }
     ,cocktails: {
         get: getCocktails
@@ -283,12 +284,13 @@ const result =await users.updateOne(
     await client.close();
   } 
 }
-async function findBotellasByNames(filter, projection){
-  console.log('hey from display party in mongo DB')
+async function productPreview(filter, projection){
+  console.log('hey from previw in mongo DB')
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const botellasCollection = PartytimetDB.collection('Botellas');
-  return await botellasCollection.find(filter).project(projection).toArray();
+  const result = await botellasCollection.findOne(filter, { projection });
+  return result;
 }
 
 

@@ -107,6 +107,12 @@ app.get('/api/read/cocktails', async (req, res) => {
          res.json(await db.botellas.search( { $text: { $search: req.body.name } },{}))
       })
 
+    app.get('/api/product/preview/:name', async (req, res) => {
+      console.log('preview for product', req.params.name)
+    const result = await db.botellas.productPreview({ name: req.params.name },{});
+     res.json(result);
+    })
+
     app.post('/api/busqueda/cart', async (req, res) => {
   try {
     const ids = req.body.ids;
@@ -170,7 +176,7 @@ console.log('req.body push to cart EXPRESS', req.body)
     res.json(await db.users.buyIngredient(userId, ingDbname));
   });
   // Static server
-app.use(express.static('src'));
+  app.use(express.static('src'));
 
   app.listen(port, async () => {
     console.log(` listening on port ${port}`);
