@@ -49,6 +49,7 @@ export class PreCartPopUp extends LitElement {
             <button class="popup-close-button" @click="${() => this.remove()}">X</button>
             </div>
             <div class="popup-body">
+              <p class="popup-description">dummy suggestions of serving until db is ready$ {this.dbitem.description}</p>
               <img src="../../img/imgProductos/${this.dbitem.name}.png" alt="${this.dbitem.name}" class="preview-image" />
             <p class="popup-description">${this.dbitem.price}</p>
               <select id="quantity" @change=${this._handleQuantityChange}>

@@ -135,11 +135,13 @@ export class MyRecipes extends LitElement {
 
               <div class="recipe-data">
 
+
                 <ul class="recipe-ingredients-list">
                   ${item.ingredientes.map(ing => html`
                     <li class="recipe-ingredient">${ing.name} ${ing.mls}ml</li>
                   `)}
                 </ul>
+                <p class="serving-description">dummy suggestions of serving until db is ready$ {this.item.serving}</p>
 
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
