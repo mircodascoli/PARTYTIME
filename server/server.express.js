@@ -145,10 +145,8 @@ app.post('/api/busqueda/party', async (req, res) => {
   }
 });
    
-   app.post('/api/push/to/cart', async (req, res) => {
+   app.post('/api/push/to/cart', async (req) => {
 console.log('req.body push to cart EXPRESS', req.body)
-    
-         res.json(await db.users.carting( req.body.idBotella, req.body.idUser))
       })
 
   app.post('/api/push/to/recipes', async (req, res) => {
