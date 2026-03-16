@@ -15,11 +15,11 @@ export const db = {
         clearCart: clearCart,
         clearRecipes: clearRecipes,
         deleteRecipe: deleteRecipe,
-        buyIngredient: buyIngredient
+        addToCart: AddProductToCart
     },
     botellas: {
         get: getBotellas,
-        getInCart: getBotellaInCart,
+        getInCart: DisplayBotellasInCart,
         search: searchBotellas,
         findByIds: findBotellasByIds,
         productPreview: productPreview 
@@ -40,7 +40,7 @@ export const db = {
   }
 
 
-  async function getBotellaInCart(){
+  async function DisplayBotellasInCart(){
     console.log('hey from get botellas in cartMONGODB')
     const client = new MongoClient(URI);
     const PartytimetDB = client.db('Partytime');
@@ -48,13 +48,46 @@ export const db = {
     return await usersCollection.findOne({  });
   }
 
-async function buyIngredient(idBotella, idUser){
-    console.log('hey from add to cart', idBotella, idUser)
-    const client = new MongoClient(URI);
-    const PartytimetDB = client.db('Partytime');
-    const usersCollection = PartytimetDB.collection('users');
-    return await usersCollection.updateOne({ _id: new ObjectId(idUser) }, { $push: { cart: idBotella } });
+async function AddProductToCart(idProductQuantity, idUser) {
+  const client = new MongoClient(URI);
+  console.log('Adding product to cart in MongoDB...', idProductQuantity, 'for user', idUser);
+
+  try {
+    await client.connect();
+    const db = client.db("Partytime");
+    const users = db.collection("users");
+
+    // 1️⃣ Try to update quantity if product already exists in cart
+    const result = await users.updateOne(
+      {
+        _id: new ObjectId(idUser),
+        "cart._id": idProductQuantity._id  // ← match the specific cart item
+      },
+      {
+        $inc: {
+          "cart.$.quantity": idProductQuantity.quantity
+        }
+      }
+    );
+
+    // 2️⃣ If product not in cart yet → push it
+    if (result.matchedCount === 0) {
+      await users.updateOne(
+        { _id: new ObjectId(idUser) },
+        {
+          $push: {
+            cart: { ...idProductQuantity }
+          }
+        }
+      );
+    }
+
+  } catch (err) {
+    console.error(err);
+  } finally {
+    await client.close();
   }
+}
 async function addToRecipes(recipe, idUser) {
   const client = new MongoClient(URI);
 
