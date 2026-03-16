@@ -57,12 +57,28 @@ export class PreCartPopUp extends LitElement {
         <option value=${num}>${num}</option>
       `)}
     </select>
-            <button class="popup-select-button">Add to Cart</button>
+            <button class="popup-select-button" @click="${this.handleAddToCart}">Add to Cart</button>
             </div>
           </div>
 
     `;
   }
-   
+  _handleQuantityChange(event) {
+    this.quantity = parseInt(event.target.value);
+  } 
+  async handleAddToCart() {
+    const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
+    this.user = idUserNum
+
+  let body = {
+    cartProductQuantity: {product: this.dbitem, quantity: this.quantity},
+    user: this.user
+  };
+
+  console.log(body, 'body');
+  const PAYLOAD = JSON.stringify(body);
+  const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/push/to/cart`, 'POST', PAYLOAD);
+  return apiData;
+}
 }
 customElements.define('pre-cart-popup', PreCartPopUp);
