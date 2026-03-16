@@ -71,7 +71,10 @@ export class PreCartPopUp extends LitElement {
     this.user = idUserNum
 
   let body = {
-    cartProductQuantity: {product: this.dbitem, quantity: this.quantity},
+    productAndQuantity: {
+      _id: this.dbitem._id,
+      quantity: this.quantity
+    },
     user: this.user
   };
 
