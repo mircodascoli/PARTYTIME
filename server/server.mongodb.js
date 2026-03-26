@@ -153,7 +153,7 @@ async function addToRecipes(recipe, idUser) {
   }
 
   async function searchBotellas(filter,projection){
-    console.log('hey from search botellas')
+    console.log('hey from search botellas', filter)
     const client = new MongoClient(URI);
     const PartytimetDB = client.db('Partytime');
     const botellasCollection = PartytimetDB.collection('Botellas');
