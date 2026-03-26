@@ -6,5 +6,6 @@ import { MyRecipes } from "./MyRecipes/MyRecipes.js";
 import { CocktailList } from "./CocktailList/CocktailList.js";
 import { DescriptionPopUp } from "./DescriptionPopUp/DescriptionPopUp.js";
 import { PreCartPopUp } from "./PreCartPopUp/PreCartPopUp.js";
+import { CartList } from "./CartList/CartList.js";
 
-export { SignInFormLit, LoginInFormLit, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp }; 
+export { SignInFormLit, LoginInFormLit, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList }; 
