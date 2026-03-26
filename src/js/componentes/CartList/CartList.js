@@ -48,7 +48,10 @@ console.log(this.apiData.cart, 'apidata.cart from cartlist');
   }
 
  render() {
+     if (!this.apiData) return html`<p>Loading...</p>`;
   return html`
+
+
   <ul class="cart-list">
 
         ${this.apiData.cart?.length === 0
