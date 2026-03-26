@@ -174,6 +174,12 @@ app.post('/api/buy/ingredient', async (req, res) => {
   const { userId, ingDbname } = req.body;
   res.json(await db.users.buyIngredient(userId, ingDbname));
 });
+
+app.get('/api/find/bottles/:id', async (req) => {
+  console.log('server find bottle by id', req.params.id);
+ /*  const bottle = await db.botellas.findByIds({ _id: new ObjectId(req.params.id) }, {});
+  res.json(bottle[0]); */
+})
 // Static server
 app.use(express.static('src'));
 

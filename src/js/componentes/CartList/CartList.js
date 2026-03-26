@@ -25,27 +25,32 @@ export class CartList extends LitElement {
      this.loadApiData();
   }
 
-   async loadApiData() {
-    console.log('Loading the data');
-    if (!this._idSession) return;
+ async loadApiData() {
+  if (!this._idSession) return;
 
-    const payload = JSON.stringify({ id: this._idSession });
+  try {
+    const apiData = await getAPIData(
+      `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
+      'POST',
+      JSON.stringify({ id: this._idSession })
+    );
 
-    try {
-      const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
-        'POST',
-        payload
-      );
+    const enrichedCart = await Promise.all(
+      apiData.cart.map(async (item) => {
+        const details = await getAPIData(
+          `${location.protocol}//${location.hostname}${API_PORT}/api/find/bottles/${item._id}`,
+          'GET'
+        );
+        return { ...item, ...details }; // { _id, quantity, name, price, ... }
+      })
+    );
 
-      
+    this.apiData = { ...apiData, cart: enrichedCart };
 
-      this.apiData = apiData;
-console.log(this.apiData.cart, 'apidata.cart from cartlist');
-    } catch (err) {
-      console.error("Error loading recipes:", err);
-    }
+  } catch (err) {
+    console.error("Error loading cart:", err);
   }
+}
 
  render() {
      if (!this.apiData) return html`<p>Loading...</p>`;
@@ -54,25 +59,17 @@ console.log(this.apiData.cart, 'apidata.cart from cartlist');
 
   <ul class="cart-list">
 
-        ${this.apiData.cart?.length === 0
-          ? html`<p>No items in cart.</p>`
-          : this.apiData.cart.map(item => html`
-
-            <div class="recipe-card">
-
-              <button class="delete-item">X</button>
-
-              <div class="recipe-data">
-                <h2>${item._id}</h2>
-                <h3>${item.quantity}</h3>
-                <p class="serving-description">dummy suggestions of serving until db is ready$ {this.item.serving}</p>
-
-              </div>
-
-            </div>
-
-          `)
-        }
+        ${this.apiData.cart.map(item => html`
+  <div class="cart-card">
+    <button class="delete-item">X</button>
+    <div class="recipe-data">
+      <img src="${item.image}" alt="${item.name}" class="cart-product-image" />
+      <h2>${item.name}</h2>
+      <p>${item.price}</p>
+      <select>${item.quantity}</select>
+    </div>
+  </div>
+`)}
 
         </ul>
   `;
