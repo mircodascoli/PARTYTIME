@@ -161,6 +161,7 @@ export class MyRecipes extends LitElement {
           `)
         }
 
+        </ul>
       </div>
     `;
   }

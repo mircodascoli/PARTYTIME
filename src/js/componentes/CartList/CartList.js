@@ -1,45 +1,77 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartListCSS from '../CartList/CartListCSS.css' with { type: 'css' };
-/* import { getAPIData, API_PORT } from '../../main.js'; */
+ import { getAPIData, API_PORT } from '../../main.js'; 
 
 export class CartList extends LitElement {
   static styles = [ResetCSS, CartListCSS];
 
-  static properties = {
-/*     cocktails: { type: Array } */
+   static properties = {
+    apiData: { type: Object }
   };
-
-  constructor() {
+ constructor() {
     super();
-/*     this.cocktails = []; */
-  }
+    this.apiData = null;
 
+    try {
+      this._idSession = JSON.parse(sessionStorage.getItem('user'))._id;
+    } catch {
+      console.warn('No user logged');
+      this._idSession = null;
+    }
+  }
   connectedCallback() {
     super.connectedCallback();
-    this.getCart();
-    console.log('CartList connected to the DOM');
+     this.loadApiData();
   }
 
-  /* async getCart() {
+   async loadApiData() {
+    console.log('Loading the data');
+    if (!this._idSession) return;
+
+    const payload = JSON.stringify({ id: this._idSession });
+
     try {
-      let data = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/read/cocktails`,
-        'GET'
+      const apiData = await getAPIData(
+        `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
+        'POST',
+        payload
       );
 
-      this.cocktails = data;
+      
 
-      console.log(this.cocktails, 'cocktails mapped to model');
-    } catch (error) {
-      console.error('Error fetching cocktails:', error);
+      this.apiData = apiData;
+console.log(this.apiData.cart, 'apidata.cart from cartlist');
+    } catch (err) {
+      console.error("Error loading recipes:", err);
     }
-  } */
+  }
 
  render() {
   return html`
-  
-    <p>Cart List</p>
+  <ul class="cart-list">
+
+        ${this.apiData.cart?.length === 0
+          ? html`<p>No items in cart.</p>`
+          : this.apiData.cart.map(item => html`
+
+            <div class="recipe-card">
+
+              <button class="delete-item">X</button>
+
+              <div class="recipe-data">
+                <h2>${item._id}</h2>
+                <h3>${item.quantity}</h3>
+                <p class="serving-description">dummy suggestions of serving until db is ready$ {this.item.serving}</p>
+
+              </div>
+
+            </div>
+
+          `)
+        }
+
+        </ul>
   `;
  }
 /*  _clickToChoose(recipeSelected) {
