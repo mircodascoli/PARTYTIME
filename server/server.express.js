@@ -175,10 +175,18 @@ app.post('/api/buy/ingredient', async (req, res) => {
   res.json(await db.users.buyIngredient(userId, ingDbname));
 });
 
-app.get('/api/find/bottles/:id', async (req) => {
+app.get('/api/find/bottles/:id', async (req, res) => {
   console.log('server find bottle by id', req.params.id);
- /*  const bottle = await db.botellas.findByIds({ _id: new ObjectId(req.params.id) }, {});
-  res.json(bottle[0]); */
+  try {
+    const botella = await db.botellas.productPreview(
+      { _id: new ObjectId(req.params.id) },
+      {}
+    );
+    res.json(botella);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Server error' });
+  }
 })
 // Static server
 app.use(express.static('src'));
