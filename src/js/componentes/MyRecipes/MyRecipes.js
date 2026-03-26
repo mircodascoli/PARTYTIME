@@ -47,6 +47,10 @@ export class MyRecipes extends LitElement {
     }
   }
 
+  async buySetClick(ingredientes) {
+    console.log('buy set function activated by the click', ingredientes);
+  }
+
   async clearList() {
     if (!this._idSession) return;
     console.log('clear recipe event lauched');
@@ -146,13 +150,10 @@ export class MyRecipes extends LitElement {
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
                     <li>${ing.dbname}</li>
-                     <img src="../../img/imgProductos/${ing.dbname}.png" alt="${ing.dbname}" class="suggested-product-image" />
+                     <img src="../../img/imgProductos/${ing.dbname}.png" alt="${ing.dbname}" class="suggested-product-image" @click=${() => this._launchpreCartPoPup(ing)} />
                     <button class="buy-button" @click=${() => this._launchpreCartPoPup(ing)}>BUY</button>
                   `)}
                 </ul>
-
-                <button>BUY SET</button>
-
               </div>
 
             </div>
