@@ -17,7 +17,7 @@ function DomContentLoaded() {
   let botonBuscar = document.getElementById('botonBuscar')
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
-  let bodyCarrito = document.getElementById('bodyCarrito')
+/*   let bodyCarrito = document.getElementById('bodyCarrito') */
   let bodyChoose = document.getElementById('bodyChoose') 
   let hamMenu= document.getElementById('hamMenu')
   let xButton = document.getElementById('xButton')
@@ -56,10 +56,12 @@ function DomContentLoaded() {
       console.log('body userencontrado, weloming user')
       welcoming()
     }
-    if (bodyCarrito != null){
+    /* if (bodyCarrito != null){
       console.log('body carritoencontrado, display carrito') 
-     loadCartData()
-    }
+     loadCartData() 
+     }
+     */
+  
     if (bodyChoose != null){
       console.log('body chooseencontrado, display choosepoison')
       document.addEventListener('craft-selected', (event) => {
@@ -348,7 +350,7 @@ catch (error) {
 
 }
 
- async function loadCartData() {
+/*  async function loadCartData() {
 
   const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
   console.log('Loading the data', idUserNum);
@@ -367,10 +369,10 @@ catch (error) {
     console.error('Error during botton click:', error);
   }
 
-}
+} */
 
 
-  async function getbottlesFromShop(idsInCart) {
+ /*  async function getbottlesFromShop(idsInCart) {
   console.log('up next getting this bottles from shop',idsInCart);
 
  try{
@@ -421,7 +423,7 @@ apiDataCart.forEach((botella) => {
      }catch (error) {
     console.error('Error during botton click:', error);
      }
-}
+} */
  
 function deleteItemFromCart(idBotellaNum){
   console.log('delete from crt event lauched')
@@ -441,7 +443,7 @@ location.reload();
 
 }
 
-function clearCart(){
+/* function clearCart(){
   console.log('clear cart event lauched')
   let userId = JSON.parse(sessionStorage.getItem('user'))._id
   console.log(userId)
@@ -454,7 +456,7 @@ function clearCart(){
   console.log(apiData)
   alert('Cart cleared!')
   location.reload(); 
-}
+} */
 
 function welcoming(){
   let pWelcome = document.getElementById('welcome')
