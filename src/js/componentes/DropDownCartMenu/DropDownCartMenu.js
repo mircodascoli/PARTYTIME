@@ -1,0 +1,52 @@
+import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+import ResetCSS from '../../../css/reset.css' with { type: 'css' };
+import DropDownCartMenuCSS from '../DropDownCartMenu/DropDownCartMenuCSS.css' with { type: 'css' };
+export class DropDownCartMenu extends LitElement {
+static styles = [ResetCSS, DropDownCartMenuCSS];
+static properties = {
+    quantity: { type: Number }, 
+    _isOpen: { state: true }   
+  };
+constructor() {
+    super();
+    // Qui imposti il VALORE DI DEFAULT
+    this.quantity = 1; 
+    this._isOpen = false;
+  }
+render() {
+    return html`
+      <div class="select-box" @click="${this._toggleMenu}">
+        <span>Qty: ${this.quantity}</span>
+        <span>${this._isOpen ? '▲' : '▼'}</span>
+      </div>
+
+      ${this._isOpen ? html`
+        <ul class="options-container">
+          ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => html`
+            <li class="option" @click="${() => this._select(num)}">
+              ${num}
+              ${num === this.quantity ? html`<span class="check">✓</span>` : ''}
+            </li>
+          `)}
+        </ul>
+      ` : ''}
+    `;
+  }
+
+  _toggleMenu() {
+    this._isOpen = !this._isOpen;
+  }
+
+  _select(val) {
+    this.quantity = val;
+    this._isOpen = false;
+    
+    // Emette l'evento per il genitore
+    this.dispatchEvent(new CustomEvent('change', {
+      detail: { value: val },
+      bubbles: true,
+      composed: true
+    }));
+  }
+}
+customElements.define('drop-down-cart-menu', DropDownCartMenu);
