@@ -8,6 +8,7 @@ export class CartList extends LitElement {
 
    static properties = {
     apiData: { type: Object }
+
   };
  constructor() {
     super();
@@ -46,6 +47,7 @@ export class CartList extends LitElement {
     );
 
     this.apiData = { ...apiData, cart: enrichedCart };
+    console.log('Enriched cart data:', this.apiData);
 
   } catch (err) {
     console.error("Error loading cart:", err);
@@ -63,10 +65,12 @@ export class CartList extends LitElement {
   <div class="cart-card">
     <button class="delete-item">X</button>
     <div class="recipe-data">
-      <img src="${item.image}" alt="${item.name}" class="cart-product-image" />
+      <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
       <h2>${item.name}</h2>
-      <p>${item.price}</p>
-      <select>${item.quantity}</select>
+      <p>${item.price} €</p>
+      <p>description when is ready${item.description}</p>
+     
+         <drop-down-cart-menu .quantity=${item.quantity}></drop-down-cart-menu> 
     </div>
   </div>
 `)}
@@ -74,16 +78,7 @@ export class CartList extends LitElement {
         </ul>
   `;
  }
-/*  _clickToChoose(recipeSelected) {
-    
-    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.description}`);
 
-    this.dispatchEvent(new CustomEvent('item-selected', {
-      detail: recipeSelected,
-      bubbles: true,
-      composed: true
-    }));
- } */
 }
 customElements.define('cart-list', CartList);
 
