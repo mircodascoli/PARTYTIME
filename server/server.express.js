@@ -99,6 +99,12 @@ app.delete('/api/delete/recipe', async (req, res) => {
   res.json(await db.users.deleteRecipe(userId, recipeId));
 });
 
+app.delete('/api/delete/item', async (req, res) => {
+  console.log('server delete item', req.body)
+  const { userId, itemId } = req.body;
+  res.json(await db.users.deleteItem(userId, itemId));
+});
+
 // FILTER
 
 app.post('/api/busqueda', async (req, res) => {

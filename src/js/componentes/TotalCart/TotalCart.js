@@ -6,22 +6,21 @@ import TotalCartCSS from '../TotalCart/TotalCartCSS.css' with { type: 'css' };
 export class TotalCart extends LitElement {
   static styles = [ResetCSS, TotalCartCSS];
   static properties = {
-    apiData: { type: Object }
+    data : { type: Array},
   };
  constructor() {
     super();
-    this.apiData = null;
-
-    try {
-      this._idSession = JSON.parse(sessionStorage.getItem('user'))._id;
-    } catch {
-      console.warn('No user logged');
-      this._idSession = null;
-    }
+     this.data = [];
   }
-  connectedCallback() {
+ connectedCallback() {
     super.connectedCallback();
+    this.getTotalCart();
+     console.table('total cart connected', this.data)
   }
+    getTotalCart() {
+  };
+ 
+
 
  render() {
   
