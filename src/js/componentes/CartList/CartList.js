@@ -1,16 +1,16 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartListCSS from '../CartList/CartListCSS.css' with { type: 'css' };
- import { getAPIData, API_PORT } from '../../main.js'; 
+import { getAPIData, API_PORT } from '../../main.js';
 
 export class CartList extends LitElement {
   static styles = [ResetCSS, CartListCSS];
 
-   static properties = {
+  static properties = {
     apiData: { type: Object }
 
   };
- constructor() {
+  constructor() {
     super();
     this.apiData = null;
 
@@ -23,47 +23,47 @@ export class CartList extends LitElement {
   }
   connectedCallback() {
     super.connectedCallback();
-     this.loadApiData();
+    this.loadApiData();
   }
 
- async loadApiData() {
-  if (!this._idSession) return;
+  async loadApiData() {
+    if (!this._idSession) return;
 
-  try {
-    const apiData = await getAPIData(
-      `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
-      'POST',
-      JSON.stringify({ id: this._idSession })
-    );
+    try {
+      const apiData = await getAPIData(
+        `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
+        'POST',
+        JSON.stringify({ id: this._idSession })
+      );
 
-    const enrichedCart = await Promise.all(
-      apiData.cart.map(async (item) => {
-        const details = await getAPIData(
-          `${location.protocol}//${location.hostname}${API_PORT}/api/find/bottles/${item._id}`,
-          'GET'
-        );
-        return { ...item, ...details }; // { _id, quantity, name, price, ... }
-      })
-    );
+      const enrichedCart = await Promise.all(
+        apiData.cart.map(async (item) => {
+          const details = await getAPIData(
+            `${location.protocol}//${location.hostname}${API_PORT}/api/find/bottles/${item._id}`,
+            'GET'
+          );
+          return { ...item, ...details }; // { _id, quantity, name, price, ... }
+        })
+      );
 
-    this.apiData = { ...apiData, cart: enrichedCart };
-    console.log('Enriched cart data:', this.apiData);
+      this.apiData = { ...apiData, cart: enrichedCart };
+      console.log('Enriched cart data:', this.apiData);
 
-  } catch (err) {
-    console.error("Error loading cart:", err);
+    } catch (err) {
+      console.error("Error loading cart:", err);
+    }
   }
-}
 
- render() {
-     if (!this.apiData) return html`<p>Loading...</p>`;
-  return html`
+  render() {
+    if (!this.apiData) return html`<p>Loading...</p>`;
+    return html`
 
 
   <ul class="cart-list">
 
         ${this.apiData.cart.map(item => html`
   <div class="cart-card">
-    <button class="delete-item">X</button>
+    <button class="delete-item" @click=${() => this.deleteItem(item._id)}>X</button>
     <div class="recipe-data">
       <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
       <h2>${item.name}</h2>
@@ -74,11 +74,39 @@ export class CartList extends LitElement {
     </div>
   </div>
 `)}
-
-        </ul>
+</ul>
+<total-cart .data=${this.apiData.cart}></total-cart>
   `;
- }
+  }
 
+  async deleteItem(id) {
+
+    if (!this._idSession) return;
+
+    const payload = JSON.stringify({
+      userId: this._idSession,
+      itemId: id
+    });
+    console.log('delete item payload', payload);
+    try {
+      await getAPIData(
+        `${location.protocol}//${location.hostname}${API_PORT}/api/delete/item`,
+        'DELETE',
+        payload
+      );
+
+      // aggiornamento UI senza reload
+      this.apiData = {
+        ...this.apiData,
+        cart: this.apiData.cart.filter(r => r._id !== id)
+      };
+
+    } catch (err) {
+      console.error("Error deleting item", err);
+    }
+  }
 }
+
+
 customElements.define('cart-list', CartList);
 

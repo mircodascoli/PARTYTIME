@@ -17,7 +17,6 @@ function DomContentLoaded() {
   let botonBuscar = document.getElementById('botonBuscar')
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
-/*   let bodyCarrito = document.getElementById('bodyCarrito') */
   let bodyChoose = document.getElementById('bodyChoose') 
   let hamMenu= document.getElementById('hamMenu')
   let xButton = document.getElementById('xButton')
@@ -56,12 +55,6 @@ function DomContentLoaded() {
       console.log('body userencontrado, weloming user')
       welcoming()
     }
-    /* if (bodyCarrito != null){
-      console.log('body carritoencontrado, display carrito') 
-     loadCartData() 
-     }
-     */
-  
     if (bodyChoose != null){
       console.log('body chooseencontrado, display choosepoison')
       document.addEventListener('craft-selected', (event) => {
@@ -350,81 +343,7 @@ catch (error) {
 
 }
 
-/*  async function loadCartData() {
 
-  const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
-  console.log('Loading the data', idUserNum);
-
-  try {
-    const payload = JSON.stringify({ id: idUserNum });
-    console.log(payload);
-    const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`, 'POST', payload);
-   console.log(apiData);
-    let idsInCart = apiData.cart;
-    console.log(idsInCart);
-   getbottlesFromShop(idsInCart)
-
-    
-  } catch (error) {
-    console.error('Error during botton click:', error);
-  }
-
-} */
-
-
- /*  async function getbottlesFromShop(idsInCart) {
-  console.log('up next getting this bottles from shop',idsInCart);
-
- try{
- 
-  const payloadCart = JSON.stringify({ ids: idsInCart });
-  console.log(payloadCart);
-  const apiDataCart = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/busqueda/cart`, 'POST', payloadCart);
-     console.log(apiDataCart,typeof apiDataCart);
-     if (apiDataCart.length === 0) {
-  alert('No product found in DB');
-  return;
-}
-const cartList = document.getElementById('carrito');
-apiDataCart.forEach((botella) => {
-  const producto = document.createElement('li'); 
-  producto.innerHTML = `
-      
-        <img src="../img/imgProductos/${botella.name}.png" alt="${botella.name}">
-        <h3>${botella.name}</h3>
-        <p class="price">${botella.price} &euro;</p>
-        <a href="./external.html"><button>BUY</button></a>
-      `;
-     cartList?.appendChild(producto)
-     const button = document.createElement('button');
-      button.textContent = 'X';
-      button.classList.add('delete-button');
-      button.dataset.id = botella._id;
-      let idBotellaNum = button.dataset.id 
-      console.log(button.dataset.id,`botella.dataset.id`);
-      button.addEventListener('click', () => {
-        deleteItemFromCart(idBotellaNum);
-      });
-     
-      producto.appendChild(button);
-  
-    
-    
-})
-
-    let ClearCartButton = document.createElement('button');
-    let clearBtnContainer = document.querySelector('#clearBtnContainer')
-    ClearCartButton.textContent = 'Clear Cart';
-    ClearCartButton.classList.add('clear');
-     clearBtnContainer?.appendChild(ClearCartButton);
-    ClearCartButton.addEventListener('click', () => {
-      clearCart();
-    })
-     }catch (error) {
-    console.error('Error during botton click:', error);
-     }
-} */
- 
 function deleteItemFromCart(idBotellaNum){
   console.log('delete from crt event lauched')
 let userId = JSON.parse(sessionStorage.getItem('user'))._id
@@ -443,20 +362,6 @@ location.reload();
 
 }
 
-/* function clearCart(){
-  console.log('clear cart event lauched')
-  let userId = JSON.parse(sessionStorage.getItem('user'))._id
-  console.log(userId)
-  const body = {
-    userId
-  }
-  const payload = JSON.stringify(body);
-   console.log(payload)
-  const apiData = getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/delete/cart`, 'DELETE', payload);
-  console.log(apiData)
-  alert('Cart cleared!')
-  location.reload(); 
-} */
 
 function welcoming(){
   let pWelcome = document.getElementById('welcome')
