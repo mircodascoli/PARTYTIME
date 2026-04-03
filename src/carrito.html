@@ -1,47 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Carrito</title>
-        <script type="module" src="./js/main.js"></script>
-          <script type="module" src="./js/componentes/bundle.js" defer></script>
-        <link rel="stylesheet" href="./css/reset.css">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/styles.mobile.css" media="screen and (max-width: 480px)">
-        <link rel="stylesheet" href="./css/styles.desktop.css" media="screen and (min-width: 481px)">
-<!--         <link rel="preconnect" href="https://fonts.googleapis.com">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito</title>
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/componentes/bundle.js" defer></script>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/styles.mobile.css" media="screen and (max-width: 480px)">
+    <link rel="stylesheet" href="./css/styles.desktop.css" media="screen and (min-width: 481px)">
+    <!--         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet"> -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
-    </head>
+
+</head>
+
 <body id="bodyCarrito">
-     <header>
-    <img src="./img/logo.png" alt="logoPYT" class="logo-pt">
-    <svg xmlns="http://www.w3.org/2000/svg" id="hamMenu" height="35px" viewBox="0 -960 960 960" width="35px" fill="#e8eaed"><path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z"/></svg>  </label>
-   
-  </header>
-  
+    <header>
+        <img src="./img/logo.png" alt="logoPYT" class="logo-pt">
+        <svg xmlns="http://www.w3.org/2000/svg" id="hamMenu" height="35px" viewBox="0 -960 960 960" width="35px"
+            fill="#e8eaed">
+            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+        </svg> </label>
+
+    </header>
+
     <main class="main-carrito">
-         <div id="underlay" class="hidden"></div>
-     <menu class="sidebar">
-         <svg xmlns="http://www.w3.org/2000/svg" id="xButton" height="35px" viewBox="0 -960 960 960" width="35px" fill="#e8eaed"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"/></svg>
-        <li><a href="./choosepoison.html">next cocktails</a></li>
-        <li><a href="./calculadores.html">Calculators</a></li>
-        <li><a href="./productos.html">Products</a></li>
-        <li><a href="./user.html">user area</a></li>
-       </menu>
-       <div id="clearBtnContainer"></div>
-         <cart-list></cart-list>
-        
-      
+        <div id="underlay" class="hidden"></div>
+        <menu class="sidebar">
+            <svg xmlns="http://www.w3.org/2000/svg" id="xButton" height="35px" viewBox="0 -960 960 960" width="35px"
+                fill="#e8eaed">
+                <path
+                    d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" />
+            </svg>
+            <li><a href="./choosepoison.html">next cocktails</a></li>
+            <li><a href="./calculadores.html">Calculators</a></li>
+            <li><a href="./productos.html">Products</a></li>
+            <li><a href="./user.html">user area</a></li>
+        </menu>
+        <div id="clearBtnContainer"></div>
+        <cart-list></cart-list>
+
+
     </main>
     <footer>
         <p>PARTYTIME was made for fun, thanks for using it</p>
         <p>2025 Mirco D'Ascoli</p>
     </footer>
 </body>
+
 </html>

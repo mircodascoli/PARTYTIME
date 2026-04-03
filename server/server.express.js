@@ -194,6 +194,11 @@ app.get('/api/find/bottles/:id', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 })
+
+app.put('/api/cart/item/update', async (req, res) => {
+   console.log('req.body cart item update EXPRESS', req.body)
+  res.json(await db.users.updateCart(req.body.productAndQuantity, req.body.user))
+})
 // Static server
 app.use(express.static('src'));
 

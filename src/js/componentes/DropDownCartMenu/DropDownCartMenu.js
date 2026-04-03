@@ -1,15 +1,18 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import DropDownCartMenuCSS from '../DropDownCartMenu/DropDownCartMenuCSS.css' with { type: 'css' };
+import { getAPIData, API_PORT } from '../../main.js';
 export class DropDownCartMenu extends LitElement {
 static styles = [ResetCSS, DropDownCartMenuCSS];
 static properties = {
     quantity: { type: Number }, 
-    _isOpen: { state: true }   
+    _isOpen: { state: true },   
+    _id: { type: String }
   };
 constructor() {
     super();
     // Qui imposti il VALORE DI DEFAULT
+    this._id= "";
     this.quantity = 1; 
     this._isOpen = false;
   }
@@ -40,13 +43,27 @@ render() {
   _select(val) {
     this.quantity = val;
     this._isOpen = false;
-    
-    // Emette l'evento per il genitore
-    this.dispatchEvent(new CustomEvent('change', {
-      detail: { value: val },
-      bubbles: true,
-      composed: true
-    }));
+   console.log(val, 'selected quantity');
+   this.handleQuantityChange(val);
   }
+  async handleQuantityChange(val) {
+ const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
+     this.user = idUserNum
+ 
+   let body = {
+     productAndQuantity: {
+       _id: this._id,
+       quantity: val
+     },
+     user: this.user
+   };
+
+ 
+   console.log(body, 'body');
+   const PAYLOAD = JSON.stringify(body);
+   const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/cart/item/update`, 'PUT', PAYLOAD);
+   return apiData;
+  }
+
 }
 customElements.define('drop-down-cart-menu', DropDownCartMenu);
