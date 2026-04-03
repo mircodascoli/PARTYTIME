@@ -16,7 +16,9 @@ export const db = {
     clearRecipes: clearRecipes,
     deleteRecipe: deleteRecipe,
     deleteItem: deleteItem,
-    addToCart: AddProductToCart
+    addToCart: AddProductToCart,
+    updateCart: UpdateProductInCart
+
 
   },
   botellas: {
@@ -355,4 +357,29 @@ async function productPreview(filter, projection) {
   return result;
 }
 
+async function UpdateProductInCart(productAndQuantity, idUser) {
+  const client = new MongoClient(URI);
+  console.log('Updating product in cart in MongoDB...', productAndQuantity, 'for user', idUser);
+  try {
+    await client.connect();
+    const db = client.db('Partytime');
+    const users = db.collection('users');
+
+   const result = await users.updateOne(
+  { 
+    _id: new ObjectId(idUser),   // user _id is still an ObjectId
+    'cart._id': productAndQuantity._id           // cart _id is a plain string
+  },
+  { $set: { 'cart.$.quantity': productAndQuantity.quantity } }
+);;
+
+    console.log('Update result:', result);
+    return result;
+  } catch (error) {
+    console.error('Error updating product in cart:', error);
+    throw error;
+  } finally {
+    await client.close();
+  }
+}
 

@@ -70,7 +70,7 @@ export class CartList extends LitElement {
       <p>${item.price} €</p>
       <p>description when is ready${item.description}</p>
      
-         <drop-down-cart-menu .quantity=${item.quantity}></drop-down-cart-menu> 
+         <drop-down-cart-menu .quantity=${item.quantity} ._id=${item._id}></drop-down-cart-menu> 
     </div>
   </div>
 `)}
