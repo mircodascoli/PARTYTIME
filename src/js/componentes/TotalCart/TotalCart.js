@@ -15,9 +15,15 @@ export class TotalCart extends LitElement {
  connectedCallback() {
     super.connectedCallback();
     this.getTotalCart();
-     console.table('total cart connected', this.data)
+    
   }
     getTotalCart() {
+      console.log('get total cart', this.data)
+ return this.total = parseFloat(
+    this.data.reduce((sum, item) => sum + (item.price * item.quantity), 0).toFixed(2)
+  );
+  
+     
   };
  
 
@@ -27,7 +33,7 @@ export class TotalCart extends LitElement {
   return html`
     <div class="total-cart"></div>
       <h2>Total:</h2>
-        <p>total price when is ready</p>
+        <p>${this.total}</p>
     </div>      
   `;
  }
