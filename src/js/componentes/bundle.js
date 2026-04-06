@@ -9,5 +9,5 @@ import { PreCartPopUp } from "./PreCartPopUp/PreCartPopUp.js";
 import { CartList } from "./CartList/CartList.js";
 import { DropDownCartMenu }  from "./DropDownCartMenu/DropDownCartMenu.js"; 
 import { TotalCart } from "./TotalCart/TotalCart.js";
-
-export { SignInFormLit, LoginInFormLit, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart }; 
+import { ProductsList } from "./ProductsList/ProductsList.js";
+export { SignInFormLit, LoginInFormLit, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, ProductsList }; 
