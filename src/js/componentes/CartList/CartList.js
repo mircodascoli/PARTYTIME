@@ -8,8 +8,8 @@ export class CartList extends LitElement {
 
   static properties = {
     apiData: { type: Object }
-
   };
+
   constructor() {
     super();
     this.apiData = null;
@@ -21,6 +21,7 @@ export class CartList extends LitElement {
       this._idSession = null;
     }
   }
+
   connectedCallback() {
     super.connectedCallback();
     this.loadApiData();
@@ -42,60 +43,59 @@ export class CartList extends LitElement {
             `${location.protocol}//${location.hostname}${API_PORT}/api/find/bottles/${item._id}`,
             'GET'
           );
-          return { ...item, ...details }; // { _id, quantity, name, price, ... }
+          return { ...item, ...details };
         })
       );
 
       this.apiData = { ...apiData, cart: enrichedCart };
-      console.log('Enriched cart data:', this.apiData);
 
     } catch (err) {
       console.error("Error loading cart:", err);
     }
   }
 
+  getTotal() {
+    console.log('getTotal called, cart:', this.apiData?.cart);
+    if (!this.apiData || !this.apiData.cart.length) return '0.00';
+     const total = this.apiData.cart
+    .reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    .toFixed(2);
+  console.log('total calculated:', total);
+  return total;
+  }
+
   render() {
     if (!this.apiData) return html`<p>Loading...</p>`;
+
     return html`
-
-
-  <ul class="cart-list">
-
+      <ul class="cart-list">
         ${this.apiData.cart.map(item => html`
-  <div class="cart-card">
-    <button class="delete-item" @click=${() => this.deleteItem(item._id)}>X</button>
-    <div class="recipe-data">
-      <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
-      <h2>${item.name}</h2>
-      <p>${item.price} €</p>
-      <p>description when is ready${item.description}</p>
-     
-         <drop-down-cart-menu .quantity=${item.quantity} ._id=${item._id}></drop-down-cart-menu> 
-    </div>
-  </div>
-`)}
-</ul>
-<total-cart .data=${this.apiData.cart}></total-cart>
-  `;
+          <div class="cart-card">
+            <button class="delete-item" @click=${() => this.deleteItem(item._id)}>X</button>
+            <div class="recipe-data">
+              <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
+              <h2>${item.name}</h2>
+              <p>${item.price} €</p>
+              <p>${item.description}</p>
+              <drop-down-cart-menu .quantity=${item.quantity} ._id=${item._id}></drop-down-cart-menu>
+            </div>
+          </div>
+        `)}
+      </ul>
+      <total-cart .total=${this.getTotal()}></total-cart>
+    `;
   }
 
   async deleteItem(id) {
-
     if (!this._idSession) return;
 
-    const payload = JSON.stringify({
-      userId: this._idSession,
-      itemId: id
-    });
-    console.log('delete item payload', payload);
     try {
       await getAPIData(
         `${location.protocol}//${location.hostname}${API_PORT}/api/delete/item`,
         'DELETE',
-        payload
+        JSON.stringify({ userId: this._idSession, itemId: id })
       );
 
-      // aggiornamento UI senza reload
       this.apiData = {
         ...this.apiData,
         cart: this.apiData.cart.filter(r => r._id !== id)
@@ -107,6 +107,4 @@ export class CartList extends LitElement {
   }
 }
 
-
 customElements.define('cart-list', CartList);
-
