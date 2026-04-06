@@ -44,11 +44,15 @@ render() {
     this.quantity = val;
     this._isOpen = false;
     this.handleQuantityChange(val);
+    this.dispatchEvent(new CustomEvent('quantity-changed', {
+      detail: { quantity: val },
+      bubbles: true,
+      composed: true
+    }));
   }
   async handleQuantityChange(val) {
  const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
      this.user = idUserNum
- 
    let body = {
      productAndQuantity: {
        _id: this._id,
