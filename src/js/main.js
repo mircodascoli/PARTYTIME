@@ -24,7 +24,6 @@ function DomContentLoaded() {
   let deleteButton = document.querySelector('.delete-button')
   let CocktailListComp = document.querySelector('cocktail-list')
   let MyRecipesComp = document.querySelector('my-recipes')
- 
 
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
@@ -361,6 +360,9 @@ console.log(userId, idBotellaNum)
 location.reload();
 
 }
+
+
+
 
 
 function welcoming(){

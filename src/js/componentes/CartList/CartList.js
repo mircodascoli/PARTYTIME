@@ -77,7 +77,7 @@ export class CartList extends LitElement {
               <h2>${item.name}</h2>
               <p>${item.price} €</p>
               <p>${item.description}</p>
-              <drop-down-cart-menu .quantity=${item.quantity} ._id=${item._id}></drop-down-cart-menu>
+              <drop-down-cart-menu .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu>
             </div>
           </div>
         `)}
@@ -104,6 +104,10 @@ export class CartList extends LitElement {
     } catch (err) {
       console.error("Error deleting item", err);
     }
+  }
+
+  updateTotal() {
+    window.location.reload();
   }
 }
 
