@@ -25,6 +25,10 @@ function DomContentLoaded() {
   let CocktailListComp = document.querySelector('cocktail-list')
   let MyRecipesComp = document.querySelector('my-recipes')
 
+  window.addEventListener('ingredient-selected', (e) => {
+    openPreCart(e.detail);
+   });
+
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
   botonBuscar?.addEventListener('click', buscarProducto)
