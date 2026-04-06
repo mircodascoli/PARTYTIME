@@ -2,7 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import ProductsListCSS from '../ProductsList/ProductsListCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT } from '../../main.js'; 
-
+import {  launchpreCartPoPup } from '../utils.js';
 export class ProductsList extends LitElement {
   static styles = [ResetCSS, ProductsListCSS];
 
@@ -41,8 +41,8 @@ export class ProductsList extends LitElement {
           <h2>${bottle.name}</h2>
           <p>${bottle.price} €</p>
           <p>${bottle.description}</p>
-          <button class="add-to-cart-button" @click=${() => this.addToCart(bottle)}>Add to Cart</button> <!-- this will open the pre-cart with the selected product and quantity 1 by default, then the user can change the quantity with the dropdown menu in the pre-cart
-        </li> -->
+          <button class="add-to-cart-button" @click=${() => launchpreCartPoPup(bottle)}>Add to Cart</button> <!-- this will open the pre-cart with the selected product and quantity 1 by default, then the user can change the quantity with the dropdown menu in the pre-cart
+        --> </li>
       `)}
     </ul>
   `; 

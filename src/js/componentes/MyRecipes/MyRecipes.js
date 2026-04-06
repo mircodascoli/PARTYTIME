@@ -2,7 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import MyRecipesCSS from '../MyRecipes/MyRecipesCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT } from '../../main.js';
-
+import {  launchpreCartPoPup } from '../utils.js';
 export class MyRecipes extends LitElement {
 
   static styles = [ResetCSS, MyRecipesCSS];
@@ -100,16 +100,7 @@ export class MyRecipes extends LitElement {
     }
   } 
 
-  _launchpreCartPoPup(ing) {
-    console.log('buy ingredient function activated by the click', ing.dbname);
 
-    this.dispatchEvent(new CustomEvent('ingredient-selected', {
-      detail: ing,
-      bubbles: true,
-      composed: true
-    }));
-  
-  } 
   render() {
 
     if (!this.apiData) {
@@ -151,7 +142,7 @@ export class MyRecipes extends LitElement {
                   ${item.ingredientes.map(ing => html`
                     <li>${ing.dbname}</li>
                      <img src="../../img/imgProductos/${ing.dbname}.png" alt="${ing.dbname}" class="suggested-product-image" @click=${() => this._launchpreCartPoPup(ing)} />
-                    <button class="buy-button" @click=${() => this._launchpreCartPoPup(ing)}>BUY</button>
+                    <button class="buy-button" @click=${() =>  launchpreCartPoPup(ing)}>BUY</button>
                   `)}
                 </ul>
               </div>
