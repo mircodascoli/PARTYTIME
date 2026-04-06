@@ -43,8 +43,7 @@ render() {
   _select(val) {
     this.quantity = val;
     this._isOpen = false;
-   console.log(val, 'selected quantity');
-   this.handleQuantityChange(val);
+    this.handleQuantityChange(val);
   }
   async handleQuantityChange(val) {
  const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
@@ -59,7 +58,6 @@ render() {
    };
 
  
-   console.log(body, 'body');
    const PAYLOAD = JSON.stringify(body);
    const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/cart/item/update`, 'PUT', PAYLOAD);
    return apiData;
