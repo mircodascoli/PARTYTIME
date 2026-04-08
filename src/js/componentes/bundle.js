@@ -11,4 +11,5 @@ import { DropDownCartMenu }  from "./DropDownCartMenu/DropDownCartMenu.js";
 import { TotalCart } from "./TotalCart/TotalCart.js";
 import { Shop } from "./Shop/Shop.js";
 import { SearchBar } from "./SearchBar/SearchBar.js";
-export { SignInFormLit, LoginInFormLit, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar }; 
+import { HamburgerMenu } from "./HamburgerMenu/HamburgerMenu.js";
+export { SignInFormLit, LoginInFormLit, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, HamburgerMenu}; 
