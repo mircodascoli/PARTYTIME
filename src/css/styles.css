@@ -1,6 +1,7 @@
 
 *{
     box-sizing: border-box;
+    font-family: Helvetica, sans-serif;
 }
 
 
@@ -158,7 +159,7 @@ header{
     align-items: center;
     row-gap: 20px;
     padding: 10%;
-    background-image: linear-gradient( rgb(224, 135, 56), rgba(0, 0, 0, 1));
+    background-color: azure;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
