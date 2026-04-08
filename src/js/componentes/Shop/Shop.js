@@ -1,10 +1,10 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import ProductsListCSS from '../ProductsList/ProductsListCSS.css' with { type: 'css' };
+import ShopCSS from './ShopCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT } from '../../main.js'; 
 import {  launchpreCartPoPup } from '../utils.js';
-export class ProductsList extends LitElement {
-  static styles = [ResetCSS, ProductsListCSS];
+export class Shop extends LitElement {
+  static styles = [ResetCSS, ShopCSS];
 
   static properties = {
     bottles: { type: Array }
@@ -49,4 +49,4 @@ export class ProductsList extends LitElement {
  }
 
 }
-customElements.define('products-list', ProductsList);
+customElements.define('shop-component', Shop);
