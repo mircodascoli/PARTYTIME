@@ -34,6 +34,7 @@ export class Shop extends LitElement {
 
  render() {
   return html`
+  <search-bar></search-bar>
     <ul class="products-list">
       ${this.bottles.map(bottle => html`
         <li class="product-item">
