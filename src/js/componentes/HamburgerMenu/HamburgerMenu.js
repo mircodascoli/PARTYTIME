@@ -4,12 +4,14 @@ import HamburgerMenuCSS from '../HamburgerMenu/HamburgerMenuCSS.css' with { type
 export class HamburgerMenu extends LitElement {
   static properties = {
     open: { type: Boolean },
+    links: { type: Array },
   };
 
   static styles = [ResetCSS, HamburgerMenuCSS];
    constructor() {
     super();
     this.open = false;
+      this.links = [];
   }
  
   _toggle() {
@@ -41,12 +43,11 @@ export class HamburgerMenu extends LitElement {
  
       <!-- Sidebar -->
       <aside class="sidebar ${this.open ? 'is-open' : ''}">
-        <nav>
-          <a href="#" @click=${this._close}>Link 1</a>
-          <a href="#" @click=${this._close}>Link 2</a>
-          <a href="#" @click=${this._close}>Link 3</a>
-          <a href="#" @click=${this._close}>Link 4</a>
-        </nav>
+   <nav>
+  ${this.links.map(link => html`
+    <a href="${link.href}" @click=${this._close}>${link.label}</a>
+  `)}
+</nav>
       </aside>
     `;
   }
