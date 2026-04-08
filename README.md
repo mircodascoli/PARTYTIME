@@ -3,7 +3,7 @@
 
 > More than a liquor store — an interactive experience that guides you through the world of spirits, helps you craft unforgettable cocktails, and makes every visit feel like a night out.
 
-[Captura de pantalla](src/captura.png)
+![Captura de pantalla](src/captura.png)
 
 ## ✨ What is this?
 
