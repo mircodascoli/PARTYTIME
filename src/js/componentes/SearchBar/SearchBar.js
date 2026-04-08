@@ -18,6 +18,14 @@ constructor() {
   }
   _handleInput(e) {
     this.query = e.target.value;
+  if (this.query.trim() === '') {
+    this.dispatchEvent(
+      new CustomEvent('search-reset', {
+        bubbles:  true,
+        composed: true,
+      })
+    );
+  }
   }
  
   async _handleSearch(e) {
