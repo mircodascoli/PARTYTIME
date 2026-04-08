@@ -41,7 +41,7 @@ export class ProductsList extends LitElement {
           <h2>${bottle.name}</h2>
           <p>${bottle.price} €</p>
           <p>${bottle.description}</p>
-          <button class="add-to-cart-button" @click=${() => launchpreCartPoPup(bottle)}>Add to Cart</button> <!-- this will open the pre-cart with the selected product and quantity 1 by default, then the user can change the quantity with the dropdown menu in the pre-cart
+          <button class="add-to-cart-button" @click=${() => launchpreCartPoPup(bottle.name)}>Add to Cart</button> <!-- this will open the pre-cart with the selected product and quantity 1 by default, then the user can change the quantity with the dropdown menu in the pre-cart
         --> </li>
       `)}
     </ul>
