@@ -7,11 +7,19 @@
   text-align: center;
   width: 200px;
   height: auto;
+  background-color: rgb(240, 246, 246);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Helvetica, sans-serif;
 
   .img-list-cocktails {
     height: 150px;
     width: auto;
     border-radius: 5px;
     margin-top: 10px;
+  }
+
+  h2{
+    font-size: 1.2em;
+    margin: 10px 0;
   }
 }

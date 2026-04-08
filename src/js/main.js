@@ -166,7 +166,7 @@ function onLogOut(event) {
     
   function redirectToCalculator(){
     console.log('redirecting to calculator page')
-    location.href = './calculadores.html'
+    location.href = './calculator.html'
   }
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
