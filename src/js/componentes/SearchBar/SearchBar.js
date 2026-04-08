@@ -72,7 +72,7 @@ constructor() {
       <form class="search-wrapper" @submit=${this._handleSearch}>
         <input
           type="text"
-          placeholder="Buscar producto..."
+          placeholder="Ex.'Campari','Vodka'..."
           .value=${this.query}
           @input=${this._handleInput}
           ?disabled=${this.loading}
