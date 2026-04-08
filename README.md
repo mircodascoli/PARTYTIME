@@ -1,77 +1,26 @@
 
 # PARTYTIME
-
-PARTYTIME es una applicacion con calculadores para aumentar,
- la venta de licores de una tienda de licores en linea
-![Captura de pantalla](src/captura.png)
-## Tecnologias usadas
-HTML, CSS, Javascript para el front end
-Javascipt con Node.js e MONGO DB como base de datos
-TypeScript : conceptos basicos para evitar errore de tipado
-ESlint, Style lint para linteo
-Lit para componentes web reutilizables
  
+> More than a liquor store — an interactive experience that guides you through the world of spirits, helps you craft unforgettable cocktails, and makes every visit feel like a night out.
+ 
+---
+ 
+[Captura de pantalla](src/captura.png)
+## ✨ What is this?
+is a full-stack web application that blends e-commerce with entertainment. Users don't just browse and buy — they explore spirits, discover cocktail recipes, and get guided through the art of mixology, all while the store sells more product in the most enjoyable way possible.
+ 
+---
+## 🛠️ Tech Stack
+ 
+| Layer      | Technology                          |
+|------------|--------------------------------------|
+| Frontend   | Lit Web Components, HTML, CSS        |
+| Build Tool | Vite                                 |
+| Backend    | Node.js, Express                     |
+| Database   | MongoDB                              |
+ 
+---
 
-## Inicio y Selección de Cócteles
+## 📄 License
 
-El usuario abre la aplicación y ve dos listas de cócteles:
-
-Sabores intensos y fuertes
-
-Sabores ligeros y refrescantes
-
-Cada lista contiene 4 o 5 cócteles disponibles.
-
-Los usuarios pueden desbloquear más cócteles suscribiéndose a Premium.
-
-## Información del Cóctel
-
-Al seleccionar un cóctel, el usuario accede a:
-
-Receta base con proporciones estándar.
-
-Historia del cóctel (origen, curiosidades).
-
-Sugerencias (cómo servirlo, con qué maridar).
-
-## Uso del Calculador de Prebatch
-
-El usuario elige la cantidad total deseada de cóctel:
-
-Mínimo: 180 ml
-
-Máximo: 1800 ml
-
-Sensibilidad: 10 ml (puede ajustar en incrementos de 10 ml)
-
-Pulsa el botón CALCULA.
-
-Cálculo de Ingredientes
-La app muestra con precisión de 0.1 ml las cantidades exactas de cada ingrediente.
-
-El botón CALCULA se transforma en AÑADIR AL CARRITO.
-
-el calculador se transforma en una seleccion de licores para eligir la marca de licor
-
-Agregado de Botellas al Carrito
-Por cada 700 ml de producto, la app añade automáticamente al carrito una botella del licor correspondiente.
-
-Se puede modificar la cantidad Y MARCAantes de la compra.
-
-## Finalización de Compra
-
-El usuario revisa su carrito y finaliza la compra.
-
-Se genera un resumen con los productos y cantidades exactas.
-
-la app sugiere otros licores o ingredientes complementarios.
-
-La receta de los prebatch se queda en un historial donde el utente siempre puede revisar la receta o ir de nuevo a su calculador
-
-## DEFINIR BASE DE DATOS
-
-base de datos de licores con sus datos y precios
-
-base de datos usuarios
-
-base de datos cockteles y ingredientes
+MIT — do whatever you want, just pour yourself a drink first.
