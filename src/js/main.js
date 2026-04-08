@@ -11,17 +11,13 @@ function DomContentLoaded() {
   let formLogOut = document.getElementById('logOutButton')
   let formSignout = document.getElementById('signOutButton')
   let bodyCalculator = document.getElementById('body-calculadores')
-  let bodyProductos = document.getElementById('bodyProductos')
   let bodyUser = document.getElementById('bodyUser')
-  let formBusqueda =  document.getElementById('formBusqueda')
-  let botonBuscar = document.getElementById('botonBuscar')
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
   let bodyChoose = document.getElementById('bodyChoose') 
   let hamMenu= document.getElementById('hamMenu')
   let xButton = document.getElementById('xButton')
   let underlay = document.getElementById('underlay')
-  let deleteButton = document.querySelector('.delete-button')
   let CocktailListComp = document.querySelector('cocktail-list')
   let MyRecipesComp = document.querySelector('my-recipes')
 
@@ -31,23 +27,15 @@ function DomContentLoaded() {
 
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
-  botonBuscar?.addEventListener('click', buscarProducto)
-  formBusqueda?.addEventListener('submit', buscarProducto)
-  formBusqueda?.addEventListener('keyup', onInputKeyUp)
   hamMenu?.addEventListener('click',openSideBar)
   xButton ?.addEventListener('click',closeSideBar)   
-  deleteButton?.addEventListener('click', deleteItemFromCart) 
+
   CocktailListComp?.addEventListener('item-selected', (e) => {
     openPopUp(e.detail);
    });
    MyRecipesComp?.addEventListener('ingredient-selected', (e) => {
     openPreCart(e.detail);
    });
-
-    if (bodyProductos != null){
-      console.log('body encontrado, display productos') 
-      displayProductos()
-    }
    if (bodyCalculator != null){
       console.log('body calculadoraencontrado, display calculadora') 
       document.addEventListener('receta-guardada', () => {
@@ -214,160 +202,6 @@ export async function getAPIData(apiURL, method = 'GET', data) {
   console.log(apiData, typeof apiData, 'data from getApiData' )
   return apiData
 }
-
-async function displayProductos() {
- try { 
-  const listaProductos = document.getElementById('listaProductos'); 
-
-    const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/read/botellas`, 'GET');
-    
-    console.log(apiData);
-
-    apiData.forEach((botella) => {
-      const producto = document.createElement('li');
-      
-      // Crea il bottone
-      const button = document.createElement('button');
-      button.textContent = 'Add to cart';
-      button.classList.add('addToCart'); // Classe invece dell'id
-      button.dataset.id = botella._id; // Usa dataset per salvare l'id
-
-      // Aggiungi l'event listener direttamente qui
-      button.addEventListener('click', () => {
-        addToCart(botella._id); // Funzione da scrivere a parte
-      });
-
-      // Crea l'HTML del resto
-      producto.innerHTML = `
-       
-        <img src="../img/imgProductos/${botella.name}.png" alt="${botella.name}">
-        <h3>${botella.name}</h3>
-        <p class="price">${botella.price} &euro;</p>
-      `;
-
-      producto.appendChild(button); // Aggiungi il bottone creato
-      listaProductos.appendChild(producto);
-    });
- 
-  } catch (error) {
-    console.error('Errore durante la richiesta API:', error);
-  } 
-}
-
-async function buscarProducto(event) {
-  event.preventDefault();
-
-  try {
-    const listaProductos = document.getElementById('listaProductos');
-    const InputBusqueda = document.getElementById('busqueda');
-    const valorBusqueda = InputBusqueda?.value.trim(); // rimuove spazi iniziali/finali
-
-    if (valorBusqueda === '') {
-      alert('Debes ingresar un nombre de producto');
-      return;
-    }
-
-    const newBotella = { name: valorBusqueda };
-    const payload = JSON.stringify(newBotella);
-
-    const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/busqueda`, 'POST', payload);
-
-    if (apiData.length === 0) {
-      alert('Producto no encontrado');
-      return;
-    }
-
-   
-    listaProductos.innerHTML = '';
-
-    apiData.forEach((botella) => {
-      const producto = document.createElement('li'); 
-
-      producto.innerHTML = `
-        <img src="../img/imgProductos/${botella.name}.png" alt="${botella.name}">
-        <h3>${botella.name}</h3>
-        <p class="price">${botella.price} &euro;</p>
-      `;
-
-      const button = document.createElement('button');
-      button.textContent = 'Add to cart';
-      button.classList.add('addToCart');
-      button.dataset.id = botella._id;
-     
-
-      button.addEventListener('click', () => {
-        addToCart(botella._id);
-      });
-
-      producto.appendChild(button);
-      listaProductos?.appendChild(producto);
-    });
-
-  } catch (error) {
-    console.error('Errore durante la richiesta API:', error);
-  }
-}
-
-
-function onInputKeyUp(event) {// Keyup: mirar teclas pulsadas
-  console.log(event.key)
-   const listaProductos = document.getElementById('listaProductos');
-   
-  let formBusqueda  = document.getElementById('busqueda')
-  if(formBusqueda?.value  === ''){
-    while (listaProductos?.firstChild) {
-      listaProductos.removeChild(listaProductos.firstChild)
-    }
-    displayProductos()
-  }
-}
-
-async function addToCart(id){
-try{
-  console.log('add to cart',id)
-  const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
-  const idBotellaNum = id
-  const body = {
-  idUser : idUserNum,
-  idBotella: idBotellaNum,
- 
-}
-  const payload = JSON.stringify(body);
-   console.log(payload)
-  const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/push/to/cart`, 'POST', payload);
-  alert('Added to your cart!')
-    console.log(apiData)
-    location.href = './carrito.html';
-
-}
-catch (error) {
-  console.error('Error during botton click:', error);
-}
-
-}
-
-
-function deleteItemFromCart(idBotellaNum){
-  console.log('delete from crt event lauched')
-let userId = JSON.parse(sessionStorage.getItem('user'))._id
-console.log(userId, idBotellaNum)
-
-  const body = {
-  idUser : userId,
-  idBotella: idBotellaNum, 
- 
-}
-  const payload = JSON.stringify(body);
-   console.log(payload)
-  const apiData = getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/delete/from/cart`, 'DELETE', payload);
-  console.log(apiData)
-location.reload();
-
-}
-
-
-
-
 
 function welcoming(){
   let pWelcome = document.getElementById('welcome')
