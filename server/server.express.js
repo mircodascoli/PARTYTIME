@@ -107,8 +107,8 @@ app.delete('/api/delete/item', async (req, res) => {
 
 // FILTER
 
-app.post('/api/busqueda', async (req, res) => {
-  console.log('estamos en busqueda', req.body)
+app.post('/api/search', async (req, res) => {
+  console.log('search in express', req.body)
   //recuerda añadir la projeccion para filtrar los ampos que devolvemos
   res.json(await db.botellas.search({ $text: { $search: req.body.name } }, {}))
 })
