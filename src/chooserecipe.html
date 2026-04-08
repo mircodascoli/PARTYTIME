@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculadores</title>
+        <title>choose  </title>
         <script type="module" src="./js/main.js"></script>
         <link rel="stylesheet" href="./css/reset.css">
         <link rel="stylesheet" href="./css/styles.css">
@@ -11,40 +11,40 @@
         <link rel="stylesheet" href="./css/styles.desktop.css" media="screen and (min-width: 481px)">
         <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
-
-      <script type="module" src="./js/componentes/bundle.js" defer></script>
-
-    </head>
-<body id="body-calculadores">
-
-    <header>
-
-  
-
-        <img src="./img/logo.png" alt="logoPYT" class="logo-pt">
-        <hamburger-menu></hamburger-menu>
-    </header>
-
-    <main id="mainCalculadores">
-         
-        <calculator-component>
-          
-        </calculator-component>
-
-    <div id="underlay" class="hidden"></div>
-
    
-    </main>
 
- 
+    <script type="importmap">
+        {
+          "imports": {
+            "classes/HttpError": "./JS/clases/HttpError.js",
+            "lib/simpleFetch": "./js/lib/simpleFetch.js"
+          }
+        }
+      </script>
+      <script type="module" src="./js/componentes/bundle.js" defer></script></head>
+<body id="bodyChoose">
+  <header>
+    <img src="./img/logo.png" alt="logoPYT" class="logo-pt">
+   <hamburger-menu links='[
+  {"label": "Shop",    "href": "/shop.html"},
+  {"label": "Cart",   "href": "/cart.html"},
+  {"label": "User Area", "href": "/user.html"}
+]'></hamburger-menu>
+  </header>
+    <main class="main-choose">
+    
+           <div id="underlay" class="hidden"></div>
+  
+       <cocktail-list></cocktail-list>
+    </main>
     <footer>
         <p>PARTYTIME was made for fun, thank fors using it</p>
         <p>2025 Mirco D'Ascoli</p>
     </footer>
 </body>
+
 </html>
