@@ -4,34 +4,21 @@ window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
 function DomContentLoaded() {
   
-  let formLogOut = document.getElementById('logOutButton')
-  let signInFormLit = document.querySelector('signin-form-lit')
-  let LogInFormLit = document.querySelector('log-in-form-lit')
-  let bodyChoose = document.getElementById('bodyChoose') 
-  let CocktailListComp = document.querySelector('cocktail-list')
-  let MyRecipesComp = document.querySelector('my-recipes')
+  let formLogOut = document.getElementById('logOutButton')// creare componente a parte
+  let signInFormLit = document.querySelector('signin-form-lit')// cambiare nome e ricontrollare funzioni
+  let LogInFormLit = document.querySelector('log-in-form-lit') // cambiare nome e ricontrollare funzioni
+  let CocktailListComp = document.querySelector('cocktail-list')// stays
+  let MyRecipesComp = document.querySelector('my-recipes')// stays
 
-  window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
-  formLogOut?.addEventListener('click', onLogOut)
-  CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
-  MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
+  window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
+  formLogOut?.addEventListener('click', onLogOut)//creare componente
+  CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});// stays
+  MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
   window.addEventListener('receta-guardada', () => {location.href = './user.html'})
-   
-    if (bodyChoose != null){
-      console.log('body chooseencontrado, display choosepoison')
-      document.addEventListener('craft-selected', (event) => {
- 
-     SetCocktailToSS(event.detail);
-
-     redirectToCalculator();
-
-    });
-
-    }
+  window.addEventListener('craft-selected', (event) => {SetCocktailToSS(event.detail); redirectToCalculator();});// questo lo puo fare il componente??
 
   signInFormLit?.addEventListener('signin-form-submit', (event) => {
     if (event?.detail?.text === 'User already exists') {
-    console.log('ponemos el cartel de user existente')
     document.getElementById('already')?.classList.remove('hidden')
     setTimeout(() => {
       document.getElementById('already')?.classList.add('hidden')
@@ -42,7 +29,7 @@ function DomContentLoaded() {
     setTimeout(() => {
       document.getElementById('registered')?.classList.add('hidden')
     }, 1500)
-    }
+    }// questo puo farlo il componente 
     
   })
 
@@ -64,7 +51,7 @@ function DomContentLoaded() {
   }
 })
   checkLoggedIn() 
-  }
+  }// spostare logica nel component
 
 
 function checkLoggedIn() {
@@ -75,14 +62,13 @@ function checkLoggedIn() {
   } else if (accessPages.includes(location.pathname) && sessionStorage.getItem('user') != null) {
     sessionStorage.setItem('user', null)
   }
-}
+}// questa rimane, ma sarebbe meglio fare un componente che gestisce l'autenticazione e le pagine accessibili in base allo stato di login
 
 function onLogOut(event) {
     event.preventDefault()
-    // Eliminar la sesión del usuario
     sessionStorage.removeItem('user')
     location.href = './index.html'
-  }
+  }// creare componente a parte
 
  function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
@@ -90,24 +76,24 @@ function onLogOut(event) {
     let popUp = document.createElement('description-pop-up')
     popUp.cocktail = data;
     document.body.appendChild(popUp)
-  }
+  }// questo rimane
 
   function openPreCart(data) {
     console.log(`lets open the popup for ${data.name}`);
     let preCart = document.createElement('pre-cart-popup')
     preCart.product = data;
     document.body.appendChild(preCart)
-  }
+  }// perche ci sono due funzioni praticamente identiche? 
+  //questa rimane viene chiamata dallévento
 
   function SetCocktailToSS(cocktail){
     console.log('setting cocktail to session storage', cocktail)
     sessionStorage.setItem('selectedCraft', JSON.stringify(cocktail))
-  }
-    
+  }// questo lo puo fare il componente
   function redirectToCalculator(){
     console.log('redirecting to calculator page')
     location.href = './calculator.html'
-  }
+  }// questo lo puo fare il componente
 
 export function launchpreCartPoPup(ing) {
     console.log('buy ingredient function activated by the click', ing);
@@ -118,5 +104,5 @@ export function launchpreCartPoPup(ing) {
       composed: true
     }));
 
-  } 
+  } // questo meglio in utils e update myrecipies and shop components
 
