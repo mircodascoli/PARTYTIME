@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', DomContentLoaded)
 function DomContentLoaded() {
   
   let formLogOut = document.getElementById('logOutButton')
-  let formSignout = document.getElementById('signOutButton')
   let bodyCalculator = document.getElementById('body-calculadores')
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
@@ -15,7 +14,6 @@ function DomContentLoaded() {
 
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
   formLogOut?.addEventListener('click', onLogOut)
-  formSignout?.addEventListener('click', onSignOut)
   CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
    
@@ -88,23 +86,6 @@ function onLogOut(event) {
     sessionStorage.removeItem('user')
     location.href = './index.html'
   }
-
-  function onSignOut() {
-
-    if (sessionStorage.getItem('user') && confirm('¿Estás seguro de borrar tu usuario?')) {
-      let userId = JSON.parse(sessionStorage.getItem('user'))._id
-      console.log(userId, typeof userId)
-      let payload = JSON.stringify({ _id: userId })
-      let apiData = getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/delete/user/`, 'DELETE', payload);
-      console.log(apiData)
-       sessionStorage.removeItem('user')  
-      alert('Usuario borrado correctamente') 
-       location.href = './index.html' 
-    }
-
-  }
-
-
 
  function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
