@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import MyRecipesCSS from '../MyRecipes/MyRecipesCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT } from '../../utils.js';
+import { getAPIData, API_PORT, SSID } from '../../utils.js';
 import {  launchpreCartPoPup } from '../../main.js';
 export class MyRecipes extends LitElement {
 
@@ -16,7 +16,7 @@ export class MyRecipes extends LitElement {
     this.apiData = null;
 
     try {
-      this._idSession = JSON.parse(sessionStorage.getItem('user'))._id;
+      this._idSession = SSID;
     } catch {
       console.warn('No user logged');
       this._idSession = null;
