@@ -102,27 +102,44 @@ export class MyRecipes extends LitElement {
 
 
   render() {
+  const recipes = this.apiData?.recipes ?? [];
 
-    if (!this.apiData) {
-      return html`<p>Loading recipes...</p>`;
+  return html`
+
+    <!-- CLEAR BUTTON -->
+    ${recipes.length >= 1
+      ? html`
+        <button class="clear-button" @click=${this.clearList}>
+          Clear List
+        </button>
+      `
+      : null
     }
 
-    return html`
-      <button class="clear-button" @click=${this.clearList}>
-        Clear List
-      </button>
+    <!-- ADD BUTTON -->
+    ${recipes.length <= 2
+      ? html`
+        <button class="add-button" @click=${this.addRecipe}>
+          Add New Recipe
+        </button>
+      `
+      : null
+    }
 
-      <div class="my-recipes-container">
-        <ul class="recipes-list">
+    <div class="my-recipes-container">
+      <ul class="recipes-list">
 
-        ${this.apiData.recipes?.length === 0
+        ${recipes.length === 0
           ? html`<p>No recipes saved.</p>`
-          : this.apiData.recipes.map(item => html`
+          : recipes.map(item => html`
 
-            <div class="recipe-card">
+            <li class="recipe-card">
 
-              <button class="delete-recipe"
-                @click=${() => this.deleteRecipe(item._id)}>X</button>
+              <button
+                class="delete-recipe"
+                @click=${() => this.deleteRecipe(item._id)}>
+                X
+              </button>
 
               <div class="recipe-title">
                 <p>${item.name} × ${item.amount}</p>
@@ -130,32 +147,56 @@ export class MyRecipes extends LitElement {
 
               <div class="recipe-data">
 
-
+                <!-- INGREDIENTS -->
                 <ul class="recipe-ingredients-list">
                   ${item.ingredientes.map(ing => html`
-                    <li class="recipe-ingredient">${ing.name} ${ing.mls}ml</li>
+                    <li class="recipe-ingredient">
+                      ${ing.name} ${ing.mls}ml
+                    </li>
                   `)}
                 </ul>
-                <p class="serving-description">dummy suggestions of serving until db is ready$ {this.item.serving}</p>
 
+                <!-- SERVING -->
+                <p class="serving-description">
+                  ${item.serving ?? "Serving suggestion coming soon"}
+                </p>
+
+                <!-- PRODUCTS -->
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
-                    <li>${ing.dbname}</li>
-                     <img src="../../img/imgProductos/${ing.dbname}.png" alt="${ing.dbname}" class="suggested-product-image" @click=${() => this._launchpreCartPoPup(ing)} />
-                    <button class="buy-button" @click=${() =>  launchpreCartPoPup(ing.dbname)}>BUY</button>
+                    <li class="product-item">
+
+                      <p>${ing.dbname}</p>
+
+                      <img
+                        src="../../img/imgProductos/${ing.dbname}.png"
+                        alt="${ing.dbname}"
+                        class="suggested-product-image"
+                        @click=${() => this._launchpreCartPoPup(ing)}
+                        @error=${(e) => e.target.src = '../../img/fallback.png'}
+                      />
+
+                      <button
+                        class="buy-button"
+                        @click=${() => this._launchpreCartPoPup(ing)}>
+                        BUY
+                      </button>
+
+                    </li>
                   `)}
                 </ul>
+
               </div>
 
-            </div>
+            </li>
 
           `)
         }
 
-        </ul>
-      </div>
-    `;
-  }
+      </ul>
+    </div>
+  `;
+}
 }
 
 customElements.define('my-recipes', MyRecipes);
