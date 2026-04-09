@@ -1,8 +1,5 @@
  //@ts-no-check
 
-
-
-
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
 function DomContentLoaded() {
@@ -14,31 +11,19 @@ function DomContentLoaded() {
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
   let bodyChoose = document.getElementById('bodyChoose') 
-
   let CocktailListComp = document.querySelector('cocktail-list')
   let MyRecipesComp = document.querySelector('my-recipes')
 
-  window.addEventListener('ingredient-selected', (e) => {
-    openPreCart(e.detail);
-   });
-
+  window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
   formLogOut?.addEventListener('click', onLogOut)
   formSignout?.addEventListener('click', onSignOut)
-  
-
-  CocktailListComp?.addEventListener('item-selected', (e) => {
-    openPopUp(e.detail);
-   });
-   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {
-    openPreCart(e.detail);
-   });
-   if (bodyCalculator != null){
-      console.log('body calculadoraencontrado, display calculadora') 
-      document.addEventListener('receta-guardada', () => {
-        location.href = './user.html';
-      });
-    }
-    if (bodyUser != null){
+  CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
+  MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
+   
+  if (bodyCalculator != null){
+      document.addEventListener('receta-guardada', () => {location.href = './user.html'})}
+   
+      if (bodyUser != null){
       console.log('body userencontrado, weloming user')
       welcoming()
     }
@@ -110,7 +95,7 @@ function onLogOut(event) {
   }
 
   function onSignOut() {
-   console.log('borrar usuario')
+
     if (sessionStorage.getItem('user') && confirm('¿Estás seguro de borrar tu usuario?')) {
       let userId = JSON.parse(sessionStorage.getItem('user'))._id
       console.log(userId, typeof userId)

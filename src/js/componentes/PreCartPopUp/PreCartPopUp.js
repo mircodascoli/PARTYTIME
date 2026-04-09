@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import PreCartPopUpCSS from '../PreCartPopUp/PreCartPopUpCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import { getAPIData, API_PORT } from '../../utils.js';
+import { getAPIData, API_PORT, SSID } from '../../utils.js';
 export class PreCartPopUp extends LitElement {
  static styles = [ResetCSS, PreCartPopUpCSS];
  static properties = { product: { type: Object }, dbitem: { type: Object },   quantity: { type: Number } };
@@ -67,8 +67,8 @@ export class PreCartPopUp extends LitElement {
     this.quantity = parseInt(event.target.value);
   } 
   async handleAddToCart() {
-    const idUserNum = JSON.parse(sessionStorage.getItem('user'))._id
-    this.user = idUserNum
+    
+    this.user = SSID;
 
   let body = {
     productAndQuantity: {

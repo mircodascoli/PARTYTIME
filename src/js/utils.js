@@ -2,9 +2,7 @@ import { simpleFetch } from './lib/simpleFetch.js'
 import { HttpError } from './clases/HttpError.js'
 const TIMEOUT = 10000
 export const API_PORT = location.port ? `:${1337}` : ''
- 
-
-
+export const SSID = JSON.parse(sessionStorage.getItem('user'))?._id || null
   export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
 
