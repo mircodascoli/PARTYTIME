@@ -5,7 +5,6 @@ window.addEventListener('DOMContentLoaded', DomContentLoaded)
 function DomContentLoaded() {
   
   let formLogOut = document.getElementById('logOutButton')
-  let bodyCalculator = document.getElementById('body-calculadores')
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
   let bodyChoose = document.getElementById('bodyChoose') 
@@ -16,9 +15,7 @@ function DomContentLoaded() {
   formLogOut?.addEventListener('click', onLogOut)
   CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
-   
-  if (bodyCalculator != null){
-      document.addEventListener('receta-guardada', () => {location.href = './user.html'})}
+  window.addEventListener('receta-guardada', () => {location.href = './user.html'})
    
     if (bodyChoose != null){
       console.log('body chooseencontrado, display choosepoison')

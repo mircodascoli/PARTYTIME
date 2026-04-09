@@ -14,6 +14,7 @@ export class Calculator extends LitElement {
 
     const storedRecipe = sessionStorage.getItem('selectedCraft');
 
+    
     if (storedRecipe) {
       this.recipe = JSON.parse(storedRecipe);
   
@@ -96,7 +97,7 @@ export class Calculator extends LitElement {
 
   } catch (err) {
     console.error('Error saving receta', err);
-    alert('Something went wrong 😬');
+    alert('Something went wrong ');
   }
 }
 
