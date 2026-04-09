@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import CalculatorCSS from '../Calculator/CalculatorCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import { getAPIData, API_PORT } from '../../main.js';
+import { getAPIData, API_PORT } from '../../utils.js';
 export class Calculator extends LitElement {
 
  static properties = { 

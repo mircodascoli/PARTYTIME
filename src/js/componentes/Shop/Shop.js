@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import ShopCSS from './ShopCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT } from '../../main.js'; 
+import { getAPIData, API_PORT } from '../../utils.js'; 
 import { launchpreCartPoPup } from '../utils.js';
 import '../SearchBar/SearchBar.js'; // registra <search-bar>
  
