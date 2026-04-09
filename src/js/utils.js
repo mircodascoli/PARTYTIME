@@ -3,17 +3,7 @@ import { HttpError } from './clases/HttpError.js'
 const TIMEOUT = 10000
 export const API_PORT = location.port ? `:${1337}` : ''
  
- 
- export function launchpreCartPoPup(ing) {
-    console.log('buy ingredient function activated by the click', ing);
 
-    window.dispatchEvent(new CustomEvent('ingredient-selected', {
-      detail: ing,
-      bubbles: true,
-      composed: true
-    }));
-  
-  } 
 
   export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
@@ -48,4 +38,11 @@ export const API_PORT = location.port ? `:${1337}` : ''
   }
   console.log(apiData, typeof apiData, 'data from getApiData' )
   return apiData
+}
+export function getInputValue(inputElement) {
+  if (inputElement) {
+    return /** @type {HTMLInputElement} */(inputElement).value
+  } else {
+    return ''
+  }
 }

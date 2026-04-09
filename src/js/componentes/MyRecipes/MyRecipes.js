@@ -2,7 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import MyRecipesCSS from '../MyRecipes/MyRecipesCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT } from '../../utils.js';
-import {  launchpreCartPoPup } from '../main.js';
+import {  launchpreCartPoPup } from '../../main.js';
 export class MyRecipes extends LitElement {
 
   static styles = [ResetCSS, MyRecipesCSS];
