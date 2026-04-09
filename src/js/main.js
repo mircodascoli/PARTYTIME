@@ -7,7 +7,6 @@ function DomContentLoaded() {
   let formLogOut = document.getElementById('logOutButton')
   let formSignout = document.getElementById('signOutButton')
   let bodyCalculator = document.getElementById('body-calculadores')
-  let bodyUser = document.getElementById('bodyUser')
   let signInFormLit = document.querySelector('signin-form-lit')
   let LogInFormLit = document.querySelector('log-in-form-lit')
   let bodyChoose = document.getElementById('bodyChoose') 
@@ -23,10 +22,6 @@ function DomContentLoaded() {
   if (bodyCalculator != null){
       document.addEventListener('receta-guardada', () => {location.href = './user.html'})}
    
-      if (bodyUser != null){
-      console.log('body userencontrado, weloming user')
-      welcoming()
-    }
     if (bodyChoose != null){
       console.log('body chooseencontrado, display choosepoison')
       document.addEventListener('craft-selected', (event) => {
@@ -136,15 +131,6 @@ function onLogOut(event) {
     location.href = './calculator.html'
   }
 
-
-function welcoming(){
-  let pWelcome = document.getElementById('welcome')
-  let userName = JSON.parse(sessionStorage.getItem('user')).name
-  pWelcome?.classList.add('p-welcome')
-  pWelcome.textContent= `Welcome,
-  ${userName}`
-}
-
 export function launchpreCartPoPup(ing) {
     console.log('buy ingredient function activated by the click', ing);
 
@@ -153,5 +139,6 @@ export function launchpreCartPoPup(ing) {
       bubbles: true,
       composed: true
     }));
-  
+
   } 
+
