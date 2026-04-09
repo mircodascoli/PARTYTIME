@@ -5,7 +5,8 @@ const TIMEOUT = 10000
 
 export const API_PORT = location.port ? `:${1337}` : ''
 export const SSID = JSON.parse(sessionStorage.getItem('user'))?._id || null
-  export async function getAPIData(apiURL, method = 'GET', data) {
+
+export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
 
   try {
@@ -39,6 +40,7 @@ export const SSID = JSON.parse(sessionStorage.getItem('user'))?._id || null
   console.log(apiData, typeof apiData, 'data from getApiData' )
   return apiData
 }
+
 export function getInputValue(inputElement) {
   if (inputElement) {
     return /** @type {HTMLInputElement} */(inputElement).value
@@ -46,3 +48,14 @@ export function getInputValue(inputElement) {
     return ''
   }
 }
+
+export function launchpreCartPoPup(ing) {
+    console.log('buy ingredient function activated by the click', ing);
+
+    window.dispatchEvent(new CustomEvent('ingredient-selected', {
+      detail: ing,
+      bubbles: true,
+      composed: true
+    }));
+
+  } 

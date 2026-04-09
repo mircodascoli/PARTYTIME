@@ -87,18 +87,21 @@ export class Calculator extends LitElement {
   };
 
   try {
-    const result = await this.guardarReceta(recipe);
+   await this.guardarReceta(recipe);
+   
 
-    this.dispatchEvent(new CustomEvent('receta-guardada', {
+   /*  this.dispatchEvent(new CustomEvent('receta-guardada', {
       detail: result,
       bubbles: true,
       composed: true
-    }));
+    })); */
+    location.href = './user.html'
 
   } catch (err) {
     console.error('Error saving receta', err);
     alert('Something went wrong ');
   }
+  
 }
 
  async guardarReceta(recipe) {

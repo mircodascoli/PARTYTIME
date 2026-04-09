@@ -4,17 +4,15 @@ window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
 function DomContentLoaded() {
   
-  let formLogOut = document.getElementById('logOutButton')// creare componente a parte
+
   let signInFormLit = document.querySelector('signin-form-lit')// cambiare nome e ricontrollare funzioni
   let LogInFormLit = document.querySelector('log-in-form-lit') // cambiare nome e ricontrollare funzioni
   let CocktailListComp = document.querySelector('cocktail-list')// stays
   let MyRecipesComp = document.querySelector('my-recipes')// stays
 
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
-  formLogOut?.addEventListener('click', onLogOut)//creare componente
   CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});// stays
   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
-  window.addEventListener('receta-guardada', () => {location.href = './user.html'})
   window.addEventListener('craft-selected', (event) => {SetCocktailToSS(event.detail); redirectToCalculator();});// questo lo puo fare il componente??
 
   signInFormLit?.addEventListener('signin-form-submit', (event) => {
@@ -64,12 +62,6 @@ function checkLoggedIn() {
   }
 }// questa rimane, ma sarebbe meglio fare un componente che gestisce l'autenticazione e le pagine accessibili in base allo stato di login
 
-function onLogOut(event) {
-    event.preventDefault()
-    sessionStorage.removeItem('user')
-    location.href = './index.html'
-  }// creare componente a parte
-
  function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
       and description: ${data.description}`);
@@ -95,14 +87,4 @@ function onLogOut(event) {
     location.href = './calculator.html'
   }// questo lo puo fare il componente
 
-export function launchpreCartPoPup(ing) {
-    console.log('buy ingredient function activated by the click', ing);
-
-    window.dispatchEvent(new CustomEvent('ingredient-selected', {
-      detail: ing,
-      bubbles: true,
-      composed: true
-    }));
-
-  } // questo meglio in utils e update myrecipies and shop components
 
