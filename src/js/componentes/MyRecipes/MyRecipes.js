@@ -2,7 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import MyRecipesCSS from '../MyRecipes/MyRecipesCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT, SSID } from '../../utils.js';
-import {  launchpreCartPoPup } from '../../main.js';
+import {  launchpreCartPoPup } from '../../utils.js';
 export class MyRecipes extends LitElement {
 
   static styles = [ResetCSS, MyRecipesCSS];
@@ -106,7 +106,6 @@ export class MyRecipes extends LitElement {
 
   return html`
 
-    <!-- CLEAR BUTTON -->
     ${recipes.length >= 1
       ? html`
         <button class="clear-button" @click=${this.clearList}>
@@ -116,7 +115,6 @@ export class MyRecipes extends LitElement {
       : null
     }
 
-    <!-- ADD BUTTON -->
     ${recipes.length <= 2
       ? html`
         <button class="add-button" @click=${this.addRecipe}>
@@ -172,13 +170,13 @@ export class MyRecipes extends LitElement {
                         src="../../img/imgProductos/${ing.dbname}.png"
                         alt="${ing.dbname}"
                         class="suggested-product-image"
-                        @click=${() => this._launchpreCartPoPup(ing)}
+                        @click=${() => launchpreCartPoPup(ing.dbname)}
                         @error=${(e) => e.target.src = '../../img/fallback.png'}
                       />
 
                       <button
                         class="buy-button"
-                        @click=${() => this._launchpreCartPoPup(ing)}>
+                        @click=${() => launchpreCartPoPup(ing.dbname)}>
                         BUY
                       </button>
 
