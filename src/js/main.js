@@ -25,10 +25,11 @@ function DomContentLoaded() {
     setTimeout(() => {
       document.getElementById('registered')?.classList.add('hidden')
     }, 1500)
-    }// questo puo farlo il componente 
-    
+    }
   })
-
+//////////////////////////////////////////////////////////
+    // create new component for this 2 event handling./////////AccessAttemptResult
+    ///////////////////////////////////////////////////////////
   LogInFormLit?.addEventListener('login-form-submit', (event) => {
   const { success, data, error } = event?.detail || {};
 
@@ -47,7 +48,10 @@ function DomContentLoaded() {
   }
 })
   checkLoggedIn() 
-  }// spostare logica nel component
+  }
+   //////////////////////////////////////////////////////////
+    // same as above.//////////AccessAttemptResult
+    ////////////////////////////////////////////////////////
 
  function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
@@ -55,13 +59,13 @@ function DomContentLoaded() {
     let popUp = document.createElement('description-pop-up')
     popUp.cocktail = data;
     document.body.appendChild(popUp)
-  }// stays
+  }
 
   function openPreCart(data) {
     console.log(`lets open the popup for ${data.name}`);
     let preCart = document.createElement('pre-cart-popup')
     preCart.product = data;
     document.body.appendChild(preCart)
-  }//stays
+  }
 
  

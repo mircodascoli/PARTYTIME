@@ -22,6 +22,7 @@ export class LoginForm extends LitElement {
                 <input  type="email" id="emailLog"placeholder="Your email" minlength="3" required>
                  <input type="password" id="passwordLog" placeholder="Your password" minlength="3" required>
                  <button type="submit" class="btn" title="Login" ?disabled=${this.email === '' || this.password === ''}>Login</button>
+                 <access-attempt-result></access-attempt-result>
                   <a href="./sign.html" class="login-or-sign">Or Sign Up</a>
             </form>
         `;

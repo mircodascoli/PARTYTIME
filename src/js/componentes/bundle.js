@@ -15,4 +15,5 @@ import { HamburgerMenu } from "./HamburgerMenu/HamburgerMenu.js";
 import { Welcoming } from "./Welcoming/Welcoming.js";
 import { SignOut } from "./SignOut/SignOut.js";
 import { LogOut } from "./LogOut/LogOut.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, HamburgerMenu, Welcoming, SignOut, LogOut}; 
+import { AccessAttemptResult } from "./AccessAttemptResult/AccessAttemptResult.js";
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, HamburgerMenu, Welcoming, SignOut, LogOut, AccessAttemptResult}; 
