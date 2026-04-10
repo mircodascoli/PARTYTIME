@@ -1,8 +1,8 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import { getAPIData, getInputValue, API_PORT } from '../../utils.js';
 import ResetCSS from '../../../css/reset.css' with {type: 'css'};
-import SignInFormLitCSS from '../SignInFormLit/SignInFormLit.css'with {type: 'css'};
-export class SignInFormLit extends LitElement {
+import SignInFormLitCSS from './SignInFormCSS.css'with {type: 'css'};
+export class SignInForm extends LitElement {
     static styles = [ResetCSS, SignInFormLitCSS];
     static properties = {
     name: { type: String },
@@ -80,4 +80,4 @@ export class SignInFormLit extends LitElement {
   }
     }
 
-customElements.define('signin-form-lit', SignInFormLit);
+customElements.define('signin-form', SignInForm);

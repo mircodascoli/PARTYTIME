@@ -93,4 +93,4 @@ export class LoginInFormLit extends LitElement {
 }
 
 }
-customElements.define('log-in-form-lit', LoginInFormLit);
+customElements.define('log-in-form', LoginInFormLit);

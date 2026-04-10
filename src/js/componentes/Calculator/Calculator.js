@@ -89,12 +89,6 @@ export class Calculator extends LitElement {
   try {
    await this.guardarReceta(recipe);
    
-
-   /*  this.dispatchEvent(new CustomEvent('receta-guardada', {
-      detail: result,
-      bubbles: true,
-      composed: true
-    })); */
     location.href = './user.html'
 
   } catch (err) {
