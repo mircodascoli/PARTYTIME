@@ -3,16 +3,15 @@ import { checkLoggedIn } from "./utils.js"// delete once login and sign are read
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
 function DomContentLoaded() {
-
-  let signInFormLit = document.querySelector('signin-form')// cambiare nome e ricontrollare funzioni
-  let LogInFormLit = document.querySelector('log-in-form') // cambiare nome e ricontrollare funzioni
+  let signInFormLit = document.querySelector('signin-form')//  ricontrollare funzioni 
+  let LogInFormLit = document.querySelector('log-in-form') // ricontrollare funzioni 
   let CocktailListComp = document.querySelector('cocktail-list')// stays
   let MyRecipesComp = document.querySelector('my-recipes')// stays
 
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
   CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});// stays
   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
- 
+
 
   signInFormLit?.addEventListener('signin-form-submit', (event) => {
     if (event?.detail?.text === 'User already exists') {
@@ -65,4 +64,4 @@ function DomContentLoaded() {
     document.body.appendChild(preCart)
   }//stays
 
-
+ 

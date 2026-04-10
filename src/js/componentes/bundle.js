@@ -1,5 +1,5 @@
 
-import {LoginInForm} from "./LoginForm/loginForm.js";
+import { LoginForm } from "./LoginForm/LoginForm.js";
 import { SignInForm } from "./SignInForm/SignInForm.js";
 import { Calculator } from "./Calculator/Calculator.js";
 import { MyRecipes } from "./MyRecipes/MyRecipes.js";
@@ -15,4 +15,4 @@ import { HamburgerMenu } from "./HamburgerMenu/HamburgerMenu.js";
 import { Welcoming } from "./Welcoming/Welcoming.js";
 import { SignOut } from "./SignOut/SignOut.js";
 import { LogOut } from "./LogOut/LogOut.js";
-export { SignInForm, LoginInForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, HamburgerMenu, Welcoming, SignOut, LogOut}; 
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, HamburgerMenu, Welcoming, SignOut, LogOut}; 
