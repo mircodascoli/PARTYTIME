@@ -1,9 +1,9 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' }
-import LogInFormCSS from '../LoginFormLit/LoginFormCSS.css' with { type: 'css' }
+import LogInFormCSS from '../LoginForm/LoginFormCSS.css' with { type: 'css' }
 import { getAPIData, API_PORT } from '../../utils.js'
 
-export class LoginInFormLit extends LitElement {
+export class LoginForm extends LitElement {
     static styles = [ResetCSS, LogInFormCSS];
     
     static properties = {
@@ -93,4 +93,4 @@ export class LoginInFormLit extends LitElement {
 }
 
 }
-customElements.define('log-in-form', LoginInFormLit);
+customElements.define('log-in-form', LoginForm);

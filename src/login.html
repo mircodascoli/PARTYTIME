@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
-        <script type="module" src="./js/main.js"></script>
-        <link rel="stylesheet" href="./css/reset.css">
-        <link rel="stylesheet" href="./css/styles.css">
-        <link rel="stylesheet" href="./css/styles.mobile.css" media="screen and (max-width: 480px)">
-        <link rel="stylesheet" href="./css/styles.desktop.css" media="screen and (min-width: 481px)">
-      <!--  <script src="https://accounts.google.com/gsi/client" async defer></script> -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet"> 
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-   
-    <script type="module" src="./js/componentes/bundle.js" defer></script>
-    <script type="importmap">
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Login</title>
+       <script type="module" src="./js/main.js"></script>
+       <link rel="stylesheet" href="./css/reset.css">
+       <link rel="stylesheet" href="./css/styles.css">
+       <link rel="stylesheet" href="./css/styles.mobile.css" media="screen and (max-width: 480px)">
+       <link rel="stylesheet" href="./css/styles.desktop.css" media="screen and (min-width: 481px)">
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet"> 
+       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+       <script type="module" src="./js/main.js"></script>
+       <script type="module" src="./js/componentes/bundle.js" defer></script>
+       <script type="importmap">
         {
           "imports": {
             "classes/HttpError": "./JS/clases/HttpError.js",
             "lib/simpleFetch": "./js/lib/simpleFetch.js"
           }
         }
-      </script>
-      <script type="module" src="./js/componentes/bundle.js" defer></script>
+       </script>
     </head>
-<body class="body-form">
-    <header class="header-form">
+    <body class="body-form">
+     <header class="header-form">
        <img src="./img/logo.png" alt="logoPYT">
-    </header>
-    <main class="main-form">
-
-              
+     </header>
+     <main class="main-form">    
         <log-in-form>
            <h1 class="title">Log in </h1>
         </log-in-form>
-    
         <p id="logged" class="hidden">Logged succesfuly!</p>
         <p id="rejected" class="hidden">Wrong combiation of email and password</p>
     </main>
@@ -46,6 +41,5 @@
         <p>PARTYTIME was made for fun, thanks for using it</p>
         <p>2025 Mirco D'Ascoli</p>
     </footer>
- 
-</body>
+ </body>
 </html>
