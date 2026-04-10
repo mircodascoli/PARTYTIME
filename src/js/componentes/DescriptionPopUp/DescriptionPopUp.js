@@ -35,15 +35,15 @@ export class DescriptionPopUp extends LitElement {
     `;
   }
    SelectRecipeToCalc(recipeSelected) {
-       // 1️⃣ log dell'elemento cliccato
-    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.ingredient}`);
-
-      this.dispatchEvent(new CustomEvent('craft-selected', {
-      detail: recipeSelected,
-      bubbles: true,
-      composed: true
-    }));
+    try {
+  sessionStorage.setItem('selectedCraft', JSON.stringify(recipeSelected))
+  }catch (err) {
+    console.error('Error setting cocktail to session storage', err);
+    alert('Something went wrong when selecting the cocktail');
   }
+    finally {
+    location.href = './calculator.html'
+    }
 }
-
+}
 customElements.define('description-pop-up', DescriptionPopUp);
