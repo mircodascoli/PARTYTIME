@@ -3,28 +3,21 @@ import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import AccessAttemptResultCSS from '../AccessAttemptResult/AccessAttemptResultCSS.css' with { type: 'css' };
 export class AccessAttemptResult extends LitElement {
   static properties = {
-    open: { type: Boolean },
-    links: { type: Array },
+   message : {type: String},
   };
 
   static styles = [ResetCSS, AccessAttemptResultCSS];
    constructor() {
     super();
-    this.open = false;
-      this.links = [];
+    this.message = '';
   }
- 
-  _toggle() {
-    this.open = !this.open;
-  }
- 
-  _close() {
-    this.open = false;
-  }
+
  
   render() {
+    if (!this.message) return html`<p>No message to display</p>`;
+    
     return html`
-     <p>access-attempt-result</p>
+     <p>${this.message}</p>
     `;
   }
 }

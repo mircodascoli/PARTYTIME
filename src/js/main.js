@@ -1,58 +1,15 @@
  //@ts-no-check
-import { checkLoggedIn } from "./utils.js"// delete once login and sign are ready
+//import { checkLoggedIn } from "./utils.js"// delete once login and sign are ready
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
 function DomContentLoaded() {
-  let signInFormLit = document.querySelector('signin-form')//  ricontrollare funzioni 
-  let LogInFormLit = document.querySelector('log-in-form') // ricontrollare funzioni 
   let CocktailListComp = document.querySelector('cocktail-list')// stays
   let MyRecipesComp = document.querySelector('my-recipes')// stays
 
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
   CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});// stays
   MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
-
-
-  signInFormLit?.addEventListener('signin-form-submit', (event) => {
-    if (event?.detail?.text === 'User already exists') {
-    document.getElementById('already')?.classList.remove('hidden')
-    setTimeout(() => {
-      document.getElementById('already')?.classList.add('hidden')
-    }, 1500)
-    }else{
-      console.log('ponemos el cartel de user registrado')
-    document.getElementById('registered')?.classList.remove('hidden')
-    setTimeout(() => {
-      document.getElementById('registered')?.classList.add('hidden')
-    }, 1500)
-    }
-  })
-//////////////////////////////////////////////////////////
-    // create new component for this 2 event handling./////////AccessAttemptResult
-    ///////////////////////////////////////////////////////////
-  LogInFormLit?.addEventListener('login-form-submit', (event) => {
-  const { success, data, error } = event?.detail || {};
-
-  if (success) {
-    console.log('Login ok:', data);
-    document.getElementById('logged')?.classList.remove('hidden');
-    setTimeout(() => {
-      document.getElementById('logged')?.classList.add('hidden');
-    }, 500);
-  } else {
-    console.warn('Login fail', error);
-    document.getElementById('rejected')?.classList.remove('hidden');
-    setTimeout(() => {
-      document.getElementById('rejected')?.classList.add('hidden');
-    }, 1500);
-  }
-})
-  checkLoggedIn() 
-  }
-   //////////////////////////////////////////////////////////
-    // same as above.//////////AccessAttemptResult
-    ////////////////////////////////////////////////////////
-
+ 
  function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
       and description: ${data.description}`);
@@ -67,5 +24,7 @@ function DomContentLoaded() {
     preCart.product = data;
     document.body.appendChild(preCart)
   }
+
+}
 
  
