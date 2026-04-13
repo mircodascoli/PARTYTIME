@@ -19,18 +19,16 @@ app.post('/api/create/botellas', async (req, res) => {
 });
 
 app.post('/api/create/users', async (req, res) => {
-  // 1. Comprobar si ya existe el usuario, usando getUsers
   const userExists = await db.users.get({ email: req.body.email })
   console.log("hello from create users")
 
-  // 2. Si no existe, crearlo
   if (userExists.length === 0) {
-    // Remove _id property from payload object
     const newUser = req.body
     delete newUser._id
     res.json(await db.users.create(newUser))
+    
   } else {
-    res.status(400).send('User already exists')
+    res.status(400).send('User already exists from express')
   }
 })
 
