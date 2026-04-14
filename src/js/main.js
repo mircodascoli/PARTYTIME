@@ -1,14 +1,11 @@
  //@ts-no-check
-//import { checkLoggedIn } from "./utils.js"// delete once login and sign are ready
+import { checkLoggedIn } from "./utils.js"
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
 function DomContentLoaded() {
-  let CocktailListComp = document.querySelector('cocktail-list')// stays
-  let MyRecipesComp = document.querySelector('my-recipes')// stays
-
-  window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
-  CocktailListComp?.addEventListener('item-selected', (e) => {openPopUp(e.detail)});// stays
-  MyRecipesComp?.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});// stays
+  checkLoggedIn();
+  window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
+  window.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
  
  function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
