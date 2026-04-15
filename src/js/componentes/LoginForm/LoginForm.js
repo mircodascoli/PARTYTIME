@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import LogInFormCSS from '../LoginForm/LoginFormCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT } from '../../utils.js';
+import { supabase } from '../../../../supabaseClient.js';
 
 export class LoginForm extends LitElement {
   static styles = [ResetCSS, LogInFormCSS];
@@ -20,9 +20,9 @@ export class LoginForm extends LitElement {
       <form id="formSign" @submit="${this._onFormSubmit}">
         <slot></slot>
         <p id="infoMessage">Get Back to your account</p>
-        <input type="email" id="emailLog" placeholder="Your email" minlength="3" required>
-        <input type="password" id="passwordLog" placeholder="Your password" minlength="3" required>
-        <button type="submit" class="btn" title="Login">Login</button>
+        <input type="email" id="emailLog" placeholder="Your email" required>
+        <input type="password" id="passwordLog" placeholder="Your password" required>
+        <button type="submit" class="btn">Login</button>
         <a href="./sign.html" class="login-or-sign">Or Sign Up</a>
       </form>
 
@@ -45,26 +45,26 @@ export class LoginForm extends LitElement {
     }
 
     try {
-      const payload = JSON.stringify({ email, password });
-      const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/login`,
-        'POST',
-        payload
-      );
+      // 🔥 QUI CAMBIA TUTTO
+      const { error } = await supabase.auth.signInWithPassword({
+        email,
+        password
+      });
 
-      if (apiData) {
-        sessionStorage.setItem('user', JSON.stringify(apiData));
-        this.resultMessage = 'Login successful, redirecting...';
-        setTimeout(() => {
-          location.href = './user.html';
-        }, 1000);
-      } else {
-        this.resultMessage = 'Invalid email or password';
+      if (error) {
+        this.resultMessage = error.message;
+        return;
       }
 
+      this.resultMessage = 'Login successful, redirecting...';
+
+      setTimeout(() => {
+        location.href = './user.html';
+      }, 1000);
+
     } catch (error) {
-      console.error('Error in login request:', error);
-      this.resultMessage = 'Error: Invalid email or password';
+      console.error('Login error:', error);
+      this.resultMessage = 'Something went wrong';
     }
   }
 }
