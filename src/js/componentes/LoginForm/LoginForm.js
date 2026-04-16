@@ -46,9 +46,7 @@ export class LoginForm extends LitElement {
       this.resultMessage = 'Email or password missing';
       return;
     }
-
     try {
-      // 🔥 QUI CAMBIA TUTTO
       const { error } = await supabase.auth.signInWithPassword({
         email,
         password

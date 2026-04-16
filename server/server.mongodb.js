@@ -187,12 +187,13 @@ async function findBotellasByIds(filter) {
   return await botellasCollection.find(filter).toArray();
 }
 
-async function login({ email, password }) {
-  console.log('hey from login')
+async function login(email) {
+  console.log('hey from login', email)
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const usersCollection = PartytimetDB.collection('users');
-  let collectionUsers = usersCollection.findOne({ email, password })
+  let collectionUsers = usersCollection.findOne( email )
+  
   return await collectionUsers
 
 }

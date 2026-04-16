@@ -1,9 +1,17 @@
  //@ts-no-check
-import { checkLoggedIn } from "./utils.js"
+import { checkLoggedIn, syncUserWithMongo } from "./utils.js"
+
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
  async function DomContentLoaded() {
   await checkLoggedIn();
+
+  const mongoUser = await syncUserWithMongo();
+  console.log('mongoUser:', mongoUser);
+  
+  if (mongoUser) {
+    sessionStorage.setItem('user', JSON.stringify(mongoUser));
+  }
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
   window.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
 }
