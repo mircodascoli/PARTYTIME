@@ -18,14 +18,12 @@ export async function getAPIData(apiURL, method = 'GET', data) {
       headers.append('Content-Length', String(JSON.stringify(data).length))
     }  
     apiData = await simpleFetch(apiURL, {
-      // Si la petición tarda demasiado, la abortamos
       signal: AbortSignal.timeout(TIMEOUT),
       method: method,
       body: data ?? undefined,
       headers: headers
     });
   } catch (/** @type {any | HttpError} */err) {
-    // En caso de error, controlamos según el tipo de error
     if (err.name === 'AbortError') {
       console.error('Fetch abortado');
     }
@@ -62,14 +60,67 @@ export function launchpreCartPoPup(ing) {
   } 
 
 export async function checkLoggedIn() {
-  const restrictedPages = ['/src/cart.html', '/src/shop.html', '/src/chooserecipe.html', '/src/calculator.html', '/src/user.html'];
-  const accessPages = ['/src/index.html', '/src/sign.html', '/src/login.html'];
+  const restrictedPages = ['/cart.html', '/shop.html', '/chooserecipe.html', '/calculator.html', '/user.html'];
+  const accessPages = ['/index.html', '/sign.html', '/login.html'];
 
   const { data: { session } } = await supabase.auth.getSession();
 
   if (restrictedPages.includes(location.pathname) && !session) {
     location.href = './index.html';
-  } else if (accessPages.includes(location.pathname) && session) {
+    return;
+  }
+
+  if (accessPages.includes(location.pathname) && session) {
     location.href = './user.html';
   }
+}
+
+export async function syncUserWithMongo() {
+  // aspetta che Supabase processi il token dall'URL
+  const { data: { session } } = await supabase.auth.getSession();
+  
+  if (!session) {
+    // se non c'è sessione, aspetta l'evento onAuthStateChange
+    return new Promise((resolve) => {
+      supabase.auth.onAuthStateChange(async (event, session) => {
+        if (session) {
+          resolve(await _doSync(session.user));
+        } else {
+          resolve(null);
+        }
+      });
+    });
+  }
+
+  return await _doSync(session.user);
+}
+
+async function _doSync(supabaseUser) {
+  const res = await fetch('/api/login', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: supabaseUser.email })
+  });
+
+  console.log('status:', res.status);
+  const text = await res.text();
+  console.log('raw response:', text);
+
+  const existingUser = text ? JSON.parse(text) : null;
+
+  if (!existingUser) {
+    const createRes = await fetch('/api/create/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: supabaseUser.user_metadata.full_name,
+        email: supabaseUser.email,
+        cart: [],
+        recipes: []
+      })
+    });
+    return await createRes.json();
+  }
+
+  return existingUser;
 }

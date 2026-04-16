@@ -169,7 +169,7 @@ app.post('/api/buscar/usuario', async (req, res) => {
 
 app.post('/api/login', async (req, res) => {
   console.log('estamos en login', req.body)
-  const user = await db.users.login({ email: req.body.email, password: req.body.password })
+  const user = await db.users.login({ email: req.body.email})
   res.json(user)
 })
 

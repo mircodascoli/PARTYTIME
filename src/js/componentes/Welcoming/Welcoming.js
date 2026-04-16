@@ -14,7 +14,7 @@ export class Welcoming extends LitElement {
     this.name = '';
   }
 
-  connectedCallback() {
+connectedCallback() {
     super.connectedCallback();
     this.name = JSON.parse(sessionStorage.getItem('user')).name;
   }
