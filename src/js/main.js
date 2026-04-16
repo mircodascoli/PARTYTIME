@@ -2,12 +2,13 @@
 import { checkLoggedIn } from "./utils.js"
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
-function DomContentLoaded() {
-  checkLoggedIn();
+ async function DomContentLoaded() {
+  await checkLoggedIn();
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
   window.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
- 
- function openPopUp(data) {
+}
+
+function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
       and description: ${data.description}`);
     let popUp = document.createElement('description-pop-up')
@@ -21,7 +22,5 @@ function DomContentLoaded() {
     preCart.product = data;
     document.body.appendChild(preCart)
   }
-
-}
 
  
