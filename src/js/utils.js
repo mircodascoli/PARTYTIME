@@ -1,5 +1,6 @@
 import { simpleFetch } from './lib/simpleFetch.js'
 import { HttpError } from './clases/HttpError.js'
+import { supabase } from '../config/supabaseClient.js';
 
 const TIMEOUT = 10000
 
@@ -60,12 +61,15 @@ export function launchpreCartPoPup(ing) {
 
   } 
 
-export function checkLoggedIn() {
-  const restrictedPages = ['/carrito.html', '/productos.html', '/choosepoison.html', '/calculadores.html', '/user.html'];
-  const accessPages = ['/index.html', '/signin.html', '/login.html'];
-  if (restrictedPages.includes(location.pathname) && sessionStorage.getItem('user') == null) {
-    location.href = './index.html'
-  } else if (accessPages.includes(location.pathname) && sessionStorage.getItem('user') != null) {
-    sessionStorage.setItem('user', null)
+export async function checkLoggedIn() {
+  const restrictedPages = ['/src/cart.html', '/src/shop.html', '/src/chooserecipe.html', '/src/calculator.html', '/src/user.html'];
+  const accessPages = ['/src/index.html', '/src/sign.html', '/src/login.html'];
+
+  const { data: { session } } = await supabase.auth.getSession();
+
+  if (restrictedPages.includes(location.pathname) && !session) {
+    location.href = './index.html';
+  } else if (accessPages.includes(location.pathname) && session) {
+    location.href = './user.html';
   }
 }
