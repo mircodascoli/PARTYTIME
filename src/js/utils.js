@@ -76,11 +76,9 @@ export async function checkLoggedIn() {
 }
 
 export async function syncUserWithMongo() {
-  // aspetta che Supabase processi il token dall'URL
   const { data: { session } } = await supabase.auth.getSession();
   
   if (!session) {
-    // se non c'è sessione, aspetta l'evento onAuthStateChange
     return new Promise((resolve) => {
       supabase.auth.onAuthStateChange(async (event, session) => {
         if (session) {
