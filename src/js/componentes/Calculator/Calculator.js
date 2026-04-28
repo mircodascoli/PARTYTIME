@@ -21,6 +21,10 @@ export class Calculator extends LitElement {
       sessionStorage.removeItem('selectedCraft');
     }
   }
+  disconnectedCallback() {
+  super.disconnectedCallback();
+  sessionStorage.removeItem('selectedCraft');
+}
   constructor() {
     super();
     this.quantity = 5;

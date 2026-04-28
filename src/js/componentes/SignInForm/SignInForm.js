@@ -2,6 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import { getAPIData, getInputValue, API_PORT } from '../../utils.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import SignInFormLitCSS from './SignInFormCSS.css' with { type: 'css' };
+import { supabase } from '../../../config/supabaseClient.js';
 
 export class SignInForm extends LitElement {
   static styles = [ResetCSS, SignInFormLitCSS];
@@ -23,6 +24,9 @@ export class SignInForm extends LitElement {
         <input type="email" id="emailSign" placeholder="Email" required>
         <input type="password" id="passwordSign" placeholder="Password" required>
         <button type="submit" class="btn">Sign Up</button>
+        <button type="button" class="btn btn-google" @click="${this._onGoogleSignIn}">
+          Sign Up with Google
+        </button>
       </form>
 
       ${this.resultMessage
@@ -34,38 +38,63 @@ export class SignInForm extends LitElement {
     `;
   }
 
-  async _onFormSubmit(e) {
-    e.preventDefault();
-
-    const name = this.renderRoot.getElementById('nameSign');
-    const email = this.renderRoot.getElementById('emailSign');
-    const password = this.renderRoot.getElementById('passwordSign');
-
-    const signInData = {
-      name: getInputValue(name),
-      email: getInputValue(email),
-      password: getInputValue(password),
-    };
-
-    if (signInData.email !== '' && signInData.password !== '') {
-      const payload = JSON.stringify(signInData);
-      const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/create/users`,
-        'POST',
-        payload
-      );
-      console.log('API response:', apiData);
-
-      if (apiData?.acknowledged === true) {
-        this.resultMessage = 'Account created successfully!';
-      } else {
-        this.resultMessage = 'User already exists';
+  async _onGoogleSignIn() {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.origin + '/user.html'
       }
-    } else {
-      console.error('Not sending form data');
-      this.resultMessage = 'Please fill in all fields';
+    });
+
+    if (error) {
+      this.resultMessage = error.message;
     }
   }
+
+  async _onFormSubmit(e) {
+  e.preventDefault();
+
+  const name = this.renderRoot.getElementById('nameSign');
+  const email = this.renderRoot.getElementById('emailSign');
+  const password = this.renderRoot.getElementById('passwordSign');
+
+  const signInData = {
+    name: getInputValue(name),
+    email: getInputValue(email),
+    password: getInputValue(password),
+  };
+
+  if (signInData.email !== '' && signInData.password !== '') {
+
+    // 1. Registra su Supabase
+    const { error } = await supabase.auth.signUp({
+      email: signInData.email,
+      password: signInData.password,
+    });
+
+    if (error) {
+      this.resultMessage = error.message;
+      return;
+    }
+
+    // 2. Registra su MongoDB
+    const payload = JSON.stringify(signInData);
+    const apiData = await getAPIData(
+      `${location.protocol}//${location.hostname}${API_PORT}/api/create/users`,
+      'POST',
+      payload
+    );
+
+    if (apiData?.acknowledged === true) {
+      this.resultMessage = 'Account created successfully!';
+    } else {
+      this.resultMessage = 'User already exists';
+    }
+
+  } else {
+    this.resultMessage = 'Please fill in all fields';
+  }
+}
 }
 
 customElements.define('signin-form', SignInForm);
