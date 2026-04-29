@@ -5,7 +5,7 @@ import { supabase } from '../config/supabaseClient.js';
 const TIMEOUT = 10000
 
 export const API_PORT = location.port ? `:${1337}` : ''
-export const SSID = JSON.parse(sessionStorage.getItem('user'))?._id || null
+export const getSSID = () => JSON.parse(sessionStorage.getItem('user'))?._id || null;
 
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
@@ -63,7 +63,8 @@ export async function checkLoggedIn() {
   const restrictedPages = ['/cart.html', '/shop.html', '/chooserecipe.html', '/calculator.html', '/user.html'];
   const accessPages = ['/index.html', '/sign.html', '/login.html'];
 
-  const { data: { session } } = await supabase.auth.getSession();
+  // 👇 aspetta la sessione reale prima di decidere
+  const session = await getSessionWithFallback();
 
   if (restrictedPages.includes(location.pathname) && !session) {
     location.href = './index.html';
@@ -75,16 +76,52 @@ export async function checkLoggedIn() {
   }
 }
 
+async function getSessionWithFallback() {
+  const { data: { session } } = await supabase.auth.getSession();
+  
+  if (session) return session; // sessione già disponibile, nessun problema
+
+  // sessione non ancora pronta (post-redirect OAuth), aspetta INITIAL_SESSION
+  return new Promise((resolve) => {
+    const TIMEOUT_MS = 5000;
+
+    const timer = setTimeout(() => {
+      subscription.unsubscribe();
+      resolve(null);
+    }, TIMEOUT_MS);
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
+        clearTimeout(timer);
+        subscription.unsubscribe();
+        resolve(session);
+      }
+    });
+  });
+}
 export async function syncUserWithMongo() {
   const { data: { session } } = await supabase.auth.getSession();
   
   if (!session) {
     return new Promise((resolve) => {
-      supabase.auth.onAuthStateChange(async (event, session) => {
-        if (session) {
-          resolve(await _doSync(session.user));
-        } else {
-          resolve(null);
+      const TIMEOUT_MS = 5000;
+
+      const timer = setTimeout(() => {
+        subscription.unsubscribe();
+        resolve(null);
+      }, TIMEOUT_MS);
+
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+        
+        if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
+          clearTimeout(timer);
+          subscription.unsubscribe();
+
+          if (session) {
+            resolve(await _doSync(session.user));
+          } else {
+            resolve(null);
+          }
         }
       });
     });

@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import DropDownCartMenuCSS from '../DropDownCartMenu/DropDownCartMenuCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, SSID } from '../../utils.js';
+import { getAPIData, API_PORT, getSSID } from '../../utils.js';
 export class DropDownCartMenu extends LitElement {
 static styles = [ResetCSS, DropDownCartMenuCSS];
 static properties = {
@@ -51,7 +51,7 @@ render() {
     }));
   }
   async handleQuantityChange(val) {
-     this.user = SSID;
+     this.user = getSSID();
    let body = {
      productAndQuantity: {
        _id: this._id,

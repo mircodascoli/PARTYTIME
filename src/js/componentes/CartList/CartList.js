@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartListCSS from '../CartList/CartListCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, SSID } from '../../utils.js';
+import { getAPIData, API_PORT, getSSID } from '../../utils.js';
 
 export class CartList extends LitElement {
   static styles = [ResetCSS, CartListCSS];
@@ -15,7 +15,7 @@ export class CartList extends LitElement {
     this.apiData = null;
 
     try {
-      this._idSession = SSID;
+      this._idSession = getSSID();
     } catch {
       console.warn('No user logged');
       this._idSession = null;
