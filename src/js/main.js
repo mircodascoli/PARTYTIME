@@ -1,17 +1,28 @@
- //@ts-no-check
+//@ts-no-check
 import { checkLoggedIn, syncUserWithMongo } from "./utils.js"
+import { supabase } from '../config/supabaseClient.js' // 👈 adatta il path
 
 window.addEventListener('DOMContentLoaded', DomContentLoaded)
 
- async function DomContentLoaded() {
+async function DomContentLoaded() {
+  console.log('1. DOMContentLoaded fired');
+
+  const { data: { session } } = await supabase.auth.getSession();
+  console.log('2. session immediata:', session);
+
   await checkLoggedIn();
+  console.log('3. checkLoggedIn done');
 
   const mongoUser = await syncUserWithMongo();
-  console.log('mongoUser:', mongoUser);
+  console.log('4. mongoUser:', mongoUser);
   
   if (mongoUser) {
     sessionStorage.setItem('user', JSON.stringify(mongoUser));
+    console.log('5. sessionStorage user:', sessionStorage.getItem('user'));
+  } else {
+    console.log('5. mongoUser è null, sessionStorage NON aggiornato');
   }
+
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
   window.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
 }
