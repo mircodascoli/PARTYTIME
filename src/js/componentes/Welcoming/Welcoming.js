@@ -15,9 +15,18 @@ export class Welcoming extends LitElement {
   }
 
 connectedCallback() {
-    super.connectedCallback();
-    this.name = JSON.parse(sessionStorage.getItem('user')).name;
+  super.connectedCallback();
+
+  const stored = sessionStorage.getItem('user');
+
+  if (stored) {
+    this.name = JSON.parse(stored).name;
+  } else {
+    window.addEventListener('user-ready', (e) => {
+      this.name = e.detail.name;
+    }, { once: true }); 
   }
+}
 
   render() {
     console.log('Welcoming updated, name:', this.name)
