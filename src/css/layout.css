@@ -1,6 +1,9 @@
 /* layout.css */
 
 /* ─── Document ──────────────────────────────────────────── */
+* {
+  box-sizing: border-box;
+}
 
 html {
   background-color: var(--color-bg);
@@ -8,9 +11,10 @@ html {
 
 body {
   display: grid;
-  grid-template-rows: var(--header-h) 1fr var(--footer-h);
+  grid-template-rows: 80px 1fr 120px;
   min-height: 100vh;
-  width: 100vw;
+  width: 100%
+  ;
   margin: 0;
 }
 
@@ -19,7 +23,7 @@ body {
 header,
 main,
 footer {
-  width: 100vw;
+  width: 100%;
 }
 
 /* ─── Header ────────────────────────────────────────────── */
@@ -31,11 +35,12 @@ header {
   align-items: center;
   padding: 0 var(--space-md);
   background-color: var(--color-surface);
+  position: sticky;
 }
 
 .logo-pt {
-  width: var(--header-h);
-  height: var(--header-h);
+  width: 100px;
+  height: 100px;
 }
 
 #hamMenu {
@@ -69,30 +74,9 @@ main {
   gap: var(--space-lg);
   padding: var(--space-xl);
   overflow: hidden;
-  background-color: var(--color-bg);
+  background-color: var(--color-bg)
 }
 
-/* ─── Main variants ─────────────────────────────────────── */
-
-#mainUser,
-#mainCalculadores,
-#mainProductos,
-#mainCarrito,
-.main-choose,
-.main-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-lg);
-  padding: var(--space-2xl);
-  background-color: var(--color-surface);
-}
-
-#mainProductos,
-#mainCalculadores {
-  overflow-y: scroll;
-}
 
 /* ─── Sidebar ───────────────────────────────────────────── */
 
