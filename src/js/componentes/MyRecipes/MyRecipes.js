@@ -6,7 +6,6 @@ import {  launchpreCartPoPup } from '../../utils.js';
 export class MyRecipes extends LitElement {
 
   static styles = [ResetCSS, MyRecipesCSS];
-
   static properties = {
     apiData: { type: Object }
   };
@@ -103,7 +102,7 @@ export class MyRecipes extends LitElement {
 
   render() {
   const recipes = this.apiData?.recipes ?? [];
-
+  
   return html`
 
     ${recipes.length >= 1
@@ -156,7 +155,8 @@ export class MyRecipes extends LitElement {
 
                 <!-- SERVING -->
                 <p class="serving-description">
-                  ${item.serving ?? "Serving suggestion coming soon"}
+                  ${item.serving}
+                  
                 </p>
 
                 <!-- PRODUCTS -->
