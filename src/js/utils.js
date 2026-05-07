@@ -59,6 +59,13 @@ export function launchpreCartPoPup(ing) {
 
   } 
 
+export function ConfirmAddedToCart() {
+    window.dispatchEvent(new CustomEvent('AddedToCart', {
+      bubbles: true,
+      composed: true
+    }));
+  }
+
 export async function checkLoggedIn() {
   const restrictedPages = ['/cart.html', '/shop.html', '/chooserecipe.html', '/calculator.html', '/user.html'];
   const accessPages = ['/index.html', '/sign.html', '/login.html'];

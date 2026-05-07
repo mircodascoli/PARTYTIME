@@ -16,6 +16,7 @@ async function DomContentLoaded() {
 
   window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
   window.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
+  window.addEventListener('AddedToCart', () => {openCartVerified()});
 }
 
 function openPopUp(data) {
@@ -32,5 +33,16 @@ function openPopUp(data) {
     preCart.product = data;
     document.body.appendChild(preCart)
   }
+
+ function openCartVerified() {
+  let cartVerified = document.querySelector('cart-verified');
+  
+  if (!cartVerified) {
+    cartVerified = document.createElement('cart-verified');
+    document.body.appendChild(cartVerified);
+  }
+
+  cartVerified.show();
+}
 
  

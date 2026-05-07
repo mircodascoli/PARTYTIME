@@ -2,6 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import PreCartPopUpCSS from '../PreCartPopUp/PreCartPopUpCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import { getAPIData, API_PORT, getSSID } from '../../utils.js';
+import { ConfirmAddedToCart } from '../../utils.js';
 export class PreCartPopUp extends LitElement {
  static styles = [ResetCSS, PreCartPopUpCSS];
  static properties = { product: { type: Object }, dbitem: { type: Object },   quantity: { type: Number } };
@@ -81,7 +82,10 @@ export class PreCartPopUp extends LitElement {
   console.log(body, 'body');
   const PAYLOAD = JSON.stringify(body);
   const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/push/to/cart`, 'POST', PAYLOAD);
-  return apiData;
+
+ConfirmAddedToCart()
+this.remove();
+return apiData;
 }
 }
 customElements.define('pre-cart-popup', PreCartPopUp);

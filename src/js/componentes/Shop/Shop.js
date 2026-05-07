@@ -35,12 +35,12 @@ export class Shop extends LitElement {
     }
   }
  
-  // Riceve i risultati dal figlio <search-bar> e aggiorna la lista
+ 
   _onResults(e) {
     this.bottles = e.detail.results;
   }
   _onReset() {
-  this.getBottles(); // ricarica tutta la lista originale
+  this.getBottles(); 
 }
  
   render() {
