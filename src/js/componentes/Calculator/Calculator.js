@@ -84,7 +84,7 @@ export class Calculator extends LitElement {
   const recipe = {
     name: this.recipe.name,
     amount: this.quantity,
-    serving: this.serving,
+    serving: this.recipe.serving,
     ingredientes: this.recipe.ingredients.map(i => ({
       name: i.name,
       mls: i.ml * this.quantity,
