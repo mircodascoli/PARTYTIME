@@ -195,6 +195,11 @@ export class MyRecipes extends LitElement {
     </div>
   `;
 }
+addRecipe() {
+  window.location.href = '/chooserecipe.html'; 
 }
+
+}
+
 
 customElements.define('my-recipes', MyRecipes);
