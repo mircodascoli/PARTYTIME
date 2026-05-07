@@ -11,7 +11,6 @@ import { DropDownCartMenu }  from "./DropDownCartMenu/DropDownCartMenu.js";
 import { TotalCart } from "./TotalCart/TotalCart.js";
 import { Shop } from "./Shop/Shop.js";
 import { SearchBar } from "./SearchBar/SearchBar.js";
-import { HamburgerMenu } from "./HamburgerMenu/HamburgerMenu.js";
 import { Welcoming } from "./Welcoming/Welcoming.js";
 import { SignOut } from "./SignOut/SignOut.js";
 import { LogOut } from "./LogOut/LogOut.js";
@@ -19,4 +18,4 @@ import { AccessAttemptResult } from "./AccessAttemptResult/AccessAttemptResult.j
 import { CartVerified } from "./CartVerified/CartVerified.js";
 import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
 import { ModalSignOut } from "./ModalSignOut/ModalSignOut.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, HamburgerMenu, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut}; 
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut}; 
