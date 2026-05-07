@@ -1,0 +1,37 @@
+:host{
+    display:block;
+   
+}
+
+.toast-container {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: auto;
+  z-index: 9999;
+   background-color:rgba(64, 64, 64, 0.54);
+    color:white
+}
+
+.toast-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+#confirmButton, #cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
