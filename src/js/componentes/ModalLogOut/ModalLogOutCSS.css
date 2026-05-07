@@ -22,3 +22,16 @@
   opacity: 1;
   pointer-events: auto;
 }
+
+.button-container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+#confirmButton, #cancelButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
