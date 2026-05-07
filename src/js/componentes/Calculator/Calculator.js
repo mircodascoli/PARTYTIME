@@ -80,9 +80,11 @@ export class Calculator extends LitElement {
   }
 
   async handleClick() {
+    console.log('this.recipe', this.recipe.serving);
   const recipe = {
     name: this.recipe.name,
     amount: this.quantity,
+    serving: this.serving,
     ingredientes: this.recipe.ingredients.map(i => ({
       name: i.name,
       mls: i.ml * this.quantity,

@@ -49,7 +49,7 @@ export class CocktailList extends LitElement {
  }
  _clickToChoose(recipeSelected) {
     // 1️⃣ log dell'elemento cliccato
-    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.description}`);
+    console.log(`Cocktail selezionato: ${recipeSelected.name} ${recipeSelected.description} ${recipeSelected.serving}`);
 
     // 2️⃣ evento con i dati dell'item
     this.dispatchEvent(new CustomEvent('item-selected', {
