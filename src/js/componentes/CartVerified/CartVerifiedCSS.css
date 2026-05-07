@@ -1,0 +1,25 @@
+:host{
+    display:block;
+   
+}
+
+.toast-container {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: auto;
+  z-index: 9999;
+   background-color:grey;
+    color:white
+}
+
+.toast-container.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
