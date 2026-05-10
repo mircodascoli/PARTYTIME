@@ -1,41 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>List</title>
-        <script type="module" src="./js/main.js"></script>
-        
-        <link rel="stylesheet" href="./css/reset.css">
-             <link rel="stylesheet" href="./css/tokens.css">
-    <link rel="stylesheet" href="./css/typography.css">
-    <link rel="stylesheet" href="./css/layout.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>List</title>
 
-       <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
-    </head>
-    <body id="bodyProductos">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet" />
 
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/tokens.css" />
+    <link rel="stylesheet" href="./css/typography.css" />
+    <link rel="stylesheet" href="./css/layout.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  </head>
+  <body id="bodyProductos">
     <header>
- <header-nav></header-nav>
-   </header>   
+     <img src="./img/logo.png" alt="logoPYT" class="logo">
+     <nav>
+         <button onclick="window.location.href='./shop.html'"><i class="ti ti-shopping-cart"></i><span>Shop</span></button>
+         <button onclick="window.location.href='./chooserecipe.html'"><i class="ti ti-chef-hat"></i><span>New recipe</span></button>
+         <button onclick="window.location.href='./cart.html'"><i class="ti ti-shopping-cart"></i><span>Cart</span></button>
+         <button onclick="window.location.href='./user.html'"><i class="ti ti-user"></i><span>User</span></button>
+     </nav>
+      
+    </header>
+
     <main id="mainProductos">
-          <div id="underlay" class="hidden"></div>
-        
-    
-    <shop-component></shop-component>
-   
+      <div id="underlay" class="hidden"></div>
+      <shop-component></shop-component>
     </main>
-    <bottom-nav></bottom-nav>
+
     <footer>
-        <p>PARTYTIME was made for fun, thanks for using it</p>
-        <p>2025 Mirco D'Ascoli</p>
+      <p>PARTYTIME was made for fun, thanks for using it</p>
+      <p>2025 Mirco D'Ascoli</p>
     </footer>
-</body>
-<script type="module" src="./js/componentes/bundle.js" defer></script>
+
+    
+
+    <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/componentes/bundle.js" defer></script>
+  </body>
 </html>
