@@ -18,7 +18,5 @@ import { AccessAttemptResult } from "./AccessAttemptResult/AccessAttemptResult.j
 import { CartVerified } from "./CartVerified/CartVerified.js";
 import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
 import { ModalSignOut } from "./ModalSignOut/ModalSignOut.js";
-import { BottomNav } from "./BottomNav/BottomNav.js";
-import { HeaderNav } from "./HeaderNav/HeaderNav.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut, BottomNav, HeaderNav}; 
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut}; 
 
