@@ -59,11 +59,11 @@ header button {
   font-size: 14px;
   border-radius: 8px;
   color: #444;
+
 }
 
 header button:hover {
   color: var(--color-accent);
- 
 }
 
 header span:hover {
@@ -86,17 +86,22 @@ footer {
 
 /* ───Bottom navigation ───────────────────────────────────── */
 .bottom-nav {
-  display: none; /* nascosto su desktop */
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   background: white;
   border-top: 1px solid #eee;
+  border-radius: 30px;
   z-index: 100;
+  padding: var(--space-xs);
+  max-width: 400px;
+  display: flex;
+  gap: 0;
 }
 
 .bottom-nav button {
+  overflow: visible;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -104,31 +109,33 @@ footer {
   gap: 3px;
   padding: 10px 0 8px;
   border: none;
+  border-radius: 30px;
   background: transparent;
   cursor: pointer;
   color: #888;
+  margin-inline: -6px;
+  position: relative;
+  z-index: 1;
+  transition: 
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.bottom-nav button:first-child {
+  margin-left: 0;
+}
+
+.bottom-nav button:last-child {
+  margin-right: 0;
 }
 
 .bottom-nav button:hover {
   color: #000;
+  background-color: var(--color-bg-selected-button);
+  z-index: 2;
+  transform: translateY(-2px);
 }
-
-
-
-
-/* ─── Main generic ──────────────────────────────────────── */
-
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-lg);
-  padding: var(--space-xl);
-  overflow: hidden;
-  background-color: var(--color-bg)
-}
-
 
 /* ─── Product list ──────────────────────────────────────── */
 
