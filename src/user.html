@@ -30,15 +30,16 @@
 
   </head>
 <body id="bodyUser">
-  <header>
-    <img src="./img/logo.png" alt="logoPYT" class="logo-pt">
-   <hamburger-menu links='[
-  {"label": "Choose your recipe",    "href": "/chooserecipe.html"},
-  {"label": "Shop",   "href": "/shop.html"},
-  {"label": "Cart", "href": "/cart.html"}
-]'></hamburger-menu>
-   
-  </header>
+   <header>
+     <img src="./img/logo.png" alt="logoPYT" class="logo">
+     <nav>
+         <button onclick="window.location.href='./shop.html'"><i class="ti ti-shopping-cart"></i><span>Shop</span></button>
+         <button onclick="window.location.href='./chooserecipe.html'"><i class="ti ti-flask"></i><span>New recipe</span></button>
+         <button onclick="window.location.href='./cart.html'"><i class="ti ti-shopping-cart"></i><span>Cart</span></button>
+         <button onclick="window.location.href='./user.html'"><i class="ti ti-user"></i><span>User</span></button>
+     </nav>
+      
+    </header>
 
   <main id="mainUser">
        <welcoming-component></welcoming-component>
