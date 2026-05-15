@@ -1,41 +1,47 @@
 :host {
-      display: block;
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      display: flex;
+      
     }
  
     .search-wrapper {
       display: flex;
-      gap: 0.5rem;
-      align-items: center;
+      flex-direction: row;
+      align-items: flex-start;
+      border: 2px solid black;
+      border-radius: 50px;
+      max-width: fit-content;
+      max-height: fit-content;
+    }
+
+    .search-wrapper :focus {
+      border-color: var(--color-accent);
     }
  
     input {
       flex: 1;
       padding: 0.6rem 1rem;
       font-size: 1rem;
-      border: 2px solid #ccc;
-      border-radius: 8px;
+      border: none;
       outline: none;
       transition: border-color 0.2s;
+      max-width: 500px;
     }
  
-    input:focus {
-      border-color: #4f46e5;
-    }
+    
  
     button {
       padding: 0.6rem 1.2rem;
-      background: #4f46e5;
+      background: var(--color-accent);
       color: white;
       border: none;
-      border-radius: 8px;
+      border-radius: 50px;
       font-size: 1rem;
       cursor: pointer;
       transition: background 0.2s;
     }
  
     button:hover {
-      background: #4338ca;
+      background: var(--color-accent-hover);
     }
  
     button:disabled {

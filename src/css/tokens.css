@@ -44,7 +44,5 @@
   --shadow-sm: 0 1px 3px rgba(15, 17, 23, 0.06);
   --shadow-md: 0 4px 12px rgba(15, 17, 23, 0.08);
 
-  .bottom-nav button i {
-  color: var(--color-outline-icons);
-}
+  
 }
