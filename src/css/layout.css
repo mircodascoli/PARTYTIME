@@ -147,44 +147,6 @@ footer {
   font-size: 12px;
 }
  
-
-/* ─── Product list ──────────────────────────────────────── */
-
-#listaProductos,
-#carrito {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  gap: var(--space-lg);
-}
-
-#listaProductos li,
-#carrito li {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 250px;
-  width: 200px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  background-color: var(--color-surface-alt);
-  cursor: pointer;
-  transition: border 0.15s ease;
-}
-
-#listaProductos li:hover,
-#carrito li:hover {
-  border: 2px solid var(--color-accent);
-}
-
-#listaProductos li img,
-#carrito li img {
-  height: 150px;
-  width: auto;
-}
-
 /* ─── User area ─────────────────────────────────────────── */
 
 #userArea {

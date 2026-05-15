@@ -78,7 +78,7 @@ constructor() {
           ?disabled=${this.loading}
         />
         <button type="submit" ?disabled=${this.loading}>
-          ${this.loading ? 'Buscando…' : 'Buscar'}
+          ${this.loading ? 'Searching…' : 'Search'}
         </button>
       </form>
  
