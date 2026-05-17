@@ -25,7 +25,7 @@ render() {
 
       ${this._isOpen ? html`
         <ul class="options-container">
-          ${[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => html`
+          ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => html`
             <li class="option" @click="${() => this._select(num)}">
               ${num}
               ${num === this.quantity ? html`<span class="check">✓</span>` : ''}

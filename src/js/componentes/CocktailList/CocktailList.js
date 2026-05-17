@@ -38,7 +38,7 @@ export class CocktailList extends LitElement {
 
  render() {
   return html`
-    <ul id="listCocktails">
+    <ul class="cocktail-list">
       ${this.cocktails.map(
         cocktail => html`
           <cocktail-details  @click=${() => this._clickToChoose(cocktail)} .cocktail=${cocktail}></cocktail-details>
