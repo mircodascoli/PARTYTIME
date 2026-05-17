@@ -1,14 +1,27 @@
 :host {
-  display: block;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #ccc;
 }
 
 .cart-card {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
   padding: 1rem;
-  border: 1px solid #ccc;
   border-radius: 8px;
+}
+
+.cart-card-data {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100px;
 }
 
 .delete-item {
@@ -26,4 +39,11 @@
   object-fit: cover;
   margin-right: 1rem;
 }
+
+h2 {
+  text-transform: capitalize;
+ 
+}
+
+
 

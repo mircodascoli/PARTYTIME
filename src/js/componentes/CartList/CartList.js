@@ -1,7 +1,7 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartListCSS from '../CartList/CartListCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, getSSID } from '../../utils.js';
+import { getAPIData, API_PORT, getSSID, formatPrice } from '../../utils.js';
 
 export class CartList extends LitElement {
   static styles = [ResetCSS, CartListCSS];
@@ -70,16 +70,18 @@ export class CartList extends LitElement {
     return html`
       <ul class="cart-list">
         ${this.apiData.cart.map(item => html`
+          <li class="cart-item">
           <div class="cart-card">
-            <button class="delete-item" @click=${() => this.deleteItem(item._id)}>X</button>
-            <div class="recipe-data">
-              <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
+            <button class="delete-item" @click=${() => this.deleteItem(item._id)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></button>
+            <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
+            <div class="cart-card-data">
               <h2>${item.name}</h2>
-              <p>${item.price} €</p>
               <p>${item.description}</p>
-              <drop-down-cart-menu .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu>
+              <p>${formatPrice(item.price)}</p>
             </div>
           </div>
+          <drop-down-cart-menu class="drop-down-menu" .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu>
+          </li>
         `)}
       </ul>
       <total-cart .total=${this.getTotal()}></total-cart>
