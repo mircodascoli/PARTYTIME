@@ -45,7 +45,7 @@ export class Shop extends LitElement {
  
   render() {
     return html`
-      <search-bar @search-results=${this._onResults} @search-reset=${this._onReset}></search-bar>
+      <search-bar @search-results=${this._onResults} @search-reset=${this._onReset} class="search-bar"></search-bar>
  
       <ul class="products-list">
         ${this.bottles.map(bottle => html`

@@ -1,7 +1,10 @@
 :host{
     display:flex;
     flex-direction:column;
-  
+}
+
+.search-bar{
+  margin-left: var(--space-md);
 }
 
 .products-list{
