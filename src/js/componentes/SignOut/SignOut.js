@@ -21,7 +21,6 @@ export class SignOut extends LitElement {
   }
 
   render() {
-    console.log('Welcoming updated, name:', this.name)
     return html`
         <button id="signOutButton" @click="${this._unsubscribe}">Unsubscribe</button>
     `;
