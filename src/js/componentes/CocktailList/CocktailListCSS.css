@@ -1,53 +1,13 @@
-#listCocktails{
-            display: flex;
-            flex-direction: row ;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            row-gap: 20px;  
-    
-            li{
-                display: flex;
-                flex-direction: column;
-                justify-content:space-evenly;
-                align-items: center;
-                height: 250px;
-                width: 200px;
-                border: 1px solid lightgrey;
-                border-radius: 5px;
-                background-color: white ;
+:host{
+    display:flex;
+    flex-direction:column;
+  
+}
 
-                h3{
-                    text-transform: capitalize;
-                }
-
-                .price{
-                    font-weight: bold;
-                }
-
-                img{
-                    height: 150px;
-                    width: auto;
-                }
-
-                button{
-                    text-decoration: none;
-                    border: 1px solid lightgrey;
-                    border-radius: 7px;
-                    height: 40px;
-                    width: 100px;
-                    cursor: pointer;
-                }
-            }
-
-            li:hover, li:focus, li:active {
-                border: 2px solid black
-              }
-
-    
-        }
-
-           .delete-button{
-                cursor: pointer;
-                justify-self: flex-start;
-             
-              }
+.cocktail-list{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  padding: var(--space-md);
+  gap: var(--space-md);
+  
+}
