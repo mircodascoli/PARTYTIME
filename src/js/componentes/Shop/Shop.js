@@ -49,7 +49,7 @@ export class Shop extends LitElement {
  
       <ul class="products-list">
         ${this.bottles.map(bottle => html`
-          <li class="product-item">
+          <li class="product-item" @click=${() => launchpreCartPoPup(bottle.name)}>
             <img src="../../img/imgProductos/${bottle.name}.png" alt="${bottle.name}" class="product-image" />
             <h2 class="product-name">${bottle.name}</h2>
             <p class="product-price">${formatPrice(bottle.price)}</p>
