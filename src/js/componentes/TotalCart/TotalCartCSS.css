@@ -40,6 +40,9 @@
     color: white;
     border: none;
     border-radius: 20px;
+    width: 180px;
+    font-size: var(--text-lg);
+    font-weight: bold;
     cursor: pointer;
 }
 
