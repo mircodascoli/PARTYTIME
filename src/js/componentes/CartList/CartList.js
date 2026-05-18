@@ -77,10 +77,11 @@ export class CartList extends LitElement {
             <div class="cart-card-data">
               <h2 class="cart-product-name">${item.name}</h2>
               <p class="cart-product-description">${item.description}</p>
-              <p class="cart-product-price">${formatPrice(item.price)}</p>
+                <div class="cart-item-price-controller"><p class="cart-product-price">${formatPrice(item.price)}</p><drop-down-cart-menu class="drop-down-menu" .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu></div>
             </div>
           </div>
-          <drop-down-cart-menu class="drop-down-menu" .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu>
+        
+          
           </li>
         `)}
       </ul>

@@ -1,6 +1,7 @@
 :host {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 .cart-item {
@@ -30,6 +31,7 @@
   font-size: 1.5rem;
   cursor: pointer;
   margin-right: 1rem;
+  
 }
 
 .cart-product-image {
@@ -49,6 +51,12 @@
   font-size: 0.9rem;
   color: #666;
   margin-bottom: var(--space-sm)
+}
+
+.cart-item-price-controller{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .cart-product-price {
