@@ -34,6 +34,11 @@
     font-size: 1.5em;
 }
 
+.total-cart p {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
 .checkout-button {
     padding: 10px 20px;
     background-color:var(--color-accent);
