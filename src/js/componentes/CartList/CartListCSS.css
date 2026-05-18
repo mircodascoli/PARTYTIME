@@ -1,6 +1,6 @@
 :host {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  flex-direction: row;
 }
 
 .cart-item {
@@ -56,4 +56,15 @@
   font-weight: bold;
 }
 
+@media (max-width: 768px) { 
+  :host {
+  flex-direction: column;
+}
 
+.total-cart-component-container{
+  margin-top: var(--space-md);
+}
+
+
+
+}
