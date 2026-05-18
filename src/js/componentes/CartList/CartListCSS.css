@@ -36,23 +36,23 @@
   width: auto;
   height: 100px;
   object-fit: cover;
-  margin-right: 1rem;
+   margin-bottom: var(--space-md);
 }
 
 .cart-product-name {
   text-transform: capitalize;
   font-size: 1.2rem;
-  margin-bottom: 0.5rem;
+   margin-bottom: var(--space-sm)
 }
 
 .cart-product-description {
   font-size: 0.9rem;
   color: #666;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-sm)
 }
 
 .cart-product-price {
-  font-size: 1.2rem;
+  font-size: var(--text-lg);
   font-weight: bold;
 }
 
