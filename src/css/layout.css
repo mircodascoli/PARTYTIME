@@ -1,5 +1,3 @@
-/* layout.css */
-
 /* ─── Document ──────────────────────────────────────────── */
 * {
   box-sizing: border-box;
@@ -18,7 +16,6 @@ body {
 }
 
 /* ─── Main regions ──────────────────────────────────────── */
-
 
 main,
 footer {
@@ -134,11 +131,15 @@ footer {
   margin-right: 0;
 }
 
-.bottom-nav button:hover {
+.bottom-nav button.selected {
   color: #000;
   background-color: var(--color-bg-selected-button);
   z-index: 2;
-  transform: translateY(-2px);
+  transform: scale(1.1);
+  transition: 
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
  .ti{
@@ -149,30 +150,7 @@ footer {
   font-size: 12px;
 }
  
-/* ─── User area ─────────────────────────────────────────── */
 
-#userArea {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  gap: var(--space-md);
-  width: 80%;
-}
-
-#btnUserContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-sm);
-}
-
-#btnsUser {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  gap: var(--space-sm);
-}
 
 /* ─── Index buttons ─────────────────────────────────────── */
 
