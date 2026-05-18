@@ -11,7 +11,6 @@ static properties = {
   };
 constructor() {
     super();
-    // Qui imposti il VALORE DI DEFAULT
     this._id= "";
     this.quantity = 1; 
     this._isOpen = false;
@@ -19,8 +18,9 @@ constructor() {
 render() {
     return html`
       <div class="select-box" @click="${this._toggleMenu}">
-        <span>Qty: ${this.quantity}</span>
-        <span>${this._isOpen ? '▲' : '▼'}</span>
+        <span class="qty-span">Qty:</span>
+        <span class="selected">${this.quantity}</span>
+        <span class="arrow">${this._isOpen ? '▲' : '▼'}</span>
       </div>
 
       ${this._isOpen ? html`
