@@ -14,7 +14,7 @@ export class LogOut extends LitElement {
 
   render() {
     return html`
-      <button id="signOutButton" @click="${this._LogOut}">Log Out</button>
+      <button class="log-out-button" @click="${this._LogOut}">Log Out</button>
     `;
   }
 }
