@@ -157,13 +157,42 @@ footer {
  
 
 
-/* ─── Index buttons ─────────────────────────────────────── */
+/
 
 .index-buttons-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: var(--space-md);
+}
+
+/* ─── User Page ─────────────────────────────────────── */
+
+.main-user {
+  display: grid;
+  grid-template-rows: 200px 1fr 250px;
+  padding: var(--space-md);
+}
+
+.container-welcoming {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.container-my-recipes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.container-sign-out {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
 }
 
 /* ─── Calculator ────────────────────────────────────────── */

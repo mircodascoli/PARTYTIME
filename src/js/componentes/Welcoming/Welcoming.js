@@ -31,8 +31,9 @@ connectedCallback() {
   render() {
     console.log('Welcoming updated, name:', this.name)
     return html`
-        <div class="welcome-container"></div>
-          <p id="welcome">Welcome, ${this.name}</p>
+        <div class="welcome-container">
+          <h1 id="welcome-text">Welcome, ${this.name}</h1>
+           <logout-component></logout-component>
         </div>
     `;
   }

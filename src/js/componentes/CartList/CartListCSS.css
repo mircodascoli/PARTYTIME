@@ -1,7 +1,6 @@
 :host {
-  display: flex;
-  flex-direction: row;
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .cart-item {
@@ -15,7 +14,8 @@
   display: flex;
   align-items: center;
   padding: 1rem;
- 
+  border: 1px solid #eee;
+  
 }
 
 .cart-card-data {
@@ -23,6 +23,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100px;
+  width: 90%;
 }
 
 .delete-item {
@@ -66,6 +67,7 @@
 
 @media (max-width: 768px) { 
   :host {
+  display: flex;
   flex-direction: column;
 }
 
