@@ -15,7 +15,7 @@ export class SignOut extends LitElement {
   
   }
     _unsubscribe() {
-     const modal = document.createElement('modal-log-out');
+     const modal = document.createElement('modal-sign-out');
     document.body.appendChild(modal);
     modal.show();
   }
