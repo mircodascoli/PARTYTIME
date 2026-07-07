@@ -22,7 +22,7 @@ async function DomContentLoaded() {
 function openPopUp(data) {
     console.log(`lets open the popup for ${data.name}
       and description: ${data.description}`);
-    let popUp = document.createElement('description-pop-up')
+    let popUp = document.createElement('recipe-customizer')
     popUp.cocktail = data;
     document.body.appendChild(popUp)
   }
