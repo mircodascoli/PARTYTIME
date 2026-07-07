@@ -4,7 +4,7 @@ import { SignInForm } from "./SignInForm/SignInForm.js";
 import { Calculator } from "./Calculator/Calculator.js";
 import { MyRecipes } from "./MyRecipes/MyRecipes.js";
 import { CocktailList } from "./CocktailList/CocktailList.js";
-import { DescriptionPopUp } from "./DescriptionPopUp/DescriptionPopUp.js";
+import { RecipeCustomizer } from "./RecipeCustomizer/RecipeCustomizer.js";
 import { PreCartPopUp } from "./PreCartPopUp/PreCartPopUp.js";
 import { CartList } from "./CartList/CartList.js";
 import { DropDownCartMenu }  from "./DropDownCartMenu/DropDownCartMenu.js"; 
@@ -18,5 +18,5 @@ import { AccessAttemptResult } from "./AccessAttemptResult/AccessAttemptResult.j
 import { CartVerified } from "./CartVerified/CartVerified.js";
 import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
 import { ModalSignOut } from "./ModalSignOut/ModalSignOut.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, DescriptionPopUp, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut}; 
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut}; 
 
