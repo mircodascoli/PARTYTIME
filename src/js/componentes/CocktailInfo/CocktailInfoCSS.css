@@ -1,0 +1,54 @@
+:host{
+    display: block;
+}
+
+.popup-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      background-color: skyblue;
+
+
+      p{
+        text-align: center;
+        font-weight: bold;
+        background-color: coral;
+
+      }
+
+      .popup-close-button {
+        background-color: red;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      .popup-body {
+        background-color: mediumorchid;
+
+        p {
+         background-color: aquamarine;
+         margin-bottom: 20px;
+        }
+
+        .popup-select-button {
+          padding: 10px 20px;
+          background-color: #007BFF;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+        }
+    }
+  }
+
+.img-popup-cocktails {
+  width: 100px;
+  height: auto;
+  border-radius: 5px;
+  margin-top: 10px; 
+
+}

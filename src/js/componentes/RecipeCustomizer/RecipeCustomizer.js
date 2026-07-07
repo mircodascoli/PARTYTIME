@@ -22,15 +22,10 @@ export class RecipeCustomizer extends LitElement {
    return html`
           
     <div class="popup-window">
-      <div class="popup-header">
-        <h2>${this.cocktail.name}</h2>
+      <div class="popup-close-button container">
         <button class="popup-close-button" @click="${() => this.remove()}">X</button>
       </div>
-      <div class="popup-body">
-          <p class="popup-description">${this.cocktail.description}</p>
-          <img src="../../img/imgCocktails/${this.cocktail.name}.jpeg" alt="${this.cocktail.name}" class="img-popup-cocktails" />
-          <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }" @click="${() => this.remove() }">SELECT</button> 
-        </div>
+     <cocktail-info .cocktail="${this.cocktail}"></cocktail-info>
      </div>
 
     `;
