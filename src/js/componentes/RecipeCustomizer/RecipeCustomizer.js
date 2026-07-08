@@ -26,7 +26,9 @@ export class RecipeCustomizer extends LitElement {
       `;
     }
     return html`
-      <div class="popup-window" @switch-view="${this._onSwitchView}">
+       <div class="popup-window" 
+         @switch-view="${this._onSwitchView}"
+         @close-popup="${() => this.remove()}">
         <div class="popup-close-button-container">
           <button class="popup-close-button" @click="${() => this.remove()}">X</button>
         </div>
