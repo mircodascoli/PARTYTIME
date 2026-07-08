@@ -66,12 +66,13 @@ export class Calculator extends LitElement {
           ${this.selected
             ? html`<p class="total-ml"> Total: <strong>${this.totalMl} ml </strong></p>`
             : null}
-          <button id="save" @click="${this.handleClick}">Save and party!</button>
-          <button  @click="${() => history.back()}">Another one</button>
+          <button id="save" @click="${this.handleSaveClick}">Save and party!</button>
+          <button  @click="${this.handleOthersClick}">Another recipe</button>
         </div>
       </div>
     `;
   }
+
   handleRange(e) {
     const target = e.target;
     this.quantity = parseInt(target.value);
@@ -79,7 +80,7 @@ export class Calculator extends LitElement {
     this.requestUpdate();
   }
 
-  async handleClick() {
+  async handleSaveClick() {
     console.log('this.recipe', this.recipe.serving);
   const recipe = {
     name: this.recipe.name,
@@ -104,6 +105,12 @@ export class Calculator extends LitElement {
   
 }
 
+handleOthersClick() {
+    this.dispatchEvent(new CustomEvent('close-popup', {
+    bubbles: true,
+    composed: true,
+  }));
+}
  async guardarReceta(recipe) {
   const idUserNum = getSSID();
   const body = {
@@ -116,6 +123,7 @@ export class Calculator extends LitElement {
 
   return apiData;
 }
+
 }
 
 customElements.define('calculator-component', Calculator);

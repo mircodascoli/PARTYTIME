@@ -14,8 +14,8 @@ export class CocktailInfo extends LitElement {
 
   }
 
-npmconnectedCallback() {
-  super.connectedCallback();
+  connectedCallback() {
+    super.connectedCallback();
 
 }
 
@@ -28,7 +28,7 @@ npmconnectedCallback() {
       <div class="popup-body">
           <p class="popup-description">${this.cocktail.description}</p>
           <img src="../../img/imgCocktails/${this.cocktail.name}.jpeg" alt="${this.cocktail.name}" class="img-popup-cocktails" />
-          <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }">SELECT</button> 
+          <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }">NEXT</button> 
         </div>
        
     `;
