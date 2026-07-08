@@ -17,14 +17,6 @@
 
       }
 
-      .popup-close-button {
-        background-color: red;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-      }
 
       .popup-body {
         background-color: mediumorchid;
