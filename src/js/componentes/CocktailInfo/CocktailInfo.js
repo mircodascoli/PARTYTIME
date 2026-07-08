@@ -6,7 +6,7 @@ export class CocktailInfo extends LitElement {
   static styles = [ResetCSS, CocktailInfoCSS];
 
   static properties = {
-  
+  cocktail: { type: Object }
   };
 
   constructor() {
@@ -14,7 +14,7 @@ export class CocktailInfo extends LitElement {
 
   }
 
-connectedCallback() {
+npmconnectedCallback() {
   super.connectedCallback();
 
 }
@@ -28,11 +28,21 @@ connectedCallback() {
       <div class="popup-body">
           <p class="popup-description">${this.cocktail.description}</p>
           <img src="../../img/imgCocktails/${this.cocktail.name}.jpeg" alt="${this.cocktail.name}" class="img-popup-cocktails" />
-          <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }" @click="${() => this.remove() }">SELECT</button> 
+          <button class="popup-select-button" @click="${() => this.SelectRecipeToCalc(this.cocktail) }">SELECT</button> 
         </div>
        
     `;
   }
+  SelectRecipeToCalc(recipeSelected) {
+  this.dispatchEvent(new CustomEvent('switch-view', {
+    detail: {
+      next: 'B',
+      recipeSelected: recipeSelected,
+    },
+    bubbles: true,
+    composed: true,
+  }));
+}
 }
 
 customElements.define('cocktail-info', CocktailInfo);
