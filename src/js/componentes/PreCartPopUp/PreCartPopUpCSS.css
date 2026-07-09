@@ -1,17 +1,25 @@
 :host {
   position: fixed;
+  display: block;
+}
+
+.underlay {
+  position: fixed;
   inset: 0;
-  z-index: 90;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
   background-color: rgba(128, 128, 128, 0.166);
-  width: 100vw;
-  height: 100vh;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  cursor: pointer;
+  animation: fadeInUnderlay 0.25s ease-out;
 }
 
 /* POPUP WINDOW */
-:host .popup-window {
+.popup-window {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -22,10 +30,12 @@
   text-align: center;
   height: 70%;
   width: 70%;
+  cursor: default;
+  animation: popIn 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 /* HEADER */
-:host .popup-window .popup-header {
+.popup-window .popup-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,45 +43,73 @@
   background-color: skyblue;
 }
 
-:host .popup-window .popup-header p {
+.popup-window .popup-header p {
   text-align: center;
   font-weight: bold;
   background-color: coral;
 }
 
 /* CLOSE BUTTON */
-:host .popup-window .popup-header .popup-close-button {
+.popup-window .popup-header .popup-close-button {
   background-color: red;
   color: white;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.popup-window .popup-header .popup-close-button:hover {
+  background-color: #d10000;
+  transform: scale(1.08);
 }
 
 /* BODY */
-:host .popup-window .popup-body {
+.popup-window .popup-body {
   background-color: mediumorchid;
 }
 
-:host .popup-window .popup-body p {
+.popup-window .popup-body p {
   background-color: aquamarine;
   margin-bottom: 20px;
 }
 
 /* SELECT BUTTON */
-:host .popup-window .popup-body .popup-select-button {
+.popup-window .popup-body .popup-select-button {
   padding: 10px 20px;
   background-color: #007BFF;
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+.popup-window .popup-body .popup-select-button:hover {
+  background-color: #0062cc;
+  transform: scale(1.04);
 }
 
 /* IMAGE */
-:host .preview-image {
+.preview-image {
   max-width: 100px;
   height: auto;
   margin-bottom: 20px;
+}
+
+@keyframes fadeInUnderlay {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
