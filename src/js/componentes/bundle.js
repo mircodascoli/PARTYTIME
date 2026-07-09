@@ -17,7 +17,6 @@ import { LogOut } from "./LogOut/LogOut.js";
 import { AccessAttemptResult } from "./AccessAttemptResult/AccessAttemptResult.js";
 import { CartVerified } from "./CartVerified/CartVerified.js";
 import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
-import { ModalSignOut } from "./ModalSignOut/ModalSignOut.js";
 import { CocktailInfo } from "./CocktailInfo/CocktailInfo.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, ModalSignOut, CocktailInfo}; 
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo}; 
 
