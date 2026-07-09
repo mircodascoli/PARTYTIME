@@ -20,23 +20,35 @@ export class RecipeCustomizer extends LitElement {
   render() {
     if (!this.cocktail) {
       return html`
-        <div class="description-pop-up open">
-          <h2>Loading...</h2>
+        <div class="underlay">
+          <div class="description-pop-up open">
+            <h2>Loading...</h2>
+          </div>
         </div>
       `;
     }
     return html`
-       <div class="popup-window" 
-         @switch-view="${this._onSwitchView}"
-         @close-popup="${() => this.remove()}">
-        <div class="popup-close-button-container">
-          <button class="popup-close-button" @click="${() => this.remove()}">X</button>
+      <div class="underlay" @click="${this._onUnderlayClick}">
+        <div
+          class="popup-window"
+          @click="${(e) => e.stopPropagation()}"
+          @switch-view="${this._onSwitchView}"
+          @close-popup="${() => this.remove()}"
+        >
+          <div class="popup-close-button-container">
+            <button class="popup-close-button" @click="${() => this.remove()}">X</button>
+          </div>
+          ${this.activeView === 'A'
+            ? html`<cocktail-info .cocktail="${this.cocktail}"></cocktail-info>`
+            : html`<calculator-component .recipe="${this.selectedRecipe}"></calculator-component>`}
         </div>
-        ${this.activeView === 'A'
-          ? html`<cocktail-info .cocktail="${this.cocktail}"></cocktail-info>`
-          : html`<calculator-component .recipe="${this.selectedRecipe}"></calculator-component>`}
       </div>
     `;
+  }
+
+  _onUnderlayClick(e) {
+    // click sull'underlay (fuori dal popup-window) -> chiudi
+    this.remove();
   }
 
   _onSwitchView(e) {
