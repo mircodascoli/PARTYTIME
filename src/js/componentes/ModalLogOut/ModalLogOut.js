@@ -2,6 +2,7 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import ModalLogOutCSS from '../ModalLogOut/ModalLogOutCSS.css' with { type: 'css' };
 import { supabase } from '../../../config/supabaseClient.js';
+
 export class ModalLogOut extends LitElement {
   static styles = [ResetCSS, ModalLogOutCSS];
 
@@ -16,31 +17,35 @@ export class ModalLogOut extends LitElement {
 
   show() {
     this.visible = true;
-
   }
 
   render() {
     return html`
-      <div class="toast-container ${this.visible ? 'visible' : ''}">
-        <p id="toastmessage">Do you want to log out?</p>
-        <div class="button-container"></div>
-          <button id="confirmButton" @click="${() => this._ConfirmLogOut()}">Confirm</button>
-          <button id="cancelButton" @click="${() => this._CancelLogOut()}">Cancel</button>
+      <div class="underlay ${this.visible ? 'visible' : ''}" @click="${this._onUnderlayClick}">
+        <div class="toast-container" @click="${(e) => e.stopPropagation()}">
+          <p id="toastmessage">Do you want to log out?</p>
+          <div class="button-container">
+            <button id="confirmButton" @click="${() => this._ConfirmLogOut()}">Confirm</button>
+            <button id="cancelButton" @click="${() => this._CancelLogOut()}">Cancel</button>
+          </div>
+        </div>
       </div>
     `;
   }
-   async _ConfirmLogOut() {
+
+  _onUnderlayClick() {
+    this._CancelLogOut();
+  }
+
+  async _ConfirmLogOut() {
     await supabase.auth.signOut();
     sessionStorage.removeItem('user');
-    window.location.href = '../index.html'; 
+    window.location.href = '../index.html';
   }
 
   _CancelLogOut() {
     this.visible = false;
   }
-
-
-
 }
 
 customElements.define('modal-log-out', ModalLogOut);
