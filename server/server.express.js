@@ -66,12 +66,6 @@ app.put('/api/update/users/:_id', async (req, res) => {
 
 // DELETE
 
-app.delete('/api/delete/user/', async (req, res) => {
-  console.log('server delete user', req.body, typeof req.body)
-
-  res.json(await db.users.delete(req.body._id))
-})
-
 app.delete('/api/delete/from/cart', async (req, res) => {
   console.log('server delete from cart')
 

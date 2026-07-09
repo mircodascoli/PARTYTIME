@@ -82,21 +82,6 @@ export class MyRecipes extends LitElement {
   
   return html`
 
-    ${recipes.length >= 1
-      ? html`
-      `
-      : null
-    }
-
-    ${recipes.length <= 2
-      ? html`
-        <button class="add-button" @click=${this.addRecipe}>
-          Add New Recipe
-        </button>
-      `
-      : null
-    }
-
     <div class="my-recipes-container">
       <ul class="recipes-list">
 
@@ -167,9 +152,7 @@ export class MyRecipes extends LitElement {
     </div>
   `;
 }
-addRecipe() {
-  window.location.href = '/chooserecipe.html'; 
-}
+
 
 }
 
