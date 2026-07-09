@@ -81,75 +81,51 @@ export class MyRecipes extends LitElement {
   const recipes = this.apiData?.recipes ?? [];
   
   return html`
+<div class="my-recipes-container">
+  <p>My recipes</p>
+  <ul class="recipes-list">
+    ${recipes.length === 0
+      ? html`<p>No recipes saved.</p>`
+      : recipes.map(item => html`
+        <li class="recipe-card">
+          <div class="recipe-header">
+            <p>${item.name} × ${item.amount}</p>
+            <button class="delete-recipe" @click=${() => this.deleteRecipe(item._id)}>x</button>
+          </div>
 
-    <div class="my-recipes-container">
-      <ul class="recipes-list">
-
-        ${recipes.length === 0
-          ? html`<p>No recipes saved.</p>`
-          : recipes.map(item => html`
-
-            <li class="recipe-card">
-
-              <button
-                class="delete-recipe"
-                @click=${() => this.deleteRecipe(item._id)}>
-                X
-              </button>
-
-              <div class="recipe-title">
-                <p>${item.name} × ${item.amount}</p>
+          <div class="recipe-data">
+            <div class="recipe-ingredients-container">
+              <div class="recipe-preview-container">
+                <img src="../../../img/imgCocktails/${item.name}.png" alt="${item.name}" class="recipe-preview-image" />
+                <p class="recipe-preview-description">${item.description}</p>
               </div>
 
-              <div class="recipe-data">
+              <ul class="recipe-ingredients-list">
+                ${item.ingredientes.map(ing => html` <li class="recipe-ingredient">${ing.name} ${ing.mls}ml</li>`)}
+              </ul>
+            </div>
 
-               
-                <ul class="recipe-ingredients-list">
-                  ${item.ingredientes.map(ing => html`
-                    <li class="recipe-ingredient">
-                      ${ing.name} ${ing.mls}ml
-                    </li>
-                  `)}
-                </ul>
+            <div class="serving-container">
+              <p class="serving-description">${item.serving}</p>
+            </div>
 
-                <p class="serving-description">
-                  ${item.serving}
-                  
-                </p>
-
-                <ul class="recipe-products-list">
-                  ${item.ingredientes.map(ing => html`
-                    <li class="product-item">
-
-                      <p>${ing.dbname}</p>
-
-                      <img
-                        src="../../img/imgProductos/${ing.dbname}.png"
-                        alt="${ing.dbname}"
-                        class="suggested-product-image"
-                        @click=${() => launchpreCartPoPup(ing.dbname)}
-                        @error=${(e) => e.target.src = '../../img/fallback.png'}
-                      />
-
-                      <button
-                        class="buy-button"
-                        @click=${() => launchpreCartPoPup(ing.dbname)}>
-                        BUY
-                      </button>
-
-                    </li>
-                  `)}
-                </ul>
-
-              </div>
-
-            </li>
-
-          `)
-        }
-
-      </ul>
-    </div>
+            <div class="recipe-ingredients-container">
+              <ul class="recipe-products-list">
+                ${item.ingredientes.map(ing => html`
+                  <li class="product-item">
+                    <img src="../../img/imgProductos/${ing.dbname}.png" alt="${ing.dbname}" class="suggested-product-image" @click=${() => launchpreCartPoPup(ing.dbname)} @error=${(e) => e.target.src = '../../img/fallback.png'} />
+                    <p>${ing.dbname}</p>
+                    <button class="buy-button" @click=${() => launchpreCartPoPup(ing.dbname)}>BUY</button>
+                  </li>
+                `)}
+              </ul>
+            </div>
+          </div>
+        </li>
+      `)
+    }
+  </ul>
+</div>
   `;
 }
 

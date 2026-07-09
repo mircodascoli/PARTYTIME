@@ -32,11 +32,14 @@ connectedCallback() {
     console.log('Welcoming updated, name:', this.name)
     return html`
         <div class="welcome-container">
-          <h1 id="welcome-text">Welcome, ${this.name}</h1>
-           <logout-component></logout-component>
-               <button class="add-button" @click=${this.addRecipe}>
-          Add New Recipe
-        </button>
+          <div class="hello-container">
+            <h1 id="welcome-text">Welcome, ${this.name}</h1>
+            <p>Here you can find your favorite recipes</p>
+            <logout-component></logout-component>
+          </div>
+          <div class="button-new-recipe-container">
+               <button class="add-button" @click=${this.addRecipe}> Add New Recipe</button>
+            </div>
         </div>
     `;
   }
