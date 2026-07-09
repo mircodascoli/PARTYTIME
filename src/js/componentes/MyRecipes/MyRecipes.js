@@ -50,29 +50,7 @@ export class MyRecipes extends LitElement {
     console.log('buy set function activated by the click', ingredientes);
   }
 
-  async clearList() {
-    if (!this._idSession) return;
-    console.log('clear recipe event lauched');
-
-    const payload = JSON.stringify({ userId: this._idSession });
-    console.log(payload)
-    try {
-      await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/clear/recipes`,
-        'DELETE',
-        payload
-      );
-
-      this.apiData = {
-        ...this.apiData,
-        recipes: []
-      };
-
-    } catch (err) {
-      console.error("Error clearing recipes:", err);
-    }
-  }
-
+ 
   async deleteRecipe(recipeId) {
     if (!this._idSession) return;
 
@@ -88,7 +66,6 @@ export class MyRecipes extends LitElement {
         payload
       );
 
-      // aggiornamento UI senza reload
       this.apiData = {
         ...this.apiData,
         recipes: this.apiData.recipes.filter(r => r._id !== recipeId)
@@ -107,9 +84,6 @@ export class MyRecipes extends LitElement {
 
     ${recipes.length >= 1
       ? html`
-        <button class="clear-button" @click=${this.clearList}>
-          Clear List
-        </button>
       `
       : null
     }
@@ -144,7 +118,7 @@ export class MyRecipes extends LitElement {
 
               <div class="recipe-data">
 
-                <!-- INGREDIENTS -->
+               
                 <ul class="recipe-ingredients-list">
                   ${item.ingredientes.map(ing => html`
                     <li class="recipe-ingredient">
@@ -153,13 +127,11 @@ export class MyRecipes extends LitElement {
                   `)}
                 </ul>
 
-                <!-- SERVING -->
                 <p class="serving-description">
                   ${item.serving}
                   
                 </p>
 
-                <!-- PRODUCTS -->
                 <ul class="recipe-products-list">
                   ${item.ingredientes.map(ing => html`
                     <li class="product-item">

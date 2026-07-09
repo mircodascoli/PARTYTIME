@@ -272,29 +272,7 @@ async function clearCart(userId) {
     await client.close();
   }
 }
-async function clearRecipes(userId) {
-  console.log('Clearing recipes...');
-  const client = new MongoClient(URI);
 
-  try {
-    await client.connect();
-    const db = client.db('Partytime');
-    const users = db.collection('users');
-
-    const result = await users.updateOne(
-      { _id: new ObjectId(userId) },
-      { $set: { recipes: [] } }
-    );
-
-    console.log('Clear result:', result);
-    return result;
-  } catch (error) {
-    console.error('Error clearing recipe:', error);
-    throw error;
-  } finally {
-    await client.close();
-  }
-}
 async function deleteRecipe(userId, recipeId) {
   console.log('Deleting recipe in MONGOdb...', recipeId, 'for user', userId);
   const client = new MongoClient(URI);
