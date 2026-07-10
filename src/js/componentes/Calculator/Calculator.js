@@ -90,7 +90,8 @@ export class Calculator extends LitElement {
       name: i.name,
       mls: i.ml * this.quantity,
       dbname: i.dbname
-    }))
+    })),
+    description: this.recipe.description
   };
 
   try {
