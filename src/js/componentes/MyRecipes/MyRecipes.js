@@ -89,16 +89,14 @@ export class MyRecipes extends LitElement {
       : recipes.map(item => html`
         <li class="recipe-card">
           <div class="recipe-header">
+            <img src="../../../img/imgCocktails/${item.name}.png" alt="${item.name}" class="recipe-preview-image" />
             <p>${item.name} × ${item.amount}</p>
+            <p class="recipe-preview-description">${item.description}</p>
             <button class="delete-recipe" @click=${() => this.deleteRecipe(item._id)}>x</button>
           </div>
 
           <div class="recipe-data">
-            <div class="recipe-ingredients-container">
-              <div class="recipe-preview-container">
-                <img src="../../../img/imgCocktails/${item.name}.png" alt="${item.name}" class="recipe-preview-image" />
-                <p class="recipe-preview-description">${item.description}</p>
-              </div>
+            <div class="recipe-ingredients-container">              
 
               <ul class="recipe-ingredients-list">
                 ${item.ingredientes.map(ing => html` <li class="recipe-ingredient">${ing.name} ${ing.mls}ml</li>`)}
