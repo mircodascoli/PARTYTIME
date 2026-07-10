@@ -169,9 +169,12 @@ footer {
 /* ─── User Page ─────────────────────────────────────── */
 
 .main-user {
-  display: grid;
-  grid-template-rows: 200px 1fr 250px;
-  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-lg);
+  
 }
 
 .container-welcoming {
@@ -185,7 +188,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid black;
+ 
 }
 
 .container-sign-out {
