@@ -29,8 +29,10 @@
   border-bottom: 1px solid #ccc;
 }
 
-.delete-recipe {
- 
+.recipe-preview-image {
+  width: 100px;
+  height: 100px;
+  
 }
 
 
