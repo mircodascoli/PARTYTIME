@@ -28,7 +28,7 @@
 .user-name-span{
     font-weight: bold;
     color: var(--color-accent);
-    font-size: var(--text-xl);
+    font-size: var(--text-2xl);
 }
 
 .hello-container{
