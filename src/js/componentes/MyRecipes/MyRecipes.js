@@ -89,7 +89,7 @@ render() {
               ${recipes.map(item => html`
                 <li class="recipe-card">
                   <div class="delete-recipe-container">
-                    <button class="delete-recipe" @click=${() => this.deleteRecipe(item._id)}>x</button>
+                    <three-dot-menu @delete-recipe=${() => this.deleteRecipe(item._id)}></three-dot-menu>
                   </div>
 
                   <div class="recipe-header">
