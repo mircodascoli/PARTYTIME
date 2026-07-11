@@ -8,12 +8,65 @@
     display:flex;
     flex-direction: row;
     align-items:center;
-    justify-content:space-evenly;; 
-    border: 1px solid red;
+    justify-content: space-around;
+   
 
 }
 
 .welcome-text{
+    display: flex;
+    flex-direction: column;
+}
+
+.user-log-container{
+    display:flex;
+    flex-direction: row;
+    align-items:center;
+   align-items: flex-end;
+}
+
+.user-name-span{
+    font-weight: bold;
+    color: var(--color-accent);
     font-size: var(--text-xl);
-    
+}
+
+.hello-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.add-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.add-button:hover {
+  background-color: #000000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.add-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.icon-tabler{
+    width: 20px;
+    height: 20px;
 }

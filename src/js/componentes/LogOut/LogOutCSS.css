@@ -3,15 +3,10 @@
 
 }
 
- .log-out-button {
-    padding: 10px 20px;
-    background-color:var(--color-accent);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    width: 150px;
-    font-size: var(--text-lg);
-    font-weight: bold;
+button{
+    background-color: transparent;
     cursor: pointer;
-
+    width: 20px;
+    height: 20px;
+    border: none;
 }
