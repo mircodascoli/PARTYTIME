@@ -1,7 +1,6 @@
 import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import ThreeDotMenuCSS from '../ThreeDotMenu/ThreeDotMenuCSS.css'with {type: 'css'};
-import { getAPIData, API_PORT } from '../../utils.js';
 export class ThreeDotMenu extends LitElement {
   static properties = {
     open: { type: Boolean, state: true }
@@ -47,7 +46,7 @@ export class ThreeDotMenu extends LitElement {
       ${this.open
         ? html`
             <div class="dropdown">
-              <button @click=${this.deleteRecipe}>Delete recipe</button>
+              <button @click=${this.deleteRecipeClick}>Delete recipe</button>
             </div>
           `
         : ''
@@ -55,30 +54,15 @@ export class ThreeDotMenu extends LitElement {
     `;
   }
 
-    async deleteRecipe(recipeId) {
-    if (!this._idSession) return;
-
-    const payload = JSON.stringify({
-      userId: this._idSession,
-      recipeId: this._id
-    });
-    console.log('delete recipe payload', payload);
-     try {
-      await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/delete/recipe`,
-        'DELETE',
-        payload
-      );
-
-      this.apiData = {
-        ...this.apiData,
-        recipes: this.apiData.recipes.filter(r => r._id !== recipeId)
-      };
-
-    } catch (err) {
-      console.error("Error deleting recipe:", err);
-    }
-  } 
+   deleteRecipeClick() {
+      this.dispatchEvent(new CustomEvent('delete-recipe', {
+      detail: { recipeId: this.recipeId },
+      bubbles: true,
+      composed: true
+    }));
+    this.open = false;
+  }
+ 
 }
 
 customElements.define('three-dot-menu', ThreeDotMenu);
