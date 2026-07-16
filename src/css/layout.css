@@ -168,29 +168,29 @@ footer {
 
 /* ─── User Page ─────────────────────────────────────── */
 
-.main-user {
+/* .main-user {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: var(--space-lg);
   
-}
-
+} */
+/* 
 .container-welcoming {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   
-}
+} */
 
-.container-my-recipes {
+/* .container-my-recipes {
   display: flex;
   justify-content: center;
   align-items: center;
  
-}
+} */
 
 .container-sign-out {
   display: flex;
