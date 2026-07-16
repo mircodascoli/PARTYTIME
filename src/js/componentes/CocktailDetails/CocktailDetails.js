@@ -10,7 +10,7 @@ export class CocktailDetails extends LitElement {
   render() {
     return html`
       <li class="cocktail-item">
-       <img src="../../img/imgCocktails/${this.cocktail.name}.jpeg" alt="${this.cocktail.name}" class="cocktail-image" />
+       <img src="../../img/imgCocktails/${this.cocktail.name}.png" alt="${this.cocktail.name}" class="cocktail-image" />
        <h2 class="cocktail-name">${this.cocktail.name}</h2>
       </li>
 
