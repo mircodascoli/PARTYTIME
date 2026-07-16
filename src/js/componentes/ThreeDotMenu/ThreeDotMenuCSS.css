@@ -1,6 +1,8 @@
 :host {
       position: relative;
-      display: inline-block;
+      display: flex;
+       height: 30px;
+      width: 15px;
     }
 
     .menu-trigger {
@@ -12,9 +14,10 @@
       align-items: center;
       justify-content: center;
       color: #555;
-      border-radius: 50%;
+      border-radius: 5%;
       transition: background-color 0.15s ease;
-      font-size: 18px;
+      font-size: 30px;
+     
     }
 
     .menu-trigger:hover {
