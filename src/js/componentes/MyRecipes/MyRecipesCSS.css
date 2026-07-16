@@ -237,7 +237,7 @@
 
   .suggested-product-image {
    height: 200px;
-   width: 50px;
+   width: calc(50% + 40px);
   }
 
   .section-divider {
@@ -246,6 +246,7 @@
 
   .delete-recipe-container {
   order: 1; /* lo spostiamo dopo gli altri */
+  margin-left: auto; /* aggiungiamo un po' di margine a sinistra */
 }
 
 .recipe-header-serving-ingredients-container{
