@@ -5,7 +5,16 @@
 .my-recipes-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
 
+}
+
+.your-recipes-p-container{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  padding-top: 20px;
+  
 }
 
 .name-desciption-container {
@@ -94,6 +103,7 @@
   flex-direction: row;
   gap: 10px;
   justify-content: center;
+  align-items: center;
 }
 
 
@@ -173,13 +183,85 @@
 }
 
 .serving-description{
-
   padding: 0 30px;
 
 }
 
 .your-recipes-p{
   text-transform: uppercase;
-  color: var(--color-text-secondary:);
+  color: var(--color-text-secondary);
   font-size: var(--text-md)
+}
+
+.recipe-preview-description{
+  max-width: 250px;
+}
+
+.recipe-products-container{
+  display: flex;
+  justify-content: center
+
+}
+
+@media (min-width: 800px) {
+  .recipe-steps-container {
+    display: flex;
+   gap: 25px;
+  }
+
+  .recipe-card {
+    display: flex;
+    flex-direction: row;
+    max-width: none;
+   
+    
+  }
+
+  .recipe-ingredients-container {
+    display: flex;
+    align-items: center
+  }
+
+  .recipe-preview-image {
+    height: 250px;
+  }
+
+  .serving-container{
+    max-width: 300px;
+  }
+
+  .p-ingredient-name{
+    white-space:wrap; 
+
+  }
+
+  .suggested-product-image {
+   height: 200px;
+   width: 50px;
+  }
+
+  .section-divider {
+  display: none;
+  }
+
+  .delete-recipe-container {
+  order: 1; /* lo spostiamo dopo gli altri */
+}
+
+.recipe-header-serving-ingredients-container{
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+   order: 0;
+ }
+
+.recipe-products-container {
+  order: 0; /* default */
+}
+
+
+/*   .recipe-ingredients-container{
+    min-width: 190px;
+
+  } */
 }
