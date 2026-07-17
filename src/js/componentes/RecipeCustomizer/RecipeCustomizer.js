@@ -36,7 +36,12 @@ export class RecipeCustomizer extends LitElement {
           @close-popup="${() => this.remove()}"
         >
           <div class="popup-close-button-container">
-            <button class="popup-close-button" @click="${() => this.remove()}">X</button>
+            <button class="close-btn" aria-label="Close" @click="${() => this.remove()}">
+             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+             <path d="M18 6L6 18M6 6l12 12"/>
+             </svg>
+           </button>
+       
           </div>
           ${this.activeView === 'A'
             ? html`<cocktail-info .cocktail="${this.cocktail}"></cocktail-info>`
@@ -46,8 +51,7 @@ export class RecipeCustomizer extends LitElement {
     `;
   }
 
-  _onUnderlayClick(e) {
-    // click sull'underlay (fuori dal popup-window) -> chiudi
+  _onUnderlayClick() {
     this.remove();
   }
 
