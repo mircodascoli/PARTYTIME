@@ -1,46 +1,70 @@
 :host{
-    display: block;
+    display: flex;
+    justify-content: center;
+    width: 85%;
+    height: 100%;
+
 }
 
-.popup-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 20px;
-      background-color: skyblue;
+.cocktail-info-data-container{
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
 
+.cocktail-info-pic-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 350px;
+  overflow: hidden;
+}
 
-      p{
-        text-align: center;
-        font-weight: bold;
-        background-color: coral;
+.cocktail-info-title{
+  font-size: var(--text-2xl);
+}
 
-      }
-
-
-      .popup-body {
-        background-color: mediumorchid;
-
-        p {
-         background-color: aquamarine;
-         margin-bottom: 20px;
-        }
-
-        .popup-select-button {
-          padding: 10px 20px;
-          background-color: #007BFF;
-          color: white;
-          border: none;
-          border-radius: 5px;
-          cursor: pointer;
-        }
-    }
-  }
 
 .img-popup-cocktails {
-  width: 100px;
-  height: auto;
-  border-radius: 5px;
-  margin-top: 10px; 
+  width: auto;
+  height: 100%;
+  overflow: hidden;
+}
 
+
+.cocktail-info-title-description-container{
+ display: flex;
+ flex-direction: column;
+ gap: var(--space-md);
+}
+
+
+
+.popup-description{
+
+}
+
+.cocktail-info-button-container{
+display: flex;
+align-items: flex-end;
+justify-content: flex-end;
+}
+
+.popup-select-button{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: none;
+  background-color: var(--color-accent);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.popup-select-button svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
 }
