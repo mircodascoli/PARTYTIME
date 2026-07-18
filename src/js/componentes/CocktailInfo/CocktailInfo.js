@@ -24,7 +24,7 @@ export class CocktailInfo extends LitElement {
     return html`
     <div class="cocktail-info-data-container">
       <div class="cocktail-info-pic-container"> 
-       <img src="../../img/imgCocktails/${this.cocktail.name}.png" alt="${this.cocktail.name}" class="img-popup-cocktails" />
+        <img src="../../img/imgCocktails/${this.cocktail.name}.png" alt="${this.cocktail.name}" class="img-popup-cocktails" />
       </div>
       <div class="cocktail-info-title-description-container">
         <h2 class="cocktail-info-title">${this.cocktail.name}</h2>

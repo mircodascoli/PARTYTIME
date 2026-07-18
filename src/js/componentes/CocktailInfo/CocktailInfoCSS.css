@@ -39,12 +39,6 @@ gap: 1em;
  gap: var(--space-md);
 }
 
-
-
-.popup-description{
-
-}
-
 .cocktail-info-button-container{
 display: flex;
 align-items: flex-end;

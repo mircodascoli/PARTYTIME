@@ -114,7 +114,6 @@ footer {
 
   .contact-container a{
     text-decoration: none;
-   /*  color: var(--color-text-inverse); */
    color: white;
   }
 
@@ -122,7 +121,7 @@ footer {
     text-decoration: underline;
   }
 
-  .contact-container span{
+  .contact-container-span{
     font-size: 24px;
 }
 
