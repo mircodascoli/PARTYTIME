@@ -49,21 +49,28 @@ export class PreCartPopUp extends LitElement {
     return html`
       <div class="underlay" @click="${this._onUnderlayClick}">
         <div class="popup-window" @click="${(e) => e.stopPropagation()}">
-          <div class="popup-header">
-            <h2>${this.dbitem.name}</h2>
-            <button class="popup-close-button" @click="${() => this.remove()}">X</button>
+          <div class="popup-close-button-container">
+             <button class="close-btn" aria-label="Close" @click="${() => this.remove()}">
+                <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+             </button>
           </div>
-          <div class="popup-body">
+
+          <div class="precart-body-container">
+            <div class="precart-pic-container">
+            <img src="../../img/imgProductos/${this.dbitem.name}.png" alt="${this.dbitem.name}" class="precart-image" />
+            </div>
+            <h2 class="precart-info-title" >${this.dbitem.name}</h2>
             <p class="popup-description">${this.dbitem.description}</p>
-            <img src="../../img/imgProductos/${this.dbitem.name}.png" alt="${this.dbitem.name}" class="preview-image" />
-            <p class="popup-description">${this.dbitem.price}</p>
+            <p class="popup-price">${this.dbitem.price}</p>// importa il format del prezzo            
             <select id="quantity" @change=${this._handleQuantityChange}>
-              ${Array.from({ length: 10 }, (_, i) => i + 1).map(num => html`
-                <option value=${num}>${num}</option>
-              `)}
+              ${Array.from({ length: 10 }, (_, i) => i + 1).map(num => html` <option value=${num}>${num}</option>`)}
             </select>
+      
             <button class="popup-select-button" @click="${this.handleAddToCart}">Add to Cart</button>
           </div>
+
         </div>
       </div>
     `;
