@@ -45,8 +45,9 @@
 .popup-close-button-container {
   display: flex;
   justify-content: flex-end;
-  align-items: flex-end;
-  width: 100%;
+  align-self: flex-end;
+  position:absolute;
+ 
 
 }
 
@@ -58,11 +59,22 @@
   cursor: pointer;
   opacity: 0.6;
   transition: transform 0.15s ease, opacity 0.15s ease;
+  position: relative;
+  top: 10px;
+  right: 10px;
+  IL PROBLEMA E QUESTO BOTTONE GIOCA CON ALTIR CONTENITORI E FLEX ROW PWR METTERLO SOPRA
 }
 
 .close-btn:hover {
   opacity: 1;
   transform: rotate(90deg);
+}
+
+.popup-child-container{
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ height: 100%;
 }
 
 
