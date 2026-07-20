@@ -3,7 +3,7 @@ import PreCartPopUpCSS from '../PreCartPopUp/PreCartPopUpCSS.css' with { type: '
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import { getAPIData, API_PORT, getSSID } from '../../utils.js';
 import { ConfirmAddedToCart } from '../../utils.js';
-
+import { formatPrice } from '../../utils.js';
 export class PreCartPopUp extends LitElement {
   static styles = [ResetCSS, PreCartPopUpCSS];
   static properties = { product: { type: Object }, dbitem: { type: Object }, quantity: { type: Number } };
@@ -58,20 +58,32 @@ export class PreCartPopUp extends LitElement {
           </div>
 
           <div class="precart-body-container">
+
             <div class="precart-pic-container">
-            <img src="../../img/imgProductos/${this.dbitem.name}.png" alt="${this.dbitem.name}" class="precart-image" />
+              <img src="../../img/imgProductos/${this.dbitem.name}.png" alt="${this.dbitem.name}" class="precart-image" />
             </div>
+
             <h2 class="precart-info-title" >${this.dbitem.name}</h2>
             <p class="popup-description">${this.dbitem.description}</p>
-            <p class="popup-price">${this.dbitem.price}</p>// importa il format del prezzo            
-            <select id="quantity" @change=${this._handleQuantityChange}>
+            <p class="popup-price">${formatPrice(this.dbitem.price)}</p> 
+            
+            <div class="precart-inputs-container">
+              <select id="quantity" @change=${this._handleQuantityChange}>
               ${Array.from({ length: 10 }, (_, i) => i + 1).map(num => html` <option value=${num}>${num}</option>`)}
-            </select>
-      
-            <button class="popup-select-button" @click="${this.handleAddToCart}">Add to Cart</button>
+              </select>
+              <div class="precart-button-container">
+                <button class="popup-select-button" @click="${this.handleAddToCart}">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 19a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" /><path d="M12.5 17h-6.5v-14h-2" /><path d="M6 5l14 1l-.86 6.017m-2.64 .983h-10.5" /><path d="M16 19h6" /><path d="M19 16v6" /></svg>
+                <span>Add to Cart</span>
+                </button>
+             </div>
+
+           </div>
+            
           </div>
 
         </div>
+        
       </div>
     `;
   }
