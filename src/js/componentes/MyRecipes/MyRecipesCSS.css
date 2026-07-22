@@ -110,7 +110,7 @@
 .suggested-product-image {
   width: auto;
   height:  100px;
-
+  cursor: pointer;
   object-fit: cover;
   margin-left: 10px;
 }

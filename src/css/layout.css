@@ -351,12 +351,7 @@ footer {
   }
 
   footer{
-    background-color: var(--color-bg);
-  }
-
-  .footer-items {
     display: none;
   }
-
 
 }
