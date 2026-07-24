@@ -4,7 +4,7 @@
     flex-direction: column;
     width: 100%;
     height: 95%;
-  }
+ }
 
 .container-calculator{
 display: flex;
@@ -17,27 +17,8 @@ width: 100%;
 
 .calculator-recipe-name{
    font-size: var(--text-2xl);
-}
+  }
 
-
-.input-calculator{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-}
-
-  table{
-    text-align: center;
-    background-color: white;
-
-    th{
-        text-transform: uppercase;
-    }
-
-  
-}
 
 #seleccionador{
     background-color: black;
@@ -45,25 +26,15 @@ width: 100%;
     height: 30px;
     border: 1px solid white;
     border-radius: 5px;
-
-}
-
-.alert {
-    color: #d84315;
-    background-color: #fff3e0;
-    padding: 0.5em 1em;
-    border-left: 4px solid #ff7043;
-    margin-bottom: 1em;
-    border-radius: 6px;
-    font-weight: bold;
   }
+
   
-  input[type="range"]:disabled {
+input[type="range"]:disabled {
     opacity: 0.5;
     cursor: not-allowed;
   }
 
-  .calculator-button-container{
+.calculator-button-container{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -85,8 +56,17 @@ width: 100%;
   }
 
   .save-recipe-button:hover, .another-recipe-button:hover {
-    background-color: var(--color-accent-dark);
+    background-color: var(--color-accent-mid);
   }
+
+  .save-recipe-button:hover svg{
+    color: var(  --color-success);
+  }
+
+  .another-recipe-button:hover svg{
+     color: var(  --color-error);
+  }
+
 
  .tabla-calculos {
   width: 100%;
@@ -95,6 +75,23 @@ width: 100%;
   font-size: 0.95rem;
   color: #2d2d2d;
 }
+
+.tabla-calculos td:nth-child(1),
+.tabla-calculos th:nth-child(1) {
+  text-align: left;
+}
+
+.tabla-calculos td:nth-child(2),
+.tabla-calculos th:nth-child(2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.tabla-calculos tbody td:nth-child(2) {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
 
 .tabla-calculos thead th {
   text-align: left;
@@ -116,18 +113,103 @@ width: 100%;
   border-bottom: none;
 }
 
-.tabla-calculos td:nth-child(1),
-.tabla-calculos th:nth-child(1) {
-  text-align: left;
+
+.input-calculator {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 0;
 }
 
-.tabla-calculos td:nth-child(2),
-.tabla-calculos th:nth-child(2) {
-  text-align: right;
+#label-range {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #6b6b6b;
+  white-space: nowrap;
+}
+
+#range {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  background: transparent;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+#range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #e0e0e0 0,
+    #e0e0e0 calc(11.11% - 2px),
+    #808080 calc(11.11% - 2px),
+    #808080 11.11%
+  );
+}
+
+#range::-moz-range-track {
+  height: 4px;
+  border-radius: 2px;
+  background: repeating-linear-gradient(
+    to right,
+    #e0e0e0 0,
+    #e0e0e0 calc(11.11% - 2px),
+    #808080 calc(11.11% - 2px),
+    #808080 11.11%
+  );
+}
+
+#range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  margin-top: -5px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+#range::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+#range::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #1a1a1a;
+  border: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+#range::-moz-range-thumb:hover {
+  transform: scale(1.2);
+}
+
+
+#range:focus-visible {
+  outline: none;
+}
+
+#range:focus-visible::-webkit-slider-thumb {
+  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.15);
+}
+
+#range:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.15);
+}
+
+.people-units {
+  font-size: 0.9rem;
+  color: #2d2d2d;
   font-variant-numeric: tabular-nums;
-}
-
-.tabla-calculos tbody td:nth-child(2) {
-  font-weight: 500;
-  color: #1a1a1a;
+  min-width: 60px;
+  text-align: right;
+  margin: 0;
 }
