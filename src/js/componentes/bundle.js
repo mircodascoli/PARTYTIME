@@ -19,5 +19,6 @@ import { CartVerified } from "./CartVerified/CartVerified.js";
 import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
 import { CocktailInfo } from "./CocktailInfo/CocktailInfo.js";
 import { ThreeDotMenu } from "./ThreeDotMenu/ThreeDotMenu.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo, ThreeDotMenu}; 
+import {CheckoutButton} from "./CheckoutButton/CheckoutButton.js";
+export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo, ThreeDotMenu, CheckoutButton }; 
 
