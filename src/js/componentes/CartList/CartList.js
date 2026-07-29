@@ -86,7 +86,7 @@ export class CartList extends LitElement {
         `)}
       </ul>
       <div class="total-cart-component-container">
-      <total-cart .total=${this.getTotal()}></total-cart>
+      <total-cart .total=${this.getTotal()} .products=${this.apiData.cart}></total-cart>
       </div>
     `;
   }

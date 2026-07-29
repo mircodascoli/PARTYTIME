@@ -2,17 +2,20 @@ import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import TotalCartCSS from '../TotalCart/TotalCartCSS.css' with { type: 'css' };
 import { formatPrice } from '../../utils.js';
+import { getSSNAME, getSSEMAIL} from '../../utils.js'
 
 export class TotalCart extends LitElement {
   static styles = [ResetCSS, TotalCartCSS];
 
   static properties = {
     total: { type: Number },
+    products: { type: Array },
   };
 
   constructor() {
     super();
     this.total = 0;
+    this.products = [];
   }
 
   render() {
@@ -29,7 +32,7 @@ export class TotalCart extends LitElement {
       <div class="total-cart">
       <h2>Total:</h2> <p>${formatPrice(this.total)}</p>
       </div>
-      <checkout-button class="checkout-button" .total=${this.total}>Checkout</checkout-button>
+      <checkout-button class="checkout-button" .total=${this.total} .name=${getSSNAME()} .email=${getSSEMAIL()} .products=${this.products} >Checkout</checkout-button>
       <p class="disclaimer">This app is for practical purposes only. No real orders will be processed.</p>
     `;
   }
