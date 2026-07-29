@@ -2,7 +2,7 @@ import express from 'express';
 import { db } from "./server.mongodb.js";
 import bodyParser from 'body-parser';
 import { ObjectId } from 'mongodb';
-
+import { sendOrderEmail } from './mailer.js'; 
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -181,6 +181,26 @@ app.get('/api/find/bottles/:id', async (req, res) => {
   }
 })
 
+// EMAIL ORDINE
+
+app.post('/api/order', async (req, res) => {
+  console.log('server send order email', req.body);
+ 
+  const { name, email, products, total } = req.body;
+ 
+  if (!name || !email || !products?.length) {
+    return res.status(400).json({ success: false, error: 'Incomplete order data' });
+  }
+ 
+  try {
+    await sendOrderEmail({ name, email, products, total });
+    res.json({ success: true, message: 'Order received, emails sent' });
+  } catch (err) {
+    console.error('❌ ERROR sending order email:', err);
+    res.status(500).json({ success: false, error: err.message });
+  }
+});
+
 app.put('/api/cart/item/update', async (req, res) => {
    console.log('req.body cart item update EXPRESS', req.body)
   res.json(await db.users.updateCart(req.body.productAndQuantity, req.body.user))
@@ -191,6 +211,4 @@ app.use(express.static('src'));
 app.listen(port, async () => {
   console.log(` listening on port ${port}`);
 })
-
-
 
