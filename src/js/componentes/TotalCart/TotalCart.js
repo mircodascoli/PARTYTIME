@@ -29,7 +29,7 @@ export class TotalCart extends LitElement {
       <div class="total-cart">
       <h2>Total:</h2> <p>${formatPrice(this.total)}</p>
       </div>
-      <checkout-button class="checkout-button">Checkout</checkout-button>
+      <checkout-button class="checkout-button" .total=${this.total}>Checkout</checkout-button>
       <p class="disclaimer">This app is for practical purposes only. No real orders will be processed.</p>
     `;
   }
