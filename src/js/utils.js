@@ -6,7 +6,8 @@ const TIMEOUT = 10000
 
 export const API_PORT = location.port ? `:${1337}` : ''
 export const getSSID = () => JSON.parse(sessionStorage.getItem('user'))?._id || null;
-
+export const getSSNAME = () => JSON.parse(sessionStorage.getItem('user'))?.name || null;
+export const getSSEMAIL = () => JSON.parse(sessionStorage.getItem('user'))?.email || null;
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData
 
