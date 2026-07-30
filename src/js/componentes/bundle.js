@@ -2,7 +2,7 @@
 import { LoginForm } from "./LoginForm/LoginForm.js";
 import { SignInForm } from "./SignInForm/SignInForm.js";
 import { Calculator } from "./Calculator/Calculator.js";
-import { MyRecipes } from "./MyRecipes/MyRecipes.js";
+import { SavedRecipesList } from "./SavedRecipesList/SavedRecipesList.js";
 import { CocktailList } from "./CocktailList/CocktailList.js";
 import { RecipeCustomizer } from "./RecipeCustomizer/RecipeCustomizer.js";
 import { PreCartPopUp } from "./PreCartPopUp/PreCartPopUp.js";
@@ -20,5 +20,5 @@ import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
 import { CocktailInfo } from "./CocktailInfo/CocktailInfo.js";
 import { ThreeDotMenu } from "./ThreeDotMenu/ThreeDotMenu.js";
 import {CheckoutButton} from "./CheckoutButton/CheckoutButton.js";
-export { SignInForm, LoginForm, Calculator, MyRecipes, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo, ThreeDotMenu, CheckoutButton }; 
+export { SignInForm, LoginForm, Calculator, SavedRecipesList, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo, ThreeDotMenu, CheckoutButton }; 
 
