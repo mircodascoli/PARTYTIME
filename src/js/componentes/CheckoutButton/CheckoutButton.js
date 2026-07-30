@@ -29,7 +29,6 @@ export class CheckoutButton extends LitElement {
    async _confirmOrder() {
     if (this.status === 'sending') return;
  
-    // Minimal client-side validation
     if (!this.name || !this.email || !this.products?.length) {
       this.status = 'error';
       this.errorMessage = 'Incomplete order data';
@@ -104,11 +103,15 @@ export class CheckoutButton extends LitElement {
  
       ${this.status === 'success'
         ? html`<p class="message success">
-            ✅ Order confirmed! Check your email.
+             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail-fast"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 7h3" /><path d="M3 11h2" /><path d="M9.02 8.801l-.6 6a2 2 0 0 0 1.99 2.199h7.98a2 2 0 0 0 1.99 -1.801l.6 -6a2 2 0 0 0 -1.99 -2.199h-7.98a2 2 0 0 0 -1.99 1.801" /><path d="M9.8 7.5l2.982 3.28a3 3 0 0 0 4.238 .202l3.28 -2.982" /></svg>
+             <span>Order confirmed! Check your email.</span>
           </p>`
         : ''}
       ${this.status === 'error'
-        ? html`<p class="message error">❌ ${this.errorMessage}</p>`
+        ? html`<p class="message error"> 
+               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-message-exclamation"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M8 9h8" /><path d="M8 13h6" /><path d="M15 18h-2l-5 3v-3h-2a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v5.5" /><path d="M19 16v3" /><path d="M19 22v.01" /></svg>
+               <span>${this.errorMessage}</span>
+             </p>`
         : ''}
     `;
   }

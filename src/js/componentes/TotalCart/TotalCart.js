@@ -33,6 +33,7 @@ export class TotalCart extends LitElement {
       <h2>Total:</h2> <p>${formatPrice(this.total)}</p>
       </div>
       <checkout-button class="checkout-button" .total=${this.total} .name=${getSSNAME()} .email=${getSSEMAIL()} .products=${this.products} >Checkout</checkout-button>
+      <------->
       <p class="disclaimer">This app is for practical purposes only. No real orders will be processed.</p>
     `;
   }
