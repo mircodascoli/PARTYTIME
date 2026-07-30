@@ -68,6 +68,9 @@ export class CartList extends LitElement {
     if (!this.apiData) return html`<p>Loading...</p>`;
 
     return html`
+    ${this.apiData.cart.length === 0
+      ? html`<p>No items in the cart yet.</p>`
+      : html`
       <ul class="cart-list">
         ${this.apiData.cart.map(item => html`
           <li class="cart-item">
@@ -88,6 +91,7 @@ export class CartList extends LitElement {
       <div class="total-cart-component-container">
       <total-cart .total=${this.getTotal()} .products=${this.apiData.cart}></total-cart>
       </div>
+      `}
     `;
   }
 
