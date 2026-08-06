@@ -181,8 +181,6 @@ app.get('/api/find/bottles/:id', async (req, res) => {
   }
 })
 
-// EMAIL ORDINE
-
 app.post('/api/order', async (req, res) => {
   console.log('server send order email', req.body);
  
@@ -196,15 +194,17 @@ app.post('/api/order', async (req, res) => {
     await sendOrderEmail({ name, email, products, total });
     res.json({ success: true, message: 'Order received, emails sent' });
   } catch (err) {
-    console.error('❌ ERROR sending order email:', err);
+    console.error(' ERROR sending order email:', err);
     res.status(500).json({ success: false, error: err.message });
   }
 });
+
 
 app.put('/api/cart/item/update', async (req, res) => {
    console.log('req.body cart item update EXPRESS', req.body)
   res.json(await db.users.updateCart(req.body.productAndQuantity, req.body.user))
 })
+
 // Static server
 app.use(express.static('src'));
 
