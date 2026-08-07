@@ -73,8 +73,8 @@ app.delete('/api/delete/from/cart', async (req, res) => {
 
 })
 
-app.delete('/api/delete/cart', async (req, res) => {
-  console.log('server delete cart', req.body.userId, typeof req.body.userId)
+app.delete('/api/clear/cart', async (req, res) => {
+  console.log('server clear cart', req.body.userId, typeof req.body.userId)
 
   res.json(await db.users.clearCart(req.body.userId))
 })
