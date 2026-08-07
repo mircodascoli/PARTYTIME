@@ -8,15 +8,14 @@ export class CheckoutButton extends LitElement {
     email: { type: String },
     products: { type: Array },
     total: { type: Number },
-    endpoint: { type: String }, // lets you override the URL if needed
-    status: { state: true }, // 'idle' | 'sending' | 'success' | 'error'
+    endpoint: { type: String },
+    status: { state: true },
     errorMessage: { state: true },
   };
 
   static styles = [ResetCSS, CheckoutButtonCSS];
 
-
-   constructor() {
+  constructor() {
     super();
     this.name = '';
     this.email = '';
@@ -25,36 +24,31 @@ export class CheckoutButton extends LitElement {
     this.endpoint = '/api/order';
     this.status = 'idle';
     this.errorMessage = '';
+    this._successTimeout = null;
   }
-   async _confirmOrder() {
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    clearTimeout(this._successTimeout);
+  }
+
+  async _confirmOrder() {
     if (this.status === 'sending') return;
- 
+
     if (!this.name || !this.email || !this.products?.length) {
       this.status = 'error';
       this.errorMessage = 'Incomplete order data';
       return;
     }
- 
+
     this.status = 'sending';
     this.errorMessage = '';
- 
-    // Let the rest of the app know sending has started (useful for external loading states)
+
     this.dispatchEvent(
       new CustomEvent('order-sending-started', { bubbles: true, composed: true })
     );
- 
+
     try {
-
-      // const body = {
-      //recipe,
-      //idUser: idUserNum
-      //};
-      //const PAYLOAD = JSON.stringify(body)
-      //const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/push/to/recipes`, 'POST', PAYLOAD);
-  
-       //return apiData;
-
- 
       const response = await fetch(this.endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -65,9 +59,9 @@ export class CheckoutButton extends LitElement {
           total: this.total,
         }),
       });
- 
+
       const data = await response.json();
- 
+
       if (response.ok && data.success) {
         this.status = 'success';
         this.dispatchEvent(
@@ -77,6 +71,10 @@ export class CheckoutButton extends LitElement {
             composed: true,
           })
         );
+
+        this._successTimeout = setTimeout(() => {
+          this._afterSuccess();
+        }, 2500);
 
       } else {
         this.status = 'error';
@@ -102,16 +100,19 @@ export class CheckoutButton extends LitElement {
     }
   }
 
+  _afterSuccess() {
+    console.log('⏱️ 2.5s dopo il successo — eseguo azione successiva');
+    // logica vera qui
+  }
+
   render() {
-    console.log('CheckoutButton updated, total:', this.total, 'products:', this.products, 'name:', this.name, 'email:', this.email);
-     return html`
+    return html`
       <button class="checkout-button"
         ?disabled=${this.status === 'sending'}
         @click=${this._confirmOrder}
       >
         ${this.status === 'sending' ? 'Sending…' : 'Confirm order'}
       </button>
-
     `;
   }
 }
