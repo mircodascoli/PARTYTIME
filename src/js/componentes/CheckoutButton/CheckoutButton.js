@@ -101,8 +101,14 @@ export class CheckoutButton extends LitElement {
   }
 
   _afterSuccess() {
-    console.log('⏱️ 2.5s dopo il successo — eseguo azione successiva');
-    // logica vera qui
+    console.log(' 2.5s dopo il successo — eseguo azione successiva');
+     try {
+
+  } catch (err) {
+    console.error('Error', err);
+  } finally {
+    window.location.reload();
+  }
   }
 
   render() {
