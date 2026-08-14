@@ -3,6 +3,17 @@
   grid-template-columns: 1fr 1fr;
 }
 
+.render-guard-p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: var(--space-lg);
+} 
+
+.render-guard-a {
+  color: var(--color-accent);
+  text-decoration: none;
+}
+
 .cart-item {
   display: flex;
   flex-direction: column;

@@ -83,7 +83,7 @@ render() {
 <div class="my-recipes-container">
   <ul class="recipes-list">
     ${recipes.length === 0
-      ? html`<p>No recipes saved yet.</p>`
+      ? html`<p class="render-guard-p">No recipes saved yet. Start by creating some!</p>`
       : html`
           <div class="your-recipes-p-container">
             <p class="your-recipes-p">Your recipes:</p>
