@@ -20,5 +20,6 @@ import { ModalLogOut } from "./ModalLogOut/ModalLogOut.js";
 import { CocktailInfo } from "./CocktailInfo/CocktailInfo.js";
 import { ThreeDotMenu } from "./ThreeDotMenu/ThreeDotMenu.js";
 import {CheckoutButton} from "./CheckoutButton/CheckoutButton.js";
-export { SignInForm, LoginForm, Calculator, SavedRecipesList, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo, ThreeDotMenu, CheckoutButton }; 
+import { Hero } from "./HeroComponent/Hero.js";
+export { SignInForm, LoginForm, Calculator, SavedRecipesList, CocktailList, RecipeCustomizer, PreCartPopUp, CartList,  DropDownCartMenu, TotalCart, Shop, SearchBar, Welcoming, SignOut, LogOut, AccessAttemptResult, CartVerified, ModalLogOut, CocktailInfo, ThreeDotMenu, CheckoutButton, Hero }; 
 
