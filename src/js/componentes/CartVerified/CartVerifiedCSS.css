@@ -1,25 +1,41 @@
-:host{
-    display:block;
-   
+:host {
+  display: block;
 }
 
 .toast-container {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: auto;
+  transform: translate(-50%, -50%) scale(0.95);
+  width: max-content;
+  max-width: min(90vw, 320px);
+  padding: 12px 20px;
+  border-radius: 8px;
+
+  background-color: rgba(28, 28, 30, 0.92);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
   z-index: 9999;
-   background-color:rgba(64, 64, 64, 0.54);
-    color:white
 }
 
 .toast-container.visible {
   opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
   pointer-events: auto;
 }
 
+@media (max-width: 480px) {
+  .toast-container {
+    max-width: 90vw;
+    font-size: 13px;
+    padding: 10px 16px;
+  }
+}
