@@ -14,7 +14,8 @@
 }
 
 .hero-logo {
-  width: 180px;
+  min-width: 250px;
+  width: 50%;
   transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1),
               margin 0.8s cubic-bezier(0.65, 0, 0.35, 1);
   z-index: 2;
@@ -51,12 +52,14 @@
 }
 
 .hero-btn-primary {
-  background: #111;
+  background: var(--color-accent);
+  min-width: 120px;
   color: #fff;
 }
 
 .hero-btn-secondary {
   background: transparent;
-  border: 1px solid #111;
-  color: #111;
+  min-width: 120px;
+  border: 1px solid #fff;
+  color: #fff;
 }
