@@ -6,7 +6,7 @@
   width: 100%;
   margin: 0 auto;
   padding: 32px;
-  background: #ffffff;
+  background: #fff;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
 }
@@ -35,8 +35,8 @@
 }
 
 .form-sign input:focus {
-  border-color: #111827;
-  background: #ffffff;
+  border-color: var(--color-accent);
+  background: #fff;
 }
 
 .btn {
@@ -54,8 +54,8 @@
 }
 
 .btn-submit {
-  background: #111827;
-  color: #ffffff;
+  background: var(--color-accent);
+  color: #fff;
 }
 
 .btn-submit:hover {
@@ -63,7 +63,7 @@
 }
 
 .btn-google {
-  background: #ffffff;
+  background: #fff;
   color: #374151;
   border: 1px solid #e5e7eb;
   display: flex;
