@@ -119,7 +119,7 @@ export class CheckoutButton extends LitElement {
   } catch (err) {
     console.error('Error clearing cart:', err);
   } finally {
-    window.location.reload();
+    setTimeout(() => window.location.reload(), 1500);
   }
 }
   
