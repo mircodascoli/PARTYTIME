@@ -17,17 +17,17 @@ export class LoginForm extends LitElement {
 
   render() {
     return html`
-      <form id="formSign" @submit="${this._onFormSubmit}">
-        <slot></slot>
-        <p id="infoMessage">Get Back to your account</p>
-        <input type="email" id="emailLog" placeholder="Your email" required>
-        <input type="password" id="passwordLog" placeholder="Your password" required>
-        <button type="submit" class="btn">Login</button>
-          <button type="button" class="btn btn-google" @click="${this._onGoogleLogin}">
-          Login with Google
-        </button>
-        <a href="./sign.html" class="login-or-sign">Or Sign Up</a>
-      </form>
+  <form class="form-sign" @submit="${this._onFormSubmit}">
+    <slot></slot>
+    <p class="info-message">Get Back to your account</p>
+    <input type="email" class="email-log" placeholder="Your email" required>
+    <input type="password" class="password-log" placeholder="Your password" required>
+    <button type="submit" class="btn btn-submit">Login</button>
+    <button type="button" class="btn btn-google" @click="${this._onGoogleLogin}">
+      Login with Google
+    </button>
+    <a href="./sign.html" class="login-or-sign">Or Sign Up</a>
+</form>
 
       ${this.resultMessage
         ? html`<access-attempt-result .message="${this.resultMessage}"></access-attempt-result>`
