@@ -55,13 +55,11 @@ export class CartList extends LitElement {
   }
 
   getTotal() {
-    console.log('getTotal called, cart:', this.apiData?.cart);
     if (!this.apiData || !this.apiData.cart.length) return '0.00';
      const total = this.apiData.cart
     .reduce((sum, item) => sum + (item.price * item.quantity), 0)
     .toFixed(2);
-  console.log('total calculated:', total);
-  return total;
+    return total;
   }
 
   render() {

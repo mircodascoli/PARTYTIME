@@ -243,14 +243,14 @@ async function clearCart(userId) {
   const client = new MongoClient(URI);
 
   try {
-    await client.connect();
-    const db = client.db('Partytime');
-    const users = db.collection('users');
+   await client.connect();
+const db = client.db('Partytime');
+const users = db.collection('users');
 
-    const result = await users.updateOne(
-      { _id: new ObjectId(userId) },
-      { $unset: { cart: "" } }
-    );
+const result = await users.updateOne(
+  { _id: new ObjectId(userId) },
+  { $set: { cart: [] } }
+);
 
     console.log('Clear result:', result);
     return result;
