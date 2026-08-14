@@ -2,6 +2,13 @@
   display: block;
 }
 
+.render-guard-p {
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: var(--space-lg);
+} 
+
+
 .my-recipes-container {
   display: flex;
   flex-direction: column;

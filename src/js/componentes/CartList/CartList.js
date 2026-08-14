@@ -67,7 +67,7 @@ export class CartList extends LitElement {
 
     return html`
     ${this.apiData.cart.length === 0
-      ? html`<p>No items in the cart yet.</p>`
+      ? html`<p class="render-guard-p">No items in the cart yet. visit our <a class="render-guard-a" href="/shop">shop</a></p>`
       : html`
       <ul class="cart-list">
         ${this.apiData.cart.map(item => html`
