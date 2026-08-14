@@ -33,7 +33,7 @@ export class Hero extends LitElement {
         />
         <div class="hero-buttons">
           <a href="./login.html"><button class="hero-btn hero-btn-primary">Login</button></a>
-          <a href="./signup.html"><button class="hero-btn hero-btn-secondary">Sign up</button></a>
+          <a href="./sign.html"><button class="hero-btn hero-btn-secondary">Sign up</button></a>
         </div>
       </section>
     `;
