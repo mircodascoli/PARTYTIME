@@ -28,12 +28,12 @@ export class Hero extends LitElement {
       <section class="hero ${this._animate ? 'is-animating' : ''}">
         <img
           class="hero-logo"
-          src="../../img/logo.svg"
+          src="../../img/logo.png"
           alt="Logo"
         />
         <div class="hero-buttons">
-          <button class="hero-btn hero-btn-primary">Login</button>
-          <button class="hero-btn hero-btn-secondary">Sign up</button>
+          <a href="./login.html"><button class="hero-btn hero-btn-primary">Login</button></a>
+          <a href="./signup.html"><button class="hero-btn hero-btn-secondary">Sign up</button></a>
         </div>
       </section>
     `;
