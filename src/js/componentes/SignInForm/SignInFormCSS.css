@@ -1,48 +1,90 @@
-.hidden {
-  display: none;
-}
-
-.loading {
-  opacity: .5;
-}
-
-
-
-.title {
-  text-shadow: 2px 2px 4px rgb(175 195 110);
-}
-
-form {
+.form-sign {
   display: flex;
   flex-direction: column;
-  background-color: #888;
-  padding: 1em;
-  border-radius: 5px;
-  gap: 10px;
-  max-width: 600px;
+  gap: 16px;
+  max-width: 360px;
+  width: 100%;
   margin: 0 auto;
+  padding: 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.info-message {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0 0 8px 0;
+  text-align: center;
+}
+
+.form-sign input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+  outline: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  box-sizing: border-box;
+}
+
+.form-sign input::placeholder {
+  color: #9ca3af;
+}
+
+.form-sign input:focus {
+  border-color: #111827;
+  background: #ffffff;
+}
+
+.btn {
+  padding: 12px 16px;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn-submit {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-submit:hover {
+  opacity: 0.9;
+}
+
+.btn-google {
+  background: #fff;
+  color: #374151;
+  border: 1px solid #e5e7eb;
+  display: flex;
   align-items: center;
-  row-gap: 20px;
+  justify-content: center;
+  gap: 8px;
+}
 
- 
-  .login-or-sign{
-      color:white;
-      text-decoration: none;
-  }
+.btn-google:hover {
+  background: #f9fafb;
+}
 
-  .btn{
-   cursor: pointer;
-        height: 40px;
-        width: 100px;
-        border-radius: 5px;
-    }
+.login-or-sign {
+  text-align: center;
+  font-size: 13px;
+  color: #6b7280;
+  text-decoration: none;
+  margin-top: 4px;
+}
 
-    input{
-        height: 30px;
-        width: 60%;
-        border-radius: 5px;
-
-    }
-
-
+.login-or-sign:hover {
+  color: #111827;
+  text-decoration: underline;
 }
