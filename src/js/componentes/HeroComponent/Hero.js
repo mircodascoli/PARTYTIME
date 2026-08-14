@@ -28,7 +28,7 @@ export class Hero extends LitElement {
       <section class="hero ${this._animate ? 'is-animating' : ''}">
         <img
           class="hero-logo"
-          src="../../img/logo.png"
+          src="../../img/logo-stretch-white.png"
           alt="Logo"
         />
         <div class="hero-buttons">
