@@ -67,7 +67,7 @@ export class CartList extends LitElement {
 
     return html`
     ${this.apiData.cart.length === 0
-      ? html`<p class="render-guard-p">No items in the cart yet. visit our <a class="render-guard-a" href="/shop">shop</a></p>`
+      ? html`<p class="render-guard-p">No items in the cart yet. visit our <a class="render-guard-a" href="/shop.html">shop</a></p>`
       : html`
       <ul class="cart-list">
         ${this.apiData.cart.map(item => html`
@@ -81,8 +81,6 @@ export class CartList extends LitElement {
                 <div class="cart-item-price-controller"><p class="cart-product-price">${formatPrice(item.price)}</p><drop-down-cart-menu class="drop-down-menu" .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu></div>
             </div>
           </div>
-        
-          
           </li>
         `)}
       </ul>
