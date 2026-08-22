@@ -1,18 +1,29 @@
 {
-  "name": "neoland",
+  "name": "Partytime",
   "version": "1.0.0",
-  "description": "par practicas",
-  "main": "server/server.basic.js",
+  "description": "Progetto didattico per esercitarsi con Node.js, Express e Lit",
+  "main": "server/server.express.js",
   "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20.6.0"
+  },
   "scripts": {
-    "server:sencillo": "node --env-file=.env --watch server/server.express.js",
-    "server:basic:start": "node --env-file=.env --watch server/server.basic.js",
-    "server:statics:start": "node --env-file=.env --watch server/server.statics.js",
-    "server:api:start": "node --env-file=.env --watch server/server.api.js",
+    "start": "node --env-file=.env server/server.express.js",
+    "dev": "node --env-file=.env --watch server/server.express.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll",
+    "lint": "eslint .",
+    "lint:css": "stylelint \"**/*.css\"",
     "docs": "jsdoc ./src -r"
   },
+  "keywords": [
+    "node",
+    "express",
+    "lit",
+    "mongodb",
+    "supabase"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/mircodascoli/Neoland.git"
