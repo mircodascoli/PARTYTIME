@@ -121,53 +121,80 @@ footer {
   padding: var(--space-md);
   background-color: var(--color-text-primary);
   color: var(--color-text-inverse);
-  height: fit-content ;
+  height: fit-content;
 }
 
-
-  .footer-logo{
-    width: 150px;
-    height: auto;
-  }
-
-  .footer-elements-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    gap: var(--space-md);
-    width: 70%;
-    padding: var(--space-md);
-  }
-
-  .contact-container{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: flex-start;
-    gap: var(--space-md);
-  }
-
-  .contact-container a{
-    text-decoration: none;
-   color: white;
-  }
-
-  .contact-container a:hover{
-    text-decoration: underline;
-  }
-
-  .contact-container-span{
-    font-size: 24px;
+.footer-logo {
+  width: 150px;
+  height: auto;
 }
 
-  .footer-credits{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    gap: var(--space-md);
-  }
+.footer-elements-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--space-md);
+  width: 70%;
+  padding: var(--space-md);
+}
+
+a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+a svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: var(--space-md);
+}
+
+.contact-container svg {
+  flex-shrink: 0;
+  display: block;
+}
+
+.contact-container a {
+  text-decoration: none;
+  color: white;
+}
+
+.contact-container a:hover {
+  text-decoration: underline;
+}
+
+.contact-container-span {
+  font-size: 24px;
+}
+
+.footer-credits {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.footer-credits p {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-credits p svg {
+  display: block;
+  flex-shrink: 0;
+}
 
 /* ───Bottom navigation ───────────────────────────────────── */
 .bottom-nav {
@@ -238,8 +265,6 @@ footer {
 }
  
 
-
-/
 
 .index-buttons-container {
   display: flex;
