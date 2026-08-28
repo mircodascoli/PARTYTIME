@@ -1,78 +1,76 @@
 :host {
-      display: block;
-    }
- 
-    .search-wrapper {
-      display: flex;
-      flex-direction: row;
-      border: 2px solid black;
-      border-radius: 50px;
-      max-width: 500px;
-     
-    }
+  display: block;
+}
 
-    .search-wrapper :focus {
-      border-color: var(--color-accent);
-    }
- 
-    input {
-      flex: 1;
-      font-size: 1rem;
-      border: none;
-      outline: none;
-      transition: border-color 0.2s;
-      border-radius: 50px;
-      padding-left: var(--space-md);
-    
-    }
- 
-    button {
-      padding: 0.6rem 1.2rem;
-      background: var(--color-accent);
-      color: white;
-      border: none;
-      border-radius: 50px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
- 
-    button:hover {
-      background: var(--color-accent-hover);
-    }
- 
-    button:disabled {
-      background: #a5b4fc;
-      cursor: not-allowed;
-    }
- 
-    .error {
-      color: #dc2626;
-      margin-top: 0.5rem;
-      font-size: 0.9rem;
-    }
- 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 1rem;
-    }
- 
-    li {
-      padding: 0.75rem 1rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-      margin-bottom: 0.5rem;
-      background: #f9fafb;
-      transition: background 0.15s;
-    }
- 
-    li:hover {
-      background: #ede9fe;
-    }
- 
-    .empty {
-      color: #6b7280;
-      margin-top: 0.75rem;
-      font-size: 0.95rem;
-    }
+.search-wrapper {
+  display: flex;
+  flex-direction: row;
+  border: 2px solid black;
+  border-radius: 50px;
+  max-width: 500px;
+}
+
+.search-wrapper :focus {
+  border-color: var(--color-accent);
+}
+
+input {
+  flex: 1;
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  transition: border-color 0.2s;
+  border-radius: 50px;
+  padding-left: var(--space-md);
+}
+
+button {
+  padding: 0.6rem 1.2rem;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: 50px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background: var(--color-accent-hover);
+}
+
+button:disabled {
+  background: #a5b4fc;
+  cursor: not-allowed;
+}
+
+.error {
+  color: #dc2626;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+li {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  background: #f9fafb;
+  transition: background 0.15s;
+}
+
+li:hover {
+  background: #ede9fe;
+}
+
+.empty {
+  color: #6b7280;
+  margin-top: 0.75rem;
+  font-size: 0.95rem;
+}

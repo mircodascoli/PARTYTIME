@@ -1,72 +1,76 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import SearchBarCSS from '../SearchBar/SearchBarCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import { getAPIData, API_PORT } from '../../utils.js';
 export class SearchBar extends LitElement {
-    static styles = [ResetCSS, SearchBarCSS];
-    static properties = {
+  static styles = [ResetCSS, SearchBarCSS];
+  static properties = {
     loading: { type: Boolean },
-    error:   { type: String  },
-    query:   { type: String  },
+    error: { type: String },
+    query: { type: String },
   };
 
-constructor() {
+  constructor() {
     super();
     this.loading = false;
-    this.error   = '';
-    this.query   = '';
+    this.error = '';
+    this.query = '';
   }
   _handleInput(e) {
     this.query = e.target.value;
-  if (this.query.trim() === '') {
-    this.dispatchEvent(
-      new CustomEvent('search-reset', {
-        bubbles:  true,
-        composed: true,
-      })
-    );
+    if (this.query.trim() === '') {
+      this.dispatchEvent(
+        new CustomEvent('search-reset', {
+          bubbles: true,
+          composed: true,
+        })
+      );
+    }
   }
-  }
- 
+
   async _handleSearch(e) {
     e.preventDefault();
- 
+
     const searchedValue = this.query.trim();
- 
+
     if (!searchedValue) {
       this.error = 'Insert product name or spirit to search';
       return;
     }
- 
-    this.error   = '';
+
+    this.error = '';
     this.loading = true;
     const payload = JSON.stringify({ name: searchedValue });
 
- 
     try {
-      let data = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/search`, 'POST', payload)
- 
+      let data = await getAPIData(
+        `${location.protocol}//${location.hostname}${API_PORT}/api/search`,
+        'POST',
+        payload
+      );
+
       if (data.length === 0) {
         this.error = 'Producto no encontrado';
         return;
-    
       }
-     console.log(data)
+      console.log(data);
       this.dispatchEvent(
         new CustomEvent('search-results', {
-          detail:   { results: data, query: searchedValue },
-          bubbles:  true,
+          detail: { results: data, query: searchedValue },
+          bubbles: true,
           composed: true,
         })
       );
- 
     } catch (err) {
       this.error = `Error al buscar: ${err.message}`;
     } finally {
       this.loading = false;
     }
   }
- 
+
   render() {
     return html`
       <form class="search-wrapper" @submit=${this._handleSearch}>
@@ -78,13 +82,28 @@ constructor() {
           ?disabled=${this.loading}
         />
         <button type="submit" ?disabled=${this.loading}>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="icon icon-tabler icons-tabler-outline icon-tabler-search"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+            <path d="M21 21l-6 -6" />
+          </svg>
         </button>
       </form>
- 
+
       ${this.error ? html`<p class="error">${this.error}</p>` : ''}
     `;
   }
 }
- 
+
 customElements.define('search-bar', SearchBar);

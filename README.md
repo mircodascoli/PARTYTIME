@@ -1,4 +1,3 @@
-
 # PARTYTIME
 
 > More than a liquor store — an interactive experience that guides you through the world of spirits, helps you craft unforgettable cocktails, and makes every visit feel like a night out.
@@ -13,12 +12,12 @@ is a full-stack web application that blends e-commerce with entertainment. Users
 
 ## 🛠️ Tech Stack
 
-| Layer      | Technology                           |
-|------------|--------------------------------------|
-| Frontend   | Lit Web Components, HTML, CSS        |
-| Build Tool | Vite                                 |
-| Backend    | Node.js, Express                     |
-| Database   | MongoDB                              |
+| Layer      | Technology                    |
+| ---------- | ----------------------------- |
+| Frontend   | Lit Web Components, HTML, CSS |
+| Build Tool | Vite                          |
+| Backend    | Node.js, Express              |
+| Database   | MongoDB                       |
 
 ---
 

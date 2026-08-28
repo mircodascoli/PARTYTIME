@@ -5,7 +5,6 @@
   width: 100vw;
   height: 100vh;
   display: block;
-
 }
 
 .underlay {
@@ -18,7 +17,7 @@
   height: 100%;
   background-color: #8080802a;
   backdrop-filter: blur(3px);
-  
+
   /* -webkit-backdrop-filter: blur(3px); */
   cursor: pointer;
   animation: fade-in-underlay 0.25s ease-out;
@@ -27,7 +26,7 @@
 .popup-window {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;;
+  justify-content: flex-start;
   align-items: center;
   background-color: white;
   padding: 20px;
@@ -47,9 +46,7 @@
   display: flex;
   justify-content: flex-end;
   align-self: flex-end;
-  position:absolute;
- 
-
+  position: absolute;
 }
 
 .close-btn {
@@ -59,7 +56,9 @@
   background: transparent;
   cursor: pointer;
   opacity: 0.6;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
   position: relative;
   top: 10px;
   right: 10px;
@@ -70,18 +69,21 @@
   transform: rotate(90deg);
 }
 
-.precart-body-container{
- display: flex;
- flex-direction: column;
- justify-content: space-between;
- align-items: center;
- height: 100%;
+.precart-body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
 }
 
-
 @keyframes fade-in-underlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes pop-in {
@@ -96,7 +98,7 @@
   }
 }
 
-.precart-pic-container{
+.precart-pic-container {
   width: 100%;
   display: flex;
   justify-content: center;
@@ -108,10 +110,9 @@
   width: auto;
   height: 100%;
   overflow: hidden;
-  
 }
 
-.precart-inputs-container{
+.precart-inputs-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -119,7 +120,7 @@
   gap: 1em;
 }
 
-.popup-select-button{
+.popup-select-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -138,8 +139,7 @@
   flex-shrink: 0;
 }
 
-.precart-info-title{
+.precart-info-title {
   font-size: var(--text-2xl);
   text-transform: capitalize;
-
 }

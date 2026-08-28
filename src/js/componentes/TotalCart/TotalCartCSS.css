@@ -1,42 +1,42 @@
-:host{
-    display:flex;
-    flex-direction:column;
-    gap: 20px;
-    align-items: center;
-    padding: 20px;
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding: 20px;
 }
 
-.items-total, .delivery, .total-cart {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px;
+.items-total,
+.delivery,
+.total-cart {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
 }
 
 .items-total {
-    border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
 }
 
 .order-summary {
-   align-self: flex-start;
+  align-self: flex-start;
 }
 
 .delivery-title {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .delivery-free {
-    color: green;
-    font-weight: bold;
+  color: green;
+  font-weight: bold;
 }
 
 .total-cart h2 {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .total-cart p {
-    font-size: 1.5em;
-    font-weight: bold;
+  font-size: 1.5em;
+  font-weight: bold;
 }
-
-

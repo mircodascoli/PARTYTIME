@@ -1,8 +1,8 @@
 import express from 'express';
-import { db } from "./server.mongodb.js";
+import { db } from './server.mongodb.js';
 import bodyParser from 'body-parser';
 import { ObjectId } from 'mongodb';
-import { sendOrderEmail } from './mailer.js'; 
+import { sendOrderEmail } from './mailer.js';
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -14,35 +14,33 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // CREATE
 
 app.post('/api/create/botellas', async (req, res) => {
-  console.log('server reate botellas')
-  res.json(await db.botellas.get())
+  console.log('server reate botellas');
+  res.json(await db.botellas.get());
 });
 
 app.post('/api/create/users', async (req, res) => {
-  const userExists = await db.users.get({ email: req.body.email })
-  console.log("hello from create users")
+  const userExists = await db.users.get({ email: req.body.email });
+  console.log('hello from create users');
 
   if (userExists.length === 0) {
-    const newUser = req.body
-    delete newUser._id
-    res.json(await db.users.create(newUser))
-    
+    const newUser = req.body;
+    delete newUser._id;
+    res.json(await db.users.create(newUser));
   } else {
-    res.status(400).send('User already exists from express')
+    res.status(400).send('User already exists from express');
   }
-})
+});
 
 // READ
 
 app.get('/api/read/users', async (req, res) => {
-  console.log('server read users')
-  res.json(await db.users.get())
+  console.log('server read users');
+  res.json(await db.users.get());
 });
 
 app.get('/api/read/botellas', async (req, res) => {
-
-  console.log('server read botellas')
-  res.json(await db.botellas.get())
+  console.log('server read botellas');
+  res.json(await db.botellas.get());
 });
 
 app.get('/api/read/cocktails', async (req, res) => {
@@ -58,35 +56,34 @@ app.get('/api/read/cocktails', async (req, res) => {
   }
 });
 
-// UPDATE     
+// UPDATE
 app.put('/api/update/users/:_id', async (req, res) => {
-  res.json(await db.users.update(req.params._id, req.body))
-  console.log('update', req.params._id, req.body)
-})
+  res.json(await db.users.update(req.params._id, req.body));
+  console.log('update', req.params._id, req.body);
+});
 
 // DELETE
 
 app.delete('/api/delete/from/cart', async (req, res) => {
-  console.log('server delete from cart')
+  console.log('server delete from cart');
 
-  res.json(await db.users.DeleteFromCart(req.body.idBotella, req.body.idUser))
-
-})
+  res.json(await db.users.DeleteFromCart(req.body.idBotella, req.body.idUser));
+});
 
 app.delete('/api/clear/cart', async (req, res) => {
-  console.log('server clear cart', req.body.userId, typeof req.body.userId)
+  console.log('server clear cart', req.body.userId, typeof req.body.userId);
 
-  res.json(await db.users.clearCart(req.body.userId))
-})
+  res.json(await db.users.clearCart(req.body.userId));
+});
 
 app.delete('/api/delete/recipe', async (req, res) => {
-  console.log('server delete recipe', req.body)
+  console.log('server delete recipe', req.body);
   const { userId, recipeId } = req.body;
   res.json(await db.users.deleteRecipe(userId, recipeId));
 });
 
 app.delete('/api/delete/item', async (req, res) => {
-  console.log('server delete item', req.body)
+  console.log('server delete item', req.body);
   const { userId, itemId } = req.body;
   res.json(await db.users.deleteItem(userId, itemId));
 });
@@ -94,28 +91,31 @@ app.delete('/api/delete/item', async (req, res) => {
 // FILTER
 
 app.post('/api/search', async (req, res) => {
-  console.log('search in express', req.body)
+  console.log('search in express', req.body);
   //recuerda añadir la projeccion para filtrar los ampos que devolvemos
-  res.json(await db.botellas.search({ $text: { $search: req.body.name } }, {}))
-})
+  res.json(await db.botellas.search({ $text: { $search: req.body.name } }, {}));
+});
 
 app.get('/api/product/preview/:name', async (req, res) => {
-  console.log('preview for product', req.params.name)
-  const result = await db.botellas.productPreview({ name: req.params.name }, {});
+  console.log('preview for product', req.params.name);
+  const result = await db.botellas.productPreview(
+    { name: req.params.name },
+    {}
+  );
   res.json(result);
-})
+});
 
 app.post('/api/busqueda/cart', async (req, res) => {
   try {
     const ids = req.body.ids;
     console.log('Ricevuti questi ID:', ids);
-    const objectIds = ids.map(id => new ObjectId(id));
+    const objectIds = ids.map((id) => new ObjectId(id));
     const botellas = await db.botellas.findByIds({ _id: { $in: objectIds } });
     res.json(botellas);
   } catch (error) {
     console.error('Error in express', error);
   }
-})
+});
 
 app.post('/api/busqueda/party', async (req, res) => {
   console.log('estamos en busqueda party', req.body);
@@ -123,7 +123,9 @@ app.post('/api/busqueda/party', async (req, res) => {
   const keywords = req.body.keywords;
   console.log(keywords, typeof keywords, 'keywords in express');
   if (!Array.isArray(keywords)) {
-    return res.status(400).json({ error: "Keywords should be an array of strings." });
+    return res
+      .status(400)
+      .json({ error: 'Keywords should be an array of strings.' });
   }
 
   try {
@@ -134,35 +136,37 @@ app.post('/api/busqueda/party', async (req, res) => {
     res.json(result);
   } catch (error) {
     console.error('DB error:', error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
 app.post('/api/push/to/cart', async (req, res) => {
-  console.log('req.body push to cart EXPRESS', req.body)
-  res.json(await db.users.addToCart(req.body.productAndQuantity, req.body.user))
-})
+  console.log('req.body push to cart EXPRESS', req.body);
+  res.json(
+    await db.users.addToCart(req.body.productAndQuantity, req.body.user)
+  );
+});
 
 app.post('/api/push/to/recipes', async (req, res) => {
-  console.log('req.body push to recipes in express', req.body)
-  res.json(await db.users.addToRecipes(req.body.recipe, req.body.idUser))
-})
+  console.log('req.body push to recipes in express', req.body);
+  res.json(await db.users.addToRecipes(req.body.recipe, req.body.idUser));
+});
 
 app.post('/api/buscar/usuario', async (req, res) => {
-  console.log('estamos en busqueda', req.body)
+  console.log('estamos en busqueda', req.body);
   //recuerda añadir la projeccion para filtrar los ampos que devolvemos
-  res.json(await db.users.search(req.body))
-  console.log(res.json)
-})
+  res.json(await db.users.search(req.body));
+  console.log(res.json);
+});
 
 app.post('/api/login', async (req, res) => {
-  console.log('estamos en login', req.body)
-  const user = await db.users.login({ email: req.body.email})
-  res.json(user)
-})
+  console.log('estamos en login', req.body);
+  const user = await db.users.login({ email: req.body.email });
+  res.json(user);
+});
 
 app.post('/api/buy/ingredient', async (req, res) => {
-  console.log('server buy ingredient', req.body)
+  console.log('server buy ingredient', req.body);
   const { userId, ingDbname } = req.body;
   res.json(await db.users.buyIngredient(userId, ingDbname));
 });
@@ -179,17 +183,19 @@ app.get('/api/find/bottles/:id', async (req, res) => {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
   }
-})
+});
 
 app.post('/api/order', async (req, res) => {
   console.log('server send order email', req.body);
- 
+
   const { name, email, products, total } = req.body;
- 
+
   if (!name || !email || !products?.length) {
-    return res.status(400).json({ success: false, error: 'Incomplete order data' });
+    return res
+      .status(400)
+      .json({ success: false, error: 'Incomplete order data' });
   }
- 
+
   try {
     await sendOrderEmail({ name, email, products, total });
     res.json({ success: true, message: 'Order received, emails sent' });
@@ -199,16 +205,16 @@ app.post('/api/order', async (req, res) => {
   }
 });
 
-
 app.put('/api/cart/item/update', async (req, res) => {
-   console.log('req.body cart item update EXPRESS', req.body)
-  res.json(await db.users.updateCart(req.body.productAndQuantity, req.body.user))
-})
+  console.log('req.body cart item update EXPRESS', req.body);
+  res.json(
+    await db.users.updateCart(req.body.productAndQuantity, req.body.user)
+  );
+});
 
 // Static server
 app.use(express.static('src'));
 
 app.listen(port, async () => {
   console.log(` listening on port ${port}`);
-})
-
+});

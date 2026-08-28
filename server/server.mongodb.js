@@ -1,4 +1,4 @@
-import { MongoClient, ObjectId } from "mongodb";
+import { MongoClient, ObjectId } from 'mongodb';
 
 const URI = process.env.MONGO_URI;
 
@@ -15,35 +15,30 @@ export const db = {
     deleteRecipe: deleteRecipe,
     deleteItem: deleteItem,
     addToCart: AddProductToCart,
-    updateCart: UpdateProductInCart
-
-
+    updateCart: UpdateProductInCart,
   },
   botellas: {
     get: getBotellas,
     getInCart: DisplayBotellasInCart,
     search: searchBotellas,
     findByIds: findBotellasByIds,
-    productPreview: productPreview
-
-  }
-  , cocktails: {
-    get: getCocktails
-  }
-}
+    productPreview: productPreview,
+  },
+  cocktails: {
+    get: getCocktails,
+  },
+};
 
 async function getBotellas(filter, projection) {
-  console.log('hey from get bottellas')
+  console.log('hey from get bottellas');
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const botellasCollection = PartytimetDB.collection('Botellas');
   return await botellasCollection.find(filter).project(projection).toArray();
-
 }
 
-
 async function DisplayBotellasInCart() {
-  console.log('hey from get botellas in cartMONGODB')
+  console.log('hey from get botellas in cartMONGODB');
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const usersCollection = PartytimetDB.collection('Botellas');
@@ -52,23 +47,28 @@ async function DisplayBotellasInCart() {
 
 async function AddProductToCart(idProductQuantity, idUser) {
   const client = new MongoClient(URI);
-  console.log('Adding product to cart in MongoDB...', idProductQuantity, 'for user', idUser);
+  console.log(
+    'Adding product to cart in MongoDB...',
+    idProductQuantity,
+    'for user',
+    idUser
+  );
 
   try {
     await client.connect();
-    const db = client.db("Partytime");
-    const users = db.collection("users");
+    const db = client.db('Partytime');
+    const users = db.collection('users');
 
     // 1️⃣ Try to update quantity if product already exists in cart
     const result = await users.updateOne(
       {
         _id: new ObjectId(idUser),
-        "cart._id": idProductQuantity._id  // ← match the specific cart item
+        'cart._id': idProductQuantity._id, // ← match the specific cart item
       },
       {
         $inc: {
-          "cart.$.quantity": idProductQuantity.quantity
-        }
+          'cart.$.quantity': idProductQuantity.quantity,
+        },
       }
     );
 
@@ -78,12 +78,11 @@ async function AddProductToCart(idProductQuantity, idUser) {
         { _id: new ObjectId(idUser) },
         {
           $push: {
-            cart: { ...idProductQuantity }
-          }
+            cart: { ...idProductQuantity },
+          },
         }
       );
     }
-
   } catch (err) {
     console.error(err);
   } finally {
@@ -95,22 +94,22 @@ async function addToRecipes(recipe, idUser) {
 
   try {
     await client.connect();
-    const db = client.db("Partytime");
-    const users = db.collection("users");
+    const db = client.db('Partytime');
+    const users = db.collection('users');
 
     // 1️⃣ Provo a sostituire se esiste già stesso name
     const result = await users.updateOne(
       {
         _id: new ObjectId(idUser),
-        "recipes.name": recipe.name
+        'recipes.name': recipe.name,
       },
       {
         $set: {
-          "recipes.$": {
+          'recipes.$': {
             _id: new ObjectId(),
-            ...recipe
-          }
-        }
+            ...recipe,
+          },
+        },
       }
     );
 
@@ -122,58 +121,54 @@ async function addToRecipes(recipe, idUser) {
           $push: {
             recipes: {
               _id: new ObjectId(),
-              ...recipe
-            }
-          }
+              ...recipe,
+            },
+          },
         }
       );
     }
   } catch (err) {
     console.error(err);
-
   } finally {
     await client.close();
   }
 }
 
 async function getUsers(filter, projection) {
-  console.log('hey from get users')
+  console.log('hey from get users');
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const usersCollection = PartytimetDB.collection('users');
   return await usersCollection.find(filter).project(projection).toArray();
-
 }
 async function getCocktails() {
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const cocktailsCollection = PartytimetDB.collection('Cocktails');
   const cocktails = await cocktailsCollection.find({}).toArray();
-  console.log(cocktails, 'cocktails from MONGOdb')
+  console.log(cocktails, 'cocktails from MONGOdb');
   return cocktails;
-
 }
 
 async function searchBotellas(filter, projection) {
-  console.log('hey from search botellas', filter)
+  console.log('hey from search botellas', filter);
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const botellasCollection = PartytimetDB.collection('Botellas');
   return await botellasCollection.find(filter).project(projection).toArray();
-
 }
 
 async function searchUsers(filter) {
-  console.log('hey from search users')
+  console.log('hey from search users');
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const usersCollection = PartytimetDB.collection('users');
 
-  console.log({ id: new ObjectId(filter) })
+  console.log({ id: new ObjectId(filter) });
 
   let UserFromDB = await usersCollection.findOne({ _id: new ObjectId(filter) });
-  console.log(UserFromDB)
-  return UserFromDB
+  console.log(UserFromDB);
+  return UserFromDB;
 }
 async function findBotellasByIds(filter) {
   console.log('Cercando bottiglie con questi ID:', filter);
@@ -186,33 +181,35 @@ async function findBotellasByIds(filter) {
 }
 
 async function login(email) {
-  console.log('hey from login', email)
+  console.log('hey from login', email);
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const usersCollection = PartytimetDB.collection('users');
-  let collectionUsers = usersCollection.findOne( email )
-  
-  return await collectionUsers
+  let collectionUsers = usersCollection.findOne(email);
 
+  return await collectionUsers;
 }
 
 async function createUsers(user) {
-  console.log('your email has been registred', user.email)
+  console.log('your email has been registred', user.email);
   const client = new MongoClient(URI);
   const PartytimeDB = client.db('Partytime');
   const usersCollection = PartytimeDB.collection('users');
-  return await usersCollection.insertOne(user)
+  return await usersCollection.insertOne(user);
 }
 
 async function updateUsers(id, updates) {
-  console.log('your recipe has been saved to your account',)
+  console.log('your recipe has been saved to your account');
   const client = new MongoClient(URI);
   const PartytimeDB = client.db('Partytime');
   const usersCollection = PartytimeDB.collection('users');
 
-  const returnValue = await usersCollection.updateOne({ _id: new ObjectId(id) }, { $set: updates });
-  console.log(returnValue)
-  return returnValue
+  const returnValue = await usersCollection.updateOne(
+    { _id: new ObjectId(id) },
+    { $set: updates }
+  );
+  console.log(returnValue);
+  return returnValue;
 }
 
 async function DeleteFromCart(idBotella, idUser) {
@@ -243,14 +240,14 @@ async function clearCart(userId) {
   const client = new MongoClient(URI);
 
   try {
-   await client.connect();
-const db = client.db('Partytime');
-const users = db.collection('users');
+    await client.connect();
+    const db = client.db('Partytime');
+    const users = db.collection('users');
 
-const result = await users.updateOne(
-  { _id: new ObjectId(userId) },
-  { $set: { cart: [] } }
-);
+    const result = await users.updateOne(
+      { _id: new ObjectId(userId) },
+      { $set: { cart: [] } }
+    );
 
     console.log('Clear result:', result);
     return result;
@@ -274,11 +271,11 @@ async function deleteRecipe(userId, recipeId) {
       { _id: new ObjectId(userId) },
       {
         $pull: {
-          recipes: { _id: new ObjectId(recipeId) }
-        }
+          recipes: { _id: new ObjectId(recipeId) },
+        },
       }
 
-      // RECIPE ID ARRIVA UNDEFINED 
+      // RECIPE ID ARRIVA UNDEFINED
     );
     console.log('Delete result:', result);
     return result;
@@ -301,11 +298,11 @@ async function deleteItem(userId, itemId) {
       { _id: new ObjectId(userId) },
       {
         $pull: {
-          cart: { _id:(itemId) }
-        }
+          cart: { _id: itemId },
+        },
       }
 
-      // RECIPE ID ARRIVA UNDEFINED 
+      // RECIPE ID ARRIVA UNDEFINED
     );
     console.log('Delete result:', result);
     return result;
@@ -317,7 +314,7 @@ async function deleteItem(userId, itemId) {
   }
 }
 async function productPreview(filter, projection) {
-  console.log('hey from previw in mongo DB')
+  console.log('hey from previw in mongo DB');
   const client = new MongoClient(URI);
   const PartytimetDB = client.db('Partytime');
   const botellasCollection = PartytimetDB.collection('Botellas');
@@ -327,19 +324,24 @@ async function productPreview(filter, projection) {
 
 async function UpdateProductInCart(productAndQuantity, idUser) {
   const client = new MongoClient(URI);
-  console.log('Updating product in cart in MongoDB...', productAndQuantity, 'for user', idUser);
+  console.log(
+    'Updating product in cart in MongoDB...',
+    productAndQuantity,
+    'for user',
+    idUser
+  );
   try {
     await client.connect();
     const db = client.db('Partytime');
     const users = db.collection('users');
 
-   const result = await users.updateOne(
-  { 
-    _id: new ObjectId(idUser),   // user _id is still an ObjectId
-    'cart._id': productAndQuantity._id           // cart _id is a plain string
-  },
-  { $set: { 'cart.$.quantity': productAndQuantity.quantity } }
-);;
+    const result = await users.updateOne(
+      {
+        _id: new ObjectId(idUser), // user _id is still an ObjectId
+        'cart._id': productAndQuantity._id, // cart _id is a plain string
+      },
+      { $set: { 'cart.$.quantity': productAndQuantity.quantity } }
+    );
 
     console.log('Update result:', result);
     return result;
@@ -350,4 +352,3 @@ async function UpdateProductInCart(productAndQuantity, idUser) {
     await client.close();
   }
 }
-

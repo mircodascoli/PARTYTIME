@@ -1,42 +1,48 @@
 //@ts-no-check
-import { checkLoggedIn, syncUserWithMongo } from "./utils.js"
+import { checkLoggedIn, syncUserWithMongo } from './utils.js';
 
-window.addEventListener('DOMContentLoaded', DomContentLoaded)
+window.addEventListener('DOMContentLoaded', DomContentLoaded);
 
 async function DomContentLoaded() {
   await checkLoggedIn();
 
   const mongoUser = await syncUserWithMongo();
-  
+
   if (mongoUser) {
     sessionStorage.setItem('user', JSON.stringify(mongoUser));
-  
+
     window.dispatchEvent(new CustomEvent('user-ready', { detail: mongoUser }));
   }
 
-  window.addEventListener('ingredient-selected', (e) => {openPreCart(e.detail)});
-  window.addEventListener('item-selected', (e) => {openPopUp(e.detail)});
-  window.addEventListener('AddedToCart', () => {openCartVerified()});
+  window.addEventListener('ingredient-selected', (e) => {
+    openPreCart(e.detail);
+  });
+  window.addEventListener('item-selected', (e) => {
+    openPopUp(e.detail);
+  });
+  window.addEventListener('AddedToCart', () => {
+    openCartVerified();
+  });
 }
 
 function openPopUp(data) {
-    console.log(`lets open the popup for ${data.name}
+  console.log(`lets open the popup for ${data.name}
       and description: ${data.description}`);
-    let popUp = document.createElement('recipe-customizer')
-    popUp.cocktail = data;
-    document.body.appendChild(popUp)
-  }
+  let popUp = document.createElement('recipe-customizer');
+  popUp.cocktail = data;
+  document.body.appendChild(popUp);
+}
 
-  function openPreCart(data) {
-    console.log(`lets open the popup for ${data.name}`);
-    let preCart = document.createElement('pre-cart-popup')
-    preCart.product = data;
-    document.body.appendChild(preCart)
-  }
+function openPreCart(data) {
+  console.log(`lets open the popup for ${data.name}`);
+  let preCart = document.createElement('pre-cart-popup');
+  preCart.product = data;
+  document.body.appendChild(preCart);
+}
 
- function openCartVerified() {
+function openCartVerified() {
   let cartVerified = document.querySelector('cart-verified');
-  
+
   if (!cartVerified) {
     cartVerified = document.createElement('cart-verified');
     document.body.appendChild(cartVerified);
@@ -44,5 +50,3 @@ function openPopUp(data) {
 
   cartVerified.show();
 }
-
- 

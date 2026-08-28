@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartListCSS from '../CartList/CartListCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT, getSSID, formatPrice } from '../../utils.js';
@@ -7,7 +10,7 @@ export class CartList extends LitElement {
   static styles = [ResetCSS, CartListCSS];
 
   static properties = {
-    apiData: { type: Object }
+    apiData: { type: Object },
   };
 
   constructor() {
@@ -48,17 +51,16 @@ export class CartList extends LitElement {
       );
 
       this.apiData = { ...apiData, cart: enrichedCart };
-
     } catch (err) {
-      console.error("Error loading cart:", err);
+      console.error('Error loading cart:', err);
     }
   }
 
   getTotal() {
     if (!this.apiData || !this.apiData.cart.length) return '0.00';
-     const total = this.apiData.cart
-    .reduce((sum, item) => sum + (item.price * item.quantity), 0)
-    .toFixed(2);
+    const total = this.apiData.cart
+      .reduce((sum, item) => sum + item.price * item.quantity, 0)
+      .toFixed(2);
     return total;
   }
 
@@ -66,28 +68,73 @@ export class CartList extends LitElement {
     if (!this.apiData) return html`<p>Loading...</p>`;
 
     return html`
-    ${this.apiData.cart.length === 0
-      ? html`<p class="render-guard-p">No items in the cart yet. visit our <a class="render-guard-a" href="/shop.html">shop</a></p>`
-      : html`
-      <ul class="cart-list">
-        ${this.apiData.cart.map(item => html`
-          <li class="cart-item">
-          <div class="cart-card">
-            <button class="delete-item" @click=${() => this.deleteItem(item._id)}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-trash"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M4 7l16 0" /><path d="M10 11l0 6" /><path d="M14 11l0 6" /><path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" /><path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" /></svg></button>
-            <img src="../../img/imgProductos/${item.name}.png" alt="${item.name}" class="cart-product-image" />
-            <div class="cart-card-data">
-              <h2 class="cart-product-name">${item.name}</h2>
-              <p class="cart-product-description">${item.description}</p>
-                <div class="cart-item-price-controller"><p class="cart-product-price">${formatPrice(item.price)}</p><drop-down-cart-menu class="drop-down-menu" .quantity=${item.quantity} ._id=${item._id} @quantity-changed=${this.updateTotal}></drop-down-cart-menu></div>
+      ${
+      this.apiData.cart.length === 0
+        ? html`<p class="render-guard-p">
+            No items in the cart yet. visit our
+            <a class="render-guard-a" href="/shop.html">shop</a>
+          </p>`
+        : html`
+            <ul class="cart-list">
+              ${this.apiData.cart.map(
+          (item) => html`
+            <li class="cart-item">
+              <div class="cart-card">
+                <button
+                  class="delete-item"
+                  @click=${() => this.deleteItem(item._id)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-trash"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M4 7l16 0" />
+                    <path d="M10 11l0 6" />
+                    <path d="M14 11l0 6" />
+                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                  </svg>
+                </button>
+                <img
+                  src="../../img/imgProductos/${item.name}.png"
+                  alt="${item.name}"
+                  class="cart-product-image"
+                />
+                <div class="cart-card-data">
+                  <h2 class="cart-product-name">${item.name}</h2>
+                  <p class="cart-product-description">${item.description}</p>
+                  <div class="cart-item-price-controller">
+                    <p class="cart-product-price">${formatPrice(item.price)}</p>
+                    <drop-down-cart-menu
+                      class="drop-down-menu"
+                      .quantity=${item.quantity}
+                      ._id=${item._id}
+                      @quantity-changed=${this.updateTotal}
+                    ></drop-down-cart-menu>
+                  </div>
+                </div>
+              </div>
+            </li>
+          `
+        )}
+            </ul>
+            <div class="total-cart-component-container">
+              <total-cart
+                .total=${this.getTotal()}
+                .products=${this.apiData.cart}
+              ></total-cart>
             </div>
-          </div>
-          </li>
-        `)}
-      </ul>
-      <div class="total-cart-component-container">
-      <total-cart .total=${this.getTotal()} .products=${this.apiData.cart}></total-cart>
-      </div>
-      `}
+          `
+    }
     `;
   }
 
@@ -103,11 +150,10 @@ export class CartList extends LitElement {
 
       this.apiData = {
         ...this.apiData,
-        cart: this.apiData.cart.filter(r => r._id !== id)
+        cart: this.apiData.cart.filter((r) => r._id !== id),
       };
-
     } catch (err) {
-      console.error("Error deleting item", err);
+      console.error('Error deleting item', err);
     }
   }
 

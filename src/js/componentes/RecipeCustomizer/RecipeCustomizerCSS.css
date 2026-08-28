@@ -5,7 +5,6 @@
   width: 100vw;
   height: 100vh;
   display: block;
-
 }
 
 .underlay {
@@ -18,7 +17,7 @@
   height: 100%;
   background-color: #8080802a;
   backdrop-filter: blur(3px);
-  
+
   /* -webkit-backdrop-filter: blur(3px); */
   cursor: pointer;
   animation: fade-in-underlay 0.25s ease-out;
@@ -27,7 +26,7 @@
 .popup-window {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;;
+  justify-content: flex-start;
   align-items: center;
   background-color: white;
   padding: 20px;
@@ -47,9 +46,7 @@
   display: flex;
   justify-content: flex-end;
   align-self: flex-end;
-  position:absolute;
- 
-
+  position: absolute;
 }
 
 .close-btn {
@@ -59,7 +56,9 @@
   background: transparent;
   cursor: pointer;
   opacity: 0.6;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
   position: relative;
   top: 10px;
   right: 10px;
@@ -70,19 +69,22 @@
   transform: rotate(90deg);
 }
 
-.popup-child-container{
- display: flex;
- flex-direction: column;
- justify-content: center;
- align-items: center;
- height: 100%;
- width: 100%;
+.popup-child-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
 }
 
-
 @keyframes fade-in-underlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes pop-in {

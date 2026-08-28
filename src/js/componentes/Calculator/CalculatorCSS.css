@@ -1,48 +1,45 @@
 :host {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 100%;
-    height: 95%;
- }
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  height: 95%;
+}
 
-.container-calculator{
-display: flex;
-flex-direction: column;
-justify-content: space-around;
-gap: 1em;
-height: 100%;
-width: 100%;
-  }
+.container-calculator {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  gap: 1em;
+  height: 100%;
+  width: 100%;
+}
 
-.calculator-recipe-name{
-   font-size: var(--text-2xl);
-  }
+.calculator-recipe-name {
+  font-size: var(--text-2xl);
+}
 
+#seleccionador {
+  background-color: black;
+  color: white;
+  height: 30px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
 
-#seleccionador{
-    background-color: black;
-    color: white;
-    height: 30px;
-    border: 1px solid white;
-    border-radius: 5px;
-  }
+input[type='range']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
-  
-input[type="range"]:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+.calculator-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
 
-.calculator-button-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    
-
-  }
-
-  .save-recipe-button, .another-recipe-button {
+.save-recipe-button,
+.another-recipe-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -53,25 +50,26 @@ input[type="range"]:disabled {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  }
+}
 
-  .save-recipe-button:hover, .another-recipe-button:hover {
-    background-color: var(--color-accent-mid);
-  }
+.save-recipe-button:hover,
+.another-recipe-button:hover {
+  background-color: var(--color-accent-mid);
+}
 
-  .save-recipe-button:hover svg{
-    color: var(  --color-success);
-  }
+.save-recipe-button:hover svg {
+  color: var(--color-success);
+}
 
-  .another-recipe-button:hover svg{
-     color: var(  --color-error);
-  }
+.another-recipe-button:hover svg {
+  color: var(--color-error);
+}
 
-
- .tabla-calculos {
+.tabla-calculos {
   width: 100%;
   border-collapse: collapse;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 0.95rem;
   color: #2d2d2d;
 }
@@ -92,7 +90,6 @@ input[type="range"]:disabled {
   color: #1a1a1a;
 }
 
-
 .tabla-calculos thead th {
   text-align: left;
   padding: 12px 16px;
@@ -112,7 +109,6 @@ input[type="range"]:disabled {
 .tabla-calculos tbody tr:last-child td {
   border-bottom: none;
 }
-
 
 .input-calculator {
   display: flex;
@@ -172,7 +168,9 @@ input[type="range"]:disabled {
   border-radius: 50%;
   background: #1a1a1a;
   margin-top: -5px;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
 }
 
 #range::-webkit-slider-thumb:hover {
@@ -185,13 +183,14 @@ input[type="range"]:disabled {
   border-radius: 50%;
   background: #1a1a1a;
   border: none;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition:
+    transform 0.15s ease,
+    background 0.15s ease;
 }
 
 #range::-moz-range-thumb:hover {
   transform: scale(1.2);
 }
-
 
 #range:focus-visible {
   outline: none;
