@@ -3,7 +3,7 @@
   width: 30%;
   flex-direction: row-reverse;
   padding: var(--space-xs);
-  position: relative; /* ancora per .options-container */
+  position: relative;
 }
 
 .select-box {
@@ -32,19 +32,19 @@
   padding: 6px 0;
   list-style: none;
   z-index: 99;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 4px 10px #0000001f;
 }
 
 .options-container.drop-down {
   top: calc(100% + 6px);
   bottom: auto;
-  animation: dropIn 0.15s ease-out;
+  animation: drop-in 0.15s ease-out;
 }
 
 .options-container.drop-up {
   bottom: calc(100% + 6px);
   top: auto;
-  animation: dropUp 0.15s ease-out;
+  animation: drop-up 0.15s ease-out;
 }
 
 .option {
@@ -60,12 +60,12 @@
   background: #f2f2f2;
 }
 
-@keyframes dropIn {
+@keyframes drop-in {
   from { opacity: 0; transform: translateY(-6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-@keyframes dropUp {
+@keyframes drop-up {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }

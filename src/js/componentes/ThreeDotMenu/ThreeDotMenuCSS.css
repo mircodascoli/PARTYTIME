@@ -21,7 +21,7 @@
     }
 
     .menu-trigger:hover {
-      background-color: rgba(0, 0, 0, 0.06);
+      background-color: #0000000f;
     }
 
     .dropdown {
@@ -31,7 +31,7 @@
       margin-top: 6px;
       background-color: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 4px 12px #00000026;
       min-width: 160px;
       overflow: hidden;
       z-index: 10;
