@@ -41,7 +41,6 @@
 
 .delete-recipe{
   background-color: transparent;
-
   cursor: pointer;
   width: 20px;
   height: 20px;
@@ -54,7 +53,7 @@
   background-color: #fff;
   border: 1px solid #e0e0e0;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px #00000014;
   margin: 24px 10px;
   padding: 20px;
   max-width: 480px;
@@ -62,7 +61,7 @@
 }
 
 .recipe-card:hover {
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 20px #0000001f;
   transform: translateY(-2px);
 }
 
@@ -143,17 +142,17 @@
   padding: 12px 24px;
   cursor: pointer;
   transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 6px #00000026;
 }
 
 .btn-black:hover {
   background-color: #000000;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px #00000033;
 }
 
 .btn-black:active {
   transform: scale(0.97);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px #00000026;
 }
 
 .btn-black:disabled {
@@ -162,10 +161,10 @@
   box-shadow: none;
 }
 
-.span-grey{
+.span-grey {
   text-transform: uppercase;
-  color: var(--color-text-secondary:) ;
-  font-size: var(--text-md)
+  color: var(--color-text-secondary);
+  font-size: var(--text-md);
 }
 
 .p-ingredient-name{
@@ -180,7 +179,6 @@
 
 .span-recipe-title{
   font-size: var(--text-xl);
-  text-transform: bold ;
 }
 
 .serving-container, .recipe-ingredients-list{
@@ -252,8 +250,8 @@
   }
 
   .delete-recipe-container {
-  order: 1; /* lo spostiamo dopo gli altri */
-  margin-left: auto; /* aggiungiamo un po' di margine a sinistra */
+  order: 1; 
+  margin-left: auto; 
 }
 
 .recipe-header-serving-ingredients-container{
@@ -264,12 +262,7 @@
  }
 
 .recipe-products-container {
-  order: 0; /* default */
+  order: 0; 
 }
 
-
-/*   .recipe-ingredients-container{
-    min-width: 190px;
-
-  } */
 }

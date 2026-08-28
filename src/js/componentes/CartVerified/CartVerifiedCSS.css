@@ -11,14 +11,13 @@
   max-width: min(90vw, 320px);
   padding: 12px 20px;
   border-radius: 8px;
-
-  background-color: rgba(28, 28, 30, 0.92);
+  background-color: #1c1c1eeb;
   backdrop-filter: blur(6px);
   color: #fff;
   font-size: 14px;
   line-height: 1.4;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px #00000026;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.25s ease, transform 0.25s ease;

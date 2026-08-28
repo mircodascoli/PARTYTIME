@@ -156,7 +156,7 @@ td {
 
 .hero-logo h1 {
   color:       var(--color-text-inverse);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 4px #000000cc;
   text-align:  center;
 }
 

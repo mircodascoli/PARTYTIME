@@ -13,7 +13,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: #00000059;
   z-index: 9999;
 }
 
@@ -27,7 +27,7 @@
   height: auto;
   padding: 16px;
   border-radius: 8px;
-  background-color: rgba(64, 64, 64, 0.9);
+  background-color: #404040e6;
   color: white;
   text-align: center;
   cursor: default;

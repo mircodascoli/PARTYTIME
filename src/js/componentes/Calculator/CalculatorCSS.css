@@ -121,7 +121,7 @@ input[type="range"]:disabled {
   padding: 16px 0;
 }
 
-#label-range {
+#labelRange {
   font-size: 0.85rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -131,7 +131,7 @@ input[type="range"]:disabled {
 }
 
 #range {
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   appearance: none;
   flex: 1;
   height: 4px;
@@ -165,7 +165,7 @@ input[type="range"]:disabled {
 }
 
 #range::-webkit-slider-thumb {
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   appearance: none;
   width: 14px;
   height: 14px;
@@ -198,11 +198,11 @@ input[type="range"]:disabled {
 }
 
 #range:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.15);
+  box-shadow: 0 0 0 4px #1a1a1a26;
 }
 
 #range:focus-visible::-moz-range-thumb {
-  box-shadow: 0 0 0 4px rgba(26, 26, 26, 0.15);
+  box-shadow: 0 0 0 4px #1a1a1a26;
 }
 
 .people-units {
