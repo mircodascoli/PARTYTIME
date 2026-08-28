@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartVerifiedCSS from '../CartVerified/CartVerifiedCSS.css' with { type: 'css' };
 
@@ -20,7 +23,6 @@ export class CartVerified extends LitElement {
     setTimeout(() => {
       this.visible = false;
     }, 1500);
-
   }
 
   render() {

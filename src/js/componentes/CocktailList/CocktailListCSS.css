@@ -1,13 +1,11 @@
-:host{
-    display:flex;
-    flex-direction:column;
-  
+:host {
+  display: flex;
+  flex-direction: column;
 }
 
-.cocktail-list{
+.cocktail-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   padding: var(--space-md);
   gap: var(--space-md);
-  
 }

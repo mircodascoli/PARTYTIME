@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CocktailListCSS from '../CocktailList/CocktailListCSS.css' with { type: 'css' };
 import '../../componentes/CocktailDetails/CocktailDetails.js';
@@ -8,7 +11,7 @@ export class CocktailList extends LitElement {
   static styles = [ResetCSS, CocktailListCSS];
 
   static properties = {
-    cocktails: { type: Array }
+    cocktails: { type: Array },
   };
 
   constructor() {
@@ -36,24 +39,28 @@ export class CocktailList extends LitElement {
     }
   }
 
- render() {
-  return html`
-    <ul class="cocktail-list">
-      ${this.cocktails.map(
-        cocktail => html`
-          <cocktail-details  @click=${() => this._clickToChoose(cocktail)} .cocktail=${cocktail}></cocktail-details>
+  render() {
+    return html`
+      <ul class="cocktail-list">
+        ${this.cocktails.map(
+        (cocktail) => html`
+          <cocktail-details
+            @click=${() => this._clickToChoose(cocktail)}
+            .cocktail=${cocktail}
+          ></cocktail-details>
         `
       )}
-    </ul>
-  `;
- }
- _clickToChoose(recipeSelected) {
-    this.dispatchEvent(new CustomEvent('item-selected', {
-      detail: recipeSelected,
-      bubbles: true,
-      composed: true
-    }));
- }
+      </ul>
+    `;
+  }
+  _clickToChoose(recipeSelected) {
+    this.dispatchEvent(
+      new CustomEvent('item-selected', {
+        detail: recipeSelected,
+        bubbles: true,
+        composed: true,
+      })
+    );
+  }
 }
 customElements.define('cocktail-list', CocktailList);
-

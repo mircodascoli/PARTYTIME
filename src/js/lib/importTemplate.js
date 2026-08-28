@@ -1,4 +1,4 @@
-import { simpleFetch } from "./simpleFetch.js";
+import { simpleFetch } from './simpleFetch.js';
 
 /**
  * Importa un template HTML en el body del documento.

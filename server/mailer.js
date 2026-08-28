@@ -11,7 +11,6 @@ export const transporter = nodemailer.createTransport({
   },
 });
 
-
 function buildEmailHtml({ title, bodyHtml }) {
   return `
   <div style="font-family: Arial, Helvetica, sans-serif; background-color: #f4f4f7; padding: 24px 0;">
@@ -40,7 +39,7 @@ function buildEmailHtml({ title, bodyHtml }) {
 function buildProductListHtml(products) {
   const rows = products
     .map(
-      p => `
+      (p) => `
       <tr>
         <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; color: #374151;">${p.name}</td>
         <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb; color: #374151; text-align: center;">x${p.quantity}</td>
@@ -74,7 +73,10 @@ export async function sendOrderEmail({ name, email, products, total }) {
     from: `"Shop Notifications" <${process.env.GMAIL_USER}>`,
     to: process.env.MY_NOTIFICATION_EMAIL,
     subject: `🛒 New order from ${name}`,
-    html: buildEmailHtml({ title: 'New order received', bodyHtml: ownerBodyHtml }),
+    html: buildEmailHtml({
+      title: 'New order received',
+      bodyHtml: ownerBodyHtml,
+    }),
   });
 
   // Confirmation email to the customer
@@ -95,6 +97,9 @@ export async function sendOrderEmail({ name, email, products, total }) {
     from: `"Your Shop" <${process.env.GMAIL_USER}>`,
     to: email,
     subject: 'Your order confirmation',
-    html: buildEmailHtml({ title: `Thank you for your order, ${name}!`, bodyHtml: customerBodyHtml }),
+    html: buildEmailHtml({
+      title: `Thank you for your order, ${name}!`,
+      bodyHtml: customerBodyHtml,
+    }),
   });
 }

@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CheckoutButtonCSS from '../CheckoutButton/CheckoutButtonCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT, getSSID } from '../../utils.js';
@@ -45,7 +48,10 @@ export class CheckoutButton extends LitElement {
     this.errorMessage = '';
 
     this.dispatchEvent(
-      new CustomEvent('order-sending-started', { bubbles: true, composed: true })
+      new CustomEvent('order-sending-started', {
+        bubbles: true,
+        composed: true,
+      })
     );
 
     try {
@@ -75,7 +81,6 @@ export class CheckoutButton extends LitElement {
         this._successTimeout = setTimeout(() => {
           this._afterSuccess();
         }, 2500);
-
       } else {
         this.status = 'error';
         this.errorMessage = data.error || 'Error while sending the order';
@@ -100,33 +105,32 @@ export class CheckoutButton extends LitElement {
     }
   }
 
+  async _afterSuccess() {
+    console.log('2.5s dopo il successo — svuoto il carrello');
 
- async _afterSuccess() {
-  console.log('2.5s dopo il successo — svuoto il carrello');
+    const body = {
+      userId: getSSID(),
+    };
+    const PAYLOAD = JSON.stringify(body);
 
-  const body = {
-    userId: getSSID(),
-  };
-  const PAYLOAD = JSON.stringify(body);
-
-  try {
-    const apiData = await getAPIData(
-      `${location.protocol}//${location.hostname}${API_PORT}/api/clear/cart`,
-      'DELETE',
-      PAYLOAD
-    );
-    console.log('Carrello svuotato:', apiData);
-  } catch (err) {
-    console.error('Error clearing cart:', err);
-  } finally {
-    setTimeout(() => window.location.reload(), 1500);
+    try {
+      const apiData = await getAPIData(
+        `${location.protocol}//${location.hostname}${API_PORT}/api/clear/cart`,
+        'DELETE',
+        PAYLOAD
+      );
+      console.log('Carrello svuotato:', apiData);
+    } catch (err) {
+      console.error('Error clearing cart:', err);
+    } finally {
+      setTimeout(() => window.location.reload(), 1500);
+    }
   }
-}
-  
 
   render() {
     return html`
-      <button class="checkout-button"
+      <button
+        class="checkout-button"
         ?disabled=${this.status === 'sending'}
         @click=${this._confirmOrder}
       >

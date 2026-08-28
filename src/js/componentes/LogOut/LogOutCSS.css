@@ -1,12 +1,11 @@
-:host{
-    display:block;
-
+:host {
+  display: block;
 }
 
-button{
-    background-color: transparent;
-    cursor: pointer;
-    width: 20px;
-    height: 20px;
-    border: none;
+button {
+  background-color: transparent;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  border: none;
 }

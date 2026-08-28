@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import ModalLogOutCSS from '../ModalLogOut/ModalLogOutCSS.css' with { type: 'css' };
 import { supabase } from '../../../config/supabaseClient.js';
@@ -21,12 +24,19 @@ export class ModalLogOut extends LitElement {
 
   render() {
     return html`
-      <div class="underlay ${this.visible ? 'visible' : ''}" @click="${this._onUnderlayClick}">
+      <div
+        class="underlay ${this.visible ? 'visible' : ''}"
+        @click="${this._onUnderlayClick}"
+      >
         <div class="toast-container" @click="${(e) => e.stopPropagation()}">
           <p id="toastmessage">Do you want to log out?</p>
           <div class="button-container">
-            <button id="confirmButton" @click="${() => this._ConfirmLogOut()}">Confirm</button>
-            <button id="cancelButton" @click="${() => this._CancelLogOut()}">Cancel</button>
+            <button id="confirmButton" @click="${() => this._ConfirmLogOut()}">
+              Confirm
+            </button>
+            <button id="cancelButton" @click="${() => this._CancelLogOut()}">
+              Cancel
+            </button>
           </div>
         </div>
       </div>

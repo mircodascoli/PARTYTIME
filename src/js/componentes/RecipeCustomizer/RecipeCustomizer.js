@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import RecipeCustomizerCSS from '../RecipeCustomizer/RecipeCustomizerCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 
@@ -36,17 +39,33 @@ export class RecipeCustomizer extends LitElement {
           @close-popup="${() => this.remove()}"
         >
           <div class="popup-close-button-container">
-            <button class="close-btn" aria-label="Close" @click="${() => this.remove()}">
-             <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-             <path d="M18 6L6 18M6 6l12 12"/>
-             </svg>
-           </button>
-       
+            <button
+              class="close-btn"
+              aria-label="Close"
+              @click="${() => this.remove()}"
+            >
+              <svg
+                width="38"
+                height="38"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path d="M18 6L6 18M6 6l12 12" />
+              </svg>
+            </button>
           </div>
           <div class="popup-child-container">
-             ${this.activeView === 'A'
-              ? html`<cocktail-info .cocktail="${this.cocktail}"></cocktail-info>`
-              : html`<calculator-component .recipe="${this.selectedRecipe}"></calculator-component>`}
+            ${
+               this.activeView === 'A'
+                 ? html`<cocktail-info
+                     .cocktail="${this.cocktail}"
+                   ></cocktail-info>`
+                 : html`<calculator-component
+                     .recipe="${this.selectedRecipe}"
+                   ></calculator-component>`
+             }
           </div>
         </div>
       </div>

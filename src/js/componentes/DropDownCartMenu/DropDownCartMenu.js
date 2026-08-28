@@ -1,4 +1,7 @@
-import { LitElement, html } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
+import {
+  LitElement,
+  html,
+} from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import DropDownCartMenuCSS from '../DropDownCartMenu/DropDownCartMenuCSS.css' with { type: 'css' };
 import { getAPIData, API_PORT, getSSID } from '../../utils.js';
@@ -9,12 +12,12 @@ export class DropDownCartMenu extends LitElement {
     quantity: { type: Number },
     _isOpen: { state: true },
     _dropDirection: { state: true },
-    _id: { type: String }
+    _id: { type: String },
   };
 
   constructor() {
     super();
-    this._id = "";
+    this._id = '';
     this.quantity = 1;
     this._isOpen = false;
     this._dropDirection = 'drop-down';
@@ -39,16 +42,22 @@ export class DropDownCartMenu extends LitElement {
         <span class="arrow">${this._isOpen ? '▲' : '▼'}</span>
       </div>
 
-      ${this._isOpen ? html`
-        <ul class="options-container ${this._dropDirection}">
-          ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(num => html`
-            <li class="option" @click="${() => this._select(num)}">
-              ${num}
-              ${num === this.quantity ? html`<span class="check">✓</span>` : ''}
-            </li>
-          `)}
-        </ul>
-      ` : ''}
+      ${
+        this._isOpen
+          ? html`
+              <ul class="options-container ${this._dropDirection}">
+                ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
+            (num) => html`
+              <li class="option" @click="${() => this._select(num)}">
+                ${num}
+                ${num === this.quantity ? html`<span class="check">✓</span>` : ''}
+              </li>
+            `
+          )}
+              </ul>
+            `
+          : ''
+      }
     `;
   }
 
@@ -67,7 +76,8 @@ export class DropDownCartMenu extends LitElement {
     const spaceBelow = window.innerHeight - rect.bottom;
     const estimatedMenuHeight = 9 * 32 + 12; // ~ opzioni + padding, stima grezza
 
-    this._dropDirection = spaceBelow < estimatedMenuHeight ? 'drop-up' : 'drop-down';
+    this._dropDirection =
+      spaceBelow < estimatedMenuHeight ? 'drop-up' : 'drop-down';
   }
 
   _onDocumentClick(e) {
@@ -80,11 +90,13 @@ export class DropDownCartMenu extends LitElement {
     this.quantity = val;
     this._isOpen = false;
     this.handleQuantityChange(val);
-    this.dispatchEvent(new CustomEvent('quantity-changed', {
-      detail: { quantity: val },
-      bubbles: true,
-      composed: true
-    }));
+    this.dispatchEvent(
+      new CustomEvent('quantity-changed', {
+        detail: { quantity: val },
+        bubbles: true,
+        composed: true,
+      })
+    );
   }
 
   async handleQuantityChange(val) {
@@ -92,13 +104,17 @@ export class DropDownCartMenu extends LitElement {
     let body = {
       productAndQuantity: {
         _id: this._id,
-        quantity: val
+        quantity: val,
       },
-      user: this.user
+      user: this.user,
     };
 
     const PAYLOAD = JSON.stringify(body);
-    const apiData = await getAPIData(`${location.protocol}//${location.hostname}${API_PORT}/api/cart/item/update`, 'PUT', PAYLOAD);
+    const apiData = await getAPIData(
+      `${location.protocol}//${location.hostname}${API_PORT}/api/cart/item/update`,
+      'PUT',
+      PAYLOAD
+    );
     return apiData;
   }
 }

@@ -1,30 +1,33 @@
-import { simpleFetch } from './lib/simpleFetch.js'
-import { HttpError } from './clases/HttpError.js'
+import { simpleFetch } from './lib/simpleFetch.js';
+import { HttpError } from './clases/HttpError.js';
 import { supabase } from '../config/supabaseClient.js';
 
-const TIMEOUT = 10000
+const TIMEOUT = 10000;
 
-export const API_PORT = location.port ? `:${1337}` : ''
-export const getSSID = () => JSON.parse(sessionStorage.getItem('user'))?._id || null;
-export const getSSNAME = () => JSON.parse(sessionStorage.getItem('user'))?.name || null;
-export const getSSEMAIL = () => JSON.parse(sessionStorage.getItem('user'))?.email || null;
+export const API_PORT = location.port ? `:${1337}` : '';
+export const getSSID = () =>
+  JSON.parse(sessionStorage.getItem('user'))?._id || null;
+export const getSSNAME = () =>
+  JSON.parse(sessionStorage.getItem('user'))?.name || null;
+export const getSSEMAIL = () =>
+  JSON.parse(sessionStorage.getItem('user'))?.email || null;
 export async function getAPIData(apiURL, method = 'GET', data) {
-  let apiData
+  let apiData;
 
   try {
-    let headers = new Headers()
-    headers.append('Content-Type', 'application/json')
-    headers.append('Access-Control-Allow-Origin', '*')
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    headers.append('Access-Control-Allow-Origin', '*');
     if (data) {
-      headers.append('Content-Length', String(JSON.stringify(data).length))
-    }  
+      headers.append('Content-Length', String(JSON.stringify(data).length));
+    }
     apiData = await simpleFetch(apiURL, {
       signal: AbortSignal.timeout(TIMEOUT),
       method: method,
       body: data ?? undefined,
-      headers: headers
+      headers: headers,
     });
-  } catch (/** @type {any | HttpError} */err) {
+  } catch (/** @type {any | HttpError} */ err) {
     if (err.name === 'AbortError') {
       console.error('Fetch abortado');
     }
@@ -37,38 +40,47 @@ export async function getAPIData(apiURL, method = 'GET', data) {
       }
     }
   }
-  console.log(apiData, typeof apiData, 'data from getApiData' )
-  return apiData
+  console.log(apiData, typeof apiData, 'data from getApiData');
+  return apiData;
 }
 
 export function getInputValue(inputElement) {
   if (inputElement) {
-    return /** @type {HTMLInputElement} */(inputElement).value
+    return /** @type {HTMLInputElement} */ (inputElement).value;
   } else {
-    return ''
+    return '';
   }
 }
 
 export function launchpreCartPoPup(ing) {
-    console.log('buy ingredient function activated by the click', ing);
+  console.log('buy ingredient function activated by the click', ing);
 
-    window.dispatchEvent(new CustomEvent('ingredient-selected', {
+  window.dispatchEvent(
+    new CustomEvent('ingredient-selected', {
       detail: ing,
       bubbles: true,
-      composed: true
-    }));
-
-  } 
+      composed: true,
+    })
+  );
+}
 
 export function ConfirmAddedToCart() {
-    window.dispatchEvent(new CustomEvent('AddedToCart', {
+  window.dispatchEvent(
+    new CustomEvent('AddedToCart', {
       bubbles: true,
-      composed: true
-    }));
-  }
+      composed: true,
+    })
+  );
+}
 
 export async function checkLoggedIn() {
-  const restrictedPages = ['/cart.html', '/shop.html', '/chooserecipe.html', '/calculator.html', '/user.html'];
+  const restrictedPages = [
+    '/cart.html',
+    '/shop.html',
+    '/chooserecipe.html',
+    '/calculator.html',
+    '/user.html',
+  ];
   const accessPages = ['/index.html', '/sign.html', '/login.html'];
 
   // 👇 aspetta la sessione reale prima di decidere
@@ -85,8 +97,10 @@ export async function checkLoggedIn() {
 }
 
 async function getSessionWithFallback() {
-  const { data: { session } } = await supabase.auth.getSession();
-  
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   if (session) return session; // sessione già disponibile, nessun problema
 
   // sessione non ancora pronta (post-redirect OAuth), aspetta INITIAL_SESSION
@@ -98,7 +112,9 @@ async function getSessionWithFallback() {
       resolve(null);
     }, TIMEOUT_MS);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((event, session) => {
       if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
         clearTimeout(timer);
         subscription.unsubscribe();
@@ -108,8 +124,10 @@ async function getSessionWithFallback() {
   });
 }
 export async function syncUserWithMongo() {
-  const { data: { session } } = await supabase.auth.getSession();
-  
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
   if (!session) {
     return new Promise((resolve) => {
       const TIMEOUT_MS = 5000;
@@ -119,8 +137,9 @@ export async function syncUserWithMongo() {
         resolve(null);
       }, TIMEOUT_MS);
 
-      const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-        
+      const {
+        data: { subscription },
+      } = supabase.auth.onAuthStateChange(async (event, session) => {
         if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
           clearTimeout(timer);
           subscription.unsubscribe();
@@ -142,7 +161,7 @@ async function _doSync(supabaseUser) {
   const res = await fetch('/api/login', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: supabaseUser.email })
+    body: JSON.stringify({ email: supabaseUser.email }),
   });
 
   console.log('status:', res.status);
@@ -159,8 +178,8 @@ async function _doSync(supabaseUser) {
         name: supabaseUser.user_metadata.full_name,
         email: supabaseUser.email,
         cart: [],
-        recipes: []
-      })
+        recipes: [],
+      }),
     });
     return await createRes.json();
   }
@@ -169,5 +188,8 @@ async function _doSync(supabaseUser) {
 }
 
 export function formatPrice(price) {
-  return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(price);
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'EUR',
+  }).format(price);
 }
