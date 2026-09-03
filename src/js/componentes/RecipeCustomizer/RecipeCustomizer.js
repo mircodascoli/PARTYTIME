@@ -58,14 +58,14 @@ export class RecipeCustomizer extends LitElement {
           </div>
           <div class="popup-child-container">
             ${
-               this.activeView === 'A'
-                 ? html`<cocktail-info
-                     .cocktail="${this.cocktail}"
-                   ></cocktail-info>`
-                 : html`<calculator-component
-                     .recipe="${this.selectedRecipe}"
-                   ></calculator-component>`
-             }
+              this.activeView === 'A'
+                ? html`<cocktail-info
+                    .cocktail="${this.cocktail}"
+                  ></cocktail-info>`
+                : html`<calculator-component
+                    .recipe="${this.selectedRecipe}"
+                  ></calculator-component>`
+            }
           </div>
         </div>
       </div>

@@ -151,13 +151,13 @@ export class Calculator extends LitElement {
             </thead>
             <tbody>
               ${this.recipe.ingredients.map(
-                 (i) => html`
-                   <tr>
-                     <td>${i.name}</td>
-                     <td>${i.ml * this.quantity} ml</td>
-                   </tr>
-                 `
-               )}
+                (i) => html`
+                  <tr>
+                    <td>${i.name}</td>
+                    <td>${i.ml * this.quantity} ml</td>
+                  </tr>
+                `
+              )}
             </tbody>
           </table>
         </div>

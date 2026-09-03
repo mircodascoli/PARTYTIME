@@ -47,13 +47,13 @@ export class DropDownCartMenu extends LitElement {
           ? html`
               <ul class="options-container ${this._dropDirection}">
                 ${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(
-            (num) => html`
-              <li class="option" @click="${() => this._select(num)}">
-                ${num}
-                ${num === this.quantity ? html`<span class="check">✓</span>` : ''}
-              </li>
-            `
-          )}
+                  (num) => html`
+                    <li class="option" @click="${() => this._select(num)}">
+                      ${num}
+                      ${num === this.quantity ? html`<span class="check">✓</span>` : ''}
+                    </li>
+                  `
+                )}
               </ul>
             `
           : ''

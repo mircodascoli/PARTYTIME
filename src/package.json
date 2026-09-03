@@ -1,7 +1,7 @@
 {
   "name": "Partytime",
   "version": "1.0.0",
-  "description": "Progetto didattico per esercitarsi con Node.js, Express e Lit",
+  "description": "Portfolio project",
   "main": "server/server.express.js",
   "type": "module",
   "private": true,
@@ -32,7 +32,7 @@
     "type": "git",
     "url": "git+https://github.com/mircodascoli/Neoland.git"
   },
-  "author": "Mirco",
+  "author": "Mirco Dascoli",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mircodascoli/Neoland/issues"
