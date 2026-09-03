@@ -43,13 +43,13 @@ export class CocktailList extends LitElement {
     return html`
       <ul class="cocktail-list">
         ${this.cocktails.map(
-        (cocktail) => html`
-          <cocktail-details
-            @click=${() => this._clickToChoose(cocktail)}
-            .cocktail=${cocktail}
-          ></cocktail-details>
-        `
-      )}
+          (cocktail) => html`
+            <cocktail-details
+              @click=${() => this._clickToChoose(cocktail)}
+              .cocktail=${cocktail}
+            ></cocktail-details>
+          `
+        )}
       </ul>
     `;
   }

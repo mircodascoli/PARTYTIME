@@ -61,12 +61,12 @@ export class SignInForm extends LitElement {
       </form>
 
       ${
-  this.resultMessage
-    ? html`<access-attempt-result
-        .message="${this.resultMessage}"
-      ></access-attempt-result>`
-    : ''
-}
+        this.resultMessage
+          ? html`<access-attempt-result
+              .message="${this.resultMessage}"
+            ></access-attempt-result>`
+          : ''
+      }
     `;
   }
 
