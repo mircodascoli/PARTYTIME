@@ -29,7 +29,9 @@
   --space-xl: 4rem;
 
   /* ─── Typography ─── */
-  --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+   --font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-main: var(--font-family-base);
+  --font-display: var(--font-family-base);
   --text-sm: 0.875rem;
   --text-md: 1rem;
   --text-lg: 1.25rem;
