@@ -77,61 +77,63 @@ export class CartList extends LitElement {
           : html`
               <ul class="cart-list">
                 ${this.apiData.cart.map(
-                (item) => html`
-                  <li class="cart-item">
-                    <div class="cart-card">
-                      <button
-                        class="delete-item"
-                        @click=${() => this.deleteItem(item._id)}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="icon icon-tabler icons-tabler-outline icon-tabler-trash"
+                  (item) => html`
+                    <li class="cart-item">
+                      <div class="cart-card">
+                        <button
+                          class="delete-item"
+                          @click=${() => this.deleteItem(item._id)}
                         >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M4 7l16 0" />
-                          <path d="M10 11l0 6" />
-                          <path d="M14 11l0 6" />
-                          <path
-                            d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
-                          />
-                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                        </svg>
-                      </button>
-                      <img
-                        src="../../img/imgProductos/${item.name}.png"
-                        alt="${item.name}"
-                        class="cart-product-image"
-                      />
-                      <div class="cart-card-data">
-                        <h2 class="cart-product-name">${item.name}</h2>
-                        <p class="cart-product-description">
-                          ${item.description}
-                        </p>
-                        <div class="cart-item-price-controller">
-                          <p class="cart-product-price">
-                            ${formatPrice(item.price)}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-trash"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M4 7l16 0" />
+                            <path d="M10 11l0 6" />
+                            <path d="M14 11l0 6" />
+                            <path
+                              d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"
+                            />
+                            <path
+                              d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"
+                            />
+                          </svg>
+                        </button>
+                        <img
+                          src="../../img/imgProductos/${item.name}.png"
+                          alt="${item.name}"
+                          class="cart-product-image"
+                        />
+                        <div class="cart-card-data">
+                          <h2 class="cart-product-name">${item.name}</h2>
+                          <p class="cart-product-description">
+                            ${item.description}
                           </p>
-                          <drop-down-cart-menu
-                            class="drop-down-menu"
-                            .quantity=${item.quantity}
-                            ._id=${item._id}
-                            @quantity-changed=${this.updateTotal}
-                          ></drop-down-cart-menu>
+                          <div class="cart-item-price-controller">
+                            <p class="cart-product-price">
+                              ${formatPrice(item.price)}
+                            </p>
+                            <drop-down-cart-menu
+                              class="drop-down-menu"
+                              .quantity=${item.quantity}
+                              ._id=${item._id}
+                              @quantity-changed=${this.updateTotal}
+                            ></drop-down-cart-menu>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </li>
-                `
-              )}
+                    </li>
+                  `
+                )}
               </ul>
               <div class="total-cart-component-container">
                 <total-cart
