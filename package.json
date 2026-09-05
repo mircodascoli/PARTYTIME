@@ -1,7 +1,7 @@
 {
   "name": "Partytime",
   "version": "1.0.0",
-  "description": "Progetto didattico per esercitarsi con Node.js, Express e Lit",
+  "description": "Fullstack portfolio project ",
   "main": "server/server.express.js",
   "type": "module",
   "private": true,
@@ -29,15 +29,15 @@
     "supabase"
   ],
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mircodascoli/Neoland.git"
+  "type": "git",
+  "url": "git+https://github.com/mircodascoli/Partytime.git"
   },
-  "author": "Mirco",
+  "author": "Mirco D'Ascoli",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mircodascoli/Neoland/issues"
+    "url": "https://github.com/mircodascoli/Partytime/issues"
   },
-  "homepage": "https://github.com/mircodascoli/Neoland#readme",
+  "homepage": "https://github.com/mircodascoli/Partytime#readme",
   "devDependencies": {
     "@commitlint/cli": "^19.8.0",
     "@commitlint/config-conventional": "^19.8.0",
