@@ -29,8 +29,8 @@
     "supabase"
   ],
   "repository": {
-  "type": "git",
-  "url": "git+https://github.com/mircodascoli/Partytime.git"
+    "type": "git",
+    "url": "git+https://github.com/mircodascoli/Partytime.git"
   },
   "author": "Mirco D'Ascoli",
   "license": "MIT",
