@@ -19,36 +19,6 @@ body {
   display: flex;
 }
 
-.full-screen-video-container {
-  overflow: hidden;
-  position: relative;
-  height: 100vh;
-  width: 100vw;
-}
-
-.full-screen-video-container video {
-  position: absolute;
-  width: auto;
-  height: auto;
-  min-width: 100%;
-  min-height: 100%;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* regola l'intensità qui */
-  z-index: 0;
-  pointer-events: none; /* lascia passare i click, se serve */
-}
-
 /* ─── Main regions ──────────────────────────────────────── */
 
 main,
@@ -355,6 +325,38 @@ a svg {
 #busqueda {
   width: 200px;
   height: 40px;
+}
+
+/* ─── Video Background ────────────────────────────────────────────────────── */
+
+.full-screen-video-container {
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+}
+
+.full-screen-video-container video {
+  position: absolute;
+  width: auto;
+  height: auto;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000080; /* regola l'intensità qui */
+  z-index: 0;
+  pointer-events: none; /* lascia passare i click, se serve */
 }
 
 /* ─── Utility ───────────────────────────────────────────── */
