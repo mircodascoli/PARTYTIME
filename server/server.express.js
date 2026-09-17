@@ -26,7 +26,6 @@ class AppError extends Error {
 
 // ---------- HEALTH ----------
 
-// utile per Render/Railway e per verificare al volo che il deploy sia vivo
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', uptime: process.uptime() });
 });
@@ -251,7 +250,6 @@ app.use(express.static('src'));
 
 // ---------- ERROR HANDLING (sempre in fondo) ----------
 
-// 404 per qualsiasi rotta /api non riconosciuta
 app.use('/api', (req, res) => {
   res.status(404).json({ success: false, error: 'Route not found' });
 });
