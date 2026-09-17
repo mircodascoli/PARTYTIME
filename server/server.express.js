@@ -1,220 +1,299 @@
 import express from 'express';
-import { db } from './server.mongodb.js';
 import bodyParser from 'body-parser';
-import { ObjectId } from 'mongodb';
+import { db, connectDB, closeDB } from './server.mongodb.js';
 import { sendOrderEmail } from './mailer.js';
+
 const app = express();
 const port = process.env.PORT || 3000;
+const isProd = process.env.NODE_ENV === 'production';
 
-// for parsing application/json
 app.use(bodyParser.json());
-// for parsing application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// CREATE
+// ---------- HELPERS ----------
 
-app.post('/api/create/botellas', async (req, res) => {
-  console.log('server reate botellas');
-  res.json(await db.botellas.get());
+
+const asyncHandler = (fn) => (req, res, next) =>
+  Promise.resolve(fn(req, res, next)).catch(next);
+
+class AppError extends Error {
+  constructor(message, statusCode = 400) {
+    super(message);
+    this.statusCode = statusCode;
+    this.isOperational = true;
+  }
+}
+
+// ---------- HEALTH ----------
+
+// utile per Render/Railway e per verificare al volo che il deploy sia vivo
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', uptime: process.uptime() });
 });
 
-app.post('/api/create/users', async (req, res) => {
-  const userExists = await db.users.get({ email: req.body.email });
-  console.log('hello from create users');
+// ---------- CREATE ----------
 
-  if (userExists.length === 0) {
-    const newUser = req.body;
+app.post(
+  '/api/create/botellas',
+  asyncHandler(async (req, res) => {
+    res.json(await db.botellas.get());
+  })
+);
+
+app.post(
+  '/api/create/users',
+  asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    if (!email) throw new AppError('Email is required', 400);
+
+    const userExists = await db.users.get({ email });
+    if (userExists.length > 0) {
+      throw new AppError('User already exists', 409);
+    }
+
+    const newUser = { ...req.body };
     delete newUser._id;
-    res.json(await db.users.create(newUser));
-  } else {
-    res.status(400).send('User already exists from express');
-  }
-});
+    res.status(201).json(await db.users.create(newUser));
+  })
+);
 
-// READ
+// ---------- READ ----------
 
-app.get('/api/read/users', async (req, res) => {
-  console.log('server read users');
-  res.json(await db.users.get());
-});
+app.get(
+  '/api/read/users',
+  asyncHandler(async (req, res) => {
+    res.json(await db.users.get());
+  })
+);
 
-app.get('/api/read/botellas', async (req, res) => {
-  console.log('server read botellas');
-  res.json(await db.botellas.get());
-});
+app.get(
+  '/api/read/botellas',
+  asyncHandler(async (req, res) => {
+    res.json(await db.botellas.get());
+  })
+);
 
-app.get('/api/read/cocktails', async (req, res) => {
-  console.log('server read cocktails');
+app.get(
+  '/api/read/cocktails',
+  asyncHandler(async (req, res) => {
+    res.json(await db.cocktails.get());
+  })
+);
 
-  try {
-    const cocktails = await db.cocktails.get();
-    console.log('cocktails from db:', cocktails);
-    res.json(cocktails);
-  } catch (err) {
-    console.error('❌ ERROR IN db.cocktails.get:', err);
-    res.status(500).json({ error: err.message });
-  }
-});
 
-// UPDATE
-app.put('/api/update/users/:_id', async (req, res) => {
-  res.json(await db.users.update(req.params._id, req.body));
-  console.log('update', req.params._id, req.body);
-});
+app.put(
+  '/api/cart/item/update',
+  asyncHandler(async (req, res) => {
+    const { productAndQuantity, user } = req.body;
+    if (!productAndQuantity || !user) {
+      throw new AppError('productAndQuantity and user are required', 400);
+    }
+    res.json(await db.users.updateCart(productAndQuantity, user));
+  })
+);
 
-// DELETE
+// ---------- DELETE ----------
 
-app.delete('/api/delete/from/cart', async (req, res) => {
-  console.log('server delete from cart');
+app.delete(
+  '/api/delete/from/cart',
+  asyncHandler(async (req, res) => {
+    const { idBotella, idUser } = req.body;
+    if (!idBotella || !idUser) {
+      throw new AppError('idBotella and idUser are required', 400);
+    }
+    res.json(await db.users.DeleteFromCart(idBotella, idUser));
+  })
+);
 
-  res.json(await db.users.DeleteFromCart(req.body.idBotella, req.body.idUser));
-});
+app.delete(
+  '/api/clear/cart',
+  asyncHandler(async (req, res) => {
+    const { userId } = req.body;
+    if (!userId) throw new AppError('userId is required', 400);
+    res.json(await db.users.clearCart(userId));
+  })
+);
 
-app.delete('/api/clear/cart', async (req, res) => {
-  console.log('server clear cart', req.body.userId, typeof req.body.userId);
+app.delete(
+  '/api/delete/recipe',
+  asyncHandler(async (req, res) => {
+    const { userId, recipeId } = req.body;
+    if (!userId || !recipeId) {
+      throw new AppError('userId and recipeId are required', 400);
+    }
+    res.json(await db.users.deleteRecipe(userId, recipeId));
+  })
+);
 
-  res.json(await db.users.clearCart(req.body.userId));
-});
+app.delete(
+  '/api/delete/item',
+  asyncHandler(async (req, res) => {
+    const { userId, itemId } = req.body;
+    if (!userId || !itemId) {
+      throw new AppError('userId and itemId are required', 400);
+    }
+    res.json(await db.users.deleteItem(userId, itemId));
+  })
+);
 
-app.delete('/api/delete/recipe', async (req, res) => {
-  console.log('server delete recipe', req.body);
-  const { userId, recipeId } = req.body;
-  res.json(await db.users.deleteRecipe(userId, recipeId));
-});
+// ---------- SEARCH / FILTER ----------
 
-app.delete('/api/delete/item', async (req, res) => {
-  console.log('server delete item', req.body);
-  const { userId, itemId } = req.body;
-  res.json(await db.users.deleteItem(userId, itemId));
-});
+app.post(
+  '/api/search',
+  asyncHandler(async (req, res) => {
+    const { name } = req.body;
+    if (!name) throw new AppError('Search term is required', 400);
+    res.json(await db.botellas.search({ $text: { $search: name } }, {}));
+  })
+);
 
-// FILTER
-
-app.post('/api/search', async (req, res) => {
-  console.log('search in express', req.body);
-  //recuerda añadir la projeccion para filtrar los ampos que devolvemos
-  res.json(await db.botellas.search({ $text: { $search: req.body.name } }, {}));
-});
-
-app.get('/api/product/preview/:name', async (req, res) => {
-  console.log('preview for product', req.params.name);
-  const result = await db.botellas.productPreview(
-    { name: req.params.name },
-    {}
-  );
-  res.json(result);
-});
-
-app.post('/api/busqueda/cart', async (req, res) => {
-  try {
-    const ids = req.body.ids;
-    console.log('Ricevuti questi ID:', ids);
-    const objectIds = ids.map((id) => new ObjectId(id));
-    const botellas = await db.botellas.findByIds({ _id: { $in: objectIds } });
-    res.json(botellas);
-  } catch (error) {
-    console.error('Error in express', error);
-  }
-});
-
-app.post('/api/busqueda/party', async (req, res) => {
-  console.log('estamos en busqueda party', req.body);
-
-  const keywords = req.body.keywords;
-  console.log(keywords, typeof keywords, 'keywords in express');
-  if (!Array.isArray(keywords)) {
-    return res
-      .status(400)
-      .json({ error: 'Keywords should be an array of strings.' });
-  }
-
-  try {
-    const result = await db.botellas.findByNames(
-      { name: { $in: keywords } },
+app.get(
+  '/api/product/preview/:name',
+  asyncHandler(async (req, res) => {
+    const result = await db.botellas.productPreview(
+      { name: req.params.name },
       {}
     );
+    if (!result) throw new AppError('Product not found', 404);
     res.json(result);
-  } catch (error) {
-    console.error('DB error:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
+  })
+);
 
-app.post('/api/push/to/cart', async (req, res) => {
-  console.log('req.body push to cart EXPRESS', req.body);
-  res.json(
-    await db.users.addToCart(req.body.productAndQuantity, req.body.user)
-  );
-});
-
-app.post('/api/push/to/recipes', async (req, res) => {
-  console.log('req.body push to recipes in express', req.body);
-  res.json(await db.users.addToRecipes(req.body.recipe, req.body.idUser));
-});
-
-app.post('/api/buscar/usuario', async (req, res) => {
-  console.log('estamos en busqueda', req.body);
-  //recuerda añadir la projeccion para filtrar los ampos que devolvemos
-  res.json(await db.users.search(req.body));
-  console.log(res.json);
-});
-
-app.post('/api/login', async (req, res) => {
-  console.log('estamos en login', req.body);
-  const user = await db.users.login({ email: req.body.email });
-  res.json(user);
-});
-
-app.post('/api/buy/ingredient', async (req, res) => {
-  console.log('server buy ingredient', req.body);
-  const { userId, ingDbname } = req.body;
-  res.json(await db.users.buyIngredient(userId, ingDbname));
-});
-
-app.get('/api/find/bottles/:id', async (req, res) => {
-  console.log('server find bottle by id', req.params.id);
-  try {
-    const botella = await db.botellas.productPreview(
-      { _id: new ObjectId(req.params.id) },
-      {}
-    );
+app.get(
+  '/api/find/bottles/:id',
+  asyncHandler(async (req, res) => {
+    const _id = toObjectId(req.params.id, 'bottle id');
+    const botella = await db.botellas.productPreview({ _id }, {});
+    if (!botella) throw new AppError('Bottle not found', 404);
     res.json(botella);
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: 'Server error' });
-  }
-});
+  })
+);
 
-app.post('/api/order', async (req, res) => {
-  console.log('server send order email', req.body);
+app.post(
+  '/api/busqueda/cart',
+  asyncHandler(async (req, res) => {
+    const { ids } = req.body;
+    if (!Array.isArray(ids)) {
+      throw new AppError('ids should be an array', 400);
+    }
+    const objectIds = ids.map((id) => toObjectId(id, 'cart item id'));
+    res.json(await db.botellas.findByIds({ _id: { $in: objectIds } }));
+  })
+);
 
-  const { name, email, products, total } = req.body;
 
-  if (!name || !email || !products?.length) {
-    return res
-      .status(400)
-      .json({ success: false, error: 'Incomplete order data' });
-  }
+app.post(
+  '/api/buscar/usuario',
+  asyncHandler(async (req, res) => {
+    const user = await db.users.search(req.body);
+    if (!user) throw new AppError('User not found', 404);
+    res.json(user);
+  })
+);
 
-  try {
+// ---------- CART / RECIPES ----------
+
+app.post(
+  '/api/push/to/cart',
+  asyncHandler(async (req, res) => {
+    const { productAndQuantity, user } = req.body;
+    if (!productAndQuantity || !user) {
+      throw new AppError('productAndQuantity and user are required', 400);
+    }
+    res.json(await db.users.addToCart(productAndQuantity, user));
+  })
+);
+
+app.post(
+  '/api/push/to/recipes',
+  asyncHandler(async (req, res) => {
+    const { recipe, idUser } = req.body;
+    if (!recipe || !idUser) {
+      throw new AppError('recipe and idUser are required', 400);
+    }
+    res.json(await db.users.addToRecipes(recipe, idUser));
+  })
+);
+
+// ---------- AUTH ----------
+
+app.post(
+  '/api/login',
+  asyncHandler(async (req, res) => {
+    const { email } = req.body;
+    if (!email) throw new AppError('Email is required', 400);
+
+    const user = await db.users.login({ email });
+    if (!user) throw new AppError('Invalid credentials', 401);
+    res.json(user);
+  })
+);
+
+// ---------- ORDER ----------
+
+app.post(
+  '/api/order',
+  asyncHandler(async (req, res) => {
+    const { name, email, products, total } = req.body;
+
+    if (!name || !email || !products?.length) {
+      throw new AppError('Incomplete order data', 400);
+    }
+
     await sendOrderEmail({ name, email, products, total });
     res.json({ success: true, message: 'Order received, emails sent' });
+  })
+);
+
+// ---------- STATIC ----------
+
+app.use(express.static('src'));
+
+// ---------- ERROR HANDLING (sempre in fondo) ----------
+
+// 404 per qualsiasi rotta /api non riconosciuta
+app.use('/api', (req, res) => {
+  res.status(404).json({ success: false, error: 'Route not found' });
+});
+
+
+app.use((err, req, res, next) => {
+  const status = err.statusCode || 500;
+
+
+  console.error(` ${status} ${req.method} ${req.originalUrl}:`, err.message);
+  if (status === 500) console.error(err.stack);
+
+  
+  const message =
+    err.isOperational || !isProd ? err.message : 'Internal server error';
+
+  res.status(status).json({ success: false, error: message });
+});
+
+// ---------- STARTUP / SHUTDOWN ----------
+
+const server = app.listen(port, async () => {
+  try {
+    await connectDB();
+    console.log(`listening on port ${port}`);
   } catch (err) {
-    console.error(' ERROR sending order email:', err);
-    res.status(500).json({ success: false, error: err.message });
+    console.error(' Failed to connect to MongoDB, shutting down:', err);
+    process.exit(1);
   }
 });
 
-app.put('/api/cart/item/update', async (req, res) => {
-  console.log('req.body cart item update EXPRESS', req.body);
-  res.json(
-    await db.users.updateCart(req.body.productAndQuantity, req.body.user)
-  );
-});
+async function shutdown(signal) {
+  console.log(`${signal} received, shutting down...`);
+  server.close(async () => {
+    await closeDB();
+    process.exit(0);
+  });
+}
 
-// Static server
-app.use(express.static('src'));
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
 
-app.listen(port, async () => {
-  console.log(` listening on port ${port}`);
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled Rejection:', reason);
 });
