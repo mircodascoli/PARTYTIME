@@ -104,9 +104,7 @@ async function getSessionWithFallback() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (session) return session; // sessione già disponibile, nessun problema
-
-  // sessione non ancora pronta (post-redirect OAuth), aspetta INITIAL_SESSION
+  if (session) return session; 
   return new Promise((resolve) => {
     const TIMEOUT_MS = 5000;
 
