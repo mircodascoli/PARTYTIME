@@ -5,8 +5,8 @@ import { supabase } from '../config/supabaseClient.js';
 const TIMEOUT = 10000;
 
 export const API_URL =
-  location.hostname === 'localhost'
-    ? 'http://localhost:1337'
+  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? 'http://127.0.0.1:1337'
     : 'https://partytime-production.up.railway.app';
 export const getSSID = () =>
   JSON.parse(sessionStorage.getItem('user'))?._id || null;
@@ -84,9 +84,8 @@ export async function checkLoggedIn() {
     '/calculator.html',
     '/user.html',
   ];
-  const accessPages = ['/index.html', '/sign.html', '/login.html'];
+  const accessPages = ['/', '/index.html', '/sign.html', '/login.html'];
 
-  // 👇 aspetta la sessione reale prima di decidere
   const session = await getSessionWithFallback();
 
   if (restrictedPages.includes(location.pathname) && !session) {
@@ -104,7 +103,7 @@ async function getSessionWithFallback() {
     data: { session },
   } = await supabase.auth.getSession();
 
-  if (session) return session; 
+  if (session) return session;
   return new Promise((resolve) => {
     const TIMEOUT_MS = 5000;
 
