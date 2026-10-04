@@ -4,7 +4,10 @@ import { supabase } from '../config/supabaseClient.js';
 
 const TIMEOUT = 10000;
 
-export const API_PORT = location.port ? `:${1337}` : '';
+export const API_URL =
+  location.hostname === 'localhost'
+    ? 'http://localhost:1337'
+    : 'https://partytime-production.up.railway.app';
 export const getSSID = () =>
   JSON.parse(sessionStorage.getItem('user'))?._id || null;
 export const getSSNAME = () =>

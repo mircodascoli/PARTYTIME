@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CartListCSS from '../CartList/CartListCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, getSSID, formatPrice } from '../../utils.js';
+import { getAPIData, API_URL, getSSID, formatPrice } from '../../utils.js';
 
 export class CartList extends LitElement {
   static styles = [ResetCSS, CartListCSS];
@@ -35,7 +35,7 @@ export class CartList extends LitElement {
 
     try {
       const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
+        `${API_URL}/api/buscar/usuario`,
         'POST',
         JSON.stringify({ id: this._idSession })
       );
@@ -43,7 +43,7 @@ export class CartList extends LitElement {
       const enrichedCart = await Promise.all(
         apiData.cart.map(async (item) => {
           const details = await getAPIData(
-            `${location.protocol}//${location.hostname}${API_PORT}/api/find/bottles/${item._id}`,
+            `${API_URL}/api/find/bottles/${item._id}`,
             'GET'
           );
           return { ...item, ...details };

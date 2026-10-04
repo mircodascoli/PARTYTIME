@@ -6,7 +6,7 @@ import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import ShopCSS from './ShopCSS.css' with { type: 'css' };
 import {
   getAPIData,
-  API_PORT,
+  API_URL,
   launchpreCartPoPup,
   formatPrice,
 } from '../../utils.js';
@@ -32,10 +32,7 @@ export class Shop extends LitElement {
 
   async getBottles() {
     try {
-      let data = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/read/botellas`,
-        'GET'
-      );
+      let data = await getAPIData(`${API_URL}/api/read/botellas`, 'GET');
       this.bottles = data;
       console.log(this.bottles, 'bottles mapped to model');
     } catch (error) {

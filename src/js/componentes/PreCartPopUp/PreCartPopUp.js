@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import PreCartPopUpCSS from '../PreCartPopUp/PreCartPopUpCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import { getAPIData, API_PORT, getSSID } from '../../utils.js';
+import { getAPIData, API_URL, getSSID } from '../../utils.js';
 import { ConfirmAddedToCart } from '../../utils.js';
 import { formatPrice } from '../../utils.js';
 export class PreCartPopUp extends LitElement {
@@ -148,7 +148,7 @@ export class PreCartPopUp extends LitElement {
     console.log(body, 'body');
     const PAYLOAD = JSON.stringify(body);
     const apiData = await getAPIData(
-      `${location.protocol}//${location.hostname}${API_PORT}/api/push/to/cart`,
+      `${API_URL}/api/push/to/cart`,
       'POST',
       PAYLOAD
     );

@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // ---------- HELPERS ----------
 
-
 const asyncHandler = (fn) => (req, res, next) =>
   Promise.resolve(fn(req, res, next)).catch(next);
 
@@ -78,7 +77,6 @@ app.get(
     res.json(await db.cocktails.get());
   })
 );
-
 
 app.put(
   '/api/cart/item/update',
@@ -180,7 +178,6 @@ app.post(
   })
 );
 
-
 app.post(
   '/api/buscar/usuario',
   asyncHandler(async (req, res) => {
@@ -254,15 +251,12 @@ app.use('/api', (req, res) => {
   res.status(404).json({ success: false, error: 'Route not found' });
 });
 
-
 app.use((err, req, res, next) => {
   const status = err.statusCode || 500;
-
 
   console.error(` ${status} ${req.method} ${req.originalUrl}:`, err.message);
   if (status === 500) console.error(err.stack);
 
-  
   const message =
     err.isOperational || !isProd ? err.message : 'Internal server error';
 

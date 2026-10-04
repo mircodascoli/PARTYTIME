@@ -6,11 +6,9 @@ if (!URI) {
   throw new Error('MONGO_URI is not defined in environment variables');
 }
 
-
 const client = new MongoClient(URI);
 
 let PartytimeDB;
-
 
 export async function connectDB() {
   await client.connect();

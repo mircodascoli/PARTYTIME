@@ -5,7 +5,7 @@ import {
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CocktailListCSS from '../CocktailList/CocktailListCSS.css' with { type: 'css' };
 import '../../componentes/CocktailDetails/CocktailDetails.js';
-import { getAPIData, API_PORT } from '../../utils.js';
+import { getAPIData, API_URL } from '../../utils.js';
 
 export class CocktailList extends LitElement {
   static styles = [ResetCSS, CocktailListCSS];
@@ -26,10 +26,7 @@ export class CocktailList extends LitElement {
 
   async getCocktails() {
     try {
-      let data = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/read/cocktails`,
-        'GET'
-      );
+      let data = await getAPIData(`${API_URL}/api/read/cocktails`, 'GET');
 
       this.cocktails = data;
 

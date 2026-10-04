@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CalculatorCSS from '../Calculator/CalculatorCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, getSSID } from '../../utils.js';
+import { getAPIData, API_URL, getSSID } from '../../utils.js';
 export class Calculator extends LitElement {
   static properties = {
     recipe: { type: Object },
@@ -81,7 +81,7 @@ export class Calculator extends LitElement {
     console.log(body, 'body in guardar receta');
     const PAYLOAD = JSON.stringify(body);
     const apiData = await getAPIData(
-      `${location.protocol}//${location.hostname}${API_PORT}/api/push/to/recipes`,
+      `${API_URL}/api/push/to/recipes`,
       'POST',
       PAYLOAD
     );

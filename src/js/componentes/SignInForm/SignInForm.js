@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
-import { getAPIData, getInputValue, API_PORT } from '../../utils.js';
+import { getAPIData, getInputValue, API_URL } from '../../utils.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import SignInFormLitCSS from './SignInFormCSS.css' with { type: 'css' };
 import { supabase } from '../../../config/supabaseClient.js';
@@ -111,7 +111,7 @@ export class SignInForm extends LitElement {
       // 2. Registra su MongoDB
       const payload = JSON.stringify(signInData);
       const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/create/users`,
+        `${location.protocol}//${location.hostname}${API_URL}/api/create/users`,
         'POST',
         payload
       );

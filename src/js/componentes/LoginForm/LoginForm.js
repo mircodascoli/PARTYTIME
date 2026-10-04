@@ -77,8 +77,8 @@ export class LoginForm extends LitElement {
   async _onFormSubmit(e) {
     e.preventDefault();
 
-    const email = this.renderRoot.querySelector('#emailLog').value;
-    const password = this.renderRoot.querySelector('#passwordLog').value;
+    const email = this.renderRoot.querySelector('.email-log').value;
+    const password = this.renderRoot.querySelector('.password-log').value;
 
     if (!email || !password) {
       this.resultMessage = 'Email or password missing';

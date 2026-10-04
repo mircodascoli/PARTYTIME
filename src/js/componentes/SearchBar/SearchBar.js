@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import SearchBarCSS from '../SearchBar/SearchBarCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import { getAPIData, API_PORT } from '../../utils.js';
+import { getAPIData, API_URL } from '../../utils.js';
 export class SearchBar extends LitElement {
   static styles = [ResetCSS, SearchBarCSS];
   static properties = {
@@ -46,11 +46,7 @@ export class SearchBar extends LitElement {
     const payload = JSON.stringify({ name: searchedValue });
 
     try {
-      let data = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/search`,
-        'POST',
-        payload
-      );
+      let data = await getAPIData(`${API_URL}/api/search`, 'POST', payload);
 
       if (data.length === 0) {
         this.error = 'Producto no encontrado';

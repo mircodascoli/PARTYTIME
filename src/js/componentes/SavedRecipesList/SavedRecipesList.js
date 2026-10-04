@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import SavedRecipesListCSS from '../SavedRecipesList/SavedRecipesListCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, getSSID } from '../../utils.js';
+import { getAPIData, API_URL, getSSID } from '../../utils.js';
 import { launchpreCartPoPup } from '../../utils.js';
 export class SavedRecipesList extends LitElement {
   static styles = [ResetCSS, SavedRecipesListCSS];
@@ -37,7 +37,7 @@ export class SavedRecipesList extends LitElement {
 
     try {
       const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/buscar/usuario`,
+        `${API_URL}/api/buscar/usuario`,
         'POST',
         payload
       );
@@ -61,11 +61,7 @@ export class SavedRecipesList extends LitElement {
     });
     console.log('delete recipe payload', payload);
     try {
-      await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/delete/recipe`,
-        'DELETE',
-        payload
-      );
+      await getAPIData(`${API_URL}/api/delete/recipe`, 'DELETE', payload);
 
       this.apiData = {
         ...this.apiData,
@@ -157,12 +153,13 @@ export class SavedRecipesList extends LitElement {
                                   <span class="span-grey">ingredients:</span>
                                 </p>
                                 ${item.ingredientes.map(
-                            (ing) => html`
-                              <li class="recipe-ingredient">
-                                <span>&#x2022;</span> ${ing.name} ${ing.mls} ml
-                              </li>
-                            `
-                          )}
+                                  (ing) => html`
+                                    <li class="recipe-ingredient">
+                                      <span>&#x2022;</span> ${ing.name}
+                                      ${ing.mls} ml
+                                    </li>
+                                  `
+                                )}
                               </ul>
                               <hr class="section-divider" />
                             </div>
@@ -208,25 +205,25 @@ export class SavedRecipesList extends LitElement {
                         <div class="recipe-products-container">
                           <ul class="recipe-products-list">
                             ${item.ingredientes.map(
-                        (ing) => html`
-                          <li class="product-item">
-                            <img
-                              src="../../img/imgProductos/${ing.dbname}.png"
-                              alt="${ing.dbname}"
-                              class="suggested-product-image"
-                              @click=${() => launchpreCartPoPup(ing.dbname)}
-                              @error=${(e) => (e.target.src = '../../img/fallback.png')}
-                            />
-                            <p class="p-ingredient-name">${ing.dbname}</p>
-                            <button
-                              class="btn-black"
-                              @click=${() => launchpreCartPoPup(ing.dbname)}
-                            >
-                              BUY
-                            </button>
-                          </li>
-                        `
-                      )}
+                              (ing) => html`
+                                <li class="product-item">
+                                  <img
+                                    src="../../img/imgProductos/${ing.dbname}.png"
+                                    alt="${ing.dbname}"
+                                    class="suggested-product-image"
+                                    @click=${() => launchpreCartPoPup(ing.dbname)}
+                                    @error=${(e) => (e.target.src = '../../img/fallback.png')}
+                                  />
+                                  <p class="p-ingredient-name">${ing.dbname}</p>
+                                  <button
+                                    class="btn-black"
+                                    @click=${() => launchpreCartPoPup(ing.dbname)}
+                                  >
+                                    BUY
+                                  </button>
+                                </li>
+                              `
+                            )}
                           </ul>
                         </div>
                       </li>

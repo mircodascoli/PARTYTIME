@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/core/lit-core.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import DropDownCartMenuCSS from '../DropDownCartMenu/DropDownCartMenuCSS.css' with { type: 'css' };
-import { getAPIData, API_PORT, getSSID } from '../../utils.js';
+import { getAPIData, API_URL, getSSID } from '../../utils.js';
 
 export class DropDownCartMenu extends LitElement {
   static styles = [ResetCSS, DropDownCartMenuCSS];
@@ -74,7 +74,7 @@ export class DropDownCartMenu extends LitElement {
     if (!box) return;
     const rect = box.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
-    const estimatedMenuHeight = 9 * 32 + 12; // ~ opzioni + padding, stima grezza
+    const estimatedMenuHeight = 9 * 32 + 12;
 
     this._dropDirection =
       spaceBelow < estimatedMenuHeight ? 'drop-up' : 'drop-down';
@@ -111,7 +111,7 @@ export class DropDownCartMenu extends LitElement {
 
     const PAYLOAD = JSON.stringify(body);
     const apiData = await getAPIData(
-      `${location.protocol}//${location.hostname}${API_PORT}/api/cart/item/update`,
+      `${API_URL}/api/cart/item/update`,
       'PUT',
       PAYLOAD
     );
