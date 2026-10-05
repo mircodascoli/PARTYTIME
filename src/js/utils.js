@@ -88,7 +88,7 @@ export async function checkLoggedIn() {
   const accessPages = ['/', '/index.html', '/sign.html', '/login.html'];
 
   const session = await getSessionWithFallback();
-
+  console.log('SESSION:', session);
   if (restrictedPages.includes(location.pathname) && !session) {
     location.href = './index.html';
     return;
