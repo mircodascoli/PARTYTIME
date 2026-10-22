@@ -7,7 +7,7 @@ const TIMEOUT = 10000;
 export const API_URL =
   location.hostname === 'localhost' || location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:1337'
-    : 'https://partytime-api.onrender.com';
+    : 'https://partytime-5tie.onrender.com';
 export const getSSID = () =>
   JSON.parse(sessionStorage.getItem('user'))?._id || null;
 export const getSSNAME = () =>
