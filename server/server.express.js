@@ -156,28 +156,6 @@ app.get(
   })
 );
 
-app.get(
-  '/api/find/bottles/:id',
-  asyncHandler(async (req, res) => {
-    const _id = toObjectId(req.params.id, 'bottle id');
-    const botella = await db.botellas.productPreview({ _id }, {});
-    if (!botella) throw new AppError('Bottle not found', 404);
-    res.json(botella);
-  })
-);
-
-app.post(
-  '/api/busqueda/cart',
-  asyncHandler(async (req, res) => {
-    const { ids } = req.body;
-    if (!Array.isArray(ids)) {
-      throw new AppError('ids should be an array', 400);
-    }
-    const objectIds = ids.map((id) => toObjectId(id, 'cart item id'));
-    res.json(await db.botellas.findByIds({ _id: { $in: objectIds } }));
-  })
-);
-
 app.post(
   '/api/buscar/usuario',
   asyncHandler(async (req, res) => {
