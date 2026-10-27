@@ -81,7 +81,7 @@ app.get(
 app.get(
   '/api/find/bottles/:id',
   asyncHandler(async (req, res) => {
-    const botella = await db.botellas.productPreview(
+    const botella = await db.botellas.cartPreview(
       { _id: req.params.id },
       {}
     );
@@ -160,7 +160,7 @@ app.get(
   '/api/product/preview/:name',
   asyncHandler(async (req, res) => {
     const result = await db.botellas.productPreview(
-      { name: req.params.name },
+      req.params.name,
       {}
     );
     if (!result) throw new AppError('Product not found', 404);

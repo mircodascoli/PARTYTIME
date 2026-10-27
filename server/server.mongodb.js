@@ -41,6 +41,7 @@ export const db = {
     getInCart: DisplayBotellasInCart,
     search: searchBotellas,
     findByIds: findBotellasByIds,
+    cartPreview: cartPreview,
     productPreview: productPreview,
   },
   cocktails: {
@@ -70,7 +71,7 @@ async function findBotellasByIds(filter) {
   return await botellasCollection.find(filter).toArray();
 }
 
-async function productPreview(filter, projection = {}) {
+async function cartPreview(filter, projection = {}) {
   const botellasCollection = PartytimeDB.collection('Botellas');
 
   const mongoFilter = {
@@ -81,6 +82,14 @@ async function productPreview(filter, projection = {}) {
   return await botellasCollection.findOne(mongoFilter, { projection });
 }
 
+async function productPreview(name, projection = {}) {
+  const botellasCollection = PartytimeDB.collection('Botellas');
+
+  return await botellasCollection.findOne(
+    { name: { $regex: `^${name}$`, $options: 'i' } },
+    { projection }
+  );
+}
 // ---------- COCKTAILS ----------
 
 async function getCocktails() {
