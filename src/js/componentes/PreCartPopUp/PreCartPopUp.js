@@ -31,7 +31,7 @@ export class PreCartPopUp extends LitElement {
     try {
       console.log(this.product, 'sendin this to endpoint');
       let data = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/product/preview/${this.product}`,
+        `${API_URL}/api/product/preview/${this.product}`,
         'GET'
       );
 

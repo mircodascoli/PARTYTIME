@@ -77,7 +77,7 @@ export function ConfirmAddedToCart() {
 }
 
 export async function checkLoggedIn() {
-    console.log('CHECK LOGIN EXECUTED', location.pathname);
+  console.log('CHECK LOGIN EXECUTED', location.pathname);
   const restrictedPages = [
     '/cart.html',
     '/shop.html',

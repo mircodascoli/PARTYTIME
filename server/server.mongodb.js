@@ -72,7 +72,13 @@ async function findBotellasByIds(filter) {
 
 async function productPreview(filter, projection = {}) {
   const botellasCollection = PartytimeDB.collection('Botellas');
-  return await botellasCollection.findOne(filter, { projection });
+
+  const mongoFilter = {
+    ...filter,
+    _id: new ObjectId(filter._id),
+  };
+
+  return await botellasCollection.findOne(mongoFilter, { projection });
 }
 
 // ---------- COCKTAILS ----------

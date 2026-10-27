@@ -78,6 +78,18 @@ app.get(
   })
 );
 
+app.get(
+  '/api/find/bottles/:id',
+  asyncHandler(async (req, res) => {
+    const botella = await db.botellas.productPreview(
+      { _id: req.params.id },
+      {}
+    );
+    if (!botella) throw new AppError('Bottle not found', 404);
+    res.json(botella);
+  })
+);
+
 app.put(
   '/api/cart/item/update',
   asyncHandler(async (req, res) => {
