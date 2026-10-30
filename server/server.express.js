@@ -58,13 +58,6 @@ app.post(
 // ---------- READ ----------
 
 app.get(
-  '/api/read/users',
-  asyncHandler(async (req, res) => {
-    res.json(await db.users.get());
-  })
-);
-
-app.get(
   '/api/read/botellas',
   asyncHandler(async (req, res) => {
     res.json(await db.botellas.get());

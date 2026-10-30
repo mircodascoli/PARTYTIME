@@ -24,7 +24,6 @@ export async function closeDB() {
 export const db = {
   users: {
     get: getUsers,
-    login: login,
     create: createUsers,
     update: updateUsers,
     search: searchUsers,
@@ -107,11 +106,6 @@ async function getUsers(filter = {}, projection = {}) {
 async function searchUsers(filter) {
   const usersCollection = PartytimeDB.collection('users');
   return await usersCollection.findOne({ _id: new ObjectId(filter) });
-}
-
-async function login({ email, password }) {
-  const usersCollection = PartytimeDB.collection('users');
-  return await usersCollection.findOne(email);
 }
 
 async function createUsers(user) {

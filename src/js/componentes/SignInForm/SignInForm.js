@@ -91,47 +91,46 @@ export class SignInForm extends LitElement {
   }
 
   async _onFormSubmit(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const name = this.renderRoot.getElementById('nameSign');
-    const email = this.renderRoot.getElementById('emailSign');
-    const password = this.renderRoot.getElementById('passwordSign');
+  const name = this.renderRoot.getElementById('nameSign');
+  const email = this.renderRoot.getElementById('emailSign');
+  const password = this.renderRoot.getElementById('passwordSign');
 
-    const signInData = {
-      name: getInputValue(name),
-      email: getInputValue(email),
-      password: getInputValue(password),
-    };
-    if (signInData.email !== '' && signInData.password !== '') {
-      // 1. Registra su Supabase
-     const { error } = await supabase.auth.signUp({
-        email: signInData.email,
-        password: signInData.password,
-      });
+  const signInData = {
+    name: getInputValue(name),
+    email: getInputValue(email),
+    password: getInputValue(password),
+  };
 
-      if (error) {
-        this.resultMessage = error.message;
-        return;
-      } 
-
-      // 2. Registra su MongoDB
-  const payload = JSON.stringify(signInData);
-      const apiData =await getAPIData(`${API_URL}/api/create/users`,
-        'POST',
-        payload
-      );
-
-      if (apiData?.acknowledged === true) {
-        this.resultMessage = 'Account created successfully!';
-      } else {
-        this.resultMessage = 'User already exists';
-      }
-    } else {
-      this.resultMessage = 'Please fill in all fields'; 
-
-     
-    }
+  if (!signInData.name || !signInData.email || !signInData.password) {
+    this.resultMessage = 'Please fill in all fields';
+    return;
   }
+
+  const { data, error } = await supabase.auth.signUp({
+    email: signInData.email,
+    password: signInData.password,
+    options: {
+      data: {
+        full_name: signInData.name,
+      },
+    },
+  });
+
+  if (error) {
+    this.resultMessage = error.message;
+    return;
+  }
+
+  
+  if (data.session) {
+    window.location.href = '/user.html';
+  } else {
+    this.resultMessage =
+      'Registration successful! Please check your email to confirm your account.';
+  }
+}
 }
 
 customElements.define('signin-form', SignInForm);
