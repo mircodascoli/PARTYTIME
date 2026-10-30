@@ -41,7 +41,7 @@ app.post(
 app.post(
   '/api/create/users',
   asyncHandler(async (req, res) => {
-    const { email } = req.body;
+    const email = req.body.email;
     if (!email) throw new AppError('Email is required', 400);
 
     const userExists = await db.users.get({ email });
@@ -81,10 +81,7 @@ app.get(
 app.get(
   '/api/find/bottles/:id',
   asyncHandler(async (req, res) => {
-    const botella = await db.botellas.cartPreview(
-      { _id: req.params.id },
-      {}
-    );
+    const botella = await db.botellas.cartPreview({ _id: req.params.id }, {});
     if (!botella) throw new AppError('Bottle not found', 404);
     res.json(botella);
   })
@@ -159,10 +156,7 @@ app.post(
 app.get(
   '/api/product/preview/:name',
   asyncHandler(async (req, res) => {
-    const result = await db.botellas.productPreview(
-      req.params.name,
-      {}
-    );
+    const result = await db.botellas.productPreview(req.params.name, {});
     if (!result) throw new AppError('Product not found', 404);
     res.json(result);
   })
@@ -206,10 +200,11 @@ app.post(
 app.post(
   '/api/login',
   asyncHandler(async (req, res) => {
-    const { email } = req.body;
-    if (!email) throw new AppError('Email is required', 400);
+    const { email, password } = req.body;
+    if (!email || !password)
+      throw new AppError('Email and password are required', 400);
 
-    const user = await db.users.login({ email });
+    const user = await db.users.login({ email, password });
     if (!user) throw new AppError('Invalid credentials', 401);
     res.json(user);
   })

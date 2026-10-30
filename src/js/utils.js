@@ -172,7 +172,7 @@ async function _doSync(supabaseUser) {
   const existingUser = text ? JSON.parse(text) : null;
 
   if (!existingUser) {
-    const createRes = await fetch('/api/create/users', {
+    const createRes = await getApiData(`${API_URL}/api/create/users`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

@@ -23,14 +23,21 @@ export class SignInForm extends LitElement {
     return html`
       <form class="form-sign" @submit="${this._onFormSubmit}">
         <p class="info-message">Register your account</p>
-        <input type="text" class="name-sign" placeholder="Name" required />
-        <input type="email" class="email-sign" placeholder="Email" required />
-        <input
-          type="password"
-          class="password-sign"
-          placeholder="Password"
-          required
-        />
+     <input type="text" id="nameSign" class="name-sign" placeholder="Name" required/>
+
+     <input type="email"id="emailSign"
+  class="email-sign"
+  placeholder="Email"
+  required
+/>
+
+<input
+  type="password"
+  id="passwordSign"
+  class="password-sign"
+  placeholder="Password"
+  required
+/>
         <button type="submit" class="btn btn-submit">Sign Up</button>
         <button
           type="button"
@@ -95,10 +102,9 @@ export class SignInForm extends LitElement {
       email: getInputValue(email),
       password: getInputValue(password),
     };
-
     if (signInData.email !== '' && signInData.password !== '') {
       // 1. Registra su Supabase
-      const { error } = await supabase.auth.signUp({
+     const { error } = await supabase.auth.signUp({
         email: signInData.email,
         password: signInData.password,
       });
@@ -106,12 +112,11 @@ export class SignInForm extends LitElement {
       if (error) {
         this.resultMessage = error.message;
         return;
-      }
+      } 
 
       // 2. Registra su MongoDB
-      const payload = JSON.stringify(signInData);
-      const apiData = await getAPIData(
-        `${location.protocol}//${location.hostname}${API_URL}/api/create/users`,
+  const payload = JSON.stringify(signInData);
+      const apiData =await getAPIData(`${API_URL}/api/create/users`,
         'POST',
         payload
       );
@@ -122,7 +127,9 @@ export class SignInForm extends LitElement {
         this.resultMessage = 'User already exists';
       }
     } else {
-      this.resultMessage = 'Please fill in all fields';
+      this.resultMessage = 'Please fill in all fields'; 
+
+     
     }
   }
 }

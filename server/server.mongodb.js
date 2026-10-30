@@ -109,7 +109,7 @@ async function searchUsers(filter) {
   return await usersCollection.findOne({ _id: new ObjectId(filter) });
 }
 
-async function login(email) {
+async function login({ email, password }) {
   const usersCollection = PartytimeDB.collection('users');
   return await usersCollection.findOne(email);
 }
