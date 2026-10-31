@@ -11,6 +11,13 @@ const isProd = process.env.NODE_ENV === 'production';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+// ---------- HEALTH ----------
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', uptime: process.uptime() });
+});
+
 // ---------- HELPERS ----------
 
 const asyncHandler = (fn) => (req, res, next) =>
@@ -23,6 +30,8 @@ class AppError extends Error {
     this.isOperational = true;
   }
 }
+
+// ---------- AUTH SUPABASE ----------
 
 const authenticateUser = asyncHandler(async (req, res, next) => {
   const authHeader = req.headers.authorization;
@@ -46,11 +55,6 @@ const authenticateUser = asyncHandler(async (req, res, next) => {
 
   next();
 });
-// ---------- HEALTH ----------
-
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', uptime: process.uptime() });
-});
 
 // ---------- CREATE ----------
 
@@ -61,22 +65,6 @@ app.post(
   })
 );
 
-app.post(
-  '/api/create/users',
-  asyncHandler(async (req, res) => {
-    const email = req.body.email;
-    if (!email) throw new AppError('Email is required', 400);
-
-    const userExists = await db.users.get({ email });
-    if (userExists.length > 0) {
-      throw new AppError('User already exists', 409);
-    }
-
-    const newUser = { ...req.body };
-    delete newUser._id;
-    res.status(201).json(await db.users.create(newUser));
-  })
-);
 
 // ---------- READ ----------
 
@@ -211,7 +199,7 @@ app.post(
   })
 );
 
-// ---------- AUTH ----------
+
 
 // ---------- USER SYNC ----------
 
@@ -227,14 +215,12 @@ app.post(
 
     const email = supabaseUser.email;
 
-    // 1. Cerca il profilo MongoDB
     const existingUsers = await db.users.get({ email }, { password: 0 });
 
     if (existingUsers.length > 0) {
       return res.status(200).json(existingUsers[0]);
     }
 
-    // 2. Se non esiste, crea un nuovo profilo
     const newUser = {
       supabaseId: supabaseUser.id,
       name:
@@ -248,26 +234,12 @@ app.post(
 
     const result = await db.users.create(newUser);
 
-    // 3. Restituisce il profilo appena creato
     const createdUser = {
       ...newUser,
       _id: result.insertedId,
     };
 
     res.status(201).json(createdUser);
-  })
-);
-
-app.post(
-  '/api/login',
-  asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
-    if (!email || !password)
-      throw new AppError('Email and password are required', 400);
-
-    const user = await db.users.login({ email, password });
-    if (!user) throw new AppError('Invalid credentials', 401);
-    res.json(user);
   })
 );
 

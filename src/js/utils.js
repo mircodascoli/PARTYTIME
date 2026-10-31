@@ -146,7 +146,7 @@ export async function syncUserWithMongo() {
           subscription.unsubscribe();
 
           if (session) {
-            resolve(await _doSync(session.user));
+            resolve(await _doSync(session));
           } else {
             resolve(null);
           }
@@ -155,37 +155,27 @@ export async function syncUserWithMongo() {
     });
   }
 
-  return await _doSync(session.user);
+  return await _doSync(session);
 }
 
-async function _doSync(supabaseUser) {
-  const res = await fetch('/api/login', {
+async function _doSync(session) {
+  const response = await fetch(`${API_URL}/api/users/sync`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email: supabaseUser.email }),
+    headers: {
+      Authorization: `Bearer ${session.access_token}`,
+      'Content-Type': 'application/json',
+    },
   });
 
-  console.log('status:', res.status);
-  const text = await res.text();
-  console.log('raw response:', text);
+  const data = await response.json();
 
-  const existingUser = text ? JSON.parse(text) : null;
-
-  if (!existingUser) {
-    const createRes = await getApiData(`${API_URL}/api/create/users`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: supabaseUser.user_metadata.full_name,
-        email: supabaseUser.email,
-        cart: [],
-        recipes: [],
-      }),
-    });
-    return await createRes.json();
+  if (!response.ok) {
+    throw new Error(data.error || 'User synchronization failed');
   }
 
-  return existingUser;
+  sessionStorage.setItem('user', JSON.stringify(data));
+
+  return data;
 }
 
 export function formatPrice(price) {
