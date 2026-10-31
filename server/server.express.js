@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { db, connectDB, closeDB } from './server.mongodb.js';
 import { sendOrderEmail } from './mailer.js';
+import { supabase } from '../supabaseClient.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -23,6 +24,28 @@ class AppError extends Error {
   }
 }
 
+const authenticateUser = asyncHandler(async (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader?.startsWith('Bearer ')) {
+    throw new AppError('Authentication token missing', 401);
+  }
+
+  const token = authHeader.split(' ')[1];
+
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser(token);
+
+  if (error || !user) {
+    throw new AppError('Invalid or expired token', 401);
+  }
+
+  req.user = user;
+
+  next();
+});
 // ---------- HEALTH ----------
 
 app.get('/api/health', (req, res) => {
@@ -189,6 +212,51 @@ app.post(
 );
 
 // ---------- AUTH ----------
+
+// ---------- USER SYNC ----------
+
+app.post(
+  '/api/users/sync',
+  authenticateUser,
+  asyncHandler(async (req, res) => {
+    const supabaseUser = req.user;
+
+    if (!supabaseUser.email) {
+      throw new AppError('User email not available', 400);
+    }
+
+    const email = supabaseUser.email;
+
+    // 1. Cerca il profilo MongoDB
+    const existingUsers = await db.users.get({ email }, { password: 0 });
+
+    if (existingUsers.length > 0) {
+      return res.status(200).json(existingUsers[0]);
+    }
+
+    // 2. Se non esiste, crea un nuovo profilo
+    const newUser = {
+      supabaseId: supabaseUser.id,
+      name:
+        supabaseUser.user_metadata?.full_name ||
+        supabaseUser.user_metadata?.name ||
+        email.split('@')[0],
+      email,
+      cart: [],
+      recipes: [],
+    };
+
+    const result = await db.users.create(newUser);
+
+    // 3. Restituisce il profilo appena creato
+    const createdUser = {
+      ...newUser,
+      _id: result.insertedId,
+    };
+
+    res.status(201).json(createdUser);
+  })
+);
 
 app.post(
   '/api/login',

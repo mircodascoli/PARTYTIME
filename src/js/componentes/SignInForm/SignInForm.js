@@ -23,21 +23,29 @@ export class SignInForm extends LitElement {
     return html`
       <form class="form-sign" @submit="${this._onFormSubmit}">
         <p class="info-message">Register your account</p>
-     <input type="text" id="nameSign" class="name-sign" placeholder="Name" required/>
+        <input
+          type="text"
+          id="nameSign"
+          class="name-sign"
+          placeholder="Name"
+          required
+        />
 
-     <input type="email"id="emailSign"
-  class="email-sign"
-  placeholder="Email"
-  required
-/>
+        <input
+          type="email"
+          id="emailSign"
+          class="email-sign"
+          placeholder="Email"
+          required
+        />
 
-<input
-  type="password"
-  id="passwordSign"
-  class="password-sign"
-  placeholder="Password"
-  required
-/>
+        <input
+          type="password"
+          id="passwordSign"
+          class="password-sign"
+          placeholder="Password"
+          required
+        />
         <button type="submit" class="btn btn-submit">Sign Up</button>
         <button
           type="button"
@@ -91,46 +99,45 @@ export class SignInForm extends LitElement {
   }
 
   async _onFormSubmit(e) {
-  e.preventDefault();
+    e.preventDefault();
 
-  const name = this.renderRoot.getElementById('nameSign');
-  const email = this.renderRoot.getElementById('emailSign');
-  const password = this.renderRoot.getElementById('passwordSign');
+    const name = this.renderRoot.getElementById('nameSign');
+    const email = this.renderRoot.getElementById('emailSign');
+    const password = this.renderRoot.getElementById('passwordSign');
 
-  const signInData = {
-    name: getInputValue(name),
-    email: getInputValue(email),
-    password: getInputValue(password),
-  };
+    const signInData = {
+      name: getInputValue(name),
+      email: getInputValue(email),
+      password: getInputValue(password),
+    };
 
-  if (!signInData.name || !signInData.email || !signInData.password) {
-    this.resultMessage = 'Please fill in all fields';
-    return;
-  }
+    if (!signInData.name || !signInData.email || !signInData.password) {
+      this.resultMessage = 'Please fill in all fields';
+      return;
+    }
 
-  const { data, error } = await supabase.auth.signUp({
-    email: signInData.email,
-    password: signInData.password,
-    options: {
-      data: {
-        full_name: signInData.name,
+    const { data, error } = await supabase.auth.signUp({
+      email: signInData.email,
+      password: signInData.password,
+      options: {
+        data: {
+          full_name: signInData.name,
+        },
       },
-    },
-  });
+    });
 
-  if (error) {
-    this.resultMessage = error.message;
-    return;
-  }
+    if (error) {
+      this.resultMessage = error.message;
+      return;
+    }
 
-  
-  if (data.session) {
-    window.location.href = '/user.html';
-  } else {
-    this.resultMessage =
-      'Registration successful! Please check your email to confirm your account.';
+    if (data.session) {
+      window.location.href = '/user.html';
+    } else {
+      this.resultMessage =
+        'Registration successful! Please check your email to confirm your account.';
+    }
   }
-}
 }
 
 customElements.define('signin-form', SignInForm);
