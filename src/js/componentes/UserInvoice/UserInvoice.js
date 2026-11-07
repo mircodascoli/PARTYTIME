@@ -1,4 +1,3 @@
-
 import {
   LitElement,
   html,
@@ -84,28 +83,100 @@ export class UserInvoice extends LitElement {
     }
   }
 
-  generatePDF() {
+  async generatePDF() {
     const doc = new jsPDF();
 
-    doc.setFontSize(20);
-    doc.text('Partytime - Order Invoice', 20, 20);
+    // Logo Partytime
+    const logo = new Image();
+    logo.src = '/img/logo.png';
 
-    doc.setFontSize(11);
-    doc.text(`Customer: ${getSSNAME() || 'Customer'}`, 20, 35);
-    doc.text(`Email: ${getSSEMAIL() || ''}`, 20, 42);
-
-    let y = 60;
-
-    this.products.forEach((item) => {
-      doc.text(item.name, 20, y);
-      doc.text(`Qty: ${item.quantity}`, 110, y);
-      doc.text(formatPrice(item.price), 150, y);
-
-      y += 10;
+    await new Promise((resolve, reject) => {
+      logo.onload = resolve;
+      logo.onerror = reject;
     });
 
+    // Intestazione
+    doc.addImage(logo, 'PNG', 20, 12, 30, 30);
+
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(22);
+    doc.text('PARTYTIME', 60, 23);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    doc.text('Order Invoice', 60, 31);
+
+    doc.setDrawColor(180, 180, 180);
+    doc.line(20, 48, 190, 48);
+
+    // Titolo
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.text('INVOICE', 20, 62);
+
+    // Dati cliente
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+
+    doc.text(`Customer: ${getSSNAME()}`, 20, 75);
+    doc.text(`Email: ${getSSEMAIL()}`, 20, 82);
+    doc.text(`Date: ${new Date().toLocaleDateString('en-GB')}`, 20, 89);
+
+    // Tabella prodotti
+    let y = 108;
+
+    doc.setFillColor(240, 240, 240);
+    doc.rect(20, y - 7, 170, 10, 'F');
+
+    doc.setFont('helvetica', 'bold');
+    doc.text('Product', 23, y);
+    doc.text('Qty', 125, y);
+    doc.text('Unit price', 145, y);
+    doc.text('Total', 175, y);
+
+    y += 12;
+
+    doc.setFont('helvetica', 'normal');
+
+    this.products.forEach((product) => {
+      const productTotal = product.price * product.quantity;
+
+      doc.text(String(product.name), 23, y);
+      doc.text(String(product.quantity), 125, y);
+      doc.text(formatPrice(product.price), 145, y);
+      doc.text(formatPrice(productTotal), 175, y);
+
+      y += 10;
+
+      // Nuova pagina se necessario
+      if (y > 265) {
+        doc.addPage();
+        y = 25;
+      }
+    });
+
+    // Linea separatrice
+    y += 3;
+    doc.setDrawColor(180, 180, 180);
+    doc.line(20, y, 190, y);
+
+    // Totale ordine
+    y += 15;
+
+    doc.setFont('helvetica', 'bold');
     doc.setFontSize(14);
-    doc.text(`Total: ${formatPrice(this.total)}`, 20, y + 10);
+    doc.text(`TOTAL: ${formatPrice(this.total)}`, 190, y, {
+      align: 'right',
+    });
+
+    // Piè di pagina
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(120, 120, 120);
+
+    doc.text('Thank you for shopping with Partytime!', 105, 285, {
+      align: 'center',
+    });
 
     doc.save('partytime-invoice.pdf');
   }
@@ -121,19 +192,6 @@ export class UserInvoice extends LitElement {
             : this.products.length === 0
               ? html`<p>No order data found.</p>`
               : html`
-                  <ul>
-                    ${this.products.map(
-                      (item) => html`
-                        <li>
-                          ${item.name} — ${item.quantity} ×
-                          ${formatPrice(item.price)}
-                        </li>
-                      `
-                    )}
-                  </ul>
-
-                  <p>Total: ${formatPrice(this.total)}</p>
-
                   <button @click=${this.generatePDF}>
                     Download Invoice PDF
                   </button>

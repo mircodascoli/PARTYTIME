@@ -70,9 +70,9 @@ export class CheckoutButton extends LitElement {
 
       if (response.ok && data.success) {
         if (data.environment === 'production') {
-        window.location.href = '/invoice.html';
-           return;
-         }
+          window.location.href = '/invoice.html';
+          return;
+        }
         this.status = 'success';
         this.dispatchEvent(
           new CustomEvent('order-completed', {
