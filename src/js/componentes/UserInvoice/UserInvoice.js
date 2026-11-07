@@ -85,8 +85,6 @@ export class UserInvoice extends LitElement {
 
   async generatePDF() {
     const doc = new jsPDF();
-
-    // Logo Partytime
     const logo = new Image();
     logo.src = '../../img/logo.png';
 
@@ -95,7 +93,6 @@ export class UserInvoice extends LitElement {
       logo.onerror = reject;
     });
 
-    // Intestazione
     doc.addImage(logo, 'PNG', 20, 12, 30, 30);
 
     doc.setFont('helvetica', 'bold');
@@ -109,12 +106,12 @@ export class UserInvoice extends LitElement {
     doc.setDrawColor(180, 180, 180);
     doc.line(20, 48, 190, 48);
 
-    // Titolo
+  
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.text('INVOICE', 20, 62);
 
-    // Dati cliente
+   
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(11);
 
@@ -122,7 +119,7 @@ export class UserInvoice extends LitElement {
     doc.text(`Email: ${getSSEMAIL()}`, 20, 82);
     doc.text(`Date: ${new Date().toLocaleDateString('en-GB')}`, 20, 89);
 
-    // Tabella prodotti
+   
     let y = 108;
 
     doc.setFillColor(240, 240, 240);
