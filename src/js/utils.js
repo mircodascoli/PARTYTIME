@@ -1,59 +1,90 @@
+
 import { simpleFetch } from './lib/simpleFetch.js';
 import { HttpError } from './clases/HttpError.js';
 import { supabase } from '../config/supabaseClient.js';
 
 const TIMEOUT = 10000;
+const AUTH_TIMEOUT = 5000;
 
 export const API_URL =
-  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+  location.hostname === 'localhost' ||
+  location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:1337'
     : 'https://partytime-5tie.onrender.com';
-export const getSSID = () =>
-  JSON.parse(sessionStorage.getItem('user'))?._id || null;
-export const getSSNAME = () =>
-  JSON.parse(sessionStorage.getItem('user'))?.name || null;
-export const getSSEMAIL = () =>
-  JSON.parse(sessionStorage.getItem('user'))?.email || null;
+
+// ---------- USER PROFILE ----------
+
+function getStoredUser() {
+  try {
+    return JSON.parse(sessionStorage.getItem('user')) || null;
+  } catch {
+    return null;
+  }
+}
+
+export const getSSID = () => getStoredUser()?._id || null;
+
+export const getSSNAME = () => getStoredUser()?.name || null;
+
+export const getSSEMAIL = () => getStoredUser()?.email || null;
+
+// ---------- API REQUESTS ----------
+
 export async function getAPIData(apiURL, method = 'GET', data) {
   let apiData;
 
   try {
-    let headers = new Headers();
+    const headers = new Headers();
+
     headers.append('Content-Type', 'application/json');
-    headers.append('Access-Control-Allow-Origin', '*');
+
     if (data) {
-      headers.append('Content-Length', String(JSON.stringify(data).length));
+      headers.append(
+        'Content-Length',
+        String(JSON.stringify(data).length)
+      );
     }
+
     apiData = await simpleFetch(apiURL, {
       signal: AbortSignal.timeout(TIMEOUT),
-      method: method,
+      method,
       body: data ?? undefined,
-      headers: headers,
+      headers,
     });
-  } catch (/** @type {any | HttpError} */ err) {
+  } catch (err) {
     if (err.name === 'AbortError') {
-      console.error('Fetch abortado');
+      console.error('Fetch aborted');
     }
+
     if (err instanceof HttpError) {
       if (err.response.status === 404) {
         console.error('Not found');
       }
+
       if (err.response.status === 500) {
         console.error('Internal server error');
       }
     }
+
+    console.error('API request failed:', err);
   }
-  console.log(apiData, typeof apiData, 'data from getApiData');
+
+  console.log(apiData, typeof apiData, 'data from getAPIData');
+
   return apiData;
 }
+
+// ---------- INPUTS ----------
 
 export function getInputValue(inputElement) {
   if (inputElement) {
     return /** @type {HTMLInputElement} */ (inputElement).value;
-  } else {
-    return '';
   }
+
+  return '';
 }
+
+// ---------- CART EVENTS ----------
 
 export function launchpreCartPoPup(ing) {
   console.log('buy ingredient function activated by the click', ing);
@@ -76,8 +107,11 @@ export function ConfirmAddedToCart() {
   );
 }
 
+// ---------- AUTHENTICATION ----------
+
 export async function checkLoggedIn() {
   console.log('CHECK LOGIN EXECUTED', location.pathname);
+
   const restrictedPages = [
     '/cart.html',
     '/shop.html',
@@ -85,10 +119,18 @@ export async function checkLoggedIn() {
     '/calculator.html',
     '/user.html',
   ];
-  const accessPages = ['/', '/index.html', '/sign.html', '/login.html'];
+
+  const accessPages = [
+    '/',
+    '/index.html',
+    '/sign.html',
+    '/login.html',
+  ];
 
   const session = await getSessionWithFallback();
+
   console.log('SESSION:', session);
+
   if (restrictedPages.includes(location.pathname) && !session) {
     location.href = './index.html';
     return;
@@ -99,60 +141,63 @@ export async function checkLoggedIn() {
   }
 }
 
+// ---------- SUPABASE SESSION ----------
+
 async function getSessionWithFallback() {
   const {
     data: { session },
+    error,
   } = await supabase.auth.getSession();
 
-  if (session) return session;
+  if (error) {
+    console.error('Error retrieving Supabase session:', error);
+    return null;
+  }
+
+  if (session) {
+    return session;
+  }
+
   return new Promise((resolve) => {
-    const TIMEOUT_MS = 5000;
+    let subscription;
+    let resolved = false;
 
     const timer = setTimeout(() => {
-      subscription.unsubscribe();
+      if (resolved) return;
+
+      resolved = true;
+      subscription?.unsubscribe();
       resolve(null);
-    }, TIMEOUT_MS);
+    }, AUTH_TIMEOUT);
 
     const {
-      data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
+      data: { subscription: authSubscription },
+    } = supabase.auth.onAuthStateChange((event, newSession) => {
+      if (
+        event === 'INITIAL_SESSION' ||
+        event === 'SIGNED_IN'
+      ) {
+        if (resolved) return;
+
+        resolved = true;
         clearTimeout(timer);
-        subscription.unsubscribe();
-        resolve(session);
+        subscription?.unsubscribe();
+
+        resolve(newSession);
       }
     });
+
+    subscription = authSubscription;
   });
 }
+
+// ---------- MONGODB USER SYNC ----------
+
 export async function syncUserWithMongo() {
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const session = await getSessionWithFallback();
 
   if (!session) {
-    return new Promise((resolve) => {
-      const TIMEOUT_MS = 5000;
-
-      const timer = setTimeout(() => {
-        subscription.unsubscribe();
-        resolve(null);
-      }, TIMEOUT_MS);
-
-      const {
-        data: { subscription },
-      } = supabase.auth.onAuthStateChange(async (event, session) => {
-        if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
-          clearTimeout(timer);
-          subscription.unsubscribe();
-
-          if (session) {
-            resolve(await _doSync(session));
-          } else {
-            resolve(null);
-          }
-        }
-      });
-    });
+    return null;
   }
 
   return await _doSync(session);
@@ -170,13 +215,31 @@ async function _doSync(session) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.error || 'User synchronization failed');
+    throw new Error(
+      data.error || 'User synchronization failed'
+    );
   }
 
-  sessionStorage.setItem('user', JSON.stringify(data));
+  const userProfile = {
+    ...data,
+    email: session.user.email,
+    name:
+      data.name ||
+      session.user.user_metadata?.full_name ||
+      session.user.user_metadata?.name ||
+      session.user.email?.split('@')[0],
+    supabaseId: session.user.id,
+  };
 
-  return data;
+  sessionStorage.setItem(
+    'user',
+    JSON.stringify(userProfile)
+  );
+
+  return userProfile;
 }
+
+// ---------- PRICE FORMAT ----------
 
 export function formatPrice(price) {
   return new Intl.NumberFormat('it-IT', {

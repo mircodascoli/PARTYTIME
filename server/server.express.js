@@ -11,7 +11,6 @@ const isProd = process.env.NODE_ENV === 'production';
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
 // ---------- HEALTH ----------
 
 app.get('/api/health', (req, res) => {
@@ -64,7 +63,6 @@ app.post(
     res.json(await db.botellas.get());
   })
 );
-
 
 // ---------- READ ----------
 
@@ -199,8 +197,6 @@ app.post(
   })
 );
 
-
-
 // ---------- USER SYNC ----------
 
 app.post(
@@ -254,8 +250,25 @@ app.post(
       throw new AppError('Incomplete order data', 400);
     }
 
-    await sendOrderEmail({ name, email, products, total });
-    res.json({ success: true, message: 'Order received, emails sent' });
+    if (process.env.APP_ENV === 'local') {
+      await sendOrderEmail({ name, email, products, total });
+
+      return res.json({
+        success: true,
+        environment: 'local',
+        message: 'Order received, email sent',
+      });
+    }
+
+    if (process.env.APP_ENV === 'production') {
+      return res.json({
+        success: true,
+        environment: 'production',
+        message: 'Demo order completed',
+      });
+    }
+
+    throw new AppError('Invalid application environment', 500);
   })
 );
 

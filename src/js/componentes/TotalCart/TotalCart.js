@@ -4,8 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import TotalCartCSS from '../TotalCart/TotalCartCSS.css' with { type: 'css' };
-import { formatPrice } from '../../utils.js';
-import { getSSNAME, getSSEMAIL } from '../../utils.js';
+import { formatPrice, getSSNAME, getSSEMAIL } from '../../utils.js';
 
 export class TotalCart extends LitElement {
   static styles = [ResetCSS, TotalCartCSS];
@@ -27,18 +26,18 @@ export class TotalCart extends LitElement {
 
   _handleOrderCompleted(e) {
     console.log('Ordine completato:', e.detail);
-    this.status = 'success'; // ✅ fisso, non da e.detail
+    this.status = 'success';
     this.statusMessage = e.detail.message || 'Order completed successfully';
   }
 
   _handleOrderFailed(e) {
     console.error('Ordine fallito:', e.detail);
-    this.status = 'error'; // ✅ fisso, non da e.detail
+    this.status = 'error';
     this.statusMessage = e.detail.message || 'Order failed. Please try again.';
   }
   render() {
     console.log('TotalCart updated, total:', this.total);
-    console.log('mailer output:', this.status); // perche undefined se
+    console.log('mailer output:', this.status);
     return html`
       <h2 class="order-summary">Order Summary</h2>
       <div class="items-total">
