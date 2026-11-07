@@ -1,4 +1,3 @@
-
 import { simpleFetch } from './lib/simpleFetch.js';
 import { HttpError } from './clases/HttpError.js';
 import { supabase } from '../config/supabaseClient.js';
@@ -7,8 +6,7 @@ const TIMEOUT = 10000;
 const AUTH_TIMEOUT = 5000;
 
 export const API_URL =
-  location.hostname === 'localhost' ||
-  location.hostname === '127.0.0.1'
+  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
     ? 'http://127.0.0.1:1337'
     : 'https://partytime-5tie.onrender.com';
 
@@ -39,10 +37,7 @@ export async function getAPIData(apiURL, method = 'GET', data) {
     headers.append('Content-Type', 'application/json');
 
     if (data) {
-      headers.append(
-        'Content-Length',
-        String(JSON.stringify(data).length)
-      );
+      headers.append('Content-Length', String(JSON.stringify(data).length));
     }
 
     apiData = await simpleFetch(apiURL, {
@@ -120,12 +115,7 @@ export async function checkLoggedIn() {
     '/user.html',
   ];
 
-  const accessPages = [
-    '/',
-    '/index.html',
-    '/sign.html',
-    '/login.html',
-  ];
+  const accessPages = ['/', '/index.html', '/sign.html', '/login.html'];
 
   const session = await getSessionWithFallback();
 
@@ -173,10 +163,7 @@ async function getSessionWithFallback() {
     const {
       data: { subscription: authSubscription },
     } = supabase.auth.onAuthStateChange((event, newSession) => {
-      if (
-        event === 'INITIAL_SESSION' ||
-        event === 'SIGNED_IN'
-      ) {
+      if (event === 'INITIAL_SESSION' || event === 'SIGNED_IN') {
         if (resolved) return;
 
         resolved = true;
@@ -215,9 +202,7 @@ async function _doSync(session) {
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(
-      data.error || 'User synchronization failed'
-    );
+    throw new Error(data.error || 'User synchronization failed');
   }
 
   const userProfile = {
@@ -231,10 +216,7 @@ async function _doSync(session) {
     supabaseId: session.user.id,
   };
 
-  sessionStorage.setItem(
-    'user',
-    JSON.stringify(userProfile)
-  );
+  sessionStorage.setItem('user', JSON.stringify(userProfile));
 
   return userProfile;
 }
