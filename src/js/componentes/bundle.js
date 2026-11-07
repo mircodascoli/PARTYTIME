@@ -20,6 +20,7 @@ import { CocktailInfo } from './CocktailInfo/CocktailInfo.js';
 import { ThreeDotMenu } from './ThreeDotMenu/ThreeDotMenu.js';
 import { CheckoutButton } from './CheckoutButton/CheckoutButton.js';
 import { Hero } from './HeroComponent/Hero.js';
+import { UserInvoice } from './UserInvoice/UserInvoice.js';
 export {
   SignInForm,
   LoginForm,
@@ -43,4 +44,5 @@ export {
   ThreeDotMenu,
   CheckoutButton,
   Hero,
+  UserInvoice,
 };
