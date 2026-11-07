@@ -55,7 +55,7 @@ export class CheckoutButton extends LitElement {
     );
 
     try {
-      const response = await fetch(this.endpoint, {
+      const response = await fetch(`${API_URL}${this.endpoint}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -69,6 +69,10 @@ export class CheckoutButton extends LitElement {
       const data = await response.json();
 
       if (response.ok && data.success) {
+        if (data.environment === 'production') {
+        window.location.href = '/invoice.html';
+           return;
+         }
         this.status = 'success';
         this.dispatchEvent(
           new CustomEvent('order-completed', {

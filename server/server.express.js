@@ -240,7 +240,6 @@ app.post(
 );
 
 // ---------- ORDER ----------
-
 app.post(
   '/api/order',
   asyncHandler(async (req, res) => {
@@ -256,7 +255,7 @@ app.post(
       return res.json({
         success: true,
         environment: 'local',
-        message: 'Order received, email sent',
+        message: 'Order received, email invoice sent',
       });
     }
 
@@ -264,7 +263,7 @@ app.post(
       return res.json({
         success: true,
         environment: 'production',
-        message: 'Order received, redirecting to invoice page!',
+        message: 'Order received, redirecting to your invoice page',
       });
     }
 
