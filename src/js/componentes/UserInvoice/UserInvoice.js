@@ -88,7 +88,7 @@ export class UserInvoice extends LitElement {
 
     // Logo Partytime
     const logo = new Image();
-    logo.src = '/img/logo.png';
+    logo.src = '../../img/logo.png';
 
     await new Promise((resolve, reject) => {
       logo.onload = resolve;
