@@ -87,7 +87,7 @@ export class TotalCart extends LitElement {
                   d="M9.8 7.5l2.982 3.28a3 3 0 0 0 4.238 .202l3.28 -2.982"
                 />
               </svg>
-              <span>Order confirmed! Check your email.</span>
+              <span>${this.statusMessage}</span>
             </p>`
           : ''
       }

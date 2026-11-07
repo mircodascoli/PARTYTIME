@@ -264,7 +264,7 @@ app.post(
       return res.json({
         success: true,
         environment: 'production',
-        message: 'Demo order completed',
+        message: 'Order received, redirecting to invoice page!',
       });
     }
 

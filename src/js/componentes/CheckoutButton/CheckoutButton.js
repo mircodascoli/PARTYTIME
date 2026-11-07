@@ -106,7 +106,7 @@ export class CheckoutButton extends LitElement {
   }
 
   async _afterSuccess() {
-    console.log('2.5s dopo il successo — svuoto il carrello');
+    console.log('2.5s after — emptying cart and reloading page');
 
     const body = {
       userId: getSSID(),
@@ -119,7 +119,7 @@ export class CheckoutButton extends LitElement {
         'DELETE',
         PAYLOAD
       );
-      console.log('Carrello svuotato:', apiData);
+      console.log('cart is cleared:', apiData);
     } catch (err) {
       console.error('Error clearing cart:', err);
     } finally {
