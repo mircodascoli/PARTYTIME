@@ -106,12 +106,10 @@ export class UserInvoice extends LitElement {
     doc.setDrawColor(180, 180, 180);
     doc.line(20, 48, 190, 48);
 
-  
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(16);
     doc.text('INVOICE', 20, 62);
 
-   
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(11);
 
@@ -119,7 +117,6 @@ export class UserInvoice extends LitElement {
     doc.text(`Email: ${getSSEMAIL()}`, 20, 82);
     doc.text(`Date: ${new Date().toLocaleDateString('en-GB')}`, 20, 89);
 
-   
     let y = 108;
 
     doc.setFillColor(240, 240, 240);

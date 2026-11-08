@@ -2,38 +2,67 @@ import {
   LitElement,
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
+
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
+
 import SavedRecipesListCSS from '../SavedRecipesList/SavedRecipesListCSS.css' with { type: 'css' };
+
 import { getAPIData, API_URL, getSSID } from '../../utils.js';
 import { launchpreCartPoPup } from '../../utils.js';
+
 export class SavedRecipesList extends LitElement {
   static styles = [ResetCSS, SavedRecipesListCSS];
+
   static properties = {
     apiData: { type: Object },
   };
 
   constructor() {
     super();
-    this.apiData = null;
 
-    try {
-      this._idSession = getSSID();
-    } catch {
-      console.warn('No user logged');
-      this._idSession = null;
-    }
+    this.apiData = null;
+    this._idSession = null;
+    this._isLoading = false;
+
+    this._handleUserReady = (e) => {
+      this._idSession = e.detail._id;
+
+      if (this._idSession) {
+        this.loadApiData();
+      }
+
+      window.removeEventListener('user-ready', this._handleUserReady);
+    };
   }
 
   connectedCallback() {
     super.connectedCallback();
-    this.loadApiData();
+
+    this._idSession = getSSID();
+
+    if (this._idSession) {
+      this.loadApiData();
+    } else {
+      window.addEventListener('user-ready', this._handleUserReady);
+    }
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+
+    window.removeEventListener('user-ready', this._handleUserReady);
   }
 
   async loadApiData() {
-    console.log('Loading the data');
-    if (!this._idSession) return;
+    if (!this._idSession || this._isLoading) return;
 
-    const payload = JSON.stringify({ id: this._idSession });
+    this._isLoading = true;
+
+    console.log('Loading saved recipes for user:', this._idSession);
+
+    const payload = JSON.stringify({
+      id: this._idSession,
+    });
 
     try {
       const apiData = await getAPIData(
@@ -42,9 +71,13 @@ export class SavedRecipesList extends LitElement {
         payload
       );
 
-      this.apiData = apiData;
+      if (apiData) {
+        this.apiData = apiData;
+      }
     } catch (err) {
       console.error('Error loading recipes:', err);
+    } finally {
+      this._isLoading = false;
     }
   }
 
@@ -59,7 +92,9 @@ export class SavedRecipesList extends LitElement {
       userId: this._idSession,
       recipeId,
     });
+
     console.log('delete recipe payload', payload);
+
     try {
       await getAPIData(`${API_URL}/api/delete/recipe`, 'DELETE', payload);
 
@@ -80,13 +115,16 @@ export class SavedRecipesList extends LitElement {
         <ul class="recipes-list">
           ${
             recipes.length === 0
-              ? html`<p class="render-guard-p">
-                  No recipes saved yet. Start by creating some!
-                </p>`
+              ? html`
+                  <p class="render-guard-p">
+                    No recipes saved yet. Start by creating some!
+                  </p>
+                `
               : html`
                   <div class="your-recipes-p-container">
                     <p class="your-recipes-p">Your recipes:</p>
                   </div>
+
                   ${recipes.map(
                     (item) => html`
                       <li class="recipe-card">
@@ -105,13 +143,15 @@ export class SavedRecipesList extends LitElement {
                               alt="${item.name}"
                               class="recipe-preview-image"
                             />
+
                             <div class="name-desciption-container">
                               <p>
-                                <span class="span-recipe-title"
-                                  >${item.name}</span
-                                >
+                                <span class="span-recipe-title">
+                                  ${item.name}
+                                </span>
                                 × ${item.amount}
                               </p>
+
                               <p class="recipe-preview-description">
                                 ${item.description}
                               </p>
@@ -150,17 +190,20 @@ export class SavedRecipesList extends LitElement {
                                     <path d="M15 17v-2" />
                                     <path d="M12 17v-1" />
                                   </svg>
-                                  <span class="span-grey">ingredients:</span>
+
+                                  <span class="span-grey"> ingredients: </span>
                                 </p>
+
                                 ${item.ingredientes.map(
                                   (ing) => html`
                                     <li class="recipe-ingredient">
-                                      <span>&#x2022;</span> ${ing.name}
-                                      ${ing.mls} ml
+                                      <span>&#x2022;</span>
+                                      ${ing.name} ${ing.mls} ml
                                     </li>
                                   `
                                 )}
                               </ul>
+
                               <hr class="section-divider" />
                             </div>
 
@@ -192,11 +235,14 @@ export class SavedRecipesList extends LitElement {
                                   />
                                   <path d="M12 5v-2" />
                                 </svg>
-                                <span class="span-grey"
-                                  >Serving suggestion:</span
-                                >
+
+                                <span class="span-grey">
+                                  Serving suggestion:
+                                </span>
                               </p>
+
                               <p class="serving-description">${item.serving}</p>
+
                               <hr class="section-divider" />
                             </div>
                           </div>
@@ -211,13 +257,18 @@ export class SavedRecipesList extends LitElement {
                                     src="../../img/imgProductos/${ing.dbname}.png"
                                     alt="${ing.dbname}"
                                     class="suggested-product-image"
-                                    @click=${() => launchpreCartPoPup(ing.dbname)}
-                                    @error=${(e) => (e.target.src = '../../img/fallback.png')}
+                                    @click=${() =>
+                                      launchpreCartPoPup(ing.dbname)}
+                                    @error=${(e) =>
+                                      (e.target.src = '../../img/fallback.png')}
                                   />
+
                                   <p class="p-ingredient-name">${ing.dbname}</p>
+
                                   <button
                                     class="btn-black"
-                                    @click=${() => launchpreCartPoPup(ing.dbname)}
+                                    @click=${() =>
+                                      launchpreCartPoPup(ing.dbname)}
                                   >
                                     BUY
                                   </button>
