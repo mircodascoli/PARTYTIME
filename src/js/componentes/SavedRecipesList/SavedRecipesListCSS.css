@@ -78,8 +78,8 @@
 }
 
 .recipe-preview-image {
-  width: auto;
-  height: 170px;
+  width: 60%;
+  height: auto;
   border-radius: 10px;
 }
 
@@ -97,12 +97,16 @@
   gap: 10px;
 }
 
+/* PRODUCTS: MOBILE GRID 2x2 */
+
 .recipe-products-list {
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
+  width: 100%;
+  padding: 0;
 }
 
 .suggested-product-image {
@@ -110,7 +114,7 @@
   height: 80px;
   cursor: pointer;
   object-fit: cover;
-  margin-left: 10px;
+  margin-left: 0;
 }
 
 .product-item {
@@ -126,7 +130,7 @@
   justify-content: center;
   gap: 8px;
   background-color: #1a1a1a;
-  color: #ffffff;
+  color: #fff;
   font-size: 15px;
   font-weight: 500;
   border: none;
@@ -141,7 +145,7 @@
 }
 
 .btn-black:hover {
-  background-color: #000000;
+  background-color: #000;
   box-shadow: 0 4px 10px #00000033;
 }
 
@@ -151,7 +155,7 @@
 }
 
 .btn-black:disabled {
-  background-color: #999999;
+  background-color: #999;
   cursor: not-allowed;
   box-shadow: none;
 }
@@ -174,6 +178,16 @@
 
 .span-recipe-title {
   font-size: var(--text-xl);
+}
+
+/* HEADER, SERVING AND INGREDIENTS: GRID 2x2 ON ALL SCREENS */
+
+.recipe-header-serving-ingredients-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  gap: 25px;
+  width: 100%;
 }
 
 .serving-container,
@@ -200,7 +214,10 @@
 .recipe-products-container {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
+
+/* DESKTOP */
 
 @media (min-width: 800px) {
   .recipe-steps-container {
@@ -228,7 +245,7 @@
   }
 
   .p-ingredient-name {
-    white-space: wrap;
+    white-space: normal;
   }
 
   .suggested-product-image {
@@ -246,13 +263,20 @@
   }
 
   .recipe-header-serving-ingredients-container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
     order: 0;
   }
 
   .recipe-products-container {
     order: 0;
+  }
+
+  /* PRODUCTS: DESKTOP FLEX, 4 ITEMS IN ONE ROW */
+
+  .recipe-products-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
   }
 }

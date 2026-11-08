@@ -4,11 +4,14 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-
 import SavedRecipesListCSS from '../SavedRecipesList/SavedRecipesListCSS.css' with { type: 'css' };
 
-import { getAPIData, API_URL, getSSID } from '../../utils.js';
-import { launchpreCartPoPup } from '../../utils.js';
+import {
+  getAPIData,
+  API_URL,
+  getSSID,
+  launchpreCartPoPup,
+} from '../../utils.js';
 
 export class SavedRecipesList extends LitElement {
   static styles = [ResetCSS, SavedRecipesListCSS];
@@ -137,77 +140,28 @@ export class SavedRecipesList extends LitElement {
                         <div
                           class="recipe-header-serving-ingredients-container"
                         >
-                          <div class="recipe-header">
+                          <div class="recipe-img-container">
                             <img
                               src="../../../img/imgCocktails/${item.name}.png"
                               alt="${item.name}"
                               class="recipe-preview-image"
                             />
+                          </div>
+                          <div class="name-desciption-container">
+                            <p>
+                              <span class="span-recipe-title">
+                                ${item.name}
+                              </span>
+                              × ${item.amount}
+                            </p>
 
-                            <div class="name-desciption-container">
-                              <p>
-                                <span class="span-recipe-title">
-                                  ${item.name}
-                                </span>
-                                × ${item.amount}
-                              </p>
-
-                              <p class="recipe-preview-description">
-                                ${item.description}
-                              </p>
-                            </div>
+                            <p class="recipe-preview-description">
+                              ${item.description}
+                            </p>
                           </div>
 
-                          <div class="recipe-steps-container">
-                            <div class="recipe-ingredients-container">
-                              <ul class="recipe-ingredients-list">
-                                <p>
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="24"
-                                    height="24"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="2"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-data"
-                                  >
-                                    <path
-                                      stroke="none"
-                                      d="M0 0h24v24H0z"
-                                      fill="none"
-                                    />
-                                    <path
-                                      d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
-                                    />
-                                    <path
-                                      d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2"
-                                    />
-                                    <path d="M9 17v-4" />
-                                    <path d="M12 17v-1" />
-                                    <path d="M15 17v-2" />
-                                    <path d="M12 17v-1" />
-                                  </svg>
-
-                                  <span class="span-grey"> ingredients: </span>
-                                </p>
-
-                                ${item.ingredientes.map(
-                                  (ing) => html`
-                                    <li class="recipe-ingredient">
-                                      <span>&#x2022;</span>
-                                      ${ing.name} ${ing.mls} ml
-                                    </li>
-                                  `
-                                )}
-                              </ul>
-
-                              <hr class="section-divider" />
-                            </div>
-
-                            <div class="serving-container">
+                          <div class="recipe-ingredients-container">
+                            <ul class="recipe-ingredients-list">
                               <p>
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
@@ -219,32 +173,72 @@ export class SavedRecipesList extends LitElement {
                                   stroke-width="2"
                                   stroke-linecap="round"
                                   stroke-linejoin="round"
-                                  class="icon icon-tabler icons-tabler-outline icon-tabler-milkshake"
+                                  class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-data"
                                 >
                                   <path
                                     stroke="none"
                                     d="M0 0h24v24H0z"
                                     fill="none"
                                   />
-                                  <path d="M17 10a5 5 0 0 0 -10 0" />
                                   <path
-                                    d="M6 11a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1l0 -1"
+                                    d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2"
                                   />
                                   <path
-                                    d="M7 13l1.81 7.243a1 1 0 0 0 .97 .757h4.44a1 1 0 0 0 .97 -.757l1.81 -7.243"
+                                    d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2"
                                   />
-                                  <path d="M12 5v-2" />
+                                  <path d="M9 17v-4" />
+                                  <path d="M12 17v-1" />
+                                  <path d="M15 17v-2" />
+                                  <path d="M12 17v-1" />
                                 </svg>
 
-                                <span class="span-grey">
-                                  Serving suggestion:
-                                </span>
+                                <span class="span-grey"> ingredients: </span>
                               </p>
 
-                              <p class="serving-description">${item.serving}</p>
+                              ${item.ingredientes.map(
+                                  (ing) => html`
+                                    <li class="recipe-ingredient">
+                                      <span>&#x2022;</span>
+                                      ${ing.name} ${ing.mls} ml
+                                    </li>
+                                  `
+                                )}
+                            </ul>
+                          </div>
 
-                              <hr class="section-divider" />
-                            </div>
+                          <div class="serving-container">
+                            <p>
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="24"
+                                height="24"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-milkshake"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                />
+                                <path d="M17 10a5 5 0 0 0 -10 0" />
+                                <path
+                                  d="M6 11a1 1 0 0 1 1 -1h10a1 1 0 0 1 1 1v1a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1l0 -1"
+                                />
+                                <path
+                                  d="M7 13l1.81 7.243a1 1 0 0 0 .97 .757h4.44a1 1 0 0 0 .97 -.757l1.81 -7.243"
+                                />
+                                <path d="M12 5v-2" />
+                              </svg>
+
+                              <span class="span-grey"> Serving: </span>
+                            </p>
+
+                            <p class="serving-description">${item.serving}</p>
                           </div>
                         </div>
 
