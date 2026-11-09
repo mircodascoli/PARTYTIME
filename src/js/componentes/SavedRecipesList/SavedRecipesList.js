@@ -196,13 +196,13 @@ export class SavedRecipesList extends LitElement {
                               </p>
 
                               ${item.ingredientes.map(
-                                  (ing) => html`
-                                    <li class="recipe-ingredient">
-                                      <span>&#x2022;</span>
-                                      ${ing.name} ${ing.mls} ml
-                                    </li>
-                                  `
-                                )}
+                                (ing) => html`
+                                  <li class="recipe-ingredient">
+                                    <span>&#x2022;</span>
+                                    ${ing.name} ${ing.mls} ml
+                                  </li>
+                                `
+                              )}
                             </ul>
                           </div>
 

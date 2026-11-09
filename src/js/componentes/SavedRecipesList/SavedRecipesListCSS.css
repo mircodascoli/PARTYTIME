@@ -2,6 +2,10 @@
   display: block;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .render-guard-p {
   font-size: 1.2rem;
   text-align: center;
@@ -20,6 +24,12 @@
   width: 100%;
   padding-top: 20px;
 }
+
+
+ .recipe-ingredients-container {
+    display: flex;
+    align-items: center;
+  }
 
 .name-desciption-container {
   display: flex;
@@ -51,7 +61,6 @@
   box-shadow: 0 4px 12px #00000014;
   margin: 24px 10px;
   padding: 20px;
-  width: 100%;
   max-width: 480px;
   transition:
     box-shadow 0.25s ease,
@@ -110,11 +119,10 @@
 }
 
 .suggested-product-image {
-  width: auto;
-  height: 80px;
-  cursor: pointer;
-  object-fit: cover;
-  margin-left: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 200px;
+  object-fit: contain;
 }
 
 .product-item {
@@ -231,9 +239,11 @@
     max-width: none;
   }
 
-  .recipe-ingredients-container {
+  .recipe-img-container{
     display: flex;
+    justify-content: center;
     align-items: center;
+
   }
 
   .recipe-preview-image {
@@ -250,7 +260,7 @@
 
   .suggested-product-image {
     height: 200px;
-    width: calc(50% + 40px);
+   /*  width: calc(50% + 40px); */
   }
 
   .section-divider {
@@ -269,8 +279,6 @@
   .recipe-products-container {
     order: 0;
   }
-
-  /* PRODUCTS: DESKTOP FLEX, 4 ITEMS IN ONE ROW */
 
   .recipe-products-list {
     display: flex;
