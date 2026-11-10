@@ -33,7 +33,7 @@ export class CocktailInfo extends LitElement {
             class="popup-select-button"
             @click="${() => this.selectRecipeToCalc(this.cocktail)}"
           >
-            <span>NEXT</span>
+            <span>Next</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"

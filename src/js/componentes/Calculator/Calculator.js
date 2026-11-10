@@ -5,6 +5,7 @@ import {
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import CalculatorCSS from '../Calculator/CalculatorCSS.css' with { type: 'css' };
 import { getAPIData, API_URL, getSSID } from '../../utils.js';
+
 export class Calculator extends LitElement {
   static properties = {
     recipe: { type: Object },
@@ -14,34 +15,11 @@ export class Calculator extends LitElement {
 
   constructor() {
     super();
+    this.recipe = null;
     this.quantity = 5;
   }
 
-  connectedCallback() {
-    super.connectedCallback();
-
-    const storedRecipe = sessionStorage.getItem('selectedCraft');
-
-    if (storedRecipe) {
-      this.recipe = JSON.parse(storedRecipe);
-
-      sessionStorage.removeItem('selectedCraft');
-    }
-  }
-  disconnectedCallback() {
-    super.disconnectedCallback();
-    sessionStorage.removeItem('selectedCraft');
-  }
-
-  handleRange(e) {
-    const target = e.target;
-    this.quantity = parseInt(target.value);
-
-    this.requestUpdate();
-  }
-
   async handleSaveClick() {
-    console.log('this.recipe', this.recipe.serving);
     const recipe = {
       name: this.recipe.name,
       amount: this.quantity,
@@ -56,7 +34,6 @@ export class Calculator extends LitElement {
 
     try {
       await this.guardarReceta(recipe);
-
       location.href = './user.html';
     } catch (err) {
       console.error('Error saving receta', err);
@@ -64,29 +41,24 @@ export class Calculator extends LitElement {
     }
   }
 
-  handleOthersClick() {
+  handleBackClick() {
     this.dispatchEvent(
-      new CustomEvent('close-popup', {
+      new CustomEvent('switch-view', {
+        detail: { next: 'B' },
         bubbles: true,
         composed: true,
       })
     );
   }
+
   async guardarReceta(recipe) {
     const idUserNum = getSSID();
     const body = {
       recipe,
       idUser: idUserNum,
     };
-    console.log(body, 'body in guardar receta');
     const PAYLOAD = JSON.stringify(body);
-    const apiData = await getAPIData(
-      `${API_URL}/api/push/to/recipes`,
-      'POST',
-      PAYLOAD
-    );
-
-    return apiData;
+    return await getAPIData(`${API_URL}/api/push/to/recipes`, 'POST', PAYLOAD);
   }
 
   render() {
@@ -105,25 +77,8 @@ export class Calculator extends LitElement {
           <h2 class="calculator-recipe-name">${this.recipe.name}</h2>
         </div>
 
-        <div class="instructions-container">
-          <p class="instructions">
-            Move the slider to increase or decrease your batch quantity
-          </p>
-        </div>
-
-        <div class="input-calculator">
-          <label for="range" id="labelRange">Quantity:</label>
-          <input
-            id="range"
-            type="range"
-            min="1"
-            max="10"
-            step="1"
-            value="5"
-            @input=${this.handleRange}
-          />
-          <p>
-          <span class="people-units">for: ${this.quantity}</span>
+        <p class="people-units">
+          for: ${this.quantity}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -142,14 +97,15 @@ export class Calculator extends LitElement {
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
           </svg>
-          </p>
-        </div>
+        </p>
 
         <div id="resultados">
-          <table class="tabla-calculos" cellspacing="1px" cellpadding="">
+          <table class="tabla-calculos" cellspacing="1px">
             <thead>
-              <th>ingredients:</th>
-              <th>quantity:</th>
+              <tr>
+                <th>ingredients:</th>
+                <th>quantity:</th>
+              </tr>
             </thead>
             <tbody>
               ${this.recipe.ingredients.map(
@@ -165,10 +121,7 @@ export class Calculator extends LitElement {
         </div>
 
         <div class="calculator-button-container">
-          <button
-            class="another-recipe-button"
-            @click="${this.handleOthersClick}"
-          >
+          <button class="back-recipe-button" @click="${this.handleBackClick}">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -185,7 +138,7 @@ export class Calculator extends LitElement {
               <path d="M9 14l-4 -4l4 -4" />
               <path d="M5 10h11a4 4 0 1 1 0 8h-1" />
             </svg>
-            <span>Another recipe</span>
+            <span>Back</span>
           </button>
           <button class="save-recipe-button" @click="${this.handleSaveClick}">
             <svg
@@ -210,7 +163,7 @@ export class Calculator extends LitElement {
               <path d="M10 14h4" />
               <path d="M12 12v4" />
             </svg>
-            <span>Save and party!</span>
+            <span>Save!</span>
           </button>
         </div>
       </div>

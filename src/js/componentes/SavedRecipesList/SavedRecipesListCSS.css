@@ -25,17 +25,16 @@
   padding-top: 20px;
 }
 
- .recipe-img-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.recipe-img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-  }
-
- .recipe-ingredients-container {
-    display: flex;
-    align-items: center;
-  }
+.recipe-ingredients-container {
+  display: flex;
+  align-items: center;
+}
 
 .name-desciption-container {
   display: flex;
@@ -111,7 +110,6 @@
   justify-content: space-between;
   gap: 10px;
 }
-
 
 .recipe-products-list {
   display: grid;
@@ -194,7 +192,7 @@
 }
 
 /* HEADER, SERVING AND INGREDIENTS: GRID 2x2 ON ALL SCREENS */
-.product-recipe-container{
+.product-recipe-container {
   display: flex;
   flex-direction: column;
   gap: 0.4em;
@@ -236,7 +234,6 @@
   width: 100%;
 }
 
-
 @media (min-width: 800px) {
   .recipe-steps-container {
     display: flex;
@@ -248,7 +245,6 @@
     flex-direction: row;
     max-width: none;
   }
-
 
   .recipe-preview-image {
     height: 250px;

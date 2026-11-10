@@ -11,6 +11,7 @@ export class RecipeCustomizer extends LitElement {
     cocktail: { type: Object },
     activeView: { type: String },
     selectedRecipe: { type: Object },
+    quantity: { type: Number },
   };
 
   constructor() {
@@ -18,6 +19,7 @@ export class RecipeCustomizer extends LitElement {
     this.cocktail = null;
     this.activeView = 'A';
     this.selectedRecipe = null;
+    this.quantity = 5;
   }
 
   render() {
@@ -74,10 +76,12 @@ export class RecipeCustomizer extends LitElement {
         return html`<select-quantity
           .recipe="${this.selectedRecipe}"
           .cocktail="${this.cocktail}"
+          .quantity="${this.quantity}"
         ></select-quantity>`;
       case 'C':
         return html`<calculator-component
           .recipe="${this.selectedRecipe}"
+          .quantity="${this.quantity}"
         ></calculator-component>`;
       default:
         return html``;
@@ -89,10 +93,13 @@ export class RecipeCustomizer extends LitElement {
   }
 
   _onSwitchView(e) {
-    const { next, recipeSelected } = e.detail;
+    const { next, recipeSelected, quantity } = e.detail;
     this.activeView = next;
     if (recipeSelected) {
       this.selectedRecipe = recipeSelected;
+    }
+    if (quantity !== undefined) {
+      this.quantity = quantity;
     }
   }
 }

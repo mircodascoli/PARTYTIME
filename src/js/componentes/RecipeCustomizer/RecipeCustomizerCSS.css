@@ -48,7 +48,6 @@
 }
 
 .close-btn {
-
   border: none;
   background: transparent;
   cursor: pointer;
@@ -57,7 +56,6 @@
     transform 0.15s ease,
     opacity 0.15s ease;
   position: relative;
-
 }
 
 .close-btn:hover {
@@ -78,7 +76,7 @@
   from {
     opacity: 0;
   }
-  
+
   to {
     opacity: 1;
   }
