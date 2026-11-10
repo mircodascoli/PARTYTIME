@@ -194,6 +194,12 @@
 }
 
 /* HEADER, SERVING AND INGREDIENTS: GRID 2x2 ON ALL SCREENS */
+.product-recipe-container{
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+  width: 100%;
+}
 
 .recipe-header-serving-ingredients-container {
   display: grid;

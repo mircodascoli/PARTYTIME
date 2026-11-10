@@ -47,7 +47,7 @@ export class RecipeCustomizer extends LitElement {
               <svg
                 width="38"
                 height="38"
-                viewBox="0 0 24 24"
+                viewBox="0 0 20 20"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"

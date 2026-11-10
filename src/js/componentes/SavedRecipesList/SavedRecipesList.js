@@ -136,10 +136,8 @@ export class SavedRecipesList extends LitElement {
                             @delete-recipe=${() => this.deleteRecipe(item._id)}
                           ></three-dot-menu>
                         </div>
-
-                        <div
-                          class="recipe-header-serving-ingredients-container"
-                        >
+<div class="product-recipe-container">
+                        <div class="recipe-header-serving-ingredients-container">
                           <div class="recipe-img-container">
                             <img
                               src="../../../img/imgCocktails/${item.name}.png"
@@ -241,7 +239,7 @@ export class SavedRecipesList extends LitElement {
                             <p class="serving-description">${item.serving}</p>
                           </div>
                         </div>
-
+                              <hr class="section-divider" />
                         <div class="recipe-products-container">
                           <ul class="recipe-products-list">
                             ${item.ingredientes.map(
@@ -271,6 +269,7 @@ export class SavedRecipesList extends LitElement {
                             )}
                           </ul>
                         </div>
+                      </div>
                       </li>
                     `
                   )}

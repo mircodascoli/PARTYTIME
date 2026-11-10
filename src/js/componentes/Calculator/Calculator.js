@@ -122,7 +122,8 @@ export class Calculator extends LitElement {
             value="5"
             @input=${this.handleRange}
           />
-          <p class="people-units">for: ${this.quantity}</p>
+          <p>
+          <span class="people-units">for: ${this.quantity}</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="24"
@@ -141,6 +142,7 @@ export class Calculator extends LitElement {
             <path d="M16 3.13a4 4 0 0 1 0 7.75" />
             <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
           </svg>
+          </p>
         </div>
 
         <div id="resultados">
