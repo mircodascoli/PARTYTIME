@@ -12,14 +12,6 @@ export class CocktailInfo extends LitElement {
     cocktail: { type: Object },
   };
 
-  constructor() {
-    super();
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-  }
-
   render() {
     return html`
       <div class="cocktail-info-data-container">
@@ -39,7 +31,7 @@ export class CocktailInfo extends LitElement {
         <div class="cocktail-info-button-container">
           <button
             class="popup-select-button"
-            @click="${() => this.SelectRecipeToCalc(this.cocktail)}"
+            @click="${() => this.selectRecipeToCalc(this.cocktail)}"
           >
             <span>NEXT</span>
             <svg
@@ -64,13 +56,11 @@ export class CocktailInfo extends LitElement {
       </div>
     `;
   }
-  SelectRecipeToCalc(recipeSelected) {
+
+  selectRecipeToCalc(recipeSelected) {
     this.dispatchEvent(
       new CustomEvent('switch-view', {
-        detail: {
-          next: 'B',
-          recipeSelected: recipeSelected,
-        },
+        detail: { next: 'B', recipeSelected },
         bubbles: true,
         composed: true,
       })

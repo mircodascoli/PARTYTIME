@@ -21,6 +21,7 @@ import { ThreeDotMenu } from './ThreeDotMenu/ThreeDotMenu.js';
 import { CheckoutButton } from './CheckoutButton/CheckoutButton.js';
 import { Hero } from './HeroComponent/Hero.js';
 import { UserInvoice } from './UserInvoice/UserInvoice.js';
+import { SelectQuantity } from './SelectQuantity/SelectQuantity.js';
 export {
   SignInForm,
   LoginForm,
@@ -45,4 +46,5 @@ export {
   CheckoutButton,
   Hero,
   UserInvoice,
+  SelectQuantity,
 };

@@ -30,6 +30,7 @@ export class RecipeCustomizer extends LitElement {
         </div>
       `;
     }
+
     return html`
       <div class="underlay" @click="${this._onUnderlayClick}">
         <div
@@ -56,20 +57,31 @@ export class RecipeCustomizer extends LitElement {
               </svg>
             </button>
           </div>
-          <div class="popup-child-container">
-            ${
-              this.activeView === 'A'
-                ? html`<cocktail-info
-                    .cocktail="${this.cocktail}"
-                  ></cocktail-info>`
-                : html`<calculator-component
-                    .recipe="${this.selectedRecipe}"
-                  ></calculator-component>`
-            }
-          </div>
+
+          <div class="popup-child-container">${this._renderView()}</div>
         </div>
       </div>
     `;
+  }
+
+  _renderView() {
+    switch (this.activeView) {
+      case 'A':
+        return html`<cocktail-info
+          .cocktail="${this.cocktail}"
+        ></cocktail-info>`;
+      case 'B':
+        return html`<select-quantity
+          .recipe="${this.selectedRecipe}"
+          .cocktail="${this.cocktail}"
+        ></select-quantity>`;
+      case 'C':
+        return html`<calculator-component
+          .recipe="${this.selectedRecipe}"
+        ></calculator-component>`;
+      default:
+        return html``;
+    }
   }
 
   _onUnderlayClick() {
