@@ -6,9 +6,10 @@
 
 .welcome-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  gap: 10px;
 }
 
 .welcome-text {
@@ -70,4 +71,11 @@
 .icon-tabler {
   width: 20px;
   height: 20px;
+}
+
+@media (min-width: 800px) {
+  .welcome-container {
+    flex-direction: row;
+     gap: 0;
+  }
 }
