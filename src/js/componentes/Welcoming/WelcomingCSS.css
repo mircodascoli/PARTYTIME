@@ -76,6 +76,6 @@
 @media (min-width: 800px) {
   .welcome-container {
     flex-direction: row;
-     gap: 0;
+    gap: 0;
   }
 }

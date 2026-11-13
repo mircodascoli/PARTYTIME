@@ -196,13 +196,13 @@ export class SavedRecipesList extends LitElement {
                                 </p>
 
                                 ${item.ingredientes.map(
-                                (ing) => html`
-                                  <li class="recipe-ingredient">
-                                    <span>&#x2022;</span>
-                                    ${ing.name} ${ing.mls} ml
-                                  </li>
-                                `
-                              )}
+                                  (ing) => html`
+                                    <li class="recipe-ingredient">
+                                      <span>&#x2022;</span>
+                                      ${ing.name} ${ing.mls} ml
+                                    </li>
+                                  `
+                                )}
                               </ul>
                             </div>
 
@@ -245,30 +245,33 @@ export class SavedRecipesList extends LitElement {
                           <div class="recipe-products-container">
                             <ul class="recipe-products-list">
                               ${item.ingredientes.map(
-                              (ing) => html`
-                                <li class="product-item">
-                                  <img
-                                    src="../../img/imgProductos/${ing.dbname}.png"
-                                    alt="${ing.dbname}"
-                                    class="suggested-product-image"
-                                    @click=${() =>
-                                      launchpreCartPoPup(ing.dbname)}
-                                    @error=${(e) =>
-                                      (e.target.src = '../../img/fallback.png')}
-                                  />
+                                (ing) => html`
+                                  <li class="product-item">
+                                    <img
+                                      src="../../img/imgProductos/${ing.dbname}.png"
+                                      alt="${ing.dbname}"
+                                      class="suggested-product-image"
+                                      @click=${() =>
+                                        launchpreCartPoPup(ing.dbname)}
+                                      @error=${(e) =>
+                                        (e.target.src =
+                                          '../../img/fallback.png')}
+                                    />
 
-                                  <p class="p-ingredient-name">${ing.dbname}</p>
+                                    <p class="p-ingredient-name">
+                                      ${ing.dbname}
+                                    </p>
 
-                                  <button
-                                    class="btn-black"
-                                    @click=${() =>
-                                      launchpreCartPoPup(ing.dbname)}
-                                  >
-                                    BUY
-                                  </button>
-                                </li>
-                              `
-                            )}
+                                    <button
+                                      class="btn-black"
+                                      @click=${() =>
+                                        launchpreCartPoPup(ing.dbname)}
+                                    >
+                                      BUY
+                                    </button>
+                                  </li>
+                                `
+                              )}
                             </ul>
                           </div>
                         </div>

@@ -142,19 +142,16 @@ export class UserInvoice extends LitElement {
 
       y += 10;
 
-      // Nuova pagina se necessario
       if (y > 265) {
         doc.addPage();
         y = 25;
       }
     });
 
-    // Linea separatrice
     y += 3;
     doc.setDrawColor(180, 180, 180);
     doc.line(20, y, 190, y);
 
-    // Totale ordine
     y += 15;
 
     doc.setFont('helvetica', 'bold');
@@ -163,7 +160,6 @@ export class UserInvoice extends LitElement {
       align: 'right',
     });
 
-    // Piè di pagina
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(9);
     doc.setTextColor(120, 120, 120);
@@ -178,7 +174,11 @@ export class UserInvoice extends LitElement {
   render() {
     return html`
       <div class="user-invoice-container">
-        <h2>Thank you, ${getSSNAME()} here is your invoice</h2>
+        <div class="user-invoice-text">
+          <span class="user-invoice-thanks-span">Thank you,</span>
+          <span class="user-invoice-name-span"> ${getSSNAME()}</span>
+          <span class="user-invoice-phrase-span"> here is your invoice: </span>
+        </div>
 
         ${
           this.loading
@@ -186,15 +186,57 @@ export class UserInvoice extends LitElement {
             : this.products.length === 0
               ? html`<p>No order data found.</p>`
               : html`
-                  <button @click=${this.generatePDF}>
-                    Download Invoice PDF
-                  </button>
+                  <div class="user-invoice-buttons-container">
+                    <button class="download-button" @click=${this.generatePDF}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-file-download"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M14 3v4a1 1 0 0 0 1 1h4" />
+                        <path
+                          d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"
+                        />
+                        <path d="M12 17v-6" />
+                        <path d="M9.5 14.5l2.5 2.5l2.5 -2.5" />
+                      </svg>
+                      <span>Download Invoice PDF</span>
+                    </button>
+                    <p>or</p>
+                    <a
+                      class="keep-shopping-button"
+                      @click=${() => (window.location.href = './shop.html')}
+                    >
+                      <span>Keep Shopping</span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 6h16" />
+                        <path d="M7 12h13" />
+                        <path d="M10 18h10" />
+                      </svg>
+                    </a>
+                  </div>
                 `
         }
-
-        <a @click=${() => (window.location.href = './user.html')}>
-          keep shopping
-        </a>
       </div>
     `;
   }

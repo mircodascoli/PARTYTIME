@@ -30,6 +30,13 @@ main {
   background-color: var(--color-bg);
 }
 
+.main-invoice {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* ─── Header ────────────────────────────────────────────── */
 
 header {

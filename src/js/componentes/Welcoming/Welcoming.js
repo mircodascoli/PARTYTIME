@@ -41,10 +41,14 @@ export class Welcoming extends LitElement {
         <div class="welcome-container">
           <div class="hello-container">
             <div class="user-log-container">
-             <div id="welcome-text"><span class="welcome-text"><span class="welcome-span">Welcome,</span> <span class="user-name-span">${this.name}</span></div>
+             <div id="welcome-text">
+              <span class="welcome-text">
+                <span class="welcome-span">Welcome,</span> 
+                <span class="user-name-span">${this.name}</span>
+              </div>
              <logout-component></logout-component>
             </div>
-            <p>Here you can find your favorite recipes</p> 
+            <p>here you can find your favorite recipes</p> 
           </div>
 
           <div class="button-new-recipe-container">

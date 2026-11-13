@@ -1,3 +1,68 @@
 :host {
   display: block;
+  width: 100%;
+}
+
+.user-invoice-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-invoice-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.user-invoice-buttons-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.user-invoice-name-span {
+  font-weight: bold;
+  color: var(--color-accent);
+  font-size: var(--text-2xl);
+}
+
+.download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  box-shadow: 0 2px 6px #00000026;
+}
+
+.keep-shopping-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #444;
+}
+
+.keep-shopping-button:hover {
+  color: var(--color-accent);
 }
