@@ -113,6 +113,7 @@ export async function checkLoggedIn() {
     '/chooserecipe.html',
     '/calculator.html',
     '/user.html',
+    '/userinvoice.html',
   ];
 
   const accessPages = ['/', '/index.html', '/sign.html', '/login.html'];
