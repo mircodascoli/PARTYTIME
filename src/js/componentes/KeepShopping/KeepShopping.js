@@ -4,15 +4,37 @@ import {
   LitElement,
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
-
+import { getAPIData, API_URL, getSSID } from '../../utils.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import KeepShoppingCSS from '../KeepShopping/KeepShoppingCSS.css' with { type: 'css' };
 export class KeepShopping extends LitElement {
     static styles = [ResetCSS, KeepShoppingCSS];
 
     static properties = {
-        keepShopping: { type: Boolean },
+       
     };
+
+      async keepShoppingButtonClicked() {
+    console.log('2.5s after — emptying cart and reloading page');
+
+    const body = {
+      userId: getSSID(),
+    };
+    const PAYLOAD = JSON.stringify(body);
+
+    try {
+      const apiData = await getAPIData(
+        `${API_URL}/api/clear/cart`,
+        'DELETE',
+        PAYLOAD
+      );
+      console.log('cart is cleared:', apiData);
+    } catch (err) {
+      console.error('Error clearing cart:', err);
+    } finally {
+      setTimeout(() =>window.location.href = './shop.html', 1500);
+    }
+  }
     render() {
         return html`
             <div class="keep-shopping-container">
