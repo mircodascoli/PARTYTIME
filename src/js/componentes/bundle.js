@@ -22,7 +22,9 @@ import { CheckoutButton } from './CheckoutButton/CheckoutButton.js';
 import { Hero } from './HeroComponent/Hero.js';
 import { UserInvoice } from './UserInvoice/UserInvoice.js';
 import { SelectQuantity } from './SelectQuantity/SelectQuantity.js';
+import { KeepShopping } from './KeepShopping/KeepShopping.js';
 export {
+  KeepShopping,
   SignInForm,
   LoginForm,
   Calculator,

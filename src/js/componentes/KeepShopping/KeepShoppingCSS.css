@@ -1,0 +1,18 @@
+:host{
+    display: block;
+}
+
+.keep-shopping-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #444;
+}
+
+.keep-shopping-button:hover {
+  color: var(--color-accent);
+}

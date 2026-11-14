@@ -5,7 +5,6 @@ import {
 
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import UserInvoiceCSS from '../UserInvoice/UserInvoiceCSS.css' with { type: 'css' };
-
 import { jsPDF } from 'https://cdn.jsdelivr.net/npm/jspdf@4.2.1/+esm';
 
 import {
@@ -171,6 +170,7 @@ export class UserInvoice extends LitElement {
     doc.save('partytime-invoice.pdf');
   }
 
+  
   render() {
     return html`
       <div class="user-invoice-container">
@@ -211,29 +211,7 @@ export class UserInvoice extends LitElement {
                       <span>Download Invoice PDF</span>
                     </button>
                     <p>or</p>
-                    <a
-                      class="keep-shopping-button"
-                      @click=${() => (window.location.href = './shop.html')}
-                    >
-                      <span>Keep Shopping</span>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        class="icon icon-tabler icons-tabler-outline icon-tabler-menu-deep"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M4 6h16" />
-                        <path d="M7 12h13" />
-                        <path d="M10 18h10" />
-                      </svg>
-                    </a>
+                    <keep-shopping></keep-shopping>
                   </div>
                 `
         }
