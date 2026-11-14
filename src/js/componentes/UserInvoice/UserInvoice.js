@@ -170,7 +170,6 @@ export class UserInvoice extends LitElement {
     doc.save('partytime-invoice.pdf');
   }
 
-  
   render() {
     return html`
       <div class="user-invoice-container">
