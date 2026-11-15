@@ -151,20 +151,16 @@ app.post(
   asyncHandler(async (req, res) => {
     console.log('Search request body:', req.body);
 
-    const { name } = req.body;
+    const name = req.body.name?.trim() || '';
 
-    if (!name || typeof name !== 'string' || !name.trim()) {
-      throw new AppError('Search term is required', 400);
-    }
-
-    const searchTerm = name.trim();
-
-    const filter = {
-      $or: [
-        { name: { $regex: searchTerm, $options: 'i' } },
-        { spirit: { $regex: searchTerm, $options: 'i' } },
-      ],
-    };
+    const filter = name
+      ? {
+          $or: [
+            { name: { $regex: name, $options: 'i' } },
+            { spirit: { $regex: name, $options: 'i' } },
+          ],
+        }
+      : {};
 
     res.json(await db.botellas.search(filter, {}));
   })
