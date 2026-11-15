@@ -62,6 +62,7 @@ async function DisplayBotellasInCart() {
 
 async function searchBotellas(filter, projection = {}) {
   const botellasCollection = PartytimeDB.collection('Botellas');
+
   return await botellasCollection.find(filter).project(projection).toArray();
 }
 

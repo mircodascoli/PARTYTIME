@@ -149,9 +149,24 @@ app.delete(
 app.post(
   '/api/search',
   asyncHandler(async (req, res) => {
+    console.log('Search request body:', req.body);
+
     const { name } = req.body;
-    if (!name) throw new AppError('Search term is required', 400);
-    res.json(await db.botellas.search({ $text: { $search: name } }, {}));
+
+    if (!name || typeof name !== 'string' || !name.trim()) {
+      throw new AppError('Search term is required', 400);
+    }
+
+    const searchTerm = name.trim();
+
+    const filter = {
+      $or: [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { spirit: { $regex: searchTerm, $options: 'i' } },
+      ],
+    };
+
+    res.json(await db.botellas.search(filter, {}));
   })
 );
 

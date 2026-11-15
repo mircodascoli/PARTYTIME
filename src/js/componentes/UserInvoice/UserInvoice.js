@@ -183,7 +183,8 @@ export class UserInvoice extends LitElement {
           this.loading
             ? html`<p>Loading invoice...</p>`
             : this.products.length === 0
-              ? html`<p>No order data found.</p>`
+              ? html`<p>No order data found.</p>
+                  <keep-shopping></keep-shopping>`
               : html`
                   <div class="user-invoice-buttons-container">
                     <button class="download-button" @click=${this.generatePDF}>
