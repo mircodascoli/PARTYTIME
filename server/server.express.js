@@ -55,15 +55,6 @@ const authenticateUser = asyncHandler(async (req, res, next) => {
   next();
 });
 
-// ---------- CREATE ----------
-
-app.post(
-  '/api/create/botellas',
-  asyncHandler(async (req, res) => {
-    res.json(await db.botellas.get());
-  })
-);
-
 // ---------- READ ----------
 
 app.get(
