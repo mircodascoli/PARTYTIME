@@ -151,7 +151,7 @@ export class CartList extends LitElement {
 
     try {
       await getAPIData(
-        `${location.protocol}//${location.hostname}${API_PORT}/api/delete/item`,
+        `${API_URL}/api/delete/item`,
         'DELETE',
         JSON.stringify({ userId: this._idSession, itemId: id })
       );
