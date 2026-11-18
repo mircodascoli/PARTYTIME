@@ -8,7 +8,7 @@
 
 ---
 
-![UX](./src/project-gif-for-github-repo-1.gif)
+![UX](./src/gif-for-repo.gif.gif)
 
 ## What is this?
 
