@@ -5,7 +5,7 @@ import { sendOrderEmail } from './mailer.js';
 import { supabase } from '../supabaseClient.js';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 1337;
 const isProd = process.env.NODE_ENV === 'production';
 
 app.use(bodyParser.json());

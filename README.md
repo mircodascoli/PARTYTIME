@@ -2,15 +2,19 @@
 
 > More than a liquor store — an interactive experience that guides you through the world of spirits, helps you craft unforgettable cocktails, and makes every visit feel like a night out.
 
+---
+
+[## Live demo Link 🔗](https://partytime-5tie.onrender.com/)
+
 ![Captura de pantalla](src/captura.png)
 
-## ✨ What is this?
+## What is this?
 
 is a full-stack web application that blends e-commerce with entertainment. Users don't just browse and buy — they explore spirits, discover cocktail recipes, and get guided through the art of mixology, all while the store sells more product in the most enjoyable way possible.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer    | Technology                    |
 | -------- | ----------------------------- |
@@ -20,7 +24,7 @@ is a full-stack web application that blends e-commerce with entertainment. Users
 
 ---
 
-## 📄 License
+## License
 
 software released into the public domain.
 
