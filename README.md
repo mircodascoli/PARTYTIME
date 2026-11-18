@@ -8,7 +8,7 @@
 
 ---
 
-![Captura de pantalla](src/captura.png)
+![UX](./src/project-gif-for-github-repo-1.gif)
 
 ## What is this?
 
