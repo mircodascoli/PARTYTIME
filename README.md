@@ -12,7 +12,7 @@
 
 ## What is this?
 
-is a full-stack web application that blends e-commerce with entertainment. Users don't just browse and buy — they explore spirits, discover cocktail recipes, and get guided through the art of mixology, all while the store sells more product in the most enjoyable way possible.
+Partytime is a full-stack web application that blends e-commerce with entertainment. Users don't just browse and buy — they explore spirits, discover cocktail recipes, and get guided through the art of mixology, all while the store sells more product in the most enjoyable way possible.
 
 ---
 
@@ -23,6 +23,10 @@ is a full-stack web application that blends e-commerce with entertainment. Users
 | Frontend | Lit Web Components, HTML, CSS |
 | Backend  | Node.js, Express              |
 | Database | MongoDB                       |
+| Auth     | SupaBase                      |
+| Parsing  | jsPDF                         |
+| Mailing  | NodeMailer                    |
+
 
 ---
 
