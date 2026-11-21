@@ -4,7 +4,7 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import UserInvoiceCSS from '../UserInvoice/UserInvoiceCSS.css' with { type: 'css' };
+import UserInvoiceCSS from './UserInvoiceCSS.css' with { type: 'css' };
 import { jsPDF } from 'https://cdn.jsdelivr.net/npm/jspdf@4.2.1/+esm';
 
 import {

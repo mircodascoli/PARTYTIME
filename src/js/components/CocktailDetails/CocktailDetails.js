@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
-import CocktailDetailsCSS from '../CocktailDetails/CocktailDetailsCSS.css' with { type: 'css' };
+import CocktailDetailsCSS from './CocktailDetailsCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 export class CocktailDetails extends LitElement {
   static styles = [ResetCSS, CocktailDetailsCSS];

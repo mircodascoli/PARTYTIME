@@ -3,7 +3,7 @@ import {
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import CalculatorCSS from '../Calculator/CalculatorCSS.css' with { type: 'css' };
+import CalculatorCSS from './CalculatorCSS.css' with { type: 'css' };
 import { getAPIData, API_URL, getSSID } from '../../utils.js';
 
 export class Calculator extends LitElement {
@@ -33,7 +33,7 @@ export class Calculator extends LitElement {
     };
 
     try {
-      await this.guardarReceta(recipe);
+      await this.saveRecipe(recipe);
       location.href = './user.html';
     } catch (err) {
       console.error('Error saving receta', err);
@@ -51,7 +51,7 @@ export class Calculator extends LitElement {
     );
   }
 
-  async guardarReceta(recipe) {
+  async saveRecipe(recipe) {
     const idUserNum = getSSID();
     const body = {
       recipe,

@@ -3,8 +3,8 @@ import {
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import CocktailListCSS from '../CocktailList/CocktailListCSS.css' with { type: 'css' };
-import '../../componentes/CocktailDetails/CocktailDetails.js';
+import CocktailListCSS from './CocktailListCSS.css' with { type: 'css' };
+import '../CocktailDetails/CocktailDetails.js';
 import { getAPIData, API_URL } from '../../utils.js';
 
 export class CocktailList extends LitElement {
