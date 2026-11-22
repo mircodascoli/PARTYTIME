@@ -126,7 +126,7 @@ export class PreCartPopUp extends LitElement {
     `;
   }
 
-  _onUnderlayClick(e) {
+  _onUnderlayClick() {
     this.remove();
   }
 

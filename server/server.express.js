@@ -283,7 +283,7 @@ app.use('/api', (req, res) => {
   res.status(404).json({ success: false, error: 'Route not found' });
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   const status = err.statusCode || 500;
 
   console.error(` ${status} ${req.method} ${req.originalUrl}:`, err.message);
