@@ -4,9 +4,8 @@ import {
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
 import PreCartPopUpCSS from '../PreCartPopUp/PreCartPopUpCSS.css' with { type: 'css' };
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
-import { getAPIData, API_URL, getSSID } from '../../utils.js';
-import { ConfirmAddedToCart } from '../../utils.js';
-import { formatPrice } from '../../utils.js';
+import { getAPIData, API_URL, getSSID, ConfirmAddedToCart, formatPrice } from '../../utils.js';
+
 export class PreCartPopUp extends LitElement {
   static styles = [ResetCSS, PreCartPopUpCSS];
   static properties = {

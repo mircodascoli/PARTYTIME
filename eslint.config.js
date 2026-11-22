@@ -12,6 +12,7 @@ export default defineConfig([
     'coverage/',
     'docs/',
     '**/*.min.js',
+    'supabaseClient.js'
   ]),
   js.configs.recommended,
   importPlugin.flatConfigs.recommended,
