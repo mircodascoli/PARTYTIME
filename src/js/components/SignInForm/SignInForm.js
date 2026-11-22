@@ -2,7 +2,7 @@ import {
   LitElement,
   html,
 } from 'https://cdn.jsdelivr.net/gh/lit/dist@3/all/lit-all.min.js';
-import { getAPIData, getInputValue, API_URL } from '../../utils.js';
+import { getInputValue} from '../../utils.js';
 import ResetCSS from '../../../css/reset.css' with { type: 'css' };
 import SignInFormLitCSS from './SignInFormCSS.css' with { type: 'css' };
 import { supabase } from '../../../config/supabaseClient.js';

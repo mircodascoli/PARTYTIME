@@ -36,7 +36,7 @@ export class Calculator extends LitElement {
       await this.saveRecipe(recipe);
       location.href = './user.html';
     } catch (err) {
-      console.error('Error saving receta', err);
+      console.error('Error saving recipe', err);
       alert('Something went wrong ');
     }
   }
