@@ -1,0 +1,396 @@
+[{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f2"
+  },
+  "name": "absolut",
+  "price": 15.5,
+  "ml": 700,
+  "spirit": "vodka",
+  "range": "basic",
+  "description": "Best quality/price vodka on the market"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f3"
+  },
+  "name": "ketel one",
+  "price": 21.3,
+  "ml": 700,
+  "spirit": "vodka",
+  "range": "recommended",
+  "description": "The greatest Dutch vodka"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f4"
+  },
+  "name": "beluga",
+  "price": 27.4,
+  "ml": 700,
+  "spirit": "vodka",
+  "range": "premium",
+  "description": "Luxury and quality, simply Beluga"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f5"
+  },
+  "name": "gordon's",
+  "price": 11.5,
+  "ml": 700,
+  "spirit": "gin",
+  "range": "basic",
+  "description": "London dry gin for a fair price"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f6"
+  },
+  "name": "tanqueray",
+  "price": 16.5,
+  "ml": 700,
+  "spirit": "gin",
+  "range": "recommended",
+  "description": "Most awarded London Dry gin in the world"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f7"
+  },
+  "name": "martin miller's",
+  "price": 22.5,
+  "ml": 700,
+  "spirit": "gin",
+  "range": "premium",
+  "description": "Icelandic water and English distillery"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f8"
+  },
+  "name": "jose cuervo",
+  "price": 10.5,
+  "ml": 700,
+  "spirit": "tequila",
+  "range": "basic",
+  "description": "More than just basic Tequila"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4f9"
+  },
+  "name": "tequila curado",
+  "price": 25.2,
+  "ml": 700,
+  "spirit": "tequila",
+  "range": "recommended",
+  "description": "The best tequila you will ever try in your life"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4fa"
+  },
+  "name": "fortaleza reposado",
+  "price": 55.5,
+  "ml": 700,
+  "spirit": "tequila",
+  "range": "premium",
+  "description": "Bring your cocktails to the next level with this premium tequila"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4fb"
+  },
+  "name": "captain morgan",
+  "price": 11.5,
+  "ml": 700,
+  "spirit": "rum",
+  "range": "basic",
+  "description": "Be creative and create your next drink with a signature rum"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4fc"
+  },
+  "name": "havana club 7",
+  "price": 17.2,
+  "ml": 700,
+  "spirit": "rum",
+  "range": "recommended",
+  "description": "Havana in a glass, hear the salsa!"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4fd"
+  },
+  "name": "veritas",
+  "price": 32.5,
+  "ml": 700,
+  "spirit": "rum",
+  "range": "premium",
+  "description": "You will never taste a daiquir without this rum"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4fe"
+  },
+  "name": "four roses",
+  "price": 12.5,
+  "ml": 700,
+  "spirit": "bourbon",
+  "range": "basic",
+  "description": "4 Rouses are enough to make you fall in love with this Bourbon"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced4ff"
+  },
+  "name": "woodford reserve",
+  "price": 24.2,
+  "ml": 700,
+  "spirit": "bourbon",
+  "range": "recommended",
+  "description": "Old fahioned have never been this tasty"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced500"
+  },
+  "name": "bulleit bourbon",
+  "price": 39.5,
+  "ml": 700,
+  "spirit": "bourbon",
+  "range": "premium",
+  "description": "No guns allowed, here we just use Bulleit"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced501"
+  },
+  "name": "rye Jack daniel's",
+  "price": 15.5,
+  "ml": 700,
+  "spirit": "rye",
+  "range": "basic",
+  "description": "Your new rye whiskey on your shelf"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced502"
+  },
+  "name": "templeton rye",
+  "price": 22.2,
+  "ml": 700,
+  "spirit": "rye",
+  "range": "recommended",
+  "description": "Balance is the key to win in life and Templeton knows this"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced503"
+  },
+  "name": "bulleit rye",
+  "price": 33.5,
+  "ml": 700,
+  "spirit": "rye",
+  "range": "premium",
+  "description": "This rye will make you stop using any other weapon than Bulleit(s) "
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced504"
+  },
+  "name": "chambord",
+  "price": 26.5,
+  "ml": 500,
+  "spirit": "raspberry liqueur",
+  "range": "recommended",
+  "description": "Ever been in a sweet dream? Exactly."
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced505"
+  },
+  "name": "cinzano",
+  "price": 11.2,
+  "ml": 750,
+  "spirit": "sweet vermouth",
+  "range": "basic",
+  "description": "Italian heritage to enjoy"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced506"
+  },
+  "name": "cocchi",
+  "price": 14.7,
+  "ml": 750,
+  "spirit": "sweet vermouth",
+  "range": "recommended",
+  "description": "From Turin to your glass."
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced507"
+  },
+  "name": "antica formula",
+  "price": 23.5,
+  "ml": 750,
+  "spirit": "sweet vermouth",
+  "range": "premium",
+  "description": "Say hello to your new favorite bottle of the shelf"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced508"
+  },
+  "name": "martini dry",
+  "price": 11.2,
+  "ml": 750,
+  "spirit": "dry vermouth",
+  "range": "recommended",
+  "description": "Thats a good vermouth to start your cocktail journey"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced509"
+  },
+  "name": "noilly prat",
+  "price": 18.1,
+  "ml": 750,
+  "spirit": "dry vermouth",
+  "range": "premium",
+  "description": "A Martini cocktail without a good dry vermouth it's a half done job, start with this one"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced50a"
+  },
+  "name": "angostura",
+  "price": 23.5,
+  "ml": 200,
+  "spirit": "angostura",
+  "range": "recommended",
+  "description": "Salt and Pepper? Sorry, i forgot we were talking about drinks, here is the perfect seasoning"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced50b"
+  },
+  "name": "campari bitter",
+  "price": 15.5,
+  "ml": 200,
+  "spirit": "campari",
+  "range": "recommended",
+  "description": "Your glass has never been so red"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced50c"
+  },
+  "name": "Schweppes soda",
+  "price": 1.5,
+  "ml": 700,
+  "spirit": "soda",
+  "range": "recommended",
+  "description": "Let's fizz this up"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced50d"
+  },
+  "name": "schweppes ginger ale",
+  "price": 1.5,
+  "ml": 700,
+  "spirit": "ginger ale",
+  "range": "recommended",
+  "description": "Let's Fizz this up"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced50e"
+  },
+  "name": "Schweppes grapefruit",
+  "price": 1.5,
+  "ml": 700,
+  "spirit": "soda pomelo",
+  "range": "recommended",
+  "description": "Let's fizz this up"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced50f"
+  },
+  "name": "lime",
+  "price": 3,
+  "ml": 1000,
+  "spirit": "fruit",
+  "range": "recommended",
+  "description": "The acidic freshness that gives the right fruity notes to your drink"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced510"
+  },
+  "name": "lemon",
+  "price": 3,
+  "ml": 1000,
+  "spirit": "fruit",
+  "range": "recommended",
+  "description": "The acidic freshness that gives the right fruity notes to your drink"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced511"
+  },
+  "name": "orange",
+  "price": 3,
+  "ml": 1000,
+  "spirit": "fruit",
+  "range": "recommended",
+  "description": "The acidic freshness that gives the right fruity notes to your drin"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced512"
+  },
+  "name": "sugar syrup",
+  "price": 6.3,
+  "ml": 500,
+  "spirit": "syrup",
+  "range": "recommended",
+  "description": "Exactly what your cocktail needs"
+},
+{
+  "_id": {
+    "$oid": "6808eaee0c1803a77cced513"
+  },
+  "name": "agave syrup",
+  "price": 4.3,
+  "ml": 200,
+  "spirit": "syrup",
+  "range": "recommended",
+  "description": "Mexican notes to your sweet side"
+},
+{
+  "_id": {
+    "$oid": "683d72561d35244c80ae1bb7"
+  },
+  "name": "water",
+  "price": 1.5,
+  "ml": 500,
+  "spirit": "water",
+  "range": "basic",
+  "description": "You won't belive what we also sell in thi shop! h2O is a great product"
+},
+{
+  "_id": {
+    "$oid": "683d73261d35244c80ae1bb9"
+  },
+  "name": "olive brine",
+  "price": 1.5,
+  "ml": 300,
+  "spirit": "water",
+  "range": "basic",
+  "description": "Sorry, we ate all the olives, but this might be useful for your drink!"
+}]

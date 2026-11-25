@@ -1,0 +1,240 @@
+[{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a3e"
+  },
+  "name": "Negroni",
+  "description": "A classic Italian cocktail, bitter and aromatic, perfect as an aperitif.",
+  "ingredients": [
+    {
+      "name": "Gin",
+      "dbname": "tanqueray",
+      "ml": 33
+    },
+    {
+      "name": "Sweet Vermouth",
+      "dbname": "cocchi",
+      "ml": 33
+    },
+    {
+      "name": "Campari",
+      "dbname": "campari bitter",
+      "ml": 33
+    },
+    {
+      "name": "Water (recomended)",
+      "dbname": "water",
+      "ml": 15
+    }
+  ],
+  "serving": "Stir all the ingredients together, bottle the cocktail in your freezer and serve this right when needed"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a3f"
+  },
+  "name": "Manhattan",
+  "description": "Elegant whiskey-based cocktail, sweet and bitter, a symbol of American tradition.",
+  "ingredients": [
+    {
+      "name": "Whiskey",
+      "dbname": "templeton rye",
+      "ml": 60
+    },
+    {
+      "name": "Sweet Vermouth",
+      "dbname": "cocchi",
+      "ml": 30
+    },
+    {
+      "name": "Angostura",
+      "dbname": "angostura",
+      "ml": 5
+    },
+    {
+      "name": "Water (recomended)",
+      "dbname": "water",
+      "ml": 15
+    }
+  ],
+  "serving": "Stir all the ingredients together, bottle the cocktail in your freezer and serve this right when needed"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a40"
+  },
+  "name": "Dry Martini",
+  "description": "Iconic gin and vermouth cocktail, dry and refined, perfect for classic lovers.",
+  "ingredients": [
+    {
+      "name": "Gin",
+      "dbname": "tanqueray",
+      "ml": 70
+    },
+    {
+      "name": "Dry vermouth",
+      "dbname": "martini dry",
+      "ml": 10
+    },
+    {
+      "name": "Water (recomended)",
+      "dbname": "water",
+      "ml": 15
+    },
+    {
+      "name": "Olive Brine for Dirty",
+      "dbname": "olive brine",
+      "ml": 5
+    }
+  ],
+  "serving": "Stir all the ingredients together, bottle the cocktail in your freezer and serve this right when needed"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a41"
+  },
+  "name": "Old Fashioned",
+  "description": "Classic American bourbon cocktail, sweet and aromatic, ideal for strong flavor lovers.",
+  "ingredients": [
+    {
+      "name": "Bourbon whiskey",
+      "dbname": "woodford reserve",
+      "ml": 60
+    },
+    {
+      "name": "Sugar syrup",
+      "dbname": "sugar syrup",
+      "ml": 5
+    },
+    {
+      "name": "Angostura bitters",
+      "dbname": "angostura",
+      "ml": 1
+    },
+    {
+      "name": "Water(recomended)",
+      "dbname": "water",
+      "ml": 15
+    }
+  ],
+  "serving": "Stir all the ingredients together, bottle the cocktail in your freezer and serve this right when needed"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a42"
+  },
+  "name": "Paloma",
+  "description": "Fresh and fruity tequila-based cocktail with grapefruit soda, perfect for summer.",
+  "ingredients": [
+    {
+      "name": "Tequila",
+      "dbname": "tequila curado",
+      "ml": 60
+    },
+    {
+      "name": "Lime juice",
+      "dbname": "lime",
+      "ml": 12.5
+    },
+    {
+      "name": "Agave syrup",
+      "dbname": "agave syrup",
+      "ml": 7
+    },
+    {
+      "name": "Grapefruit soda",
+      "dbname": "Schweppes grapefruit",
+      "ml": 100
+    }
+  ],
+  "serving": "Stir all the ingredients together, except for the soda, bottle the cocktail in your fridge. When serving on ice, add some soda and stir again"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a43"
+  },
+  "name": "Tom Collins",
+  "description": "Refreshing gin cocktail with lemon juice and soda, light and thirst-quenching.",
+  "ingredients": [
+    {
+      "name": "Gin",
+      "dbname": "tanqueray",
+      "ml": 60
+    },
+    {
+      "name": "Lemon juice",
+      "dbname": "lemon",
+      "ml": 12.5
+    },
+    {
+      "name": "Sugar syrup",
+      "dbname": "sugar syrup",
+      "ml": 7
+    },
+    {
+      "name": "soda water",
+      "dbname": "Schweppes soda",
+      "ml": 100
+    }
+  ],
+  "serving": "Stir all the ingredients together, except for the soda, bottle the cocktail in your fridge. When serving on ice, add some soda and stir again"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a44"
+  },
+  "name": "Dark & Stormy",
+  "description": "Spicy and fizzy cocktail with rum and ginger beer, perfect for bold flavor lovers.",
+  "ingredients": [
+    {
+      "name": "Rum",
+      "dbname": "havana club 7",
+      "ml": 60
+    },
+    {
+      "name": "Lime juice",
+      "dbname": "lime",
+      "ml": 12.5
+    },
+    {
+      "name": "Angostura",
+      "dbname": "angostura",
+      "ml": 1
+    },
+    {
+      "name": "Ginger Beer",
+      "dbname": "Schweppes ginger beer",
+      "ml": 10
+    }
+  ],
+  "serving": "Stir all the ingredients together, except for the soda, bottle the cocktail in your fridge. When serving on ice, add some soda and stir again"
+},
+{
+  "_id": {
+    "$oid": "694abacf1455ea6dd0d83a45"
+  },
+  "name": "Berry Hiball",
+  "description": "Fruity and sparkling cocktail with vodka and raspberry syrup, light and refreshing.",
+  "ingredients": [
+    {
+      "name": "Vodka",
+      "dbname": "ketel one",
+      "ml": 60
+    },
+    {
+      "name": "Lemon juice",
+      "dbname": "lemon",
+      "ml": 12.5
+    },
+    {
+      "name": "Raspberry syrup",
+      "dbname": "raspberry syrup",
+      "ml": 7
+    },
+    {
+      "name": "Ginger Ale",
+      "dbname": "Schweppes ginger ale",
+      "ml": 100
+    }
+  ],
+  "serving": "Stir all the ingredients together, except for the soda, bottle the cocktail in your fridge. When serving on ice, add some soda and stir again"
+}]

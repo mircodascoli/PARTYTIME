@@ -92,7 +92,7 @@ The server connects to the `Partytime` database and uses three collections:
 | `Cocktails` | Cocktail recipes                         |
 | `users`     | Created automatically on first login     |
 
-`Botellas` and `Cocktails` must be populated for the shop and the recipes pages to show content. A seed script with sample data is planned (`scripts/seed.js`).(Coming soon)
+`Botellas` and `Cocktails` must be populated for the shop and the recipes pages to show content. A seed script with sample data is planned (`scripts/seed.js`).
 
 ### 5. Run the app
 
@@ -105,6 +105,28 @@ Open **http://localhost:1337**. The server restarts automatically when you chang
 > Use `localhost` or `127.0.0.1`: the frontend picks the local API only on those hostnames.
 
 `npm start` is meant for production, where the variables are provided by the host. It does **not** read the `.env` file.
+
+### Available scripts
+
+| Script                 | What it does                                 |
+| ---------------------- | ------------------------------------------   |
+| `npm run dev`          | Start the server with `.env` and auto-reload |
+| `npm start`            | Start the server (production)                |
+| `npm run seed`         | Load the sample bottles and cocktails        |
+| `npm test`             | Run the Jest tests                           |
+| `npm run lint`         | Lint the JavaScript with ESLint              |
+| `npm run lint:fix`     | Lint and fix automatically                   |
+| `npm run lint:css`     | Lint the CSS with Stylelint                  |
+| `npm run format`       | Format the code with Prettier                |
+| `npm run format:check` | Check formatting without changing files      |
+| `npm run docs`         | Generate the JSDoc documentation             |
+
+### Troubleshooting
+
+- **`Missing Supabase environment variables`**: the `.env` file was not loaded. Start the app with `npm run dev`, not `npm start`.
+- **MongoDB connection fails and the server exits**: check `MONGO_URI` and, on Atlas, add your IP address to the network access list.
+- **The page loads but the data does not**: make sure you opened `http://localhost:1337` (not a file path or another port).
+- **The online demo is slow on the first visit**: the hosted server can take a while to wake up after a period of inactivity.
 
 ---
 
