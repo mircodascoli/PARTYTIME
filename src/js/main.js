@@ -1,4 +1,3 @@
-//@ts-no-check
 import { checkLoggedIn, syncUserWithMongo } from './utils.js';
 
 window.addEventListener('DOMContentLoaded', DomContentLoaded);
