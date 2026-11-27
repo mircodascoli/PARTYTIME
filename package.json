@@ -22,21 +22,22 @@
     "docs": "jsdoc ./src -r",
     "seed": "node seed/seed.js",
     "commitlint": "commitlint",
-    "lint:staged": "lint-staged"
+    "lint:staged": "lint-staged",
+    "prepare": "husky"
   },
   "lint-staged": {
-  "*.js": [
-    "eslint --fix",
-    "prettier --write"
-  ],
-  "*.css": [
-    "stylelint --fix",
-    "prettier --write"
-  ],
-  "*.{json,md}": [
-    "prettier --write"
-  ]
-},
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
   "keywords": [
     "node",
     "express",
@@ -64,6 +65,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.25.2",
     "globals": "^16.5.0",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jsdoc": "^4.0.4",
